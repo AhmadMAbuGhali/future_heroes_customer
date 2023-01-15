@@ -12,7 +12,7 @@ class ImageAssets {
 }
 const String ICON_PATH='assets/icon';
 class IconAssets{
-  static const String limit = '$ICON_PATH/limit.svg';
+  static const String local_offer = '$ICON_PATH/local_offer.svg';
   static const String offer = '$ICON_PATH/offer.svg';
   static const String order = '$ICON_PATH/order.svg';
   static const String point = '$ICON_PATH/point.svg';
