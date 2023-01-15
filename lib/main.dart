@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:future_heroes_customer/resources/styles_manager.dart';
+import 'package:future_heroes_customer/widgets/hello.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+
       theme: ThemeData(
         // This is the theme of your application.
-        //
+        fontFamily: 'DroidKufi',
         // Try running your application with "flutter run". You'll see the
         // application has a blue toolbar. Then, without quitting the app, try
         // changing the primarySwatch below to Colors.green and then invoke
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Hello(),
     );
   }
 }
@@ -95,9 +98,10 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+             Text(
+              'السلام عليكم:',
+             ),
+
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
