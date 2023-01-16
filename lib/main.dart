@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_customer/resources/color_manager.dart';
 
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
         fontFamily: 'DroidKufi',
-        primarySwatch: Colors.blue,
+      primaryColor: Color(0xFF8A57DC),
+
       ),
 
 

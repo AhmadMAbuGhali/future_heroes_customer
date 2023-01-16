@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/LogoAuth.dart';
 import 'package:future_heroes_customer/widgets/textSignUp.dart';
+import 'package:get/get.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  bool remmberMe = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,14 +69,29 @@ class Login extends StatelessWidget {
                 // labelText: 'كلمة المرور',
                 iconData: Icons.remove_red_eye,
               ),
-              const Text(
-                'نسيت كلمة المرور',
-                textAlign: TextAlign.end,
-                style: TextStyle(color: ColorManager.primary, fontSize: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Switch(value: remmberMe, onChanged: (bool){
+                    setState(() {
+
+                      remmberMe = bool;
+                    });
+                  },activeColor: ColorManager.primary,),
+
+                  const Text(
+                    'نسيت كلمة المرور',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(color: ColorManager.primary, fontSize: 12),
+                  ),
+
+                ],
               ),
               CustomButtonPrimary(
                 text: 'تسجيل الدخول',
-                onpressed: () {},
+                onpressed: () {
+
+                },
               ),
               const SizedBox(
                 height: 50,
