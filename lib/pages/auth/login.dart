@@ -18,6 +18,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool remmberMe = false;
+  bool hidePass = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,11 +64,15 @@ class _LoginState extends State<Login> {
               ),
               CustomTextFormAuth(
                 textInputType: TextInputType.visiblePassword,
-                hidepassword: true,
-
+                hidepassword: hidePass,
+                pressSuffixIcon: (){
+                  setState(() {
+                    hidePass = !hidePass;
+                  });
+                },
                 hintText: 'كلمة المرور',
                 // labelText: 'كلمة المرور',
-                iconData: Icons.remove_red_eye,
+                iconData:hidePass? Icons.visibility:Icons.visibility_off,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
