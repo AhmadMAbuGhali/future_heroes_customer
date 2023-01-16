@@ -107,7 +107,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     label: "الطلبات والشكاوي",
                     haveArrow: true,
                     icon: IconAssets.paper,
-                    onTap: () {}),
+                    onTap: () {
+                      Get.toNamed(RouteHelper.requestsAndComplaints);
+                    }),
 
 
 

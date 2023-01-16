@@ -7,6 +7,8 @@ class ColorManager {
   static Color black = const Color(0xff000000);
   static Color red = const Color(0xffFF6666);
   static Color white = const Color(0xffffffff);
+  static Color jewelryBG = const Color(0xffF1ECFC);
+
 
   static Color parent = Colors.transparent;
   static Color gray = Colors.grey;

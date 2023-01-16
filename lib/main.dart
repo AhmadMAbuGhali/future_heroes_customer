@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       ],
       locale: Locale("ar", "SA"),
         debugShowCheckedModeBanner: false,
+
         title: 'Flutter Demo',
         theme: ThemeData(
         fontFamily: 'DroidKufi',
