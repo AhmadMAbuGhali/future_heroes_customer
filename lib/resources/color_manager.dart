@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
-  static Color primary = const Color(0xFF8A57DC);
+  static const Color primary = const Color(0xFF8A57DC);
   static Color buttonUnused = const Color(0xffC0C5CE);
   static Color backGround = const Color(0xffFCFBFF);
   static Color black = const Color(0xff000000);

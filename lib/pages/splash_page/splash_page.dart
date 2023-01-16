@@ -11,8 +11,6 @@ import 'package:get/get.dart';
 
 import '../../routes/route_helper.dart';
 
-
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -41,8 +39,8 @@ class _SplashScreenState extends State<SplashScreen>
 
     animation = CurvedAnimation(parent: controller, curve: Curves.linear);
     Timer(
-      const   Duration(seconds: 3),
-          ()=> Get.offNamed(RouteHelper.getInitial()),
+      const Duration(seconds: 3),
+      () => Get.offNamed(RouteHelper.getlogin()),
     );
   }
 
@@ -57,18 +55,15 @@ class _SplashScreenState extends State<SplashScreen>
             scale: animation,
             child: Center(
                 child: SizedBox(
-                  width: 266,
-                  height: 280,
-                  child: SvgPicture.asset(
-                    ImageAssets.logo,
-
-                  ),
-                )),
+              width: 266,
+              height: 280,
+              child: SvgPicture.asset(
+                ImageAssets.logo,
+              ),
+            )),
           ),
-
         ],
       ),
     );
   }
 }
-
