@@ -258,49 +258,46 @@ Spacer(),
     return Container(
       decoration:
       BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
-      height: 120,
+      height: 180.h,
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.all(20),
       child: Column(
         children: [
           Text(
-            'Choose Image from',
+            'تغيير الصورة الشخصية',
 
           ),
           SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _getFromCamera();
-                          Navigator.pop(context);
-                        });
-                      },
-                      icon: Icon(Icons.camera_alt_rounded)),
-                  Text("Camera"),
-                ],
-              ),
-              Column(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _getFromGallery();
-                          Navigator.pop(context);
-                        });
-                      },
-                      icon: Icon(Icons.image)),
-                  Text("Gallery"),
-                ],
-              )
-            ],
-          )
+
+          ElevatedButton(onPressed: (){
+            setState(() {
+              _getFromCamera();
+              Navigator.pop(context);
+            });
+          }, child:   Text("فتح الكاميرا"),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ColorManager.primary,
+            padding: EdgeInsets.symmetric(horizontal: 130, vertical: 5),
+
+          ),),
+
+          SizedBox(height: 7.h,),
+          Text("أو"),
+          SizedBox(height: 7.h,),
+          ElevatedButton(onPressed: (){
+            setState(() {
+              _getFromGallery();
+              Navigator.pop(context);
+            });
+          }, child:   Text("قم بالاختيار من المعرض"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorManager.primary,
+              padding: EdgeInsets.symmetric(horizontal: 95, vertical: 5),
+
+            ),),
+
         ],
       ),
     );
