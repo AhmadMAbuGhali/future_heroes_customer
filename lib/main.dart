@@ -5,8 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:get/get.dart';
 
-import 'languages.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -22,9 +20,16 @@ class MyApp extends StatelessWidget {
     splitScreenMode: true,
     builder: (context, child) {
     return GetMaterialApp(
-      translations: Languages(),
-      locale: Get.deviceLocale,
-      fallbackLocale: const Locale('en', ''),
+      localizationsDelegates: [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale("ar", "SA"),
+        Locale("en", "US"),
+      ],
+      locale: Locale("ar", "SA"),
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
