@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:future_heroes_customer/resources/styles_manager.dart';
-import 'package:future_heroes_customer/widgets/hello.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:future_heroes_customer/routes/route_helper.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,14 +13,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
+   return ScreenUtilInit(
+        designSize: const Size(375, 812),
+    minTextAdapt: true,
+    splitScreenMode: true,
+    builder: (context, child) {
+    return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
         fontFamily: 'DroidKufi',
         primarySwatch: Colors.blue,
       ),
-      home: Hello(),
+
+
+        initialRoute: RouteHelper.getSplashScreen(),
+        getPages: RouteHelper.routes,
+      );}
     );
   }
 }
