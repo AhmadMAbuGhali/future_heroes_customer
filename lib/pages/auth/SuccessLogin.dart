@@ -42,7 +42,7 @@ class SuccessLogin extends StatelessWidget {
             CustomButtonPrimary(
               text: 'إتجه للصفحة الرئيسية',
               onpressed: () {
-                Get.offNamed(RouteHelper.NoConnection);
+                Get.offNamed(RouteHelper.noConnection);
               },
             )
           ],

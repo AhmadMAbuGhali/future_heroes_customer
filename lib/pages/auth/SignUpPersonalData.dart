@@ -29,7 +29,7 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: ListView(children: [
-            const CustomTextTitle(
+             CustomTextTitle(
               text: 'البيانات الشخصية',
             ),
             SizedBox(height: 128, width: 128, child: const LogoAuth()),

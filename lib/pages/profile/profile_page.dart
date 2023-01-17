@@ -166,7 +166,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       haveArrow: false,
                       icon: IconAssets.delete,
                       myColor: Colors.red,
-                      onTap: () {}),
+                      onTap: () {
+                        _deleteAccountDialog();
+                      }),
 
                 ],
               ),
@@ -306,17 +308,92 @@ class _ProfilePageState extends State<ProfilePage> {
                     Navigator.of(context).pop();
                   },
                   child: Container(
-                    width: 80.w,
+                    width: 100.w,
                     height: 30.h,
                     decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.red)
                     ),
-                    child:  Center(child: Text('لا ',style: getBoldStyle(color: Colors.white),)),
+                    child:  Center(child: Text('إلغاء الأمر ',textAlign: TextAlign.center,style: getBoldStyle(color: Colors.white,),)),
                   ),
                 ),
 
+              ],
+            )
+
+
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _deleteAccountDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(width: 30.w,),
+              SvgPicture.asset(IconAssets.alert,color: Colors.red,),
+              GestureDetector(
+                  onTap: (){Navigator.of(context).pop();},
+                  child:Icon(Icons.cancel,color: Colors.red,)
+              )
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('هل انت متأكد من حذف الحساب'),
+
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            Column(
+              children: [
+                Text("هل انت واثق انك تريد حذف الحساب  عند حذف الحساب  ستفقد جميع البيانات الخاصة بك "),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        width: 80.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.red)
+                        ),
+                        child:  Center(child: Text('نعم ',style: getBoldStyle(color: Colors.white),)),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        width: 100.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.red)
+                        ),
+                        child:  Center(child: Text('إلغاء الأمر ',textAlign: TextAlign.center,style: getBoldStyle(color: Colors.white,),)),
+                      ),
+                    ),
+
+                  ],
+                ),
               ],
             )
 

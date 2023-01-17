@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextTitle(
+               CustomTextTitle(
                 text: 'تسجيل الدخول',
               ),
               const SizedBox(
@@ -101,7 +101,8 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 50,
               ),
-              const CustomTextSignUpOrSignin(
+               CustomTextSignUpOrSignin(
+                 onTap: (){},
                 textone: 'ليس لديك حساب ؟   ',
                 texttwo: 'أنشئ حسابك الآن',
               ),

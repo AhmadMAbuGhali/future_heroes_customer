@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUpScreenPart2> {
               SizedBox(
                 height: 10.h,
               ),
-              const CustomTextTitle(
+               CustomTextTitle(
                 text: ' !اهلا وسهلا بك',
               ),
               SizedBox(
@@ -94,7 +94,7 @@ class _SignUpState extends State<SignUpScreenPart2> {
                           Titel: 'مرحبا بك',
                           Description: 'قم باكمال عملة التسجيل')
                       .Success();
-                  Get.offNamed(RouteHelper.gettermsAndconditions());
+                  Get.offNamed(RouteHelper.termsAndConditions);
                 },
               ),
             ],

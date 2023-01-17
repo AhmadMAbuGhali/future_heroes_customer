@@ -38,7 +38,7 @@ class _SignUpState extends State<SignUpScreen> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextTitle(
+               CustomTextTitle(
                 text: 'انشئ حسابك',
               ),
               const SizedBox(
@@ -88,7 +88,7 @@ class _SignUpState extends State<SignUpScreen> {
                           Titel: 'مرحبا بك',
                           Description: 'قم باكمال عملة التسجيل')
                       .Success();
-                  Get.offNamed(RouteHelper.getSignUpPart2());
+                  Get.offNamed(RouteHelper.signUpPart2);
                 },
               ),
               const SizedBox(
