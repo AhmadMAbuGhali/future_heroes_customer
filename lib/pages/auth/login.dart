@@ -96,7 +96,7 @@ class _LoginState extends State<Login> {
               CustomButtonPrimary(
                 text: 'تسجيل الدخول',
                 onpressed: () {
-
+                  Get.toNamed(RouteHelper.initial);
                 },
               ),
               const SizedBox(

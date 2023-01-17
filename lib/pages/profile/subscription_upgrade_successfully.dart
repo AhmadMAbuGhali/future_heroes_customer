@@ -53,7 +53,7 @@ class SubscriptionUpgradeSuccessfully extends StatelessWidget {
               ),
               CustomTextTitle(text: "ترقية الاشتراك"),
               SizedBox(height: 70.h,),
-              SvgPicture.asset(ImageAssets.upgrage),
+              SvgPicture.asset(ImageAssets.upgrage,width: 250.w,height: 250.h,),
               SizedBox(height: 40.h,),
               CustomTextTitle(text: "يرجى التوجه الى مقر النادي لتأكيد  عملية الترقية ودفع المبلغ"),
               SizedBox(height: 80.h,),

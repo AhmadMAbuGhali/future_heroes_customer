@@ -65,9 +65,9 @@ TextEditingController dateInput = TextEditingController();
             const SizedBox(
               height: 30,
             ),
-            const Text(
+             Text(
               'البريد الالكتروني ',
-              style: TextStyle(fontSize: 12),
+              style: getRegularStyle(color: Colors.black),
             ),
             // const SizedBox(
             //   height: 5,
@@ -77,6 +77,7 @@ TextEditingController dateInput = TextEditingController();
               textInputType: TextInputType.emailAddress,
 
               hintText: 'البريد الالكتروني ',
+
               //  labelText: 'البريد الالكتروني / رقم الهاتف',
               //  iconData: Icons.email_outlined,
             ),

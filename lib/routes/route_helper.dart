@@ -5,6 +5,7 @@ import 'package:future_heroes_customer/pages/auth/TermsAndConditions.dart';
 import 'package:future_heroes_customer/pages/auth/login.dart';
 import 'package:future_heroes_customer/pages/navbar/main_navbar.dart';
 import 'package:future_heroes_customer/pages/profile/change_password.dart';
+import 'package:future_heroes_customer/pages/profile/class_time.dart';
 import 'package:future_heroes_customer/pages/profile/personal_data.dart';
 import 'package:future_heroes_customer/pages/profile/postpone%D9%80an%D9%80appointment.dart';
 import 'package:future_heroes_customer/pages/profile/profile_page.dart';
@@ -34,6 +35,7 @@ class RouteHelper {
   static const String signupPersonalData = "/signup-personal-data";
   static const String termsAndConditions = "/terms-and-conditions";
   static const String changePassword = "/change-password";
+  static const String classTime = "/class-time";
 
 
 
@@ -52,6 +54,7 @@ class RouteHelper {
   static String getSignupPersonalData() => '$signupPersonalData';
   static String getTermsAndConditions() => '$termsAndConditions';
   static String getChangePassword() => '$changePassword';
+  static String getClassTime() => '$classTime';
 
 
 
@@ -142,6 +145,12 @@ class RouteHelper {
       name: changePassword,
       page: () {
         return ChangePassword();
+      },
+    ),
+GetPage(
+      name: classTime,
+      page: () {
+        return ClassTime();
       },
     ),
 

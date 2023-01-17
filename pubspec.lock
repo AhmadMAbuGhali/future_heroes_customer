@@ -113,6 +113,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  ddlog:
+    dependency: "direct main"
+    description:
+      name: ddlog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.7"
   dots_indicator:
     dependency: "direct main"
     description:
@@ -120,6 +127,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  dropdown_button2:
+    dependency: "direct main"
+    description:
+      name: dropdown_button2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.9.2"
+  enhance_stepper:
+    dependency: "direct main"
+    description:
+      name: enhance_stepper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   expandable:
     dependency: "direct main"
     description:
@@ -516,6 +537,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
+  tuple:
+    dependency: "direct main"
+    description:
+      name: tuple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   typed_data:
     dependency: transitive
     description:

@@ -146,6 +146,8 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                         Titel: 'مرحبا بك',
                         Description: 'قم باكمال عملة التسجيل')
                     .error();
+
+
               },
             ),
           ]),

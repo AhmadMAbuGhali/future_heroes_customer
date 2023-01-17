@@ -50,6 +50,10 @@ dependencies:
   awesome_snackbar_content: ^0.1.0
   cherry_toast: ^1.0.9
   motion_toast: ^2.6.4
+  enhance_stepper: ^0.1.1
+  tuple: ^2.0.1
+  ddlog: ^0.0.7
+  dropdown_button2: ^1.9.2
 
 
 

@@ -123,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       haveArrow: true,
                       icon: IconAssets.calendar,
                       onTap: () {
-                        Get.toNamed(RouteHelper.postponeAnAppointment);
+                        Get.toNamed(RouteHelper.classTime);
                       }),
 
                   //ترقية الاشتراك
@@ -267,14 +267,11 @@ class _ProfilePageState extends State<ProfilePage> {
         return AlertDialog(
 
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(width: 30.w,),
               SvgPicture.asset(IconAssets.alert,color: Colors.red,),
-              GestureDetector(
-                onTap: (){Navigator.of(context).pop();},
-                child:Icon(Icons.cancel,color: Colors.red,)
-              )
+
             ],
           ),
           content: SingleChildScrollView(
@@ -291,7 +288,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 GestureDetector(
                   onTap: (){
-                    Navigator.of(context).pop();
+                    Get.toNamed(RouteHelper.login);
                   },
                   child: Container(
                     width: 80.w,
