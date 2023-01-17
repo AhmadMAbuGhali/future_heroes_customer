@@ -16,14 +16,14 @@ import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUpScreen> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUpScreen> {
   bool remmberMe = false;
   bool hidePass = true;
   @override
@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
                 height: 10,
               ),
               const CustomTextTitle(
-                text: 'تسجيل الدخول',
+                text: 'انشئ حسابك',
               ),
               const SizedBox(
                 height: 30,
@@ -81,43 +81,24 @@ class _LoginState extends State<Login> {
                 // labelText: 'كلمة المرور',
                 iconData: hidePass ? Icons.visibility : Icons.visibility_off,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Switch(
-                    value: remmberMe,
-                    onChanged: (bool) {
-                      setState(() {
-                        remmberMe = bool;
-                      });
-                    },
-                    activeColor: ColorManager.primary,
-                  ),
-                  const Text(
-                    'نسيت كلمة المرور',
-                    textAlign: TextAlign.end,
-                    style: TextStyle(color: ColorManager.primary, fontSize: 12),
-                  ),
-                ],
-              ),
               CustomButtonPrimary(
-                text: 'تسجيل الدخول',
+                text: 'متابعة',
                 onpressed: () {
                   snakbarWidget(context,
-                          Titel: 'هناك خطأ ما ',
-                          Description: 'اعد الماولة مجدداً من فضلك')
+                          Titel: 'مرحبا بك',
+                          Description: 'قم باكمال عملة التسجيل')
                       .Success();
-                  Get.offNamed(RouteHelper.getSuccessLogin());
+                  Get.offNamed(RouteHelper.getSignUpPart2());
                 },
               ),
               const SizedBox(
                 height: 50,
               ),
               CustomTextSignUpOrSignin(
-                textone: 'ليس لديك حساب ؟   ',
-                texttwo: 'أنشئ حسابك الآن',
+                textone: ' لديك حساب ؟ ',
+                texttwo: 'قم بالدخول الى حسابك',
                 onTap: () {
-                  Get.offNamed(RouteHelper.getSignUp());
+                  Get.offNamed(RouteHelper.getLogin());
                 },
               ),
             ],

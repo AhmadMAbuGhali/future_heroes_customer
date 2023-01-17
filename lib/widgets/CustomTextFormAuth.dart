@@ -5,11 +5,11 @@ class CustomTextFormAuth extends StatelessWidget {
   final String hintText;
   final String? labelText;
   final IconData? iconData;
+
   final TextEditingController? myController;
   final bool? hidepassword;
   Function()? pressSuffixIcon;
   TextInputType? textInputType;
-
 
   CustomTextFormAuth(
       {super.key,
@@ -18,7 +18,7 @@ class CustomTextFormAuth extends StatelessWidget {
       this.iconData,
       this.myController,
       this.textInputType,
-        this.pressSuffixIcon,
+      this.pressSuffixIcon,
       this.hidepassword});
 
   @override
@@ -28,6 +28,7 @@ class CustomTextFormAuth extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(bottom: 15),
           child: TextFormField(
+            cursorColor: ColorManager.primary,
             keyboardType: textInputType,
             obscureText: hidepassword ?? false,
             controller: myController,
@@ -38,7 +39,13 @@ class CustomTextFormAuth extends StatelessWidget {
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-                suffixIcon: IconButton(icon: Icon(iconData,color: ColorManager.primary,),onPressed:  pressSuffixIcon,),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    iconData,
+                    //   color: ColorManager.primary,
+                  ),
+                  onPressed: pressSuffixIcon,
+                ),
                 hintText: hintText,
                 hintStyle: TextStyle(color: ColorManager.gray, fontSize: 10),
                 border: OutlineInputBorder(
