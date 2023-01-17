@@ -11,7 +11,7 @@ class CustomButtonPrimary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.maxFinite,
+      width: double.infinity,
       margin: const EdgeInsets.only(top: 20),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

@@ -1,22 +1,29 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/LogoAuth.dart';
+import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:future_heroes_customer/widgets/textSignUp.dart';
 import 'package:get/get.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUpScreen> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUpScreen> {
   bool remmberMe = false;
   bool hidePass = true;
   @override
@@ -32,7 +39,7 @@ class _LoginState extends State<Login> {
                 height: 10,
               ),
               const CustomTextTitle(
-                text: 'تسجيل الدخول',
+                text: 'انشئ حسابك',
               ),
               const SizedBox(
                 height: 30,
@@ -65,45 +72,34 @@ class _LoginState extends State<Login> {
               CustomTextFormAuth(
                 textInputType: TextInputType.visiblePassword,
                 hidepassword: hidePass,
-                pressSuffixIcon: (){
+                pressSuffixIcon: () {
                   setState(() {
                     hidePass = !hidePass;
                   });
                 },
                 hintText: 'كلمة المرور',
                 // labelText: 'كلمة المرور',
-                iconData:hidePass? Icons.visibility:Icons.visibility_off,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Switch(value: remmberMe, onChanged: (bool){
-                    setState(() {
-
-                      remmberMe = bool;
-                    });
-                  },activeColor: ColorManager.primary,),
-
-                  const Text(
-                    'نسيت كلمة المرور',
-                    textAlign: TextAlign.end,
-                    style: TextStyle(color: ColorManager.primary, fontSize: 12),
-                  ),
-
-                ],
+                iconData: hidePass ? Icons.visibility : Icons.visibility_off,
               ),
               CustomButtonPrimary(
-                text: 'تسجيل الدخول',
+                text: 'متابعة',
                 onpressed: () {
-
+                  snakbarWidget(context,
+                          Titel: 'مرحبا بك',
+                          Description: 'قم باكمال عملة التسجيل')
+                      .Success();
+                  Get.offNamed(RouteHelper.getSignUpPart2());
                 },
               ),
               const SizedBox(
                 height: 50,
               ),
-              const CustomTextSignUpOrSignin(
-                textone: 'ليس لديك حساب ؟   ',
-                texttwo: 'أنشئ حسابك الآن',
+              CustomTextSignUpOrSignin(
+                textone: ' لديك حساب ؟ ',
+                texttwo: 'قم بالدخول الى حسابك',
+                onTap: () {
+                  Get.offNamed(RouteHelper.getLogin());
+                },
               ),
             ],
           )),

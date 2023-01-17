@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 class CustomTextSignUpOrSignin extends StatelessWidget {
   final String textone;
   final String texttwo;
-  final void Function()? onTap;
+  final void Function() onTap;
 
-  const CustomTextSignUpOrSignin(
-      {required this.textone, required this.texttwo, this.onTap});
+  CustomTextSignUpOrSignin(
+      {required this.textone, required this.texttwo, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
