@@ -265,6 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

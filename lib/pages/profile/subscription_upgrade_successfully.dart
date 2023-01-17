@@ -57,7 +57,7 @@ class SubscriptionUpgradeSuccessfully extends StatelessWidget {
               SizedBox(height: 40.h,),
               CustomTextTitle(text: "يرجى التوجه الى مقر النادي لتأكيد  عملية الترقية ودفع المبلغ"),
               SizedBox(height: 80.h,),
-              CustomButtonPrimary(text: "ارسال شكوى ", onpressed: (){
+              CustomButtonPrimary(text: "موافق ", onpressed: (){
                 Get.toNamed(RouteHelper.initial);
               }),
 

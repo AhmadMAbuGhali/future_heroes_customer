@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
@@ -102,7 +103,9 @@ class _LoginState extends State<Login> {
                 height: 50,
               ),
                CustomTextSignUpOrSignin(
-                 onTap: (){},
+                 onTap: (){
+                   Get.toNamed(RouteHelper.signUpPart2);
+                 },
                 textone: 'ليس لديك حساب ؟   ',
                 texttwo: 'أنشئ حسابك الآن',
               ),

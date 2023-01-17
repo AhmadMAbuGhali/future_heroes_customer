@@ -28,6 +28,7 @@ class SignUpScreenPart2 extends StatefulWidget {
 class _SignUpState extends State<SignUpScreenPart2> {
   bool remmberMe = false;
   bool hidePass = true;
+  bool isCultural =false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,24 +58,58 @@ class _SignUpState extends State<SignUpScreenPart2> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SvgPicture.asset(
-                    ImageAssets.sport,
-                    height: 100.h,
-                    width: 100.h,
+                  Container(
+                    decoration: BoxDecoration(
+                        border: isCultural?null:Border.all(color: ColorManager.primary,width: 2,)
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          isCultural=false;
+                        });
+
+                      },
+                      child: SvgPicture.asset(
+                        ImageAssets.sport,
+                        height: 100.h,
+                        width: 100.h,
+                      ),
+                    ),
                   ),
                   InkWell(
                     focusColor: ColorManager.primary,
                     borderRadius: BorderRadius.circular(10),
-                    onTap: () {},
-                    child: SvgPicture.asset(
-                      ImageAssets.cultural,
-                      height: 100.h,
-                      width: 100.h,
+                    onTap: () {
+                      setState(() {
+                        isCultural = true;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: isCultural?Border.all(color: ColorManager.primary,width: 2,):null
+                      ),
+                      child: SvgPicture.asset(
+                        ImageAssets.cultural,
+                        height: 100.h,
+                        width: 100.h,
+                      ),
                     ),
                   ),
                 ],
               ),
-              Column(
+              isCultural?Column(
+                children: [
+                  CardWidget(
+                    title: 'نحت',
+                  ),
+                  CardWidget(
+                    title: 'خط',
+                  ),
+                  CardWidget(
+                    title: 'رسم',
+                  ),
+                ],
+              ):Column(
                 children: [
                   CardWidget(
                     title: 'كاراتيه',
