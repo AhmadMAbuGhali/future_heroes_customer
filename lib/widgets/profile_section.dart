@@ -21,16 +21,20 @@ class ProfileSection extends StatelessWidget {
           onTap: onTap,
           child: Row(
             children: [
-              haveArrow?SvgPicture.asset(IconAssets.arrow_back):Container(),
-             const Spacer(),
-              Text(
-                label,
-                style: getBoldStyle(color: myColor!, fontSize: 12.sp),
-              ),
+              SvgPicture.asset(icon,color: myColor!,),
               SizedBox(
                 width: 5.w,
               ),
-              SvgPicture.asset(icon,color: myColor!,),
+              Text(
+              label,
+              style: getBoldStyle(color: myColor!, fontSize: 12.sp),
+            ),
+              const Spacer(),
+              haveArrow?SvgPicture.asset(IconAssets.arrow_back):Container(),
+
+
+
+
             ],
           ),
         ),

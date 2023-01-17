@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextTitle(
+               CustomTextTitle(
                 text: 'تسجيل الدخول',
               ),
               const SizedBox(
@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                 },
                 hintText: 'كلمة المرور',
                 // labelText: 'كلمة المرور',
-                iconData:hidePass? Icons.visibility:Icons.visibility_off,
+                iconData:hidePass? Icons.visibility :Icons.visibility_off,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

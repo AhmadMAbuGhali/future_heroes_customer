@@ -6,6 +6,8 @@ import 'package:future_heroes_customer/pages/navbar/main_navbar.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/resources/styles_manager.dart';
+import 'package:future_heroes_customer/routes/route_helper.dart';
+import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/custom_complaints.dart';
 import 'package:future_heroes_customer/widgets/custom_request.dart';
 import 'package:get/get.dart';
@@ -118,17 +120,11 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                                         height: MediaQuery.of(context).size.height*0.7,
                                         child: CustomComplaints()),
                                   ),
+                                  CustomButtonPrimary(text: "ارسال شكوى ", onpressed: (){
+                                    Get.toNamed(RouteHelper.sendComplaints);
+                                  }),
 
-                                  ElevatedButton(
-                                    onPressed: () {
 
-                                    },
-                                    child: Text("ارسال شكوى جديدة"),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: ColorManager.primary,
-                                      padding: EdgeInsets.symmetric(horizontal: 110, vertical: 10),
-                                    ),
-                                  ),
                                 ])),
                         Center(
                             child: Column(
@@ -139,17 +135,10 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                                         height: MediaQuery.of(context).size.height*0.7,
                                           child: CustomRequest()),
                                     ),
+                                  CustomButtonPrimary(text: "ارسال طلب جديد", onpressed: (){
+                                    Get.toNamed(RouteHelper.sendRequests);
+                                  }),
 
-                                  ElevatedButton(
-                                    onPressed: () {
-
-                                    },
-                                    child: Text("ارسال طلب جديد"),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: ColorManager.primary,
-                                      padding: EdgeInsets.symmetric(horizontal: 130, vertical: 10),
-                                    ),
-                                  ),
                         ])),
                       ],
                     ),

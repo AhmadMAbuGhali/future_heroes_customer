@@ -27,139 +27,149 @@ class _ProfilePageState extends State<ProfilePage> {
     return SafeArea(
       child: Scaffold(
 
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 30.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (builder) => bottomSheet(),
-                        );
+        body: Directionality(
+          
+          textDirection: TextDirection.rtl,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (builder) => bottomSheet(),
+                          );
 
-                        // setState(() {
-                        //   _getFromGallery();
-                        // });
-                      },
-                      child: Center(
-                        child: CircleAvatar(
-                          radius: 60,
-                          foregroundImage: imageFile == null
-                              ? Image.asset(
-                                  ImageAssets.logopng,
-                                ).image
-                              : Image.file(
-                                  imageFile!,
-                                  fit: BoxFit.cover,
-                                ).image,
-                          backgroundImage: imageFile == null
-                              ? Image.asset(
-                                  ImageAssets.logopng,
-                                ).image
-                              : Image.file(
-                                  imageFile!,
-                                  fit: BoxFit.cover,
-                                ).image,
+                          // setState(() {
+                          //   _getFromGallery();
+                          // });
+                        },
+                        child: Center(
+                          child: CircleAvatar(
+                            radius: 60,
+                            foregroundImage: imageFile == null
+                                ? Image.asset(
+                                    ImageAssets.logopng,
+                                  ).image
+                                : Image.file(
+                                    imageFile!,
+                                    fit: BoxFit.cover,
+                                  ).image,
+                            backgroundImage: imageFile == null
+                                ? Image.asset(
+                                    ImageAssets.logopng,
+                                  ).image
+                                : Image.file(
+                                    imageFile!,
+                                    fit: BoxFit.cover,
+                                  ).image,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                Text(
-                  "يوسف الجزار ",
-                  style: getBoldStyle(color: Colors.black),
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                Text(
-                  "Yousef.n.aljazzar@gmail.com",
-                  style: getRegularStyle(color: Colors.black),
-                ),
-                SizedBox(
-                  height: 40.h,
-                ),
-                //معلومات الشخصية
-                ProfileSection(
-                    label: "المعلومات الشخصية",
-                    haveArrow: true,
-                    icon: IconAssets.user,
-                    onTap: () {
-                      Get.toNamed(RouteHelper.personalData);
-                    }),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Text(
+                    "يوسف الجزار ",
+                    style: getBoldStyle(color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Text(
+                    "Yousef.n.aljazzar@gmail.com",
+                    style: getRegularStyle(color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 40.h,
+                  ),
+                  //معلومات الشخصية
+                  ProfileSection(
+                      label: "المعلومات الشخصية",
+                      haveArrow: true,
+                      icon: IconAssets.user,
+                      onTap: () {
+                        Get.toNamed(RouteHelper.personalData);
+                      }),
 
 
 
-                //الطلبات والشكاوي
-                ProfileSection(
-                    label: "الطلبات والشكاوي",
-                    haveArrow: true,
-                    icon: IconAssets.paper,
-                    onTap: () {
-                      Get.toNamed(RouteHelper.requestsAndComplaints);
-                    }),
+                  //الطلبات والشكاوي
+                  ProfileSection(
+                      label: "الطلبات والشكاوي",
+                      haveArrow: true,
+                      icon: IconAssets.paper,
+                      onTap: () {
+                        Get.toNamed(RouteHelper.requestsAndComplaints);
+                      }),
 
 
 
-                //مواعيد التدريب
+                  //مواعيد التدريب
 
-                ProfileSection(
-                    label:   "مواعيد التدريب",
-                    haveArrow: true,
-                    icon: IconAssets.calendar,
-                    onTap: () {}),
+                  ProfileSection(
+                      label:   "مواعيد التدريب",
+                      haveArrow: true,
+                      icon: IconAssets.calendar,
+                      onTap: () {
+                        Get.toNamed(RouteHelper.postponeAnAppointment);
+                      }),
 
-                //ترقية الاشتراك
-                ProfileSection(
-                    label:   "ترقية الاشتراك",
-                    haveArrow: true,
-                    icon: IconAssets.jewelry,
-                    onTap: () {}),
+                  //ترقية الاشتراك
+                  ProfileSection(
+                      label:   "ترقية الاشتراك",
+                      haveArrow: true,
+                      icon: IconAssets.jewelry,
+                      onTap: () {
+                        Get.toNamed(RouteHelper.subscriptionUpgradeSuccessfully);
+                      }),
 
-                //العروض
-                ProfileSection(
-                    label:    "العروض",
-                    haveArrow: true,
-                    icon: IconAssets.localoffer,
-                    onTap: () {}),
+                  //العروض
+                  ProfileSection(
+                      label:    "العروض",
+                      haveArrow: true,
+                      icon: IconAssets.localoffer,
+                      onTap: () {}),
 
-                //التقيمات
+                  //التقيمات
 
-                ProfileSection(
-                    label:  "التقيمات",
-                    haveArrow: true,
-                    icon: IconAssets.stars,
-                    onTap: () {}),
+                  ProfileSection(
+                      label:  "التقيمات",
+                      haveArrow: true,
+                      icon: IconAssets.stars,
+                      onTap: () {}),
 
-                //تسجيل الخروج
-                ProfileSection(
-                    label:  "تسجيل الخروج",
-                    haveArrow: false,
-                    icon: IconAssets.user,
-                    myColor: Colors.red,
-                    onTap: () {}),
+                  //تسجيل الخروج
+                  ProfileSection(
+                      label:  "تسجيل الخروج",
+                      haveArrow: false,
+                      icon: IconAssets.user,
+                      myColor: Colors.red,
+                      onTap: () {
+                        _logoutDialog();
+                      }),
 
-                //حذف الحساب
-                ProfileSection(
-                    label:  "حذف حسابي",
-                    haveArrow: false,
-                    icon: IconAssets.delete,
-                    myColor: Colors.red,
-                    onTap: () {}),
+                  //حذف الحساب
+                  ProfileSection(
+                      label:  "حذف حسابي",
+                      haveArrow: false,
+                      icon: IconAssets.delete,
+                      myColor: Colors.red,
+                      onTap: () {}),
 
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -245,6 +255,75 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
+    );
+  }
+  Future<void> _logoutDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(width: 30.w,),
+              SvgPicture.asset(IconAssets.alert,color: Colors.red,),
+              GestureDetector(
+                onTap: (){Navigator.of(context).pop();},
+                child:Icon(Icons.cancel,color: Colors.red,)
+              )
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('هل انت متأكد من تسجيل الحروج'),
+
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    width: 80.w,
+                    height: 30.h,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.red)
+                    ),
+                    child:  Center(child: Text('نعم ',style: getBoldStyle(color: Colors.white),)),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    width: 80.w,
+                    height: 30.h,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.red)
+                    ),
+                    child:  Center(child: Text('لا ',style: getBoldStyle(color: Colors.white),)),
+                  ),
+                ),
+
+              ],
+            )
+
+
+          ],
+        );
+      },
     );
   }
 }
