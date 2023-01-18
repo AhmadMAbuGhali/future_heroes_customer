@@ -33,7 +33,7 @@ class snakbarWidget {
       ),
       position: MotionToastPosition.top,
       width: 350.w,
-      height: 70.h,
+      height: 80.h,
       animationDuration: const Duration(milliseconds: 1000),
       layoutOrientation: ToastOrientation.ltr,
     ).show(context);
