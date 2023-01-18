@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
     animation = CurvedAnimation(parent: controller, curve: Curves.linear);
     Timer(
       const Duration(seconds: 3),
-      () => Get.offNamed(RouteHelper.login),
+      () => Get.offNamed(RouteHelper.onBoarding),
     );
   }
 

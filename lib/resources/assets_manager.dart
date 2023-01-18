@@ -5,6 +5,10 @@ class ImageAssets {
 
   static const String background = '$IMAGE_PATH/background.png';
   static const String avatar = '$IMAGE_PATH/avatar.png';
+  static const String onBoardingImageOne = '$IMAGE_PATH/onBoardingImageOne.png';
+  static const String onBoardingImageTwo = '$IMAGE_PATH/onBoardingImageTwo.png';
+  static const String onBoardingImageThree =
+      '$IMAGE_PATH/onBoardingImageThree.png';
 
   static const String cultural = '$IMAGE_PATH/cultural.svg';
   static const String edit_photo = '$IMAGE_PATH/edit_photo.svg';

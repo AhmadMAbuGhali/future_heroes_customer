@@ -16,7 +16,7 @@ class NoConnectionScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -25,7 +25,7 @@ class NoConnectionScreen extends StatelessWidget {
               width: 200.w,
               height: 200.h,
               child: SvgPicture.asset(
-                ImageAssets.welcome,
+                ImageAssets.No_connection,
               ),
             )),
             SizedBox(
@@ -38,12 +38,13 @@ class NoConnectionScreen extends StatelessWidget {
             Text(
               '''للأسف قد تعذر الإتصال بالأنترنت.
 يرجى التحقق من فضلك.''',
+              textAlign: TextAlign.center,
               style: TextStyle(color: ColorManager.gray),
             ),
             CustomButtonPrimary(
               text: 'أعد المحاولة',
               onpressed: () {
-                Get.offNamed(RouteHelper.login);
+                Get.offNamed(RouteHelper.initial);
               },
             )
           ],

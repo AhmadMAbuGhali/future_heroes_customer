@@ -3,13 +3,16 @@ import 'package:future_heroes_customer/pages/auth/EndSignUp.dart';
 import 'package:future_heroes_customer/pages/auth/NoConnection.dart';
 import 'package:future_heroes_customer/pages/auth/SignUpPersonalData.dart';
 import 'package:future_heroes_customer/pages/auth/SubscriptionType.dart';
+import 'package:future_heroes_customer/pages/auth/SuccessLogin.dart';
 import 'package:future_heroes_customer/pages/auth/TermsAndConditions.dart';
 import 'package:future_heroes_customer/pages/auth/codeVerification.dart';
 import 'package:future_heroes_customer/pages/auth/diseases.dart';
 import 'package:future_heroes_customer/pages/auth/forgetPassword.dart';
 import 'package:future_heroes_customer/pages/auth/login.dart';
 import 'package:future_heroes_customer/pages/auth/setPassword.dart';
+import 'package:future_heroes_customer/pages/home/home_screen.dart';
 import 'package:future_heroes_customer/pages/navbar/main_navbar.dart';
+import 'package:future_heroes_customer/pages/onBoarding/onBoarding.dart';
 import 'package:future_heroes_customer/pages/profile/change_password.dart';
 import 'package:future_heroes_customer/pages/profile/class_time.dart';
 import 'package:future_heroes_customer/pages/profile/personal_data.dart';
@@ -53,6 +56,9 @@ class RouteHelper {
   static const String ratings = "/ratings";
   static const String setPassword = "/setPassword";
   static const String codeVerification = "/codeVerification";
+  static const String onBoarding = "/onBoarding";
+  static const String successLogin = "/successLogin";
+  static const String homeScreen = "/homeScreen";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => '$initial';
@@ -80,6 +86,9 @@ class RouteHelper {
   static String getRatings() => '$ratings';
   static String getSetPassword() => '$setPassword';
   static String getCodeVerification() => '$codeVerification';
+  static String getOnBoarding() => '$onBoarding';
+  static String getSuccessLogin() => '$successLogin';
+  static String getHomeScreen() => '$homeScreen';
 
   static List<GetPage> routes = [
     GetPage(
@@ -91,6 +100,11 @@ class RouteHelper {
         name: initial,
         page: () {
           return MainNavBar();
+        }),
+    GetPage(
+        name: homeScreen,
+        page: () {
+          return HomeScreen();
         }),
     GetPage(
       name: profile,
@@ -228,6 +242,18 @@ class RouteHelper {
       name: codeVerification,
       page: () {
         return CodeVerification();
+      },
+    ),
+    GetPage(
+      name: onBoarding,
+      page: () {
+        return OnBoarding();
+      },
+    ),
+    GetPage(
+      name: successLogin,
+      page: () {
+        return SuccessLogin();
       },
     ),
   ];

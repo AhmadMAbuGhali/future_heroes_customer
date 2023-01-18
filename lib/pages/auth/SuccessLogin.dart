@@ -16,7 +16,7 @@ class SuccessLogin extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
