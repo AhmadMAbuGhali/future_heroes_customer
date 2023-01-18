@@ -1,7 +1,11 @@
-
+import 'package:future_heroes_customer/pages/auth/CoachSelection.dart';
+import 'package:future_heroes_customer/pages/auth/EndSignUp.dart';
 import 'package:future_heroes_customer/pages/auth/NoConnection.dart';
 import 'package:future_heroes_customer/pages/auth/SignUpPersonalData.dart';
+import 'package:future_heroes_customer/pages/auth/SubscriptionType.dart';
 import 'package:future_heroes_customer/pages/auth/TermsAndConditions.dart';
+import 'package:future_heroes_customer/pages/auth/diseases.dart';
+import 'package:future_heroes_customer/pages/auth/forgetPassword.dart';
 import 'package:future_heroes_customer/pages/auth/login.dart';
 import 'package:future_heroes_customer/pages/navbar/main_navbar.dart';
 import 'package:future_heroes_customer/pages/profile/change_password.dart';
@@ -19,7 +23,6 @@ import '../pages/auth/SignUppart2.dart';
 import '../pages/splash_page/splash_page.dart';
 
 class RouteHelper {
-
   static const String splashScreen = "/splash-screen";
   static const String initial = "/";
   static const String profile = "/profile";
@@ -30,14 +33,18 @@ class RouteHelper {
   static const String postponeAnAppointment = "/postpone-an-appointment";
   static const String sendComplaints = "/send-complaints";
   static const String sendRequests = "/send-requests";
-  static const String subscriptionUpgradeSuccessfully = "/subscription-upgrade-successfully";
+  static const String subscriptionUpgradeSuccessfully =
+      "/subscription-upgrade-successfully";
   static const String signUpPart2 = "/signup-part2";
   static const String signupPersonalData = "/signup-personal-data";
   static const String termsAndConditions = "/terms-and-conditions";
   static const String changePassword = "/change-password";
   static const String classTime = "/class-time";
-
-
+  static const String diseases = "/diseases";
+  static const String coachSelection = "/coachSelection";
+  static const String subscriptionType = "/subscriptionType";
+  static const String endSignUp = "/endSignUp";
+  static const String forgetPassword = "/forgetPassword";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => '$initial';
@@ -49,14 +56,18 @@ class RouteHelper {
   static String getPostponeAnAppointment() => '$postponeAnAppointment';
   static String getSendComplaints() => '$sendComplaints';
   static String getSendRequests() => '$sendRequests';
-  static String getSubscriptionUpgradeSuccessfully() => '$subscriptionUpgradeSuccessfully';
+  static String getSubscriptionUpgradeSuccessfully() =>
+      '$subscriptionUpgradeSuccessfully';
   static String getSignUpPart2() => '$signUpPart2';
   static String getSignupPersonalData() => '$signupPersonalData';
   static String getTermsAndConditions() => '$termsAndConditions';
   static String getChangePassword() => '$changePassword';
   static String getClassTime() => '$classTime';
-
-
+  static String getDiseases() => '$diseases';
+  static String getCoachSelection() => '$coachSelection';
+  static String getSubscriptionType() => '$subscriptionType';
+  static String getEndSignUp() => '$endSignUp';
+  static String getForgetPassword() => '$forgetPassword';
 
   static List<GetPage> routes = [
     GetPage(
@@ -70,29 +81,29 @@ class RouteHelper {
           return MainNavBar();
         }),
     GetPage(
-        name: profile,
-        page: () {
-          return ProfilePage();
-        },
-       ),
+      name: profile,
+      page: () {
+        return ProfilePage();
+      },
+    ),
     GetPage(
-        name: personalData,
-        page: () {
-          return PersonalData();
-        },
-       ),
+      name: personalData,
+      page: () {
+        return PersonalData();
+      },
+    ),
     GetPage(
-        name: requestsAndComplaints,
-        page: () {
-          return RequestsAndComplaints();
-        },
-       ),
+      name: requestsAndComplaints,
+      page: () {
+        return RequestsAndComplaints();
+      },
+    ),
     GetPage(
-        name: login,
-        page: () {
-          return Login();
-        },
-       ),
+      name: login,
+      page: () {
+        return Login();
+      },
+    ),
     GetPage(
       name: noConnection,
       page: () {
@@ -147,13 +158,41 @@ class RouteHelper {
         return ChangePassword();
       },
     ),
-GetPage(
+    GetPage(
       name: classTime,
       page: () {
         return ClassTime();
       },
     ),
-
-
+    GetPage(
+      name: diseases,
+      page: () {
+        return Diseases();
+      },
+    ),
+    GetPage(
+      name: coachSelection,
+      page: () {
+        return CoachSelection();
+      },
+    ),
+    GetPage(
+      name: subscriptionType,
+      page: () {
+        return SubscriptionType();
+      },
+    ),
+    GetPage(
+      name: endSignUp,
+      page: () {
+        return EndSignUp();
+      },
+    ),
+    GetPage(
+      name: forgetPassword,
+      page: () {
+        return ForgetPassword();
+      },
+    ),
   ];
 }

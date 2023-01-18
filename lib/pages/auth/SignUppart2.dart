@@ -11,7 +11,7 @@ import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/LogoAuth.dart';
-import 'package:future_heroes_customer/widgets/cardWidget.dart';
+import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:future_heroes_customer/widgets/textSignUp.dart';
 import 'package:get/get.dart';
@@ -28,20 +28,33 @@ class SignUpScreenPart2 extends StatefulWidget {
 class _SignUpState extends State<SignUpScreenPart2> {
   bool remmberMe = false;
   bool hidePass = true;
-  bool isCultural =false;
+  bool isCultural = false;
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return ColorManager.primary;
+      }
+      return ColorManager.primary;
+    }
+
     return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
           child: ListView(
             children: [
               const LogoAuth(),
               SizedBox(
                 height: 10.h,
               ),
-               CustomTextTitle(
+              CustomTextTitle(
                 text: ' !اهلا وسهلا بك',
               ),
               SizedBox(
@@ -60,14 +73,17 @@ class _SignUpState extends State<SignUpScreenPart2> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        border: isCultural?null:Border.all(color: ColorManager.primary,width: 2,)
-                    ),
+                        border: isCultural
+                            ? null
+                            : Border.all(
+                                color: ColorManager.primary,
+                                width: 2,
+                              )),
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         setState(() {
-                          isCultural=false;
+                          isCultural = false;
                         });
-
                       },
                       child: SvgPicture.asset(
                         ImageAssets.sport,
@@ -86,8 +102,12 @@ class _SignUpState extends State<SignUpScreenPart2> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        border: isCultural?Border.all(color: ColorManager.primary,width: 2,):null
-                      ),
+                          border: isCultural
+                              ? Border.all(
+                                  color: ColorManager.primary,
+                                  width: 2,
+                                )
+                              : null),
                       child: SvgPicture.asset(
                         ImageAssets.cultural,
                         height: 100.h,
@@ -97,31 +117,39 @@ class _SignUpState extends State<SignUpScreenPart2> {
                   ),
                 ],
               ),
-              isCultural?Column(
-                children: [
-                  CardWidget(
-                    title: 'نحت',
-                  ),
-                  CardWidget(
-                    title: 'خط',
-                  ),
-                  CardWidget(
-                    title: 'رسم',
-                  ),
-                ],
-              ):Column(
-                children: [
-                  CardWidget(
-                    title: 'كاراتيه',
-                  ),
-                  CardWidget(
-                    title: 'تايكواندو',
-                  ),
-                  CardWidget(
-                    title: 'جمباز',
-                  ),
-                ],
-              ),
+              isCultural
+                  ? Column(
+                      children: [
+                        CardCheckBoxWidget(
+                          isChecked: isChecked,
+                          title: 'نحت',
+                        ),
+                        CardCheckBoxWidget(
+                          isChecked: isChecked,
+                          title: 'خط',
+                        ),
+                        CardCheckBoxWidget(
+                          isChecked: isChecked,
+                          title: 'رسم',
+                        ),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        CardCheckBoxWidget(
+                          isChecked: isChecked,
+                          title: 'كاراتيه',
+                        ),
+                        CardCheckBoxWidget(
+                          isChecked: isChecked,
+                          title: 'تايكواندو',
+                        ),
+                        CardCheckBoxWidget(
+                          isChecked: isChecked,
+                          title: 'جمباز',
+                        ),
+                      ],
+                    ),
               CustomButtonPrimary(
                 text: 'متابعة',
                 onpressed: () {

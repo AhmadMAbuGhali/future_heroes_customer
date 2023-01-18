@@ -4,6 +4,8 @@ class ImageAssets {
   static const String logopng = '$IMAGE_PATH/logo.png';
 
   static const String background = '$IMAGE_PATH/background.svg';
+  static const String avatar = '$IMAGE_PATH/avatar.svg';
+
   static const String cultural = '$IMAGE_PATH/cultural.svg';
   static const String edit_photo = '$IMAGE_PATH/edit_photo.svg';
   static const String error_email = '$IMAGE_PATH/error_email.svg';

@@ -9,11 +9,29 @@ import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
 
-class TermsAndConditions extends StatelessWidget {
+class TermsAndConditions extends StatefulWidget {
   const TermsAndConditions({super.key});
 
   @override
+  State<TermsAndConditions> createState() => _TermsAndConditionsState();
+}
+
+class _TermsAndConditionsState extends State<TermsAndConditions> {
+  bool isChecked = false;
+  @override
   Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return ColorManager.primary;
+    }
+
     return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Stack(children: [
@@ -53,7 +71,7 @@ class TermsAndConditions extends StatelessWidget {
                       ),
                       borderRadius: BorderRadiusDirectional.circular(10),
                       color: ColorManager.white),
-                  child: const Text(
+                  child: Text(
                     '''الالتزام بالزي الرياضي الكامل
 الحفاظ على نظافة الصالة .
 يمنع دخول الوجبات داخل الصالة .
@@ -76,7 +94,7 @@ class TermsAndConditions extends StatelessWidget {
 
 يحق للمركز تصوير الحصص التدريبية للمشتركين أثناء التدريب
 ونشرها على حسابات التواصل الاجتماعي الخاصة بالمركز .''',
-                    style: TextStyle(fontSize: 10),
+                    style: TextStyle(fontSize: 10.h),
                   ),
                 ),
                 SizedBox(
@@ -84,9 +102,15 @@ class TermsAndConditions extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Icon(
-                      Icons.square_outlined,
-                      color: ColorManager.primary,
+                    Checkbox(
+                      checkColor: Colors.white,
+                      fillColor: MaterialStateProperty.resolveWith(getColor),
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      },
                     ),
                     Text(
                       'أوافق على جميع الشروط والأحكام',
@@ -97,11 +121,12 @@ class TermsAndConditions extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'متابعة',
                   onpressed: () {
-                    snakbarWidget(context,
-                            Titel: 'مرحبا بك',
-                            Description: 'هذا الحقل مطلوب اجباري')
-                        .error();
-                    Get.offNamed(RouteHelper.signupPersonalData);
+                    !isChecked
+                        ? snakbarWidget(context,
+                                Titel: 'مرحبا بك',
+                                Description: 'هذا الحقل مطلوب اجباري')
+                            .error()
+                        : Get.offNamed(RouteHelper.signupPersonalData);
                   },
                 ),
               ],

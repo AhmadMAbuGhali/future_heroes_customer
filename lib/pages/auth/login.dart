@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 10,
               ),
-               CustomTextTitle(
+              CustomTextTitle(
                 text: 'تسجيل الدخول',
               ),
               const SizedBox(
@@ -66,31 +66,38 @@ class _LoginState extends State<Login> {
               CustomTextFormAuth(
                 textInputType: TextInputType.visiblePassword,
                 hidepassword: hidePass,
-                pressSuffixIcon: (){
+                pressSuffixIcon: () {
                   setState(() {
                     hidePass = !hidePass;
                   });
                 },
                 hintText: 'كلمة المرور',
                 // labelText: 'كلمة المرور',
-                iconData:hidePass? Icons.visibility:Icons.visibility_off,
+                iconData: hidePass ? Icons.visibility : Icons.visibility_off,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Switch(value: remmberMe, onChanged: (bool){
-                    setState(() {
-
-                      remmberMe = bool;
-                    });
-                  },activeColor: ColorManager.primary,),
-
-                  const Text(
-                    'نسيت كلمة المرور',
-                    textAlign: TextAlign.end,
-                    style: TextStyle(color: ColorManager.primary, fontSize: 12),
+                  Switch(
+                    value: remmberMe,
+                    onChanged: (bool) {
+                      setState(() {
+                        remmberMe = bool;
+                      });
+                    },
+                    activeColor: ColorManager.primary,
                   ),
-
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.forgetPassword);
+                    },
+                    child: const Text(
+                      'نسيت كلمة المرور',
+                      textAlign: TextAlign.end,
+                      style:
+                          TextStyle(color: ColorManager.primary, fontSize: 12),
+                    ),
+                  ),
                 ],
               ),
               CustomButtonPrimary(
@@ -102,10 +109,10 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 50,
               ),
-               CustomTextSignUpOrSignin(
-                 onTap: (){
-                   Get.toNamed(RouteHelper.signUpPart2);
-                 },
+              CustomTextSignUpOrSignin(
+                onTap: () {
+                  Get.toNamed(RouteHelper.signUpPart2);
+                },
                 textone: 'ليس لديك حساب ؟   ',
                 texttwo: 'أنشئ حسابك الآن',
               ),
