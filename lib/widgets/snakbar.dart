@@ -44,7 +44,7 @@ class snakbarWidget {
       icon: Icons.done,
       primaryColor: ColorManager.green,
       //secondaryColor: ColorManager.green,
-      backgroundType: BackgroundType.lighter,
+      backgroundType: BackgroundType.transparent,
       title: Text(
         Titel,
         style: TextStyle(

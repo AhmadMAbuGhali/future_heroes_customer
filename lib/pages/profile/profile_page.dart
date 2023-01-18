@@ -132,15 +132,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       haveArrow: true,
                       icon: IconAssets.jewelry,
                       onTap: () {
-                        Get.toNamed(RouteHelper.subscriptionUpgradeSuccessfully);
+                        Get.toNamed(RouteHelper.subscriptionUpgrade);
                       }),
 
-                  //العروض
-                  ProfileSection(
-                      label:    "العروض",
-                      haveArrow: true,
-                      icon: IconAssets.localoffer,
-                      onTap: () {}),
+
 
                   //التقيمات
 
@@ -148,7 +143,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       label:  "التقيمات",
                       haveArrow: true,
                       icon: IconAssets.stars,
-                      onTap: () {}),
+                      onTap: () {
+                        Get.toNamed(RouteHelper.ratings);
+                      }),
 
                   //تسجيل الخروج
                   ProfileSection(

@@ -4,7 +4,7 @@ class ImageAssets {
   static const String logopng = '$IMAGE_PATH/logo.png';
 
   static const String background = '$IMAGE_PATH/background.svg';
-  static const String avatar = '$IMAGE_PATH/avatar.svg';
+  static const String avatar = '$IMAGE_PATH/avatar.png';
 
   static const String cultural = '$IMAGE_PATH/cultural.svg';
   static const String edit_photo = '$IMAGE_PATH/edit_photo.svg';
@@ -20,6 +20,7 @@ class ImageAssets {
   static const String upgrage = '$IMAGE_PATH/upgrage.svg';
   static const String verification = '$IMAGE_PATH/verification.svg';
   static const String welcome = '$IMAGE_PATH/welcome.svg';
+  static const String mainImage = '$IMAGE_PATH/main_image.png';
 }
 
 const String ICON_PATH = 'assets/icon';

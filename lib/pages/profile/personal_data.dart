@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/custom_text_feild.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -62,8 +63,9 @@ TextEditingController dateInput = TextEditingController();
               ),
             ),
             SizedBox(height: 40.h,),
-            const SizedBox(
-              height: 30,
+             Center(child: CustomTextTitle(text: "معلومات المستخدم", )),
+             SizedBox(
+              height: 10.h,
             ),
              Text(
               'البريد الالكتروني ',

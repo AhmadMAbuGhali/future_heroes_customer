@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/resources/styles_manager.dart';
 
 class CustomButtonPrimary extends StatelessWidget {
   final String text;
   final void Function() onpressed;
+  Color? textColor;
+  Color? buttonColor;
 
-  const CustomButtonPrimary(
-      {super.key, required this.text, required this.onpressed});
+   CustomButtonPrimary(
+      {super.key, required this.text, required this.onpressed,this.textColor=Colors.white,this.buttonColor=ColorManager.primary});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +21,16 @@ class CustomButtonPrimary extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           foregroundColor: ColorManager.white,
+          side: BorderSide(color: ColorManager.primary),
           padding: const EdgeInsets.symmetric(vertical: 10),
-          primary: ColorManager.primary,
+          primary: buttonColor,
           textStyle: TextStyle(
             fontFamily: 'DroidKufi',
             fontSize: 16,
           ),
         ),
         onPressed: onpressed,
-        child: Text(text),
+        child: Text(text,style: getRegularStyle(color: textColor!),),
       ),
     );
   }

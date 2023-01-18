@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:future_heroes_customer/pages/home/home_screen.dart';
+import 'package:future_heroes_customer/pages/offer/offer_page.dart';
 import 'package:future_heroes_customer/pages/profile/profile_page.dart';
+import 'package:future_heroes_customer/pages/qr_code/qr_code.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/utils/colors.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+
+import '../notification/notification.dart';
+
 
 class MainNavBar extends StatefulWidget {
   const MainNavBar({Key? key}) : super(key: key);
@@ -51,17 +57,10 @@ class _MainNavBarState extends State<MainNavBar> {
   List<Widget> _buildScreens() {
     return [
       ProfilePage(),
-      Container(
-        child: Center(child: Text('NextPage 2 ')),
-      ),
-      Container(
-        child: Center(child: Text('NextPage 3')),
-      ),
-      Container(
-        child: Center(child: Text('NextPage 4')),
-      ),Container(
-        child: Center(child: Text('NextPage 5')),
-      ),
+      NotificationPage(),
+      QRCode(),
+      OfferPage(),
+      HomeScreen()
 
     ];
   }
@@ -72,32 +71,33 @@ class _MainNavBarState extends State<MainNavBar> {
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.user),
         title: ("المستحدم"),
+        iconSize: 70,
         activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.transparent,
+        inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.notifications),
         title: ("الاشعارات"),
         activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.transparent,
+        inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.qr_code),
         title: ("QR Code"),
         activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.transparent,
+        inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.localoffer),
         title: ("العروض"),
         activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.transparent,
+        inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.home),
         title: ("الرئيسية"),
         activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.transparent,
+        inactiveColorPrimary: Colors.grey,
       ),
     ];
   }
@@ -131,42 +131,9 @@ class _MainNavBarState extends State<MainNavBar> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style1, // Choose the nav bar style with this property.
+      navBarStyle: NavBarStyle.style15, // Choose the nav bar style with this property.
     );
   }
-/*
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: AppColors.mainColor,
-        unselectedItemColor: Colors.amberAccent,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-      selectedFontSize: 0.0,
-      unselectedFontSize: 0.0,
-      currentIndex: _selectedIndex,
-      onTap: onTapNav,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: "Home Page"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.archive),
-              label: "history"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: "cart "
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "me"
-          ),
-        ],
-      ),
-    );
-  }*/
+
+
 }
