@@ -87,6 +87,9 @@ class _CodeVerificationState extends State<CodeVerification> {
               text: 'تحقق',
               onpressed: () {
                 startTimer();
+                _start == 0
+                    ? Get.toNamed(RouteHelper.setPassword)
+                    : startTimer();
               },
             ),
           ]),
