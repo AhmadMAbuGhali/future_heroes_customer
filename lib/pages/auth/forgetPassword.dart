@@ -45,7 +45,7 @@ class ForgetPassword extends StatelessWidget {
             CustomButtonPrimary(
               text: 'اعادة تعيين كلمة المرور',
               onpressed: () {
-                Get.toNamed(RouteHelper.initial);
+                Get.toNamed(RouteHelper.codeVerification);
               },
             ),
           ]),

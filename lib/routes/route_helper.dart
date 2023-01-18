@@ -4,9 +4,11 @@ import 'package:future_heroes_customer/pages/auth/NoConnection.dart';
 import 'package:future_heroes_customer/pages/auth/SignUpPersonalData.dart';
 import 'package:future_heroes_customer/pages/auth/SubscriptionType.dart';
 import 'package:future_heroes_customer/pages/auth/TermsAndConditions.dart';
+import 'package:future_heroes_customer/pages/auth/codeVerification.dart';
 import 'package:future_heroes_customer/pages/auth/diseases.dart';
 import 'package:future_heroes_customer/pages/auth/forgetPassword.dart';
 import 'package:future_heroes_customer/pages/auth/login.dart';
+import 'package:future_heroes_customer/pages/auth/setPassword.dart';
 import 'package:future_heroes_customer/pages/navbar/main_navbar.dart';
 import 'package:future_heroes_customer/pages/profile/change_password.dart';
 import 'package:future_heroes_customer/pages/profile/class_time.dart';
@@ -35,7 +37,8 @@ class RouteHelper {
   static const String postponeAnAppointment = "/postpone-an-appointment";
   static const String sendComplaints = "/send-complaints";
   static const String sendRequests = "/send-requests";
-  static const String subscriptionUpgradeSuccessfully = "/subscription-upgrade-successfully";
+  static const String subscriptionUpgradeSuccessfully =
+      "/subscription-upgrade-successfully";
   static const String signUpPart2 = "/signup-part2";
   static const String signupPersonalData = "/signup-personal-data";
   static const String termsAndConditions = "/terms-and-conditions";
@@ -48,6 +51,8 @@ class RouteHelper {
   static const String forgetPassword = "/forgetPassword";
   static const String subscriptionUpgrade = "/subscription-upgrade";
   static const String ratings = "/ratings";
+  static const String setPassword = "/setPassword";
+  static const String codeVerification = "/codeVerification";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => '$initial';
@@ -59,7 +64,8 @@ class RouteHelper {
   static String getPostponeAnAppointment() => '$postponeAnAppointment';
   static String getSendComplaints() => '$sendComplaints';
   static String getSendRequests() => '$sendRequests';
-  static String getSubscriptionUpgradeSuccessfully() => '$subscriptionUpgradeSuccessfully';
+  static String getSubscriptionUpgradeSuccessfully() =>
+      '$subscriptionUpgradeSuccessfully';
   static String getSignUpPart2() => '$signUpPart2';
   static String getSignupPersonalData() => '$signupPersonalData';
   static String getTermsAndConditions() => '$termsAndConditions';
@@ -72,6 +78,8 @@ class RouteHelper {
   static String getForgetPassword() => '$forgetPassword';
   static String getSubscriptionUpgrade() => '$subscriptionUpgrade';
   static String getRatings() => '$ratings';
+  static String getSetPassword() => '$setPassword';
+  static String getCodeVerification() => '$codeVerification';
 
   static List<GetPage> routes = [
     GetPage(
@@ -208,6 +216,18 @@ class RouteHelper {
       name: ratings,
       page: () {
         return Ratings();
+      },
+    ),
+    GetPage(
+      name: setPassword,
+      page: () {
+        return SetPassword();
+      },
+    ),
+    GetPage(
+      name: codeVerification,
+      page: () {
+        return CodeVerification();
       },
     ),
   ];
