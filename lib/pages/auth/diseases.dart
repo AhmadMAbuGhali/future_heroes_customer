@@ -19,7 +19,7 @@ class Diseases extends StatefulWidget {
 }
 
 class _DiseasesState extends State<Diseases> {
-  bool isDiseases = false;
+  bool isDiseases = true;
   bool isChecked = false;
 
   @override

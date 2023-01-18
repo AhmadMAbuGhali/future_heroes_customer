@@ -7,8 +7,10 @@ class CardSubscriptionType extends StatelessWidget {
   String title;
   String description;
   String price;
+  bool isSelecte;
   CardSubscriptionType(
       {super.key,
+      required this.isSelecte,
       required this.title,
       required this.description,
       required this.price});
@@ -19,10 +21,15 @@ class CardSubscriptionType extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
       margin: EdgeInsets.symmetric(vertical: 5.h),
-      decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.gray),
-          color: ColorManager.white,
-          borderRadius: BorderRadius.circular(10)),
+      decoration: !isSelecte
+          ? BoxDecoration(
+              border: Border.all(color: ColorManager.gray, width: 1),
+              color: ColorManager.white,
+              borderRadius: BorderRadius.circular(10))
+          : BoxDecoration(
+              border: Border.all(color: ColorManager.primary, width: 2),
+              color: ColorManager.white,
+              borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           Row(

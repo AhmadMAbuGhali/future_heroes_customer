@@ -8,14 +8,18 @@ class CustomButtonPrimary extends StatelessWidget {
   Color? textColor;
   Color? buttonColor;
 
-   CustomButtonPrimary(
-      {super.key, required this.text, required this.onpressed,this.textColor=Colors.white,this.buttonColor=ColorManager.primary});
+  CustomButtonPrimary(
+      {super.key,
+      required this.text,
+      required this.onpressed,
+      this.textColor = Colors.white,
+      this.buttonColor = ColorManager.primary});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 10),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape:
@@ -30,7 +34,10 @@ class CustomButtonPrimary extends StatelessWidget {
           ),
         ),
         onPressed: onpressed,
-        child: Text(text,style: getRegularStyle(color: textColor!),),
+        child: Text(
+          text,
+          style: getRegularStyle(color: textColor!),
+        ),
       ),
     );
   }

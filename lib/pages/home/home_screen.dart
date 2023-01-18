@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: 300,
+            top: 250.h,
             left: 20,
             right: 20,
             child: ClassTimeWidget(),

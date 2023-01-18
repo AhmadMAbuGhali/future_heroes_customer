@@ -16,7 +16,6 @@ class ClassTimeWidget extends StatefulWidget {
 }
 
 class _ClassTimeWidgetState extends State<ClassTimeWidget> {
-
   int groupValue = 0;
   StepperType _type = StepperType.vertical;
 
@@ -24,42 +23,33 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
     Container(
       width: 15.w,
       height: 15.h,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: ColorManager.primary
-      ),
+      decoration:
+          BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
     ),
     Container(
       width: 15.w,
       height: 15.h,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: ColorManager.primary
-      ),
+      decoration:
+          BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
     ),
     Container(
       width: 15.w,
       height: 15.h,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: ColorManager.primary
-      ),
+      decoration:
+          BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
     ),
     Container(
       width: 15.w,
       height: 15.h,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: ColorManager.primary
-      ),
+      decoration:
+          BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
     ),
-
   ];
 
   int _index = 1;
   @override
   Widget build(BuildContext context) {
-    return  buildStepperCustom(context);
+    return buildStepperCustom(context);
   }
 
   void go(int index) {
@@ -77,32 +67,35 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
       _index += index;
     });
   }
+
   Widget buildStepperCustom(BuildContext context) {
     return EnhanceStepper(
-      // stepIconSize: 60,
+        // stepIconSize: 60,
         type: _type,
-
         horizontalTitlePosition: HorizontalTitlePosition.bottom,
         horizontalLinePosition: HorizontalLinePosition.center,
-
         currentStep: _index,
         physics: ClampingScrollPhysics(),
         steps: tuples
             .map((e) => EnhanceStep(
-          icon: Icon(
-            Icons.circle,
-            // Icons.add,
-            color: ColorManager.primary,
-            size: 16,
-          ),
-          state: StepState.values[tuples.indexOf(e)],
-          isActive: _index == tuples.indexOf(e),
-          title: Text("13/01/2023",style: getRegularStyle(color: ColorManager.primary),),
-          subtitle: Text(
-            "10:30 - 11:30",
-          ),
-          content: Text("المدرب : محمد   مدة الحصة : ٦٠ دقيقة  صالة رقم : ٣"),
-        ))
+                  icon: Icon(
+                    Icons.circle,
+                    // Icons.add,
+                    color: ColorManager.primary,
+                    size: 16,
+                  ),
+                  state: StepState.values[tuples.indexOf(e)],
+                  isActive: _index == tuples.indexOf(e),
+                  title: Text(
+                    "13/01/2023",
+                    style: getRegularStyle(color: ColorManager.primary),
+                  ),
+                  subtitle: Text(
+                    "10:30 - 11:30",
+                  ),
+                  content: Text(
+                      "المدرب : محمد   مدة الحصة : 60 دقيقة  صالة رقم : 3"),
+                ))
             .toList(),
         onStepCancel: () {
           go(-1);
@@ -127,10 +120,12 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                 width: 80.w,
                 child: ElevatedButton(
                   onPressed: details.onStepContinue,
-                  child: Text("التالي",style: getRegularStyle(color: ColorManager.white),),
-                  style: ElevatedButton.styleFrom(
-                      primary: ColorManager.primary
+                  child: Text(
+                    "التالي",
+                    style: getRegularStyle(color: ColorManager.white),
                   ),
+                  style:
+                      ElevatedButton.styleFrom(primary: ColorManager.primary),
                 ),
               ),
               SizedBox(
@@ -140,20 +135,20 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                 height: 35.h,
                 width: 80.w,
                 child: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Get.toNamed(RouteHelper.postponeAnAppointment);
                   },
-                  child: Text("طلب تأجيل",style: getRegularStyle(color: ColorManager.primary),),
+                  child: Text(
+                    "طلب تأجيل",
+                    style: getRegularStyle(color: ColorManager.primary),
+                  ),
                   style: ElevatedButton.styleFrom(
                       primary: ColorManager.white,
-                      side: BorderSide(width: 1,color: ColorManager.primary)
-
-                  ),
+                      side: BorderSide(width: 1, color: ColorManager.primary)),
                 ),
               ),
             ],
           );
         });
   }
-
 }

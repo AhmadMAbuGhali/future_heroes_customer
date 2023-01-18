@@ -26,9 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
         body: Directionality(
-          
           textDirection: TextDirection.rtl,
           child: Center(
             child: Padding(
@@ -103,8 +101,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         Get.toNamed(RouteHelper.personalData);
                       }),
 
-
-
                   //الطلبات والشكاوي
                   ProfileSection(
                       label: "الطلبات والشكاوي",
@@ -114,12 +110,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         Get.toNamed(RouteHelper.requestsAndComplaints);
                       }),
 
-
-
                   //مواعيد التدريب
 
                   ProfileSection(
-                      label:   "مواعيد التدريب",
+                      label: "مواعيد التدريب",
                       haveArrow: true,
                       icon: IconAssets.calendar,
                       onTap: () {
@@ -128,19 +122,17 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   //ترقية الاشتراك
                   ProfileSection(
-                      label:   "ترقية الاشتراك",
+                      label: "ترقية الاشتراك",
                       haveArrow: true,
                       icon: IconAssets.jewelry,
                       onTap: () {
                         Get.toNamed(RouteHelper.subscriptionUpgrade);
                       }),
 
-
-
                   //التقيمات
 
                   ProfileSection(
-                      label:  "التقيمات",
+                      label: "التقيمات",
                       haveArrow: true,
                       icon: IconAssets.stars,
                       onTap: () {
@@ -149,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   //تسجيل الخروج
                   ProfileSection(
-                      label:  "تسجيل الخروج",
+                      label: "تسجيل الخروج",
                       haveArrow: false,
                       icon: IconAssets.user,
                       myColor: Colors.red,
@@ -159,14 +151,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   //حذف الحساب
                   ProfileSection(
-                      label:  "حذف حسابي",
+                      label: "حذف حسابي",
                       haveArrow: false,
                       icon: IconAssets.delete,
                       myColor: Colors.red,
                       onTap: () {
                         _deleteAccountDialog();
                       }),
-
                 ],
               ),
             ),
@@ -256,26 +247,29 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+
   Future<void> _logoutDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(width: 30.w,),
-              SvgPicture.asset(IconAssets.alert,color: Colors.red,),
-
+              SizedBox(
+                width: 30.w,
+              ),
+              SvgPicture.asset(
+                IconAssets.alert,
+                color: Colors.red,
+              ),
             ],
           ),
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
                 Text('هل انت متأكد من تسجيل الحروج'),
-
               ],
             ),
           ),
@@ -284,7 +278,7 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Get.toNamed(RouteHelper.login);
                   },
                   child: Container(
@@ -293,13 +287,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.red)
-                    ),
-                    child:  Center(child: Text('نعم ',style: getBoldStyle(color: Colors.white),)),
+                        border: Border.all(color: Colors.red)),
+                    child: Center(
+                        child: Text(
+                      'نعم ',
+                      style: getBoldStyle(color: Colors.white),
+                    )),
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.of(context).pop();
                   },
                   child: Container(
@@ -308,16 +305,19 @@ class _ProfilePageState extends State<ProfilePage> {
                     decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.red)
-                    ),
-                    child:  Center(child: Text('إلغاء الأمر ',textAlign: TextAlign.center,style: getBoldStyle(color: Colors.white,),)),
+                        border: Border.all(color: Colors.red)),
+                    child: Center(
+                        child: Text(
+                      'إلغاء الأمر ',
+                      textAlign: TextAlign.center,
+                      style: getBoldStyle(
+                        color: Colors.white,
+                      ),
+                    )),
                   ),
                 ),
-
               ],
             )
-
-
           ],
         );
       },
@@ -333,31 +333,40 @@ class _ProfilePageState extends State<ProfilePage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 30.w,),
-              SvgPicture.asset(IconAssets.alert,color: Colors.red,),
+              SizedBox(
+                width: 30.w,
+              ),
+              SvgPicture.asset(
+                IconAssets.alert,
+                color: Colors.red,
+              ),
               GestureDetector(
-                  onTap: (){Navigator.of(context).pop();},
-                  child:Icon(Icons.cancel,color: Colors.red,)
-              )
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Icon(
+                    Icons.cancel,
+                    color: Colors.red,
+                  ))
             ],
           ),
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
                 Text('هل انت متأكد من حذف الحساب'),
-
               ],
             ),
           ),
           actions: <Widget>[
             Column(
               children: [
-                Text("هل انت واثق انك تريد حذف الحساب  عند حذف الحساب  ستفقد جميع البيانات الخاصة بك "),
+                Text(
+                    "هل انت واثق انك تريد حذف الحساب  عند حذف الحساب  ستفقد جميع البيانات الخاصة بك "),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -366,13 +375,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: BoxDecoration(
                             color: Colors.red,
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.red)
-                        ),
-                        child:  Center(child: Text('نعم ',style: getBoldStyle(color: Colors.white),)),
+                            border: Border.all(color: Colors.red)),
+                        child: Center(
+                            child: Text(
+                          'نعم ',
+                          style: getBoldStyle(color: Colors.white),
+                        )),
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -381,18 +393,21 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: BoxDecoration(
                             color: Colors.red,
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.red)
-                        ),
-                        child:  Center(child: Text('إلغاء الأمر ',textAlign: TextAlign.center,style: getBoldStyle(color: Colors.white,),)),
+                            border: Border.all(color: Colors.red)),
+                        child: Center(
+                            child: Text(
+                          'إلغاء الأمر ',
+                          textAlign: TextAlign.center,
+                          style: getBoldStyle(
+                            color: Colors.white,
+                          ),
+                        )),
                       ),
                     ),
-
                   ],
                 ),
               ],
             )
-
-
           ],
         );
       },

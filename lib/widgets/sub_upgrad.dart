@@ -14,7 +14,9 @@ class SubUpgrade extends StatefulWidget {
 class _SubUpgradeState extends State<SubUpgrade> {
   bool isSubscriptionType = false;
   bool isChecked = false;
-
+  bool isSelecteOne = false;
+  bool isSelectetwo = false;
+  bool isSelecteThree = false;
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -28,6 +30,7 @@ class _SubUpgradeState extends State<SubUpgrade> {
       }
       return ColorManager.primary;
     }
+
     return Column(
       children: [
         Text(
@@ -38,20 +41,50 @@ class _SubUpgradeState extends State<SubUpgrade> {
         SizedBox(
           height: 60.h,
         ),
-        CardSubscriptionType(
-          title: 'شهر واحد',
-          description: 'يتم سرد تفاصيل الاشتراك هنا',
-          price: '99.99 ريال',
+        InkWell(
+          onTap: () {
+            setState(() {
+              isSelecteOne = true;
+              isSelectetwo = false;
+              isSelecteThree = false;
+            });
+          },
+          child: CardSubscriptionType(
+            isSelecte: isSelecteOne,
+            title: 'شهر واحد',
+            description: 'يتم سرد تفاصيل الاشتراك هنا',
+            price: '99.99 ريال',
+          ),
         ),
-        CardSubscriptionType(
-          title: 'شهرين',
-          description: 'يتم سرد تفاصيل الاشتراك هنا',
-          price: '179.99 ريال',
+        InkWell(
+          onTap: () {
+            setState(() {
+              isSelecteOne = false;
+              isSelectetwo = true;
+              isSelecteThree = false;
+            });
+          },
+          child: CardSubscriptionType(
+            isSelecte: isSelectetwo,
+            title: 'شهرين',
+            description: 'يتم سرد تفاصيل الاشتراك هنا',
+            price: '179.99 ريال',
+          ),
         ),
-        CardSubscriptionType(
-          title: 'ثلاث شهور',
-          description: 'يتم سرد تفاصيل الاشتراك هنا',
-          price: '249.99 ريال',
+        InkWell(
+          onTap: () {
+            setState(() {
+              isSelecteOne = false;
+              isSelectetwo = false;
+              isSelecteThree = true;
+            });
+          },
+          child: CardSubscriptionType(
+            isSelecte: isSelecteThree,
+            title: 'ثلاث شهور',
+            description: 'يتم سرد تفاصيل الاشتراك هنا',
+            price: '249.99 ريال',
+          ),
         ),
       ],
     );

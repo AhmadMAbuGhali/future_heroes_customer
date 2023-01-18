@@ -36,7 +36,7 @@ class _CardCheckBoxWidgetState extends State<CardCheckBoxWidget> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5.h),
       decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.primary),
+          border: Border.all(color: ColorManager.gray),
           color: ColorManager.white,
           borderRadius: BorderRadius.circular(10)),
       child: Row(
