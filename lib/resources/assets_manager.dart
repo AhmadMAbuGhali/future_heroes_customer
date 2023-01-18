@@ -3,7 +3,7 @@ const String IMAGE_PATH = 'assets/images';
 class ImageAssets {
   static const String logopng = '$IMAGE_PATH/logo.png';
 
-  static const String background = '$IMAGE_PATH/background.svg';
+  static const String background = '$IMAGE_PATH/background.png';
   static const String avatar = '$IMAGE_PATH/avatar.png';
 
   static const String cultural = '$IMAGE_PATH/cultural.svg';

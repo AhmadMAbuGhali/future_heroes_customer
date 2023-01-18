@@ -34,22 +34,25 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
 
     return Scaffold(
       backgroundColor: ColorManager.backGround,
-      body: SingleChildScrollView(
-        child: Stack(children: [
-          SvgPicture.asset(
-            ImageAssets.background,
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+            image: AssetImage("assets/images/background.png"),
+            fit: BoxFit.cover,
           ),
-          Center(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 10.h,
+                    height: 45.h,
                   ),
                   CustomTextTitle(
                     text: 'الشروط والاحكام',
@@ -123,14 +126,15 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                       )
                     ],
                   ),
+
                   CustomButtonPrimary(
                     text: 'متابعة',
                     onpressed: () {
                       !isChecked
                           ? snakbarWidget(context,
-                                  Titel: 'مرحبا بك',
-                                  Description: 'هذا الحقل مطلوب اجباري')
-                              .error()
+                          Titel: 'مرحبا بك',
+                          Description: 'هذا الحقل مطلوب اجباري')
+                          .error()
                           : Get.offNamed(RouteHelper.signupPersonalData);
                     },
                   ),
@@ -138,7 +142,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               ),
             ),
           ),
-        ]),
+        ),
       ),
     );
   }
