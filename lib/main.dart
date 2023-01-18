@@ -15,35 +15,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return ScreenUtilInit(
+    return ScreenUtilInit(
         designSize: const Size(375, 812),
-    minTextAdapt: true,
-    splitScreenMode: true,
-    builder: (context, child) {
-    return GetMaterialApp(
-      localizationsDelegates: [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale("ar", "SA"),
-        Locale("en", "US"),
-      ],
-      locale: Locale("ar", "SA"),
-        debugShowCheckedModeBanner: false,
-
-        title: 'Flutter Demo',
-        theme: ThemeData(
-        fontFamily: 'DroidKufi',
-      primaryColor: Color(0xFF8A57DC),
-
-      ),
-
-
-        initialRoute: RouteHelper.getSplashScreen(),
-        getPages: RouteHelper.routes,
-      );}
-    );
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return GetMaterialApp(
+            localizationsDelegates: [
+              GlobalCupertinoLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale("ar", "SA"),
+              Locale("en", "US"),
+            ],
+            locale: Locale("ar", "SA"),
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              fontFamily: 'DroidKufi',
+              primaryColor: Color(0xFF8A57DC),
+            ),
+            initialRoute: RouteHelper.getSplashScreen(),
+            getPages: RouteHelper.routes,
+          );
+        });
   }
 }

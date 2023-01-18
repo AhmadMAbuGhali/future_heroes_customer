@@ -94,7 +94,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
 
 يحق للمركز تصوير الحصص التدريبية للمشتركين أثناء التدريب
 ونشرها على حسابات التواصل الاجتماعي الخاصة بالمركز .''',
-                    style: TextStyle(fontSize: 10.h),
+                    style: TextStyle(fontSize: 10.sp),
                   ),
                 ),
                 SizedBox(
