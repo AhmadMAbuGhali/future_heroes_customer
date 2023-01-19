@@ -77,7 +77,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                           color: ColorManager.primary,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadiusDirectional.circular(10),
+                        borderRadius: BorderRadiusDirectional.circular(10.r),
                         color: ColorManager.white),
                     child: Text(
                       '''الالتزام بالزي الرياضي الكامل

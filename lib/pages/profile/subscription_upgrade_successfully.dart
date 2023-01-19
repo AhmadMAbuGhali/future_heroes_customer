@@ -17,52 +17,49 @@ class SubscriptionUpgradeSuccessfully extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: ColorManager.backGround,
-      body: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                  top: 45.h,
-                  left: 20.w,
-                  right: 20.w,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "المستخدم",
-                          style: getBoldStyle(color: ColorManager.primary),
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: Icon(
-                              Icons.arrow_forward,
-                              color: ColorManager.primary,
-                            )),
-                      ],
-                    )
-                  ],
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(
+                top: 45.h,
+                left: 20.w,
+                right: 20.w,
               ),
-              CustomTextTitle(text: "ترقية الاشتراك"),
-              SizedBox(height: 70.h,),
-              SvgPicture.asset(ImageAssets.upgrage,width: 250.w,height: 250.h,),
-              SizedBox(height: 40.h,),
-              CustomTextTitle(text: "يرجى التوجه الى مقر النادي لتأكيد  عملية الترقية ودفع المبلغ"),
-              SizedBox(height: 80.h,),
-              CustomButtonPrimary(text: "موافق ", onpressed: (){
-                Get.toNamed(RouteHelper.initial);
-              }),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "المستخدم",
+                        style: getBoldStyle(color: ColorManager.primary),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: ColorManager.primary,
+                          )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            CustomTextTitle(text: "ترقية الاشتراك"),
+            SizedBox(height: 70.h,),
+            SvgPicture.asset(ImageAssets.upgrage,width: 250.w,height: 250.h,),
+            SizedBox(height: 40.h,),
+            CustomTextTitle(text: "يرجى التوجه الى مقر النادي لتأكيد  عملية الترقية ودفع المبلغ"),
+            SizedBox(height: 80.h,),
+            CustomButtonPrimary(text: "موافق ", onpressed: (){
+              Get.toNamed(RouteHelper.initial);
+            }),
 
-            ],
-          ),
+          ],
         ),
       ),
     );

@@ -50,105 +50,108 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        Container(
-          padding: EdgeInsets.only(
-            top: 45.h,
-            left: 20.w,
-            right: 20.w,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "المستخدم",
-                    style: getBoldStyle(color: ColorManager.primary),
-                  ),
-                  IconButton(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(children: [
+          Container(
+            padding: EdgeInsets.only(
+              top: 45.h,
+              left: 20.w,
+              right: 0.w,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
                       onPressed: () {
                         Get.back();
                       },
                       icon: Icon(
-                        Icons.arrow_forward,
+                        Icons.arrow_back,
                         color: ColorManager.primary,
                       )),
-                ],
-              )
-            ],
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: DefaultTabController(
-              length: 2,
-              child: Column(
-                children: <Widget>[
-                  ButtonsTabBar(
-                    buttonMargin: const EdgeInsets.symmetric(horizontal: 10),
-                    contentPadding: const EdgeInsets.only(
-                        top: 5, bottom: 10, left: 18, right: 18),
-                    height: 40.h,
-                    backgroundColor: ColorManager.primary,
-                    unselectedBackgroundColor: Colors.white,
-                    unselectedLabelStyle: getBoldStyle(color: Colors.black),
-                    borderWidth: 1,
-                    borderColor: ColorManager.primary,
-                    labelStyle:
-                        getBoldStyle(color: ColorManager.white, fontSize: 18),
-                    tabs: [
-                      Tab(
-                        text: "الشكاوي ",
-                        height: 70,
-                      ),
-                      Tab(
-                        text: "الطلبات ",
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: <Widget>[
-                        Center(
-                            child: Column(
-                                children: [
-                                  Directionality(
-                                    textDirection: TextDirection.rtl,
-                                    child: Container(
-                                        height: MediaQuery.of(context).size.height*0.7,
-                                        child: CustomComplaints()),
-                                  ),
-                                  CustomButtonPrimary(text: "ارسال شكوى ", onpressed: (){
-                                    Get.toNamed(RouteHelper.sendComplaints);
-                                  }),
-
-
-                                ])),
-                        Center(
-                            child: Column(
-                                children: [
-                                  Directionality(
-                                      textDirection: TextDirection.rtl,
-                                      child: Container(
-                                        height: MediaQuery.of(context).size.height*0.7,
-                                          child: CustomRequest()),
-                                    ),
-                                  CustomButtonPrimary(text: "ارسال طلب جديد", onpressed: (){
-                                    Get.toNamed(RouteHelper.sendRequests);
-                                  }),
-
-                        ])),
-                      ],
+                    Text(
+                      "المستخدم",
+                      style: getBoldStyle(color: ColorManager.primary),
                     ),
-                  ),
-                ],
-              ),
+
+                  ],
+                )
+              ],
             ),
           ),
-        )
-      ]),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: DefaultTabController(
+                length: 2,
+                child: Column(
+                  children: <Widget>[
+                    ButtonsTabBar(
+                      buttonMargin: const EdgeInsets.symmetric(horizontal: 10),
+                      contentPadding:  EdgeInsets.only(
+                          top: 6.h, bottom: 10.h, left: 17.w, right: 18.w),
+                      height: 45.h,
+                      backgroundColor: ColorManager.primary,
+                      unselectedBackgroundColor: Colors.white,
+                      unselectedLabelStyle: getBoldStyle(color: Colors.black),
+                      borderWidth: 1,
+                      borderColor: ColorManager.primary,
+                      labelStyle:
+                          getBoldStyle(color: ColorManager.white, fontSize: 18),
+                      tabs: [
+                        Tab(
+                          text: "الشكاوي ",
+                          height: 70.h,
+                        ),
+                        Tab(
+                          text: "الطلبات ",
+                          height: 70.h,
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: <Widget>[
+                          Center(
+                              child: Column(
+                                  children: [
+                                    Directionality(
+                                      textDirection: TextDirection.rtl,
+                                      child: Container(
+                                          height: MediaQuery.of(context).size.height*0.7,
+                                          child: CustomComplaints()),
+                                    ),
+                                    CustomButtonPrimary(text: "ارسال شكوى ", onpressed: (){
+                                      Get.toNamed(RouteHelper.sendComplaints);
+                                    }),
+
+
+                                  ])),
+                          Center(
+                              child: Column(
+                                  children: [
+                                    Container(
+                                      height: MediaQuery.of(context).size.height*0.7,
+                                        child: CustomRequest()),
+                                    CustomButtonPrimary(text: "ارسال طلب جديد", onpressed: (){
+                                      Get.toNamed(RouteHelper.sendRequests);
+
+                                    }),
+
+                          ])),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ]),
+      ),
     );
   }
 }

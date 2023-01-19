@@ -38,7 +38,7 @@ class _CardCheckBoxWidgetState extends State<CardCheckBoxWidget> {
       decoration: BoxDecoration(
           border: Border.all(color: ColorManager.gray),
           color: ColorManager.white,
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(10.r)),
       child: Row(
         children: [
           Checkbox(

@@ -21,7 +21,7 @@ class ProfileSection extends StatelessWidget {
           onTap: onTap,
           child: Row(
             children: [
-              SvgPicture.asset(icon,color: myColor!,),
+              SvgPicture.asset(icon,color: myColor!,width: 15.w,height: 15.h,),
               SizedBox(
                 width: 5.w,
               ),
@@ -30,7 +30,7 @@ class ProfileSection extends StatelessWidget {
               style: getBoldStyle(color: myColor!, fontSize: 12.sp),
             ),
               const Spacer(),
-              haveArrow?SvgPicture.asset(IconAssets.arrow_back):Container(),
+              haveArrow?SvgPicture.asset(IconAssets.arrow_back,):Container(),
 
 
 

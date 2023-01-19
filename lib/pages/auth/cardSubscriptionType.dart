@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/resources/styles_manager.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 
 class CardSubscriptionType extends StatelessWidget {
@@ -43,8 +44,7 @@ class CardSubscriptionType extends StatelessWidget {
           ),
           Text(description,
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: ColorManager.gray, fontWeight: FontWeight.normal))
+              style: getRegularStyle(color: ColorManager.gray))
         ],
       ),
     );

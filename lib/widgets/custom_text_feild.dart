@@ -33,7 +33,7 @@ class CustomTextFeild extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
           Text(label,style: getMediumStyle(color: ColorManager.black,fontSize: FontSize.s16),),
@@ -62,7 +62,7 @@ class CustomTextFeild extends StatelessWidget {
                           color: ColorManager.otpDesc, fontSize: FontSize.s14),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: ColorManager.borderTextFiel, width: 1.0),
+                              color: ColorManager.borderTextFiel, width: 1.0.w),
                           borderRadius: BorderRadius.circular(12.r)),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
@@ -75,9 +75,9 @@ class CustomTextFeild extends StatelessWidget {
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        borderSide: const BorderSide(
+                        borderSide:  BorderSide(
                           color: Colors.red,
-                          width: 1.0,
+                          width: 1.0.w,
                           style: BorderStyle.solid,
                         ),
                       ),

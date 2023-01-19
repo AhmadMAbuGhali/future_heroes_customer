@@ -54,4 +54,5 @@ class IconAssets {
   static const String Icon_cancel = '$ICON_PATH/Icon_cancel.svg';
   static const String Icon_eye_slash = '$ICON_PATH/Icon_eye_slash.svg';
   static const String alert = '$ICON_PATH/alert.svg';
+  static const String language = '$ICON_PATH/language.svg';
 }

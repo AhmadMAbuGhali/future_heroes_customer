@@ -27,7 +27,7 @@ class _CardWidgetState extends State<CardWidget> {
       decoration: BoxDecoration(
           border: Border.all(color: ColorManager.gray),
           color: ColorManager.white,
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(10.r)),
       child: Row(
         children: [
           Text(widget.title),

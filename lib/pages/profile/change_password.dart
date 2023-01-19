@@ -38,27 +38,28 @@ class _ChangePasswordState extends State<ChangePassword> {
                 children: [
                   Row(
                     children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: ColorManager.primary,
+                        )),
+
                       Text(
                         "معلومات المستخدم ",
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: ColorManager.primary,
-                          )),
                     ],
                   )
                 ],
               ),
             ),
             SizedBox(height: 40.h,),
-            const Text(
+             Text(
               'كلمة المرور السابقة',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12.sp),
             ),
 
             CustomTextFormAuth(
@@ -77,9 +78,9 @@ class _ChangePasswordState extends State<ChangePassword> {
 
             SizedBox(height: 10.h,),
 
-            const Text(
+             Text(
               'كلمة المرور الجديدة',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12.sp),
             ),
 
             CustomTextFormAuth(
@@ -98,9 +99,9 @@ class _ChangePasswordState extends State<ChangePassword> {
 
             SizedBox(height: 10.h,),
 
-            const Text(
+             Text(
               ' اعد كتابة كلمة المرور ',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12.sp),
             ),
 
             CustomTextFormAuth(

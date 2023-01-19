@@ -25,35 +25,8 @@ class _OfferPageState extends State<OfferPage> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.only(
-                top: 45.h,
-                left: 20.w,
-                right: 20.w,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "الرئيسية",
-                        style: getBoldStyle(color: ColorManager.primary),
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: ColorManager.primary,
-                          )),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(height: 10.h,),
+            SizedBox(height: 60.h,),
+
             Row(
               children: [
                 Text("العروض ",style: getBoldStyle(color: ColorManager.black),),

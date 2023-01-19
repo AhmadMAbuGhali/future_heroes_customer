@@ -12,6 +12,8 @@ import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/LogoAuth.dart';
 import 'package:get/get.dart';
 
+import '../../resources/styles_manager.dart';
+
 class CodeVerification extends StatefulWidget {
   const CodeVerification({super.key});
 
@@ -54,7 +56,7 @@ class _CodeVerificationState extends State<CodeVerification> {
             Text(
               'الكود قد تم إرساله إلى الإيميل',
               textAlign: TextAlign.center,
-              style: TextStyle(color: ColorManager.gray, fontSize: 16),
+              style: getRegularStyle(color: ColorManager.gray,fontSize: 16.sp),
             ),
             SizedBox(
               height: 15.h,
@@ -62,7 +64,7 @@ class _CodeVerificationState extends State<CodeVerification> {
             Text(
               'Yousef.n.aljazzar@gmail.com',
               textAlign: TextAlign.center,
-              style: TextStyle(color: ColorManager.primary),
+              style: getRegularStyle(color: ColorManager.primary),
             ),
             SizedBox(
               height: 30.h,

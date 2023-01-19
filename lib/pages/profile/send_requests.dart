@@ -33,18 +33,19 @@ class SendRequests extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: ColorManager.primary,
+                        )),
                       Text(
                         "الشكاوى و الطلبات",
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: ColorManager.primary,
-                          )),
+
                     ],
                   )
                 ],
@@ -56,8 +57,8 @@ class SendRequests extends StatelessWidget {
               'عنوان الطلب',
               style: TextStyle(fontSize: 12),
             ),
-            const SizedBox(
-              height: 5,
+             SizedBox(
+              height: 5.h,
             ),
             CustomTextFormAuth(
                 hidepassword: false,
@@ -66,12 +67,12 @@ class SendRequests extends StatelessWidget {
                 hintText: "اكتب العنوان هنا من فضلك"
 
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             Text(
               'الموضوع',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12.sp),
             ),
             TextField(
 
@@ -91,18 +92,18 @@ class SendRequests extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.r)),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide(color: ColorManager.primary, width: 1.0),
+                  borderSide: BorderSide(color: ColorManager.primary, width: 1.0.w),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(
-                      color: ColorManager.borderTextFiel, width: 1.0),
+                      color: ColorManager.borderTextFiel, width: 1.0.w),
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(
+                  borderSide:  BorderSide(
                     color: Colors.red,
-                    width: 1.0,
+                    width: 1.0.w,
                     style: BorderStyle.solid,
                   ),
                 ),

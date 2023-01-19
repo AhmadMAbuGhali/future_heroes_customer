@@ -35,22 +35,23 @@ class PostponeAnAppointment extends StatelessWidget {
                 right: 20.w,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Text(
-                        "مواعيد الحصص",
-                        style: getBoldStyle(color: ColorManager.primary),
-                      ),
                       IconButton(
                           onPressed: () {
                             Get.back();
                           },
                           icon: Icon(
-                            Icons.arrow_forward,
+                            Icons.arrow_back,
                             color: ColorManager.primary,
                           )),
+                      Text(
+                        "مواعيد الحصص",
+                        style: getBoldStyle(color: ColorManager.primary),
+                      ),
+
                     ],
                   )
                 ],
@@ -63,8 +64,8 @@ class PostponeAnAppointment extends StatelessWidget {
               'سبب التأجيل',
               style: TextStyle(fontSize: 12),
             ),
-            const SizedBox(
-              height: 5,
+             SizedBox(
+              height: 5.h,
             ),
             CustomTextFormAuth(
                 hidepassword: false,
@@ -151,7 +152,7 @@ class PostponeAnAppointment extends StatelessWidget {
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: ColorManager.gray666,
-                              width: 1.0),
+                              width: 1.0.w),
                           borderRadius: BorderRadius.circular(12.r)),
                     ),
                     readOnly: true,
@@ -202,9 +203,9 @@ class PostponeAnAppointment extends StatelessWidget {
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(
+                  borderSide:  BorderSide(
                     color: Colors.red,
-                    width: 1.0,
+                    width: 1.0.w,
                     style: BorderStyle.solid,
                   ),
                 ),

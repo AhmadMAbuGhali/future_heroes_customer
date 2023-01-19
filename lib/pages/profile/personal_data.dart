@@ -41,22 +41,23 @@ TextEditingController dateInput = TextEditingController();
                 right: 20.w,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_forward,
+                          color: ColorManager.primary,
+                        )),
                       Text(
                         "المستخدم",
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: ColorManager.primary,
-                          )),
+
                     ],
                   )
                 ],
@@ -86,9 +87,9 @@ TextEditingController dateInput = TextEditingController();
             //  const SizedBox(
             //     height: 10,
             //   ),
-            const Text(
+             Text(
               'كلمة المرور',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12.sp),
             ),
 
             CustomTextFormAuth(
@@ -119,9 +120,9 @@ TextEditingController dateInput = TextEditingController();
               //  labelText: 'البريد الالكتروني / رقم الهاتف',
               //  iconData: Icons.email_outlined,
             ),
-            const Text(
+             Text(
               'تاريخ الميلاد',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12.sp),
             ),
             // const SizedBox(
             //   height: 5,
@@ -148,9 +149,9 @@ TextEditingController dateInput = TextEditingController();
               hintText: 'YYYY/MM/DD',
               iconData: Icons.calendar_month_outlined,
             ),
-            const Text(
+             Text(
               'رقم الهاتف',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12.sp),
             ),
             // const SizedBox(
             //   height: 5,
@@ -166,7 +167,7 @@ TextEditingController dateInput = TextEditingController();
             SizedBox(height: 20.h,),
             Center(child: TextButton(onPressed: (){
               Get.toNamed(RouteHelper.changePassword);
-            }, child: Text("تغيير كلمة المرور",textAlign: TextAlign.center,style: getBoldStyle(color: ColorManager.primary,fontSize: 14),))),
+            }, child: Text("تغيير كلمة المرور",textAlign: TextAlign.center,style: getBoldStyle(color: ColorManager.primary,fontSize: 14.sp),))),
             SizedBox(height: 20.h,),
             CustomButtonPrimary(text: "حفظ", onpressed: (){
               Get.toNamed(RouteHelper.initial);

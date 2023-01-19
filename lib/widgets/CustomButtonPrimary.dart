@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/resources/styles_manager.dart';
 
@@ -19,18 +20,18 @@ class CustomButtonPrimary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(top: 10),
+      margin:  EdgeInsets.only(top: 10.h),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
           foregroundColor: ColorManager.white,
           side: BorderSide(color: ColorManager.primary),
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding:  EdgeInsets.symmetric(vertical: 10.h),
           primary: buttonColor,
           textStyle: TextStyle(
             fontFamily: 'DroidKufi',
-            fontSize: 16,
+            fontSize: 16.sp,
           ),
         ),
         onPressed: onpressed,

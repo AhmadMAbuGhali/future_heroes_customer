@@ -1,38 +1,47 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_customer/locale/locale.dart';
+import 'package:future_heroes_customer/locale/locale_controller.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+
+late SharedPreferences shaedpref;
+
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  shaedpref = await SharedPreferences.getInstance();
+  runApp(
+
+    MyApp()
+ );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+   MyLocalController controller =  Get.put(MyLocalController());
     return ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
-            localizationsDelegates: [
-              GlobalCupertinoLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale("ar", "SA"),
-              Locale("en", "US"),
-            ],
-            locale: Locale("ar", "SA"),
+
+            locale: shaedpref.getString("curruntLang") == null
+                ? Get.deviceLocale
+                : Locale(shaedpref.getString("curruntLang")!),
+            translations: MyLocale(),
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+
             theme: ThemeData(
               fontFamily: 'DroidKufi',
               primaryColor: Color(0xFF8A57DC),

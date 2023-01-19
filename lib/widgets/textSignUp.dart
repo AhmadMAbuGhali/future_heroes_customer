@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/resources/styles_manager.dart';
 import 'package:get/get.dart';
 
 class CustomTextSignUpOrSignin extends StatelessWidget {
@@ -7,8 +8,8 @@ class CustomTextSignUpOrSignin extends StatelessWidget {
   final String texttwo;
   final void Function() onTap;
 
-  CustomTextSignUpOrSignin(
-      {required this.textone, required this.texttwo, required this.onTap});
+  const CustomTextSignUpOrSignin(
+      {super.key, required this.textone, required this.texttwo, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,7 @@ class CustomTextSignUpOrSignin extends StatelessWidget {
           onTap: onTap,
           child: Text(
             texttwo,
-            style: TextStyle(
-                color: ColorManager.primary, fontWeight: FontWeight.bold),
-          ),
+            style: getBoldStyle(color: ColorManager.primary) ),
         )
       ],
     );

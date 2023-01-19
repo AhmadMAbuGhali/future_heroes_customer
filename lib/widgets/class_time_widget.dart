@@ -82,7 +82,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                     Icons.circle,
                     // Icons.add,
                     color: ColorManager.primary,
-                    size: 16,
+                    size: 16.h,
                   ),
                   state: StepState.values[tuples.indexOf(e)],
                   isActive: _index == tuples.indexOf(e),

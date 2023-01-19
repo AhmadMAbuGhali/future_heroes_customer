@@ -29,22 +29,23 @@ class SendComplaints extends StatelessWidget {
                 right: 20.w,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: ColorManager.primary,
+                        )),
                       Text(
                         "الشكاوى و الطلبات",
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: ColorManager.primary,
-                          )),
+
                     ],
                   )
                 ],
@@ -56,8 +57,8 @@ class SendComplaints extends StatelessWidget {
               'عنوان الشكوى',
               style: TextStyle(fontSize: 12),
             ),
-            const SizedBox(
-              height: 5,
+             SizedBox(
+              height: 5.h,
             ),
             CustomTextFormAuth(
               hidepassword: false,
@@ -66,12 +67,12 @@ class SendComplaints extends StatelessWidget {
                 hintText: "اكتب العنوان هنا من فضلك"
 
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             Text(
               'الموضوع',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12.sp),
             ),
             TextField(
 
@@ -100,9 +101,9 @@ class SendComplaints extends StatelessWidget {
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(
+                  borderSide:  BorderSide(
                     color: Colors.red,
-                    width: 1.0,
+                    width: 1.0.w,
                     style: BorderStyle.solid,
                   ),
                 ),

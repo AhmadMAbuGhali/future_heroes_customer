@@ -26,22 +26,23 @@ class SubscriptionUpgrade extends StatelessWidget {
                 right: 20.w,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: ColorManager.primary,
+                        )),
                       Text(
                         "المستخدم",
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: ColorManager.primary,
-                          )),
+
                     ],
                   )
                 ],

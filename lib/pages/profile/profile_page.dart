@@ -37,44 +37,51 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 30.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (builder) => bottomSheet(),
-                          );
-
-                          // setState(() {
-                          //   _getFromGallery();
-                          // });
-                        },
-                        child: Center(
-                          child: CircleAvatar(
-                            radius: 60,
-                            foregroundImage: imageFile == null
-                                ? Image.asset(
-                                    ImageAssets.logopng,
-                                  ).image
-                                : Image.file(
-                                    imageFile!,
-                                    fit: BoxFit.cover,
-                                  ).image,
-                            backgroundImage: imageFile == null
-                                ? Image.asset(
-                                    ImageAssets.logopng,
-                                  ).image
-                                : Image.file(
-                                    imageFile!,
-                                    fit: BoxFit.cover,
-                                  ).image,
-                          ),
+                  SizedBox(
+                    height: 80.h,
+                    width: 80.w,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      fit: StackFit.expand,
+                      children: [
+                        CircleAvatar(
+                          foregroundImage: imageFile == null
+                              ? Image.asset(
+                            ImageAssets.avatar,
+                          ).image
+                              : Image.file(
+                            imageFile!,
+                            fit: BoxFit.cover,
+                          ).image,
+                          backgroundImage: imageFile == null
+                              ? Image.asset(
+                            ImageAssets.avatar,
+                          ).image
+                              : Image.file(
+                            imageFile!,
+                            fit: BoxFit.cover,
+                          ).image,
                         ),
-                      ),
-                    ],
+                        Positioned(
+                            bottom: -10.h,
+                            right: -35.w,
+                            child: RawMaterialButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (builder) => bottomSheet(),
+                                );
+                              },
+                              elevation: 2.0,
+                              fillColor: Color(0xFFF5F6F9),
+                              child: Icon(Icons.camera_alt_outlined, color: Colors.blue,),
+                              padding: EdgeInsets.all(5.0),
+                              shape: CircleBorder(),
+                            )),
+                      ],
+                    ),
                   ),
+
                   SizedBox(
                     height: 5.h,
                   ),
@@ -88,6 +95,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   Text(
                     "Yousef.n.aljazzar@gmail.com",
                     style: getRegularStyle(color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "مستواك هو : ",
+                        style: getBoldStyle(color: Colors.black,fontSize: 12),
+                      ),
+                      Text(
+                        "مبتدأ ",
+                        style: getRegularStyle(color: ColorManager.primary),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 40.h,
@@ -137,6 +160,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       icon: IconAssets.stars,
                       onTap: () {
                         Get.toNamed(RouteHelper.ratings);
+                      }),
+
+
+                  //اللغة
+                  ProfileSection(
+                      label: "اللغة",
+                      haveArrow: true,
+                      icon: IconAssets.language,
+
+                      onTap: () {
+                        Get.toNamed(RouteHelper.language);
                       }),
 
                   //تسجيل الخروج
@@ -304,7 +338,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 30.h,
                     decoration: BoxDecoration(
                         color: Colors.red,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.r),
                         border: Border.all(color: Colors.red)),
                     child: Center(
                         child: Text(

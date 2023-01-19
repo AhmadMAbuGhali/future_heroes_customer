@@ -10,6 +10,7 @@ import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/route_manager.dart';
 
+import '../../resources/styles_manager.dart';
 import '../../routes/route_helper.dart';
 
 List<String> list = <String>[
@@ -81,12 +82,9 @@ class _CoachSelectionState extends State<CoachSelection> {
                           ),
                           Text(
                             'م.محمد',
-                            style: TextStyle(color: ColorManager.primary),
+                            style: getRegularStyle(color: ColorManager.primary),
                           ),
-                          Text(
-                            '12 طالب',
-                            style: TextStyle(color: ColorManager.gray),
-                          ),
+
                         ],
                       )),
                 ),
@@ -115,12 +113,9 @@ class _CoachSelectionState extends State<CoachSelection> {
                           ),
                           Text(
                             'م.احمد',
-                            style: TextStyle(color: ColorManager.primary),
+                           style: getRegularStyle(color: ColorManager.primary),
                           ),
-                          Text(
-                            '18 طالب',
-                            style: TextStyle(color: ColorManager.gray),
-                          ),
+
                         ],
                       )),
                 ),

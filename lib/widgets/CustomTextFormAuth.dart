@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 
 class CustomTextFormAuth extends StatelessWidget {
@@ -35,10 +36,10 @@ class CustomTextFormAuth extends StatelessWidget {
             decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: ColorManager.primary),
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(10.r)),
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 contentPadding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+                     EdgeInsets.symmetric(vertical: 5.h, horizontal: 30.w),
                 suffixIcon: IconButton(
                   icon: Icon(
                     iconData,
@@ -47,9 +48,9 @@ class CustomTextFormAuth extends StatelessWidget {
                   onPressed: pressSuffixIcon,
                 ),
                 hintText: hintText,
-                hintStyle: TextStyle(color: ColorManager.gray, fontSize: 10),
+                hintStyle: TextStyle(color: ColorManager.gray, fontSize: 10.sp),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10))),
+                    borderRadius: BorderRadius.circular(10.r))),
           ),
         ),
       ],

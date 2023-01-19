@@ -26,6 +26,7 @@ import 'package:future_heroes_customer/pages/profile/subscription_upgrade_succes
 import 'package:get/get.dart';
 
 import '../pages/auth/SignUppart2.dart';
+import '../pages/profile/language.dart';
 import '../pages/profile/subscription_upgrade.dart';
 import '../pages/splash_page/splash_page.dart';
 
@@ -59,6 +60,7 @@ class RouteHelper {
   static const String onBoarding = "/onBoarding";
   static const String successLogin = "/successLogin";
   static const String homeScreen = "/homeScreen";
+  static const String language = "/language";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => '$initial';
@@ -89,6 +91,7 @@ class RouteHelper {
   static String getOnBoarding() => '$onBoarding';
   static String getSuccessLogin() => '$successLogin';
   static String getHomeScreen() => '$homeScreen';
+  static String getLanguage() => '$language';
 
   static List<GetPage> routes = [
     GetPage(
@@ -254,6 +257,12 @@ class RouteHelper {
       name: successLogin,
       page: () {
         return SuccessLogin();
+      },
+    ),
+    GetPage(
+      name: language,
+      page: () {
+        return Language();
       },
     ),
   ];

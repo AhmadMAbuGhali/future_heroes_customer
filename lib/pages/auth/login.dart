@@ -34,7 +34,7 @@ class _LoginState extends State<Login> {
                 height: 10.h,
               ),
               CustomTextTitle(
-                text: 'تسجيل الدخول',
+                text: 'login'.tr,
               ),
               const SizedBox(
                 height: 30,

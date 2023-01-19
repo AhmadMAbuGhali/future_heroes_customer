@@ -26,22 +26,23 @@ class Ratings extends StatelessWidget {
                 right: 20.w,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: ColorManager.primary,
+                        )),
                       Text(
                         "المستخدم",
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: ColorManager.primary,
-                          )),
+
                     ],
                   )
                 ],
@@ -54,7 +55,7 @@ class Ratings extends StatelessWidget {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Column(
                       children: [
                         ExpandablePanel(
