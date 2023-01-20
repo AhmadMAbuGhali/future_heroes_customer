@@ -39,8 +39,8 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                'البريد الالكتروني / رقم الهاتف',
+               Text(
+                'email'.tr,
                 style: TextStyle(fontSize: 12),
               ),
               SizedBox(
@@ -50,15 +50,15 @@ class _LoginState extends State<Login> {
                 hidepassword: false,
                 textInputType: TextInputType.emailAddress,
 
-                hintText: 'البريد الالكتروني / رقم الهاتف',
+                hintText: 'email'.tr,
                 //  labelText: 'البريد الالكتروني / رقم الهاتف',
                 //  iconData: Icons.email_outlined,
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                'كلمة المرور',
+               Text(
+                'password'.tr,
                 style: TextStyle(fontSize: 12),
               ),
               const SizedBox(
@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                     hidePass = !hidePass;
                   });
                 },
-                hintText: 'كلمة المرور',
+                hintText: 'password'.tr,
                 // labelText: 'كلمة المرور',
                 iconData: hidePass ? Icons.visibility : Icons.visibility_off,
               ),
