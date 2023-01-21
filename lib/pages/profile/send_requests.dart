@@ -15,10 +15,9 @@ class SendRequests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 5),
-
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -34,56 +33,56 @@ class SendRequests extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: ColorManager.primary,
-                        )),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: ColorManager.primary,
+                          )),
                       Text(
-                        "الشكاوى و الطلبات",
+                        'requestsAndComplaints'.tr,
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(height: 40.h,),
-            Center(child: CustomTextTitle(text: "ارسال طلب",)),
+            SizedBox(
+              height: 40.h,
+            ),
+            Center(
+                child: CustomTextTitle(
+              text: 'sendRequest'.tr,
+            )),
             Text(
-              'عنوان الطلب',
+              'requestAddress'.tr,
               style: TextStyle(fontSize: 12),
             ),
-             SizedBox(
+            SizedBox(
               height: 5.h,
             ),
             CustomTextFormAuth(
                 hidepassword: false,
                 textInputType: TextInputType.text,
-
-                hintText: "اكتب العنوان هنا من فضلك"
-
-            ),
-             SizedBox(
+                hintText: 'AddressHint'.tr),
+            SizedBox(
               height: 10.h,
             ),
             Text(
-              'الموضوع',
+              'topic'.tr,
               style: TextStyle(fontSize: 12.sp),
             ),
             TextField(
-
               keyboardType: TextInputType.multiline,
               maxLines: 8,
               decoration: InputDecoration(
                 fillColor: ColorManager.white,
                 filled: true,
                 contentPadding:
-                EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                hintText: "اكتب موضوع الطلب",
+                    EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                hintText: 'requestTopic'.tr,
                 hintStyle: getRegularStyle(
                     color: ColorManager.otpDesc, fontSize: FontSize.s14),
                 border: OutlineInputBorder(
@@ -92,7 +91,8 @@ class SendRequests extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.r)),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide(color: ColorManager.primary, width: 1.0.w),
+                  borderSide:
+                      BorderSide(color: ColorManager.primary, width: 1.0.w),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
@@ -101,24 +101,23 @@ class SendRequests extends StatelessWidget {
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide:  BorderSide(
+                  borderSide: BorderSide(
                     color: Colors.red,
                     width: 1.0.w,
                     style: BorderStyle.solid,
                   ),
                 ),
               ),
-
             ),
-            SizedBox(height: 60.h,),
-            CustomButtonPrimary(text: "ارسال الطلب ", onpressed: (){
-              Get.toNamed(RouteHelper.requestsAndComplaints);
-            }),
-
-
-
+            SizedBox(
+              height: 60.h,
+            ),
+            CustomButtonPrimary(
+                text: "sendRequest".tr,
+                onpressed: () {
+                  Get.toNamed(RouteHelper.requestsAndComplaints);
+                }),
           ],
-
         ),
       ),
     );

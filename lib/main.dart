@@ -10,38 +10,31 @@ import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 late SharedPreferences shaedpref;
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   shaedpref = await SharedPreferences.getInstance();
-  runApp(
-
-    MyApp()
- );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-   MyLocalController controller =  Get.put(MyLocalController());
+    MyLocalController controller = Get.put(MyLocalController());
     return ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
-
             locale: shaedpref.getString("curruntLang") == null
                 ? Get.deviceLocale
                 : Locale(shaedpref.getString("curruntLang")!),
             translations: MyLocale(),
             debugShowCheckedModeBanner: false,
-
             theme: ThemeData(
               fontFamily: 'DroidKufi',
               primaryColor: Color(0xFF8A57DC),

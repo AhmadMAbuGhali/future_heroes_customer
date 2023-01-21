@@ -39,16 +39,15 @@ class _ChangePasswordState extends State<ChangePassword> {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: ColorManager.primary,
-                        )),
-
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: ColorManager.primary,
+                          )),
                       Text(
-                        "معلومات المستخدم ",
+                        'personalDetails'.tr,
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
                     ],
@@ -56,12 +55,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                 ],
               ),
             ),
-            SizedBox(height: 40.h,),
-             Text(
-              'كلمة المرور السابقة',
+            SizedBox(
+              height: 40.h,
+            ),
+            Text(
+              'lastPassword'.tr,
               style: TextStyle(fontSize: 12.sp),
             ),
-
             CustomTextFormAuth(
               textInputType: TextInputType.visiblePassword,
               hidepassword: hideLastPass,
@@ -75,14 +75,13 @@ class _ChangePasswordState extends State<ChangePassword> {
               // labelText: 'كلمة المرور',
               iconData: hideLastPass ? Icons.visibility : Icons.visibility_off,
             ),
-
-            SizedBox(height: 10.h,),
-
-             Text(
-              'كلمة المرور الجديدة',
+            SizedBox(
+              height: 10.h,
+            ),
+            Text(
+              'typeNewPassword'.tr,
               style: TextStyle(fontSize: 12.sp),
             ),
-
             CustomTextFormAuth(
               textInputType: TextInputType.visiblePassword,
               hidepassword: hideNewPass,
@@ -94,16 +93,15 @@ class _ChangePasswordState extends State<ChangePassword> {
               hintText: '*********',
 
               // labelText: 'كلمة المرور',
-              iconData: hideNewPass? Icons.visibility : Icons.visibility_off,
+              iconData: hideNewPass ? Icons.visibility : Icons.visibility_off,
             ),
-
-            SizedBox(height: 10.h,),
-
-             Text(
-              ' اعد كتابة كلمة المرور ',
+            SizedBox(
+              height: 10.h,
+            ),
+            Text(
+              'retypePassword'.tr,
               style: TextStyle(fontSize: 12.sp),
             ),
-
             CustomTextFormAuth(
               textInputType: TextInputType.visiblePassword,
               hidepassword: hideRepeatPass,
@@ -115,14 +113,17 @@ class _ChangePasswordState extends State<ChangePassword> {
               hintText: '*********',
 
               // labelText: 'كلمة المرور',
-              iconData: hideRepeatPass ? Icons.visibility : Icons.visibility_off,
+              iconData:
+                  hideRepeatPass ? Icons.visibility : Icons.visibility_off,
             ),
-
-            SizedBox(height: 10.h,),
-
-            CustomButtonPrimary(text: "حفظ", onpressed: (){
-              Get.toNamed(RouteHelper.initial);
-            }),
+            SizedBox(
+              height: 10.h,
+            ),
+            CustomButtonPrimary(
+                text: "save".tr,
+                onpressed: () {
+                  Get.toNamed(RouteHelper.initial);
+                }),
           ],
         ),
       ),

@@ -65,18 +65,17 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: ColorManager.primary,
-                      )),
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: ColorManager.primary,
+                        )),
                     Text(
-                      "المستخدم",
+                      'user'.tr,
                       style: getBoldStyle(color: ColorManager.primary),
                     ),
-
                   ],
                 )
               ],
@@ -91,7 +90,7 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                   children: <Widget>[
                     ButtonsTabBar(
                       buttonMargin: const EdgeInsets.symmetric(horizontal: 10),
-                      contentPadding:  EdgeInsets.only(
+                      contentPadding: EdgeInsets.only(
                           top: 6.h, bottom: 10.h, left: 17.w, right: 18.w),
                       height: 45.h,
                       backgroundColor: ColorManager.primary,
@@ -103,11 +102,11 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                           getBoldStyle(color: ColorManager.white, fontSize: 18),
                       tabs: [
                         Tab(
-                          text: "الشكاوي ",
+                          text: "complaints".tr,
                           height: 70.h,
                         ),
                         Tab(
-                          text: "الطلبات ",
+                          text: 'requests'.tr,
                           height: 70.h,
                         ),
                       ],
@@ -116,31 +115,31 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                       child: TabBarView(
                         children: <Widget>[
                           Center(
-                              child: Column(
-                                  children: [
-                                    Directionality(
-                                      textDirection: TextDirection.rtl,
-                                      child: Container(
-                                          height: MediaQuery.of(context).size.height*0.7,
-                                          child: CustomComplaints()),
-                                    ),
-                                    CustomButtonPrimary(text: "ارسال شكوى ", onpressed: (){
-                                      Get.toNamed(RouteHelper.sendComplaints);
-                                    }),
-
-
-                                  ])),
+                              child: Column(children: [
+                            Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.7,
+                                  child: CustomComplaints()),
+                            ),
+                            CustomButtonPrimary(
+                                text: "sendComplaint".tr,
+                                onpressed: () {
+                                  Get.toNamed(RouteHelper.sendComplaints);
+                                }),
+                          ])),
                           Center(
-                              child: Column(
-                                  children: [
-                                    Container(
-                                      height: MediaQuery.of(context).size.height*0.7,
-                                        child: CustomRequest()),
-                                    CustomButtonPrimary(text: "ارسال طلب جديد", onpressed: (){
-                                      Get.toNamed(RouteHelper.sendRequests);
-
-                                    }),
-
+                              child: Column(children: [
+                            Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.7,
+                                child: CustomRequest()),
+                            CustomButtonPrimary(
+                                text: 'sendRequest'.tr,
+                                onpressed: () {
+                                  Get.toNamed(RouteHelper.sendRequests);
+                                }),
                           ])),
                         ],
                       ),

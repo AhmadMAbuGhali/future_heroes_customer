@@ -12,16 +12,16 @@ import '../../widgets/CustomButtonPrimary.dart';
 import '../../widgets/CustomTextFormAuth.dart';
 
 class PersonalData extends StatefulWidget {
-   PersonalData({Key? key}) : super(key: key);
+  PersonalData({Key? key}) : super(key: key);
 
   @override
   State<PersonalData> createState() => _PersonalDataState();
 }
 
 class _PersonalDataState extends State<PersonalData> {
-TextEditingController? name = TextEditingController();
-bool hidePass = true;
-TextEditingController dateInput = TextEditingController();
+  TextEditingController? name = TextEditingController();
+  bool hidePass = true;
+  TextEditingController dateInput = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,6 @@ TextEditingController dateInput = TextEditingController();
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Container(
               padding: EdgeInsets.only(
                 top: 45.h,
@@ -46,30 +45,34 @@ TextEditingController dateInput = TextEditingController();
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_forward,
-                          color: ColorManager.primary,
-                        )),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: ColorManager.primary,
+                          )),
                       Text(
-                        "المستخدم",
+                        "user".tr,
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(height: 40.h,),
-             Center(child: CustomTextTitle(text: "معلومات المستخدم", )),
-             SizedBox(
+            SizedBox(
+              height: 40.h,
+            ),
+            Center(
+                child: CustomTextTitle(
+              text: 'personalDetails'.tr,
+            )),
+            SizedBox(
               height: 10.h,
             ),
-             Text(
-              'البريد الالكتروني ',
+            Text(
+              'email'.tr,
               style: getRegularStyle(color: Colors.black),
             ),
             // const SizedBox(
@@ -79,7 +82,7 @@ TextEditingController dateInput = TextEditingController();
               hidepassword: false,
               textInputType: TextInputType.emailAddress,
 
-              hintText: 'البريد الالكتروني ',
+              hintText: 'email'.tr,
 
               //  labelText: 'البريد الالكتروني / رقم الهاتف',
               //  iconData: Icons.email_outlined,
@@ -87,8 +90,8 @@ TextEditingController dateInput = TextEditingController();
             //  const SizedBox(
             //     height: 10,
             //   ),
-             Text(
-              'كلمة المرور',
+            Text(
+              'password'.tr,
               style: TextStyle(fontSize: 12.sp),
             ),
 
@@ -100,12 +103,12 @@ TextEditingController dateInput = TextEditingController();
                   hidePass = !hidePass;
                 });
               },
-              hintText: 'كلمة المرور',
+              hintText: 'password'.tr,
               // labelText: 'كلمة المرور',
               iconData: hidePass ? Icons.visibility : Icons.visibility_off,
             ),
-            const Text(
-              '   اسم المشترك  ',
+            Text(
+              'userName'.tr,
               style: TextStyle(fontSize: 12),
             ),
             // const SizedBox(
@@ -115,13 +118,13 @@ TextEditingController dateInput = TextEditingController();
               hidepassword: false,
               textInputType: TextInputType.emailAddress,
 
-              hintText:  '   اسم المشترك  ',
+              hintText: 'userName'.tr,
 
               //  labelText: 'البريد الالكتروني / رقم الهاتف',
               //  iconData: Icons.email_outlined,
             ),
-             Text(
-              'تاريخ الميلاد',
+            Text(
+              'DOB'.tr,
               style: TextStyle(fontSize: 12.sp),
             ),
             // const SizedBox(
@@ -138,7 +141,7 @@ TextEditingController dateInput = TextEditingController();
                 if (pickedDate != null) {
                   print(pickedDate);
                   String formattedDate =
-                  DateFormat('yyyy-MM-dd').format(pickedDate);
+                      DateFormat('yyyy-MM-dd').format(pickedDate);
                   print(formattedDate);
                   setState(() {
                     dateInput.text =
@@ -149,8 +152,8 @@ TextEditingController dateInput = TextEditingController();
               hintText: 'YYYY/MM/DD',
               iconData: Icons.calendar_month_outlined,
             ),
-             Text(
-              'رقم الهاتف',
+            Text(
+              'mobileNumber'.tr,
               style: TextStyle(fontSize: 12.sp),
             ),
             // const SizedBox(
@@ -160,18 +163,32 @@ TextEditingController dateInput = TextEditingController();
               hidepassword: false,
               textInputType: TextInputType.number,
               iconData: Icons.phone,
-              hintText: 'رقم الهاتف',
+              hintText: 'mobileNumber'.tr,
               //  labelText: 'البريد الالكتروني / رقم الهاتف',
               //  iconData: Icons.email_outlined,
             ),
-            SizedBox(height: 20.h,),
-            Center(child: TextButton(onPressed: (){
-              Get.toNamed(RouteHelper.changePassword);
-            }, child: Text("تغيير كلمة المرور",textAlign: TextAlign.center,style: getBoldStyle(color: ColorManager.primary,fontSize: 14.sp),))),
-            SizedBox(height: 20.h,),
-            CustomButtonPrimary(text: "حفظ", onpressed: (){
-              Get.toNamed(RouteHelper.initial);
-            }),
+            SizedBox(
+              height: 20.h,
+            ),
+            Center(
+                child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(RouteHelper.changePassword);
+                    },
+                    child: Text(
+                      'changePassword'.tr,
+                      textAlign: TextAlign.center,
+                      style: getBoldStyle(
+                          color: ColorManager.primary, fontSize: 14.sp),
+                    ))),
+            SizedBox(
+              height: 20.h,
+            ),
+            CustomButtonPrimary(
+                text: "save".tr,
+                onpressed: () {
+                  Get.toNamed(RouteHelper.initial);
+                }),
           ],
         ),
       ),
