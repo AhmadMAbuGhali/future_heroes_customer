@@ -4,18 +4,18 @@ import 'package:get/get.dart';
 
 List<OnBoardingModel> onBoardingList = [
   OnBoardingModel(
-      title: "تفوق طفلك مسؤوليتنا",
+      title: "onBoardingText1".tr,
       image: ImageAssets.onBoardingImageOne,
       body:
-          '''الاستمرار بالتمرين يصنع منك شخص من حديد يتمتع بكامل النشاط والحيوية .. ويساعد ذهنك على التركيز على جميع نواحي حياتك اليومية'''),
+          'onBoardingBody1'.tr),
   OnBoardingModel(
-      title: "صناعة ابطال المستقبل",
+      title: "onBoardingText2".tr,
       image: ImageAssets.onBoardingImageTwo,
       body:
-          '''الكثير من الأنشطة منها خدمة كرة السلة والقدم ، التايكواندو، التيكوﻧﺟﺗﺳو، البوﻛﺳﯾﻧﺞ، الجمباز.'''),
+      'onBoardingBody2'.tr),
   OnBoardingModel(
-      title: "نساعدك لتحقيق الهدف",
+      title: "onBoardingText3".tr,
       image: ImageAssets.onBoardingImageThree,
       body:
-          '''ليست مجرد لكمات وركلات🥋 نحن نصنع أفضل نسخة من طفلك💪 ابطال2021 على مستوى المملكة'''),
+      'onBoardingBody3'.tr),
 ];

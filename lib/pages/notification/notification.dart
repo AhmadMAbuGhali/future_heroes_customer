@@ -26,14 +26,14 @@ class _NotificationPageState extends State<NotificationPage> {
             SizedBox(height: 60.h,),
             Row(
               children: [
-                Text("التنبيهات ",style: getBoldStyle(color: ColorManager.black),),
+                Text("notification ".tr,style: getBoldStyle(color: ColorManager.black),),
                 CircleAvatar(
                   backgroundColor: ColorManager.primary,
                   radius: 17,
                   child: Text("4",style: getRegularStyle(color: ColorManager.white),),
                 ),
                 Spacer(),
-                TextButton(onPressed: (){}, child: Text("تحديد الكل كمقروء", style: getBoldStyle(color: ColorManager.primary,fontSize: 12),))
+                TextButton(onPressed: (){}, child: Text("markAsRead".tr, style: getBoldStyle(color: ColorManager.primary,fontSize: 12),))
               ],
             ),
 
@@ -73,10 +73,10 @@ class _NotificationPageState extends State<NotificationPage> {
                                   ),
                                 ),
                                 SizedBox(width: 15.w,),
-                                Text("اقترب الموعد على نهاية اشتراكك",style: getBoldStyle(color: ColorManager.black,fontSize: 14),),
+                                Text("notificationTitle",style: getBoldStyle(color: ColorManager.black,fontSize: 14),),
                               ],
                             ),
-                            collapsed: Text("هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي..",
+                            collapsed: Text("notificationBody".tr,
                               softWrap: true,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -84,7 +84,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             expanded: Column(
                               children: [
 
-                                Text("هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي..هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.."),
+                                Text("notificationBody".tr),
                                 Row(children: [
                                   SvgPicture.asset(IconAssets.time,color: ColorManager.primary,),
                                   Text("02 ساعات",style: getRegularStyle(color: ColorManager.primary),),

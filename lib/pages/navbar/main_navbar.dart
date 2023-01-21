@@ -7,6 +7,7 @@ import 'package:future_heroes_customer/pages/qr_code/qr_code.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/utils/colors.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../notification/notification.dart';
@@ -67,32 +68,32 @@ class _MainNavBarState extends State<MainNavBar> {
     return [
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.user),
-        title: ("المستحدم"),
+        title: ("user".tr),
         iconSize: 70,
         activeColorPrimary: ColorManager.primary,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.notifications),
-        title: ("الاشعارات"),
+        title: ("notification".tr),
         activeColorPrimary: ColorManager.primary,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.qr_code),
-        title: ("QR Code"),
+        title: ("qrCode".tr),
         activeColorPrimary: ColorManager.primary,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.localoffer),
-        title: ("العروض"),
+        title: ("offer".tr),
         activeColorPrimary: ColorManager.primary,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.home),
-        title: ("الرئيسية"),
+        title: ("home".tr),
         activeColorPrimary: ColorManager.primary,
         inactiveColorPrimary: Colors.grey,
       ),

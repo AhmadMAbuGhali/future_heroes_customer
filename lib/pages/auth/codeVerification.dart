@@ -54,7 +54,7 @@ class _CodeVerificationState extends State<CodeVerification> {
               height: 15.h,
             ),
             Text(
-              'الكود قد تم إرساله إلى الإيميل',
+              'codeWasSend'.tr,
               textAlign: TextAlign.center,
               style: getRegularStyle(color: ColorManager.gray,fontSize: 16.sp),
             ),
@@ -72,21 +72,21 @@ class _CodeVerificationState extends State<CodeVerification> {
             CustomTextFormAuth(
               hidepassword: false,
               textInputType: TextInputType.emailAddress,
-              hintText: 'ادخل رمز التحقق',
+              hintText: 'enterCode'.tr,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('    يمكنك طلب إعادة ارسال الرمز خلال  '),
+                Text('sendCodeAgain'.tr),
                 Text(
                   "$_start",
                   style: TextStyle(color: ColorManager.primary),
                 ),
-                Text("   ثانية  "),
+                Text("  seconds".tr),
               ],
             ),
             CustomButtonPrimary(
-              text: 'تحقق',
+              text: 'verification'.tr,
               onpressed: () {
                 startTimer();
                 _start == 0

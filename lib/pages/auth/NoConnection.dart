@@ -31,18 +31,17 @@ class NoConnectionScreen extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            CustomTextTitle(text: 'هناك مشكلة'),
+            CustomTextTitle(text: 'problem'.tr),
             SizedBox(
               height: 20.h,
             ),
             Text(
-              '''للأسف قد تعذر الإتصال بالأنترنت.
-يرجى التحقق من فضلك.''',
+              "noInternet".tr,
               textAlign: TextAlign.center,
               style: TextStyle(color: ColorManager.gray),
             ),
             CustomButtonPrimary(
-              text: 'أعد المحاولة',
+              text: 'tryAgain'.tr,
               onpressed: () {
                 Get.offNamed(RouteHelper.initial);
               },

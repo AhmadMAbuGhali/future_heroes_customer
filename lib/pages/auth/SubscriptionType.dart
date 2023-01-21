@@ -8,6 +8,7 @@ import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 
 import '../../routes/route_helper.dart';
@@ -25,6 +26,9 @@ class _SubscriptionTypeState extends State<SubscriptionType> {
   bool isSelecteOne = false;
   bool isSelectetwo = false;
   bool isSelecteThree = false;
+  var price1 = 99.99;
+  var price2 = 179.99;
+  var price3 = 249.99;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +53,13 @@ class _SubscriptionTypeState extends State<SubscriptionType> {
               height: 60.h,
             ),
             CustomTextTitle(
-              text: ' بقيت خطوة اخيرة',
+              text: 'lastStep'.tr,
             ),
             SizedBox(
               height: 20.h,
             ),
             Text(
-              'اختر الباقة  المناسبة لك',
+              'chosePackage'.tr,
               textAlign: TextAlign.center,
               style: TextStyle(color: ColorManager.gray),
             ),
@@ -72,9 +76,9 @@ class _SubscriptionTypeState extends State<SubscriptionType> {
               },
               child: CardSubscriptionType(
                 isSelecte: isSelecteOne,
-                title: 'شهر واحد',
-                description: 'يتم سرد تفاصيل الاشتراك هنا',
-                price: '99.99 ريال',
+                title: 'month'.tr,
+                description: 'packageDetails'.tr,
+                price: '${price1} '+ 'RS'.tr,
               ),
             ),
             InkWell(
@@ -87,9 +91,9 @@ class _SubscriptionTypeState extends State<SubscriptionType> {
               },
               child: CardSubscriptionType(
                 isSelecte: isSelectetwo,
-                title: 'شهرين',
-                description: 'يتم سرد تفاصيل الاشتراك هنا',
-                price: '179.99 ريال',
+                title: 'month2'.tr,
+                description: 'packageDetails'.tr,
+                price: '${price2} '+ 'RS'.tr,
               ),
             ),
             InkWell(
@@ -102,14 +106,14 @@ class _SubscriptionTypeState extends State<SubscriptionType> {
               },
               child: CardSubscriptionType(
                 isSelecte: isSelecteThree,
-                title: 'ثلاث شهور',
-                description: 'يتم سرد تفاصيل الاشتراك هنا',
-                price: '249.99 ريال',
+                title: 'month3'.tr,
+                description: 'packageDetails'.tr,
+                price: '${price3}  '+ 'RS'.tr,
               ),
             ),
             Spacer(),
             CustomButtonPrimary(
-              text: 'متابعة',
+              text: 'continue'.tr,
               onpressed: () {
                 Get.toNamed(RouteHelper.endSignUp);
               },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/resources/styles_manager.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class CustomTextSignUpOrSignin extends StatelessWidget {
           onTap: onTap,
           child: Text(
             texttwo,
-            style: getBoldStyle(color: ColorManager.primary) ),
+            style: getBoldStyle(color: ColorManager.primary,fontSize: 12.sp) ),
         )
       ],
     );

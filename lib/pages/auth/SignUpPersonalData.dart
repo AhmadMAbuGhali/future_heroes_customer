@@ -33,7 +33,7 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
         backgroundColor: ColorManager.backGround,
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+            padding: EdgeInsets.all(16),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               SizedBox(
@@ -41,55 +41,61 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
               ),
               Center(
                 child: CustomTextTitle(
-                  text: 'البيانات الشخصية',
+                  text: 'personalDetails'.tr,
                 ),
               ),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (builder) => bottomSheet(),
-                        );
-
-                        // setState(() {
-                        //   _getFromGallery();
-                        // });
-                      },
-                      child: Center(
-                        child: CircleAvatar(
-                          radius: 60,
-                          foregroundImage: imageFile == null
-                              ? Image.asset(
-                                  ImageAssets.avatar,
-                                ).image
-                              : Image.file(
-                                  imageFile!,
-                                  fit: BoxFit.cover,
-                                ).image,
-                          backgroundImage: imageFile == null
-                              ? Image.asset(
-                                  ImageAssets.logopng,
-                                ).image
-                              : Image.file(
-                                  imageFile!,
-                                  fit: BoxFit.cover,
-                                ).image,
-                        ),
+                  Center(
+                    child: SizedBox(
+                      height: 100.h,
+                      width: 100.w,
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        fit: StackFit.expand,
+                        children: [
+                          CircleAvatar(
+                            foregroundImage: imageFile == null
+                                ? Image.asset(
+                              ImageAssets.avatar,
+                            ).image
+                                : Image.file(
+                              imageFile!,
+                              fit: BoxFit.cover,
+                            ).image,
+                            backgroundImage: imageFile == null
+                                ? Image.asset(
+                              ImageAssets.avatar,
+                            ).image
+                                : Image.file(
+                              imageFile!,
+                              fit: BoxFit.cover,
+                            ).image,
+                          ),
+                          Positioned(
+                              bottom: -7.h,
+                              right: -15.w,
+                              child: RawMaterialButton(
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: (builder) => bottomSheet(),
+                                  );
+                                },
+                                elevation: 2.0,
+                                fillColor: Color(0xFFF5F6F9),
+                                child: Icon(Icons.camera_alt_outlined, color: Colors.blue,),
+                                padding: EdgeInsets.all(5.0),
+                                shape: CircleBorder(),
+                              )),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
 
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                'البريد الالكتروني ',
+               Text(
+                'email'.tr,
                 style: TextStyle(fontSize: 12),
               ),
               // const SizedBox(
@@ -99,15 +105,15 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                 hidepassword: false,
                 textInputType: TextInputType.emailAddress,
 
-                hintText: 'البريد الالكتروني ',
+                hintText: 'email'.tr,
                 //  labelText: 'البريد الالكتروني / رقم الهاتف',
                 //  iconData: Icons.email_outlined,
               ),
               //  const SizedBox(
               //     height: 10,
               //   ),
-              const Text(
-                'كلمة المرور',
+               Text(
+                'password'.tr,
                 style: TextStyle(fontSize: 12),
               ),
 
@@ -119,12 +125,12 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                     hidePass = !hidePass;
                   });
                 },
-                hintText: 'كلمة المرور',
+                hintText: 'password'.tr,
                 // labelText: 'كلمة المرور',
                 iconData: hidePass ? Icons.visibility : Icons.visibility_off,
               ),
-              const Text(
-                '   اسم المشترك  ',
+               Text(
+                'userName'.tr,
                 style: TextStyle(fontSize: 12),
               ),
               // const SizedBox(
@@ -134,13 +140,13 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                 hidepassword: false,
                 textInputType: TextInputType.emailAddress,
 
-                hintText: '   اسم المشترك  ',
+                hintText: 'userName'.tr,
 
                 //  labelText: 'البريد الالكتروني / رقم الهاتف',
                 //  iconData: Icons.email_outlined,
               ),
-              const Text(
-                'تاريخ الميلاد',
+               Text(
+                'DOB'.tr,
                 style: TextStyle(fontSize: 12),
               ),
               // const SizedBox(
@@ -168,8 +174,8 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                 hintText: 'YYYY/MM/DD',
                 iconData: Icons.calendar_month_outlined,
               ),
-              const Text(
-                'رقم الهاتف',
+               Text(
+                'mobileNumber'.tr,
                 style: TextStyle(fontSize: 12),
               ),
               // const SizedBox(
@@ -179,12 +185,12 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                 hidepassword: false,
                 textInputType: TextInputType.number,
                 iconData: Icons.phone,
-                hintText: 'رقم الهاتف',
+                hintText: 'mobileNumber'.tr,
                 //  labelText: 'البريد الالكتروني / رقم الهاتف',
                 //  iconData: Icons.email_outlined,
               ),
               CustomButtonPrimary(
-                text: 'متابعة',
+                text: 'continue'.tr,
                 onpressed: () {
                   Get.toNamed(RouteHelper.diseases);
                 },
@@ -232,22 +238,23 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
       child: Column(
         children: [
           Text(
-            'تغيير الصورة الشخصية',
+            'changePhoto'.tr,
           ),
           SizedBox(
             height: 8.h,
           ),
           CustomButtonPrimary(
-              text: "فتح الكاميرا",
+              text: "openCamera".tr,
               onpressed: () {
                 setState(() {
                   _getFromCamera();
                   Navigator.pop(context);
                 });
               }),
-          Text("أو"),
+          SizedBox(height: 10.h,),
+          Text("or".tr),
           CustomButtonPrimary(
-              text: "قم بالاختيار من المعرض",
+              text: "openGallery".tr,
               onpressed: () {
                 setState(() {
                   _getFromGallery();

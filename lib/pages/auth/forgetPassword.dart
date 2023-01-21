@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/resources/styles_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
@@ -25,14 +26,14 @@ class ForgetPassword extends StatelessWidget {
               height: 10.h,
             ),
             CustomTextTitle(
-              text: 'هل فقدت كلمة المرور؟',
+              text: 'didYouForgotPassword'.tr,
             ),
             const SizedBox(
               height: 30,
             ),
-            const Text(
-              'البريد الالكتروني / رقم الهاتف',
-              style: TextStyle(fontSize: 12),
+             Text(
+              'email'.tr,
+              style: getBoldStyle(color: ColorManager.black),
             ),
             const SizedBox(
               height: 5,
@@ -40,10 +41,10 @@ class ForgetPassword extends StatelessWidget {
             CustomTextFormAuth(
               hidepassword: false,
               textInputType: TextInputType.emailAddress,
-              hintText: 'البريد الالكتروني / رقم الهاتف',
+              hintText: 'email'.tr,
             ),
             CustomButtonPrimary(
-              text: 'اعادة تعيين كلمة المرور',
+              text: 'sentVerification'.tr,
               onpressed: () {
                 Get.toNamed(RouteHelper.codeVerification);
               },

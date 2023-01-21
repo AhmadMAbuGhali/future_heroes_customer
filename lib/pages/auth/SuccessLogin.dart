@@ -31,16 +31,16 @@ class SuccessLogin extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            CustomTextTitle(text: 'مرحبا بك من جديد'),
+            CustomTextTitle(text: 'helloAgain'.tr),
             SizedBox(
               height: 20.h,
             ),
             Text(
-              'هل انت جاهز للبدء',
+              'areYouReady'.tr,
               style: TextStyle(color: ColorManager.gray),
             ),
             CustomButtonPrimary(
-              text: 'إتجه للصفحة الرئيسية',
+              text: 'goToHome'.tr,
               onpressed: () {
                 Get.offNamed(RouteHelper.noConnection);
               },

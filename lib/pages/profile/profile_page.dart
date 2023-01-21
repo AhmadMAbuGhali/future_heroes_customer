@@ -26,174 +26,172 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  SizedBox(
-                    height: 80.h,
-                    width: 80.w,
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      fit: StackFit.expand,
-                      children: [
-                        CircleAvatar(
-                          foregroundImage: imageFile == null
-                              ? Image.asset(
-                            ImageAssets.avatar,
-                          ).image
-                              : Image.file(
-                            imageFile!,
-                            fit: BoxFit.cover,
-                          ).image,
-                          backgroundImage: imageFile == null
-                              ? Image.asset(
-                            ImageAssets.avatar,
-                          ).image
-                              : Image.file(
-                            imageFile!,
-                            fit: BoxFit.cover,
-                          ).image,
-                        ),
-                        Positioned(
-                            bottom: -10.h,
-                            right: -35.w,
-                            child: RawMaterialButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  builder: (builder) => bottomSheet(),
-                                );
-                              },
-                              elevation: 2.0,
-                              fillColor: Color(0xFFF5F6F9),
-                              child: Icon(Icons.camera_alt_outlined, color: Colors.blue,),
-                              padding: EdgeInsets.all(5.0),
-                              shape: CircleBorder(),
-                            )),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Text(
-                    "يوسف الجزار ",
-                    style: getBoldStyle(color: Colors.black),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Text(
-                    "Yousef.n.aljazzar@gmail.com",
-                    style: getRegularStyle(color: Colors.black),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 30.h,
+                ),
+                SizedBox(
+                  height: 80.h,
+                  width: 80.w,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    fit: StackFit.expand,
                     children: [
-                      Text(
-                        "مستواك هو : ",
-                        style: getBoldStyle(color: Colors.black,fontSize: 12),
+                      CircleAvatar(
+                        foregroundImage: imageFile == null
+                            ? Image.asset(
+                          ImageAssets.avatar,
+                        ).image
+                            : Image.file(
+                          imageFile!,
+                          fit: BoxFit.cover,
+                        ).image,
+                        backgroundImage: imageFile == null
+                            ? Image.asset(
+                          ImageAssets.avatar,
+                        ).image
+                            : Image.file(
+                          imageFile!,
+                          fit: BoxFit.cover,
+                        ).image,
                       ),
-                      Text(
-                        "مبتدأ ",
-                        style: getRegularStyle(color: ColorManager.primary),
-                      ),
+                      Positioned(
+                          bottom: -10.h,
+                          right: -35.w,
+                          child: RawMaterialButton(
+                            onPressed: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (builder) => bottomSheet(),
+                              );
+                            },
+                            elevation: 2.0,
+                            fillColor: Color(0xFFF5F6F9),
+                            child: Icon(Icons.camera_alt_outlined, color: Colors.blue,),
+                            padding: EdgeInsets.all(5.0),
+                            shape: CircleBorder(),
+                          )),
                     ],
                   ),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  //معلومات الشخصية
-                  ProfileSection(
-                      label: "المعلومات الشخصية",
-                      haveArrow: true,
-                      icon: IconAssets.user,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.personalData);
-                      }),
+                ),
 
-                  //الطلبات والشكاوي
-                  ProfileSection(
-                      label: "الطلبات والشكاوي",
-                      haveArrow: true,
-                      icon: IconAssets.paper,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.requestsAndComplaints);
-                      }),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Text(
+                  "يوسف الجزار ",
+                  style: getBoldStyle(color: Colors.black),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Text(
+                  "Yousef.n.aljazzar@gmail.com",
+                  style: getRegularStyle(color: Colors.black),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "playerLevel".tr,
+                      style: getBoldStyle(color: Colors.black,fontSize: 12),
+                    ),
 
-                  //مواعيد التدريب
+                    Text(
+                      "Beginner".tr,
+                      style: getRegularStyle(color: ColorManager.primary),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 40.h,
+                ),
+                //معلومات الشخصية
+                ProfileSection(
+                    label: "personalDetails".tr,
+                    haveArrow: true,
+                    icon: IconAssets.user,
+                    onTap: () {
+                      Get.toNamed(RouteHelper.personalData);
+                    }),
 
-                  ProfileSection(
-                      label: "مواعيد التدريب",
-                      haveArrow: true,
-                      icon: IconAssets.calendar,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.classTime);
-                      }),
+                //الطلبات والشكاوي
+                ProfileSection(
+                    label: "requestsAndComplaints".tr,
+                    haveArrow: true,
+                    icon: IconAssets.paper,
+                    onTap: () {
+                      Get.toNamed(RouteHelper.requestsAndComplaints);
+                    }),
 
-                  //ترقية الاشتراك
-                  ProfileSection(
-                      label: "ترقية الاشتراك",
-                      haveArrow: true,
-                      icon: IconAssets.jewelry,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.subscriptionUpgrade);
-                      }),
+                //مواعيد التدريب
 
-                  //التقيمات
+                ProfileSection(
+                    label: "classTime".tr,
+                    haveArrow: true,
+                    icon: IconAssets.calendar,
+                    onTap: () {
+                      Get.toNamed(RouteHelper.classTime);
+                    }),
 
-                  ProfileSection(
-                      label: "التقيمات",
-                      haveArrow: true,
-                      icon: IconAssets.stars,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.ratings);
-                      }),
+                //ترقية الاشتراك
+                ProfileSection(
+                    label: "subscriptionUpgrade".tr,
+                    haveArrow: true,
+                    icon: IconAssets.jewelry,
+                    onTap: () {
+                      Get.toNamed(RouteHelper.subscriptionUpgrade);
+                    }),
+
+                //التقيمات
+
+                ProfileSection(
+                    label: "rating".tr,
+                    haveArrow: true,
+                    icon: IconAssets.stars,
+                    onTap: () {
+                      Get.toNamed(RouteHelper.ratings);
+                    }),
 
 
-                  //اللغة
-                  ProfileSection(
-                      label: "اللغة",
-                      haveArrow: true,
-                      icon: IconAssets.language,
+                //اللغة
+                ProfileSection(
+                    label: "language".tr,
+                    haveArrow: true,
+                    icon: IconAssets.language,
 
-                      onTap: () {
-                        Get.toNamed(RouteHelper.language);
-                      }),
+                    onTap: () {
+                      Get.toNamed(RouteHelper.language);
+                    }),
 
-                  //تسجيل الخروج
-                  ProfileSection(
-                      label: "تسجيل الخروج",
-                      haveArrow: false,
-                      icon: IconAssets.user,
-                      myColor: Colors.red,
-                      onTap: () {
-                        _logoutDialog();
-                      }),
+                //تسجيل الخروج
+                ProfileSection(
+                    label: "logout".tr,
+                    haveArrow: false,
+                    icon: IconAssets.user,
+                    myColor: Colors.red,
+                    onTap: () {
+                      _logoutDialog();
+                    }),
 
-                  //حذف الحساب
-                  ProfileSection(
-                      label: "حذف حسابي",
-                      haveArrow: false,
-                      icon: IconAssets.delete,
-                      myColor: Colors.red,
-                      onTap: () {
-                        _deleteAccountDialog();
-                      }),
-                ],
-              ),
+                //حذف الحساب
+                ProfileSection(
+                    label: "deleteAccount".tr,
+                    haveArrow: false,
+                    icon: IconAssets.delete,
+                    myColor: Colors.red,
+                    onTap: () {
+                      _deleteAccountDialog();
+                    }),
+              ],
             ),
           ),
         ),

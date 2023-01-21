@@ -39,7 +39,7 @@ class CustomTextFormAuth extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.r)),
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 contentPadding:
-                     EdgeInsets.symmetric(vertical: 5.h, horizontal: 30.w),
+                     EdgeInsets.symmetric(vertical: 5.h, horizontal: 15.w),
                 suffixIcon: IconButton(
                   icon: Icon(
                     iconData,
@@ -48,7 +48,7 @@ class CustomTextFormAuth extends StatelessWidget {
                   onPressed: pressSuffixIcon,
                 ),
                 hintText: hintText,
-                hintStyle: TextStyle(color: ColorManager.gray, fontSize: 10.sp),
+                hintStyle: TextStyle(color: ColorManager.gray, fontSize: 13.sp),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.r))),
           ),

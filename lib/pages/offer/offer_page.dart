@@ -29,7 +29,7 @@ class _OfferPageState extends State<OfferPage> {
 
             Row(
               children: [
-                Text("العروض ",style: getBoldStyle(color: ColorManager.black),),
+                Text("offer".tr,style: getBoldStyle(color: ColorManager.black),),
                 CircleAvatar(
                   backgroundColor: ColorManager.primary,
                   radius: 17,
@@ -74,24 +74,24 @@ class _OfferPageState extends State<OfferPage> {
                                   ),
                                 ),
                                 SizedBox(width: 15.w,),
-                                Text("اقترب الموعد على نهاية اشتراكك",style: getBoldStyle(color: ColorManager.black,fontSize: 14),),
+                                Text("offerTitle".tr,style: getBoldStyle(color: ColorManager.black,fontSize: 14),),
                               ],
                             ),
-                            collapsed: Text("هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي..",
+                            collapsed: Text("offerBody".tr,
                               softWrap: true,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
                             expanded: Column(
                               children: [
-                                Text("هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي..هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.."),
+                                Text("offerBody".tr),
                                 Row(children: [
                                   SvgPicture.asset(IconAssets.time,color: ColorManager.primary,),
                                   Text("02 ساعات",style: getRegularStyle(color: ColorManager.primary),),
                                 ],),
-                                SizedBox(width:150.w,child: CustomButtonPrimary(text: 'طلب استفادة من العرض', onpressed: () {
+                                SizedBox(width:150.w,child: CustomButtonPrimary(text: 'takeOfferButton'.tr, onpressed: () {
                                   snakbarWidget(context,
-                                      Titel: 'تم تقديم الطلب بنجاح',
+                                      Titel: 'takeOfferSnackBar'.tr,
                                       Description: 'يمكنك التوجه للنادي لتأكيد  الطلب').Success();
                                 },textColor: ColorManager.primary,buttonColor: ColorManager.white,))
                               ],

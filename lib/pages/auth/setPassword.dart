@@ -32,7 +32,7 @@ class _SetPasswordState extends State<SetPassword> {
               height: 10.h,
             ),
             CustomTextTitle(
-              text: 'ادخل كلمة المرور الجديدة',
+              text: 'typeNewPassword'.tr,
             ),
             const SizedBox(
               height: 30,
@@ -40,8 +40,8 @@ class _SetPasswordState extends State<SetPassword> {
             SizedBox(
               height: 10.h,
             ),
-            const Text(
-              'كلمة المرور الجديدة',
+             Text(
+              'typeNewPassword'.tr,
               style: TextStyle(fontSize: 12),
             ),
             CustomTextFormAuth(
@@ -60,8 +60,8 @@ class _SetPasswordState extends State<SetPassword> {
             SizedBox(
               height: 10.h,
             ),
-            const Text(
-              ' اعد كتابة كلمة المرور ',
+             Text(
+              'retypePassword'.tr,
               style: TextStyle(fontSize: 12),
             ),
             CustomTextFormAuth(
@@ -82,7 +82,7 @@ class _SetPasswordState extends State<SetPassword> {
               height: 10.h,
             ),
             CustomButtonPrimary(
-              text: 'اعادة تعيين كلمة المرور',
+              text: 'passwordReset'.tr,
               onpressed: () {
                 Get.toNamed(RouteHelper.login);
               },

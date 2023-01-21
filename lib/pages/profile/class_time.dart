@@ -49,7 +49,7 @@ class _ClassTimeState extends State<ClassTime> {
                           color: ColorManager.primary,
                         )),
                       Text(
-                        "المستخدم",
+                        "user".tr,
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
 
@@ -61,9 +61,9 @@ class _ClassTimeState extends State<ClassTime> {
               ),
             ),
             SizedBox(height: 40.h,),
-            CustomTextTitle(text: "مواعيد الحصص"),
+            CustomTextTitle(text: "classTime".tr),
             SizedBox(height: 18.h,),
-            Text("هنا تجد مواعيد الحصص المخصصة لك حسب اشتراكك",textAlign: TextAlign.center, style: getBoldStyle(color: ColorManager.gray),),
+            Text("classTimeHint".tr,textAlign: TextAlign.center, style: getBoldStyle(color: ColorManager.gray),),
 
             Expanded(child:ClassTimeWidget()),
           ],

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/resources/styles_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
@@ -41,7 +42,7 @@ class _LoginState extends State<Login> {
               ),
                Text(
                 'email'.tr,
-                style: TextStyle(fontSize: 12),
+                style: getBoldStyle(color: ColorManager.black),
               ),
               SizedBox(
                 height: 5.h,
@@ -59,7 +60,7 @@ class _LoginState extends State<Login> {
               ),
                Text(
                 'password'.tr,
-                style: TextStyle(fontSize: 12),
+                 style: getBoldStyle(color: ColorManager.black),
               ),
               const SizedBox(
                 height: 5,
@@ -77,7 +78,6 @@ class _LoginState extends State<Login> {
                 iconData: hidePass ? Icons.visibility : Icons.visibility_off,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Switch(
                     value: remmberMe,
@@ -88,12 +88,14 @@ class _LoginState extends State<Login> {
                     },
                     activeColor: ColorManager.primary,
                   ),
+                  Text("rememberMe".tr,style: getBoldStyle(color: ColorManager.black,fontSize: 12),),
+                 Spacer(),
                   InkWell(
                     onTap: () {
                       Get.toNamed(RouteHelper.forgetPassword);
                     },
-                    child: const Text(
-                      'نسيت كلمة المرور',
+                    child:  Text(
+                      'forgotPassword'.tr,
                       textAlign: TextAlign.end,
                       style:
                           TextStyle(color: ColorManager.primary, fontSize: 12),
@@ -102,7 +104,7 @@ class _LoginState extends State<Login> {
                 ],
               ),
               CustomButtonPrimary(
-                text: 'تسجيل الدخول',
+                text: 'login'.tr,
                 onpressed: () {
                   Get.toNamed(RouteHelper.successLogin);
                 },
@@ -114,8 +116,8 @@ class _LoginState extends State<Login> {
                 onTap: () {
                   Get.toNamed(RouteHelper.signUpPart2);
                 },
-                textone: 'ليس لديك حساب ؟   ',
-                texttwo: 'أنشئ حسابك الآن',
+                textone: 'dontHaveAccount'.tr,
+                texttwo: 'makeAccount'.tr,
               ),
             ],
           )),

@@ -8,6 +8,7 @@ import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 
 import '../../resources/styles_manager.dart';
@@ -44,18 +45,17 @@ class _CoachSelectionState extends State<CoachSelection> {
           margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
           child: ListView(children: [
             CustomTextTitle(
-              text: ' اختيار المدرب',
+              text: 'choseCoach'.tr,
             ),
             SizedBox(
               height: 10.h,
             ),
             Text(
-              '''اختر من القائمة , المدرب الذي ترغب بالانضمام 
-لطلابه''',
+              "choseFavCoach".tr,
               textAlign: TextAlign.center,
               style: TextStyle(color: ColorManager.gray),
             ),
-            Text('قسم الرياضة'),
+            Text('sportSection'.tr),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -81,7 +81,7 @@ class _CoachSelectionState extends State<CoachSelection> {
                             width: 100,
                           ),
                           Text(
-                            'م.محمد',
+                            'coach1'.tr,
                             style: getRegularStyle(color: ColorManager.primary),
                           ),
 
@@ -112,7 +112,7 @@ class _CoachSelectionState extends State<CoachSelection> {
                             width: 100,
                           ),
                           Text(
-                            'م.احمد',
+                            'coach2'.tr,
                            style: getRegularStyle(color: ColorManager.primary),
                           ),
 
@@ -125,17 +125,17 @@ class _CoachSelectionState extends State<CoachSelection> {
                 ? Column(
                     children: [
                       Text(
-                        'الحصص الخاصة ب الكوتش محمد',
+                        'coachClassDay'.tr,
                         style: TextStyle(color: ColorManager.black),
                       ),
                       SizedBox(
                         height: 20.h,
                       ),
                       CardWidget(
-                        title: 'السبت / الاثنين / الأربعاء  ',
+                        title: 'ClassDays'.tr,
                       ),
                       Text(
-                        'مواعيد الحصص المتاحة',
+                        'availableTime'.tr,
                         style: TextStyle(color: ColorManager.black),
                       ),
                       Container(
@@ -175,7 +175,7 @@ class _CoachSelectionState extends State<CoachSelection> {
                     children: [],
                   ),
             CustomButtonPrimary(
-              text: 'متابعة',
+              text: 'continue'.tr,
               onpressed: () {
                 Get.toNamed(RouteHelper.subscriptionType);
               },

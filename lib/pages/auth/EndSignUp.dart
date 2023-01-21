@@ -31,19 +31,17 @@ class EndSignUp extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            CustomTextTitle(text: '! مرحبا بك'),
+            CustomTextTitle(text: 'welcome'.tr),
             SizedBox(
               height: 20.h,
             ),
             Text(
-              '''طلبك قيد التدقيق , من الإدارة
-يرجى التوجه لمقر النادي, لتثبيت الاشتراك
-في اقرب وقت''',
+             "orderUnderReview".tr,
               textAlign: TextAlign.center,
               style: TextStyle(color: ColorManager.gray),
             ),
             CustomButtonPrimary(
-              text: 'اتجه لتسجيل الدخول',
+              text: 'moveToLogin'.tr,
               onpressed: () {
                 Get.offNamed(RouteHelper.login);
               },

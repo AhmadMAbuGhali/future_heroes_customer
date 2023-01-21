@@ -94,7 +94,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                     "10:30 - 11:30",
                   ),
                   content: Text(
-                      "المدرب : محمد   مدة الحصة : 60 دقيقة  صالة رقم : 3"),
+                      "classTimeBody".tr),
                 ))
             .toList(),
         onStepCancel: () {
@@ -121,7 +121,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                 child: ElevatedButton(
                   onPressed: details.onStepContinue,
                   child: Text(
-                    "التالي",
+                    "next".tr,
                     style: getRegularStyle(color: ColorManager.white),
                   ),
                   style:
@@ -133,13 +133,13 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
               ),
               SizedBox(
                 height: 35.h,
-                width: 80.w,
+                width: 160.w,
                 child: TextButton(
                   onPressed: () {
                     Get.toNamed(RouteHelper.postponeAnAppointment);
                   },
                   child: Text(
-                    "طلب تأجيل",
+                    "requestPostponement".tr,
                     style: getRegularStyle(color: ColorManager.primary),
                   ),
                   style: ElevatedButton.styleFrom(

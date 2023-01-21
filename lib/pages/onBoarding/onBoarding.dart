@@ -30,7 +30,7 @@ class OnBoarding extends StatelessWidget {
                     CustomButtonOnBoarding(
                       textColor: ColorManager.white,
                       buttonColor: ColorManager.primary,
-                      text: 'التالي',
+                      text: 'next'.tr,
                     ),
                     CustomButtonPrimary(
                       onpressed: () {
@@ -38,7 +38,7 @@ class OnBoarding extends StatelessWidget {
                       },
                       textColor: ColorManager.primary,
                       buttonColor: ColorManager.white,
-                      text: 'تخطي',
+                      text: 'skip'.tr,
                     )
                   ],
                 ))

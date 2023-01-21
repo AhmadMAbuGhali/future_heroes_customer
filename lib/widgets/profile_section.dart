@@ -20,6 +20,8 @@ class ProfileSection extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SvgPicture.asset(icon,color: myColor!,width: 15.w,height: 15.h,),
               SizedBox(
@@ -30,7 +32,7 @@ class ProfileSection extends StatelessWidget {
               style: getBoldStyle(color: myColor!, fontSize: 12.sp),
             ),
               const Spacer(),
-              haveArrow?SvgPicture.asset(IconAssets.arrow_back,):Container(),
+              haveArrow?Icon(Icons.arrow_forward_ios_outlined,size: 15.w,):Container(),
 
 
 

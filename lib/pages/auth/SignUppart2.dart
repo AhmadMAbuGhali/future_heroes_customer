@@ -55,13 +55,13 @@ class _SignUpState extends State<SignUpScreenPart2> {
                 height: 10.h,
               ),
               CustomTextTitle(
-                text: ' !اهلا وسهلا بك',
+                text: 'welcome'.tr,
               ),
               SizedBox(
                 height: 10.h,
               ),
               Text(
-                'الى أي فئة ترغب الانضمام',
+                'whatCategory'.tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: ColorManager.gray),
               ),
@@ -85,10 +85,15 @@ class _SignUpState extends State<SignUpScreenPart2> {
                           isCultural = false;
                         });
                       },
-                      child: SvgPicture.asset(
-                        ImageAssets.sport,
-                        height: 100.h,
-                        width: 100.h,
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            ImageAssets.sport,
+                            height: 100.h,
+                            width: 100.h,
+                          ),
+                          Text("sport".tr),
+                        ],
                       ),
                     ),
                   ),
@@ -108,10 +113,15 @@ class _SignUpState extends State<SignUpScreenPart2> {
                                   width: 2,
                                 )
                               : null),
-                      child: SvgPicture.asset(
-                        ImageAssets.cultural,
-                        height: 100.h,
-                        width: 100.h,
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            ImageAssets.cultural,
+                            height: 100.h,
+                            width: 100.h,
+                          ),
+                          Text("cultural".tr)
+                        ],
                       ),
                     ),
                   ),
@@ -122,15 +132,15 @@ class _SignUpState extends State<SignUpScreenPart2> {
                       children: [
                         CardCheckBoxWidget(
                           isChecked: isChecked,
-                          title: 'نحت',
+                          title: 'Sculpture'.tr,
                         ),
                         CardCheckBoxWidget(
                           isChecked: isChecked,
-                          title: 'خط',
+                          title: 'font'.tr,
                         ),
                         CardCheckBoxWidget(
                           isChecked: isChecked,
-                          title: 'رسم',
+                          title: 'drawing'.tr,
                         ),
                       ],
                     )
@@ -138,20 +148,20 @@ class _SignUpState extends State<SignUpScreenPart2> {
                       children: [
                         CardCheckBoxWidget(
                           isChecked: isChecked,
-                          title: 'كاراتيه',
+                          title: 'Karate'.tr,
                         ),
                         CardCheckBoxWidget(
                           isChecked: isChecked,
-                          title: 'تايكواندو',
+                          title: 'taekwondo'.tr,
                         ),
                         CardCheckBoxWidget(
                           isChecked: isChecked,
-                          title: 'جمباز',
+                          title: 'Gymnastics'.tr,
                         ),
                       ],
                     ),
               CustomButtonPrimary(
-                text: 'متابعة',
+                text: 'continue'.tr,
                 onpressed: () {
                   snakbarWidget(context,
                           Titel: 'مرحبا بك',
