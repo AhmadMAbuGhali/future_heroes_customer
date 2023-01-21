@@ -1,4 +1,3 @@
-
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,12 +22,13 @@ class CustomRequest extends StatelessWidget {
                 ExpandablePanel(
                   header: Row(
                     children: [
-
                       CircleAvatar(
                         radius: 3.r,
                         backgroundColor: ColorManager.primary,
                       ),
-                      SizedBox(width: 5.w,),
+                      SizedBox(
+                        width: 5.w,
+                      ),
                       Container(
                         width: 25.w,
                         height: 25.h,
@@ -46,13 +46,18 @@ class CustomRequest extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 15.w,),
-                      Text("تم تجديد اشتراكك بنجاح",style: getBoldStyle(color: ColorManager.black,fontSize: 12),),
+                      SizedBox(
+                        width: 15.w,
+                      ),
+                      Text(
+                        "تم تجديد اشتراكك بنجاح",
+                        style: getBoldStyle(
+                            color: ColorManager.black, fontSize: 12),
+                      ),
                     ],
                   ),
                   collapsed: Container(
                     margin: EdgeInsets.only(right: 55),
-
                     child: Text(
                       "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
                       softWrap: true,
@@ -63,14 +68,15 @@ class CustomRequest extends StatelessWidget {
                   ),
                   expanded: Container(
                     margin: EdgeInsets.only(right: 55),
-
                     child: Text(
                       "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
                       softWrap: true,
                     ),
                   ),
                 ),
-                SizedBox(height: 5.h,),
+                SizedBox(
+                  height: 5.h,
+                ),
                 Divider(
                   thickness: 2,
                   endIndent: 3,

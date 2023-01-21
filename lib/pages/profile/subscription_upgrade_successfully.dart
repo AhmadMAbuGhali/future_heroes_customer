@@ -15,7 +15,7 @@ class SubscriptionUpgradeSuccessfully extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -33,7 +33,7 @@ class SubscriptionUpgradeSuccessfully extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "المستخدم",
+                        "user".tr,
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
                       IconButton(
@@ -49,16 +49,27 @@ class SubscriptionUpgradeSuccessfully extends StatelessWidget {
                 ],
               ),
             ),
-            CustomTextTitle(text: "ترقية الاشتراك"),
-            SizedBox(height: 70.h,),
-            SvgPicture.asset(ImageAssets.upgrage,width: 250.w,height: 250.h,),
-            SizedBox(height: 40.h,),
-            CustomTextTitle(text: "يرجى التوجه الى مقر النادي لتأكيد  عملية الترقية ودفع المبلغ"),
-            SizedBox(height: 80.h,),
-            CustomButtonPrimary(text: "موافق ", onpressed: (){
-              Get.toNamed(RouteHelper.initial);
-            }),
-
+            CustomTextTitle(text: 'subscriptionUpgrade'.tr),
+            SizedBox(
+              height: 70.h,
+            ),
+            SvgPicture.asset(
+              ImageAssets.upgrage,
+              width: 250.w,
+              height: 250.h,
+            ),
+            SizedBox(
+              height: 40.h,
+            ),
+            CustomTextTitle(text: 'goToGemToApprove'.tr),
+            SizedBox(
+              height: 80.h,
+            ),
+            CustomButtonPrimary(
+                text: "ok".tr,
+                onpressed: () {
+                  Get.toNamed(RouteHelper.initial);
+                }),
           ],
         ),
       ),

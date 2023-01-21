@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 import '../pages/auth/cardSubscriptionType.dart';
 import '../resources/color_manager.dart';
@@ -17,6 +18,9 @@ class _SubUpgradeState extends State<SubUpgrade> {
   bool isSelecteOne = false;
   bool isSelectetwo = false;
   bool isSelecteThree = false;
+  var price1 = 99.99;
+  var price2 = 179.99;
+  var price3 = 249.99;
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -34,7 +38,7 @@ class _SubUpgradeState extends State<SubUpgrade> {
     return Column(
       children: [
         Text(
-          'اختر الباقة  المناسبة لك',
+          'chosePackage'.tr,
           textAlign: TextAlign.center,
           style: TextStyle(color: ColorManager.gray),
         ),
@@ -51,9 +55,9 @@ class _SubUpgradeState extends State<SubUpgrade> {
           },
           child: CardSubscriptionType(
             isSelecte: isSelecteOne,
-            title: 'شهر واحد',
-            description: 'يتم سرد تفاصيل الاشتراك هنا',
-            price: '99.99 ريال',
+            title: 'month'.tr,
+            description: 'packageDetails'.tr,
+            price: '${price1} ' + 'RS'.tr,
           ),
         ),
         InkWell(
@@ -66,9 +70,9 @@ class _SubUpgradeState extends State<SubUpgrade> {
           },
           child: CardSubscriptionType(
             isSelecte: isSelectetwo,
-            title: 'شهرين',
-            description: 'يتم سرد تفاصيل الاشتراك هنا',
-            price: '179.99 ريال',
+            title: 'month2'.tr,
+            description: 'packageDetails'.tr,
+            price: '${price2} ' + 'RS'.tr,
           ),
         ),
         InkWell(
@@ -81,9 +85,9 @@ class _SubUpgradeState extends State<SubUpgrade> {
           },
           child: CardSubscriptionType(
             isSelecte: isSelecteThree,
-            title: 'ثلاث شهور',
-            description: 'يتم سرد تفاصيل الاشتراك هنا',
-            price: '249.99 ريال',
+            title: 'month3'.tr,
+            description: 'packageDetails'.tr,
+            price: '${price3}  ' + 'RS'.tr,
           ),
         ),
       ],

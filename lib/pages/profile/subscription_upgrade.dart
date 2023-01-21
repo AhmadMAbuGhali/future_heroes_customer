@@ -31,29 +31,32 @@ class SubscriptionUpgrade extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: ColorManager.primary,
-                        )),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: ColorManager.primary,
+                          )),
                       Text(
-                        "المستخدم",
+                        "user".tr,
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(height: 40.h,),
-            CustomTextTitle(text: "ترقية الاشتراك"),
+            SizedBox(
+              height: 40.h,
+            ),
+            CustomTextTitle(text: 'subscriptionUpgrade'.tr),
             SubUpgrade(),
-            CustomButtonPrimary(text: "تأكيد الترقية", onpressed: (){
-              Get.toNamed(RouteHelper.subscriptionUpgradeSuccessfully);
-            })
+            CustomButtonPrimary(
+                text: 'ConfirmUpgrade'.tr,
+                onpressed: () {
+                  Get.toNamed(RouteHelper.subscriptionUpgradeSuccessfully);
+                })
           ],
         ),
       ),
