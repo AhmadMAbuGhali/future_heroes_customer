@@ -29,39 +29,54 @@ class Language extends StatelessWidget {
                 right: 20.w,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: ColorManager.primary,
-                        )),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: ColorManager.primary,
+                          )),
                       Text(
-                        "المستخدم",
+                        "user".tr,
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(height: 40.h,),
-            Center(child: CustomTextTitle(text: "changeDisplayLang".tr ,)),
-            SizedBox(height: 100.h,),
-            SizedBox(height:50.h,child: CustomButtonPrimary(text: "اللغة العربية", onpressed:(){
-
-              controllerLang.changLocal("ar");
-            } )),
-            SizedBox(height: 40.h,),
-            SizedBox(height:50.h,child: CustomButtonPrimary(text: "English", onpressed:(){
-              controllerLang.changLocal("en");
-            } )),
+            SizedBox(
+              height: 40.h,
+            ),
+            Center(
+                child: CustomTextTitle(
+              text: "changeDisplayLang".tr,
+            )),
+            SizedBox(
+              height: 100.h,
+            ),
+            SizedBox(
+                height: 50.h,
+                child: CustomButtonPrimary(
+                    text: "اللغة العربية",
+                    onpressed: () {
+                      controllerLang.changLocal("ar");
+                    })),
+            SizedBox(
+              height: 40.h,
+            ),
+            SizedBox(
+                height: 50.h,
+                child: CustomButtonPrimary(
+                    text: "English",
+                    onpressed: () {
+                      controllerLang.changLocal("en");
+                    })),
           ],
         ),
       ),

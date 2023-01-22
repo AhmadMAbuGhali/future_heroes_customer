@@ -205,6 +205,7 @@ class MyLocale extends Translations {
           "Beginner": "مبتدأ",
           "middle": "متوسط",
           "expert": "خبير",
+          "snakbarOffers": "يمكنك التوجه للنادي لتأكيد  الطلب",
         },
         "en": {
           "login": "Login",
@@ -368,22 +369,19 @@ class MyLocale extends Translations {
           "ratingTitle": "January Rating",
           "ratingBodyCosplay": "Click to show data",
           "ratingAttendeesTitle": "Attendance: ",
-          "ratingAttendeesBody": "Your audience rating is 3 out of 5",
+          "ratingAttendeesBody": "Your rating is 3 out of 5",
           "ratingObligationDressTitle": "Dress Obligation",
-          "ratingObligationDressBody":
-              "Your rating on Dress Obligation is 3 out of 5",
+          "ratingObligationDressBody": "Your rating is 3 out of 5",
           "ratingObligationTrainingTitle": "Exercise adherence:",
-          "ratingObligationTrainingBody":
-              "Your rating for adherence to exercise is 3 out of 5",
+          "ratingObligationTrainingBody": "Your rating is 3 out of 5",
           "ratingLiteratureAndEthicsTitle": "Literature and Ethics:",
-          "ratingLiteratureAndEthicsBody":
-              "Your rating LiteratureAndEthicsBody is 3 out of 5",
+          "ratingLiteratureAndEthicsBody": "Your rating is 3 out of 5",
           "coachNoteTitle": ": Other notes from the trainer",
           "coachNoteBody":
               "There is a proven fact from a long time ago that the readable content of a page will not distract the reader from focusing on the external appearance.. There is a proven fact from a long time ago, which is that the readable content of a page will not distract the reader from focusing on the external appearance.. There is a proven fact a long time ago and it is that the",
           "logoutPopUpText": "Are you sure you are logged out",
           "yes": "yes",
-          "cancel": "to cancel",
+          "cancel": "Cancel",
           "deleteAccountTextTitle": "Are you sure to delete the account",
           "deleteAccountTextBody":
               "There is a long-established fact that the readable content of a page will not distract the reader from focusing on the external appearance.. There is a long-established fact that the readable content of a page will not distract the reader from focusing on the external appearance.. There is a proven fact a long time ago and it is that the",
@@ -413,6 +411,7 @@ class MyLocale extends Translations {
           "Beginner": "Beginner",
           "middle": "middle",
           "expert": "expert",
+          "snakbarOffers": "You can go to the club to confirm the request",
         }
       };
 }

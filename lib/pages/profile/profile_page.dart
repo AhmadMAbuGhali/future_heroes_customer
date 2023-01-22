@@ -45,20 +45,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       CircleAvatar(
                         foregroundImage: imageFile == null
                             ? Image.asset(
-                          ImageAssets.avatar,
-                        ).image
+                                ImageAssets.avatar,
+                              ).image
                             : Image.file(
-                          imageFile!,
-                          fit: BoxFit.cover,
-                        ).image,
+                                imageFile!,
+                                fit: BoxFit.cover,
+                              ).image,
                         backgroundImage: imageFile == null
                             ? Image.asset(
-                          ImageAssets.avatar,
-                        ).image
+                                ImageAssets.avatar,
+                              ).image
                             : Image.file(
-                          imageFile!,
-                          fit: BoxFit.cover,
-                        ).image,
+                                imageFile!,
+                                fit: BoxFit.cover,
+                              ).image,
                       ),
                       Positioned(
                           bottom: -10.h,
@@ -72,7 +72,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             },
                             elevation: 2.0,
                             fillColor: Color(0xFFF5F6F9),
-                            child: Icon(Icons.camera_alt_outlined, color: Colors.blue,),
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              color: Colors.blue,
+                            ),
                             padding: EdgeInsets.all(5.0),
                             shape: CircleBorder(),
                           )),
@@ -102,9 +105,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Text(
                       "playerLevel".tr,
-                      style: getBoldStyle(color: Colors.black,fontSize: 12),
+                      style: getBoldStyle(color: Colors.black, fontSize: 12),
                     ),
-
                     Text(
                       "Beginner".tr,
                       style: getRegularStyle(color: ColorManager.primary),
@@ -161,13 +163,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       Get.toNamed(RouteHelper.ratings);
                     }),
 
-
                 //اللغة
                 ProfileSection(
                     label: "language".tr,
                     haveArrow: true,
                     icon: IconAssets.language,
-
                     onTap: () {
                       Get.toNamed(RouteHelper.language);
                     }),
@@ -231,13 +231,13 @@ class _ProfilePageState extends State<ProfilePage> {
     return Container(
       decoration:
           BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
-      height: 180.h,
+      height: 200.h,
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.all(20),
       child: Column(
         children: [
           Text(
-            'تغيير الصورة الشخصية',
+            'changePhoto'.tr,
           ),
           SizedBox(
             height: 20,
@@ -249,16 +249,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 Navigator.pop(context);
               });
             },
-            child: Text("فتح الكاميرا"),
+            child: Text('openCamera'.tr),
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 130, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 5),
             ),
           ),
           SizedBox(
             height: 7.h,
           ),
-          Text("أو"),
+          Text('or'.tr),
           SizedBox(
             height: 7.h,
           ),
@@ -269,7 +269,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Navigator.pop(context);
               });
             },
-            child: Text("قم بالاختيار من المعرض"),
+            child: Text('openGallery'.tr),
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManager.primary,
               padding: EdgeInsets.symmetric(horizontal: 95, vertical: 5),
@@ -286,26 +286,36 @@ class _ProfilePageState extends State<ProfilePage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          title: Column(
             children: [
               SizedBox(
-                width: 30.w,
+                height: 20.h,
               ),
-              SvgPicture.asset(
-                IconAssets.alert,
-                color: Colors.red,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    IconAssets.alert,
+                    color: Colors.red,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.h,
               ),
             ],
           ),
           content: SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
-                Text('هل انت متأكد من تسجيل الحروج'),
+              children: [
+                Text('logoutPopUpText'.tr),
               ],
             ),
           ),
           actions: <Widget>[
+            SizedBox(
+              height: 20.h,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -314,7 +324,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Get.toNamed(RouteHelper.login);
                   },
                   child: Container(
-                    width: 80.w,
+                    width: 100.w,
                     height: 30.h,
                     decoration: BoxDecoration(
                         color: Colors.red,
@@ -322,7 +332,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         border: Border.all(color: Colors.red)),
                     child: Center(
                         child: Text(
-                      'نعم ',
+                      'yes'.tr,
                       style: getBoldStyle(color: Colors.white),
                     )),
                   ),
@@ -335,21 +345,24 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 100.w,
                     height: 30.h,
                     decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: ColorManager.white,
                         borderRadius: BorderRadius.circular(10.r),
                         border: Border.all(color: Colors.red)),
                     child: Center(
                         child: Text(
-                      'إلغاء الأمر ',
+                      'cancel'.tr,
                       textAlign: TextAlign.center,
                       style: getBoldStyle(
-                        color: Colors.white,
+                        color: Colors.red,
                       ),
                     )),
                   ),
                 ),
               ],
-            )
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
           ],
         );
       },
@@ -363,58 +376,39 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 30.w,
-              ),
               SvgPicture.asset(
                 IconAssets.alert,
                 color: Colors.red,
               ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Icon(
-                    Icons.cancel,
-                    color: Colors.red,
-                  ))
+              // GestureDetector(
+              //     onTap: () {
+              //       Navigator.of(context).pop();
+              //     },
+              //     child: Icon(
+              //       Icons.cancel,
+              //       color: Colors.red,
+              //     ))
             ],
           ),
           content: SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
-                Text('هل انت متأكد من حذف الحساب'),
+              children: <Widget>[
+                Text('deleteAccountTextTitle'.tr),
               ],
             ),
           ),
           actions: <Widget>[
             Column(
               children: [
-                Text(
-                    "هل انت واثق انك تريد حذف الحساب  عند حذف الحساب  ستفقد جميع البيانات الخاصة بك "),
+                Text('deleteAccountTextBody'.tr),
+                SizedBox(
+                  height: 20.h,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        width: 80.w,
-                        height: 30.h,
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.red)),
-                        child: Center(
-                            child: Text(
-                          'نعم ',
-                          style: getBoldStyle(color: Colors.white),
-                        )),
-                      ),
-                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pop();
@@ -428,15 +422,36 @@ class _ProfilePageState extends State<ProfilePage> {
                             border: Border.all(color: Colors.red)),
                         child: Center(
                             child: Text(
-                          'إلغاء الأمر ',
+                          'yes'.tr,
+                          style: getBoldStyle(color: Colors.white),
+                        )),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        width: 100.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.red)),
+                        child: Center(
+                            child: Text(
+                          'cancel'.tr,
                           textAlign: TextAlign.center,
                           style: getBoldStyle(
-                            color: Colors.white,
+                            color: Colors.red,
                           ),
                         )),
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 20.h,
                 ),
               ],
             )

@@ -17,7 +17,7 @@ class PostponeAnAppointment extends StatelessWidget {
   final TextEditingController vestRController = TextEditingController();
   final TextEditingController detialController = TextEditingController();
   TimeOfDay selectedTime = TimeOfDay.now();
-   PostponeAnAppointment({Key? key}) : super(key: key);
+  PostponeAnAppointment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,50 +48,55 @@ class PostponeAnAppointment extends StatelessWidget {
                             color: ColorManager.primary,
                           )),
                       Text(
-                        "مواعيد الحصص",
+                        'classTime'.tr,
                         style: getBoldStyle(color: ColorManager.primary),
                       ),
-
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(height: 40.h,),
-            Center(child: CustomTextTitle(text: "طلب تأجيل موعد",)),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 40.h,
+            ),
+            Center(
+                child: CustomTextTitle(
+              text: 'requestPostponement'.tr,
+            )),
+            SizedBox(
+              height: 15.h,
+            ),
             Text(
-              'سبب التأجيل',
+              'postponementReason'.tr,
               style: TextStyle(fontSize: 12),
             ),
-             SizedBox(
+            SizedBox(
               height: 5.h,
             ),
             CustomTextFormAuth(
                 hidepassword: false,
                 textInputType: TextInputType.text,
-
-                hintText: "اكتب العنوان الرئيسي لطلب التأجيل"
-
+                hintText: 'postponementReasonAddress'.tr),
+            SizedBox(
+              height: 16.h,
             ),
-            SizedBox(height: 16.h,),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'التاريخ',
+                  'date'.tr,
                   style: getMediumStyle(
                       color: ColorManager.black, fontSize: FontSize.s14),
                 ),
                 const Spacer(),
                 Text(
-                  'الوقت',
+                  'time'.tr,
                   style: getMediumStyle(
                       color: ColorManager.black, fontSize: FontSize.s14),
                 ),
                 const Spacer(),
-
-              ],),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -101,19 +106,16 @@ class PostponeAnAppointment extends StatelessWidget {
                     controller: dateController,
                     //editing controller of this TextField
                     decoration: InputDecoration(
-                      hintText: 'اختار التاريح',
+                      hintText: 'date'.tr,
                       hintStyle: getMediumStyle(
-                          color: ColorManager.gray,
-                          fontSize: FontSize.s16),
+                          color: ColorManager.gray, fontSize: FontSize.s16),
                       contentPadding: EdgeInsets.symmetric(
                           horizontal: 15.w, vertical: 10.h),
                       fillColor: ColorManager.white,
                       filled: true,
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color:
-                              ColorManager.gray666,
-                              width: 1.0),
+                              color: ColorManager.gray666, width: 1.0),
                           borderRadius: BorderRadius.circular(12.r)),
                     ),
                     readOnly: true,
@@ -128,7 +130,7 @@ class PostponeAnAppointment extends StatelessWidget {
 
                       if (pickedDate != null) {
                         String formattedDate =
-                        DateFormat('d/M/yyyy').format(pickedDate);
+                            DateFormat('d/M/yyyy').format(pickedDate);
                         dateController.text = formattedDate;
                         // enddatetime = pickedDate;
 
@@ -141,18 +143,16 @@ class PostponeAnAppointment extends StatelessWidget {
                   child: TextField(
                     controller: timeController,
                     decoration: InputDecoration(
-                      hintText: 'اختار الوقت',
+                      hintText: 'time'.tr,
                       hintStyle: getMediumStyle(
-                          color: ColorManager.gray,
-                          fontSize: FontSize.s16),
+                          color: ColorManager.gray, fontSize: FontSize.s16),
                       contentPadding: EdgeInsets.symmetric(
                           horizontal: 12.w, vertical: 10.h),
                       fillColor: ColorManager.white,
                       filled: true,
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: ColorManager.gray666,
-                              width: 1.0.w),
+                              color: ColorManager.gray666, width: 1.0.w),
                           borderRadius: BorderRadius.circular(12.r)),
                     ),
                     readOnly: true,
@@ -165,27 +165,28 @@ class PostponeAnAppointment extends StatelessWidget {
                       if (timeOfDay != null && timeOfDay != selectedTime) {
                         selectedTime = timeOfDay;
                         timeController.text = selectedTime.format(context);
-
                       }
                     },
                   ),
                 ),
-              ],),
-            SizedBox(height: 16.h,),
+              ],
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
             Text(
-              'تفاصيل اخرى',
+              'otherDetails'.tr,
               style: TextStyle(fontSize: 12),
             ),
             TextField(
-
               keyboardType: TextInputType.multiline,
               maxLines: 8,
               decoration: InputDecoration(
                 fillColor: ColorManager.white,
                 filled: true,
                 contentPadding:
-                EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                hintText: "اكتب العنوان الرئيسي لطلب التأجيل",
+                    EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                hintText: 'otherDetailsHint'.tr,
                 hintStyle: getRegularStyle(
                     color: ColorManager.otpDesc, fontSize: FontSize.s14),
                 border: OutlineInputBorder(
@@ -194,7 +195,8 @@ class PostponeAnAppointment extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.r)),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide(color: ColorManager.primary, width: 1.0),
+                  borderSide:
+                      BorderSide(color: ColorManager.primary, width: 1.0),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
@@ -203,19 +205,22 @@ class PostponeAnAppointment extends StatelessWidget {
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide:  BorderSide(
+                  borderSide: BorderSide(
                     color: Colors.red,
                     width: 1.0.w,
                     style: BorderStyle.solid,
                   ),
                 ),
               ),
-
             ),
-            SizedBox(height: 15.h,),
-            CustomButtonPrimary(text: "ارسال الطلب ", onpressed: (){
-              Get.toNamed(RouteHelper.initial);
-            }),
+            SizedBox(
+              height: 15.h,
+            ),
+            CustomButtonPrimary(
+                text: 'sendRequest'.tr,
+                onpressed: () {
+                  Get.toNamed(RouteHelper.initial);
+                }),
           ],
         ),
       ),

@@ -49,7 +49,7 @@ class _PersonalDataState extends State<PersonalData> {
                             Get.back();
                           },
                           icon: Icon(
-                            Icons.arrow_forward,
+                            Icons.arrow_back,
                             color: ColorManager.primary,
                           )),
                       Text(

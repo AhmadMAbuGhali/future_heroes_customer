@@ -51,10 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     "homeTopText1".tr,
                     style: getRegularStyle(color: ColorManager.white),
                   ),
-                  SizedBox(height: 5.h,),
-                  Text("numberOfPostponement".tr+ " ${numberOfDone}",
-                      style:
-                      getRegularStyle(color: ColorManager.white)),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Text("numberOfPostponement".tr + " ${numberOfDone}",
+                      style: getRegularStyle(color: ColorManager.white)),
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: Divider(
@@ -70,13 +71,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text("homeTopText2".tr,
                               style: getRegularStyle(
                                   color: ColorManager.white, fontSize: 11)),
-                          Text("homeTopText1".tr,
+                          Text("homeTopText3".tr,
                               style: getRegularStyle(
                                   color: ColorManager.white, fontSize: 11)),
                         ],
                       ),
-
-
                     ],
                   )
                 ],

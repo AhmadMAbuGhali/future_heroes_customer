@@ -32,10 +32,6 @@ class SubscriptionUpgradeSuccessfully extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        "user".tr,
-                        style: getBoldStyle(color: ColorManager.primary),
-                      ),
                       IconButton(
                           onPressed: () {
                             Get.back();
@@ -44,6 +40,10 @@ class SubscriptionUpgradeSuccessfully extends StatelessWidget {
                             Icons.arrow_back,
                             color: ColorManager.primary,
                           )),
+                      Text(
+                        "user".tr,
+                        style: getBoldStyle(color: ColorManager.primary),
+                      ),
                     ],
                   )
                 ],
