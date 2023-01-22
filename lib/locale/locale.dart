@@ -335,7 +335,7 @@ class MyLocale extends Translations {
           "newPassword": "new password",
           "requests": "requests",
           "complaints": "complaints",
-          "requestTitle": "Your subscription has been renewed successfully",
+          "requestTitle": "Your subscription renewed successfully",
           "requestBody":
               "There is a long-established fact that the readable content of a page will not distract the reader from focusing on the external appearance....",
           "complaintsTitle": "Response to Ventilation System Complaint",

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:get/get.dart';
 
 import '../resources/styles_manager.dart';
 
@@ -46,13 +47,13 @@ class CustomComplaints extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 15.w,),
-                    Text("الرد على شكوى نظام التهوية",style: getBoldStyle(color: ColorManager.black,fontSize: 12),),
+                    Text("complaintsTitle".tr,style: getBoldStyle(color: ColorManager.black,fontSize: 12),),
                   ],
                 ),
                 collapsed: Container(
                   margin: EdgeInsets.only(right: 55),
                   child: Text(
-                    "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
+                    "complaintsBody".tr,
                     softWrap: true,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -62,7 +63,7 @@ class CustomComplaints extends StatelessWidget {
                 expanded: Container(
                   margin: EdgeInsets.only(right: 55),
                   child: Text(
-                    "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
+                    "complaintsBody".tr,
                     softWrap: true,
                   ),
                 ),

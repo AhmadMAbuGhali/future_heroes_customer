@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/resources/styles_manager.dart';
+import 'package:get/get.dart';
 
 class CustomRequest extends StatelessWidget {
   const CustomRequest({Key? key}) : super(key: key);
@@ -50,7 +51,9 @@ class CustomRequest extends StatelessWidget {
                         width: 15.w,
                       ),
                       Text(
-                        "تم تجديد اشتراكك بنجاح",
+                        "requestTitle".tr,
+                        overflow: TextOverflow.ellipsis,                        softWrap: true,
+                        maxLines: 1,
                         style: getBoldStyle(
                             color: ColorManager.black, fontSize: 12),
                       ),
@@ -59,7 +62,7 @@ class CustomRequest extends StatelessWidget {
                   collapsed: Container(
                     margin: EdgeInsets.only(right: 55),
                     child: Text(
-                      "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
+                      "requestBody".tr,
                       softWrap: true,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -69,7 +72,7 @@ class CustomRequest extends StatelessWidget {
                   expanded: Container(
                     margin: EdgeInsets.only(right: 55),
                     child: Text(
-                      "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
+                      "requestBody".tr,
                       softWrap: true,
                     ),
                   ),

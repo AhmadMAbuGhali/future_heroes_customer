@@ -116,13 +116,10 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                         children: <Widget>[
                           Center(
                               child: Column(children: [
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.7,
-                                  child: CustomComplaints()),
-                            ),
+                            Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.7,
+                                child: CustomComplaints()),
                             CustomButtonPrimary(
                                 text: "sendComplaint".tr,
                                 onpressed: () {
