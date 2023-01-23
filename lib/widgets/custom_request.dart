@@ -50,12 +50,14 @@ class CustomRequest extends StatelessWidget {
                       SizedBox(
                         width: 15.w,
                       ),
-                      Text(
-                        "requestTitle".tr,
-                        overflow: TextOverflow.ellipsis,                        softWrap: true,
-                        maxLines: 1,
-                        style: getBoldStyle(
-                            color: ColorManager.black, fontSize: 12),
+                      Expanded(
+                        child: Text(
+                          "requestTitle".tr,
+                          overflow: TextOverflow.ellipsis,                        softWrap: true,
+                          maxLines: 1,
+                          style: getBoldStyle(
+                              color: ColorManager.black, fontSize: 12),
+                        ),
                       ),
                     ],
                   ),
