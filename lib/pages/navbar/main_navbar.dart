@@ -6,7 +6,6 @@ import 'package:future_heroes_customer/pages/profile/profile_page.dart';
 import 'package:future_heroes_customer/pages/qr_code/qr_code.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
-import 'package:future_heroes_customer/utils/colors.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 

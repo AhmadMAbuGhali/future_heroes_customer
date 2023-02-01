@@ -26,6 +26,8 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpState extends State<SignUpScreen> {
   bool remmberMe = false;
   bool hidePass = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +55,7 @@ class _SignUpState extends State<SignUpScreen> {
               ),
               CustomTextFormAuth(
                 hidepassword: false,
+                myController: emailController,
                 textInputType: TextInputType.emailAddress,
 
                 hintText: 'البريد الالكتروني / رقم الهاتف',
@@ -72,6 +75,7 @@ class _SignUpState extends State<SignUpScreen> {
               CustomTextFormAuth(
                 textInputType: TextInputType.visiblePassword,
                 hidepassword: hidePass,
+                myController: passwordController,
                 pressSuffixIcon: () {
                   setState(() {
                     hidePass = !hidePass;

@@ -3,13 +3,15 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/api/api_client.dart';
+import '../resources/constants_manager.dart';
 
 
 Future<void> init()async {
   final sharedPreferences = await SharedPreferences.getInstance();
   Get.lazyPut(()=> sharedPreferences);
-  //api client
-// Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.BASE_URL));
+
+  // api client
+Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.BASE_URL));
 //repo
 // Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
 // Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
