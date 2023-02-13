@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:future_heroes_customer/data/OfferResponce.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/resources/styles_manager.dart';
@@ -13,7 +16,8 @@ import 'package:future_heroes_customer/widgets/textSignUp.dart';
 import 'package:get/get.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  OfferResponce? offers;
+  Login({super.key, this.offers});
 
   @override
   State<Login> createState() => _LoginState();
@@ -34,13 +38,14 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 10.h,
               ),
+              Text(widget.offers?.price.toString() ?? 't'),
               CustomTextTitle(
                 text: 'login'.tr,
               ),
               const SizedBox(
                 height: 30,
               ),
-               Text(
+              Text(
                 'email'.tr,
                 style: getBoldStyle(color: ColorManager.black),
               ),
@@ -58,9 +63,9 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 10,
               ),
-               Text(
+              Text(
                 'password'.tr,
-                 style: getBoldStyle(color: ColorManager.black),
+                style: getBoldStyle(color: ColorManager.black),
               ),
               const SizedBox(
                 height: 5,
@@ -88,13 +93,17 @@ class _LoginState extends State<Login> {
                     },
                     activeColor: ColorManager.primary,
                   ),
-                  Text("rememberMe".tr,style: getBoldStyle(color: ColorManager.black,fontSize: 12),),
-                 Spacer(),
+                  Text(
+                    "rememberMe".tr,
+                    style:
+                        getBoldStyle(color: ColorManager.black, fontSize: 12),
+                  ),
+                  Spacer(),
                   InkWell(
                     onTap: () {
                       Get.toNamed(RouteHelper.forgetPassword);
                     },
-                    child:  Text(
+                    child: Text(
                       'forgotPassword'.tr,
                       textAlign: TextAlign.end,
                       style:
@@ -106,6 +115,7 @@ class _LoginState extends State<Login> {
               CustomButtonPrimary(
                 text: 'login'.tr,
                 onpressed: () {
+                  log(widget.offers?.price.toString() ?? '');
                   Get.toNamed(RouteHelper.successLogin);
                 },
               ),
