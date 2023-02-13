@@ -2,34 +2,30 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
-import 'package:future_heroes_customer/widgets/LogoAuth.dart';
-import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-class SignUpPersonalData extends StatefulWidget {
-  const SignUpPersonalData({super.key});
+import '../../services/auth_provider.dart';
 
-  @override
-  State<SignUpPersonalData> createState() => _SignUpPersonalDataState();
-}
+class SignUpPersonalData extends StatelessWidget {
+   SignUpPersonalData({super.key});
 
-class _SignUpPersonalDataState extends State<SignUpPersonalData> {
-  File? imageFile;
 
-  bool hidePass = true;
-  TextEditingController dateTextInput = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AuthProvider>(
+        builder: (context, provider, x){
+          return Scaffold(
         backgroundColor: ColorManager.backGround,
         body: SingleChildScrollView(
           child: Padding(
@@ -53,20 +49,20 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                         fit: StackFit.expand,
                         children: [
                           CircleAvatar(
-                            foregroundImage: imageFile == null
+                            foregroundImage: provider.imageFile == null
                                 ? Image.asset(
                               ImageAssets.avatar,
                             ).image
                                 : Image.file(
-                              imageFile!,
+                              provider.imageFile!,
                               fit: BoxFit.cover,
                             ).image,
-                            backgroundImage: imageFile == null
+                            backgroundImage: provider.imageFile == null
                                 ? Image.asset(
                               ImageAssets.avatar,
                             ).image
                                 : Image.file(
-                              imageFile!,
+                              provider.imageFile!,
                               fit: BoxFit.cover,
                             ).image,
                           ),
@@ -77,7 +73,7 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                                 onPressed: () {
                                   showModalBottomSheet(
                                     context: context,
-                                    builder: (builder) => bottomSheet(),
+                                    builder: (builder) => provider.bottomSheet(),
                                   );
                                 },
                                 elevation: 2.0,
@@ -119,15 +115,13 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
 
               CustomTextFormAuth(
                 textInputType: TextInputType.visiblePassword,
-                hidepassword: hidePass,
+                hidepassword: provider.hidePass,
                 pressSuffixIcon: () {
-                  setState(() {
-                    hidePass = !hidePass;
-                  });
+                 provider.changeHidePass();
                 },
                 hintText: 'password'.tr,
                 // labelText: 'كلمة المرور',
-                iconData: hidePass ? Icons.visibility : Icons.visibility_off,
+                iconData: provider.hidePass ? Icons.visibility : Icons.visibility_off,
               ),
                Text(
                 'userName'.tr,
@@ -153,7 +147,7 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
               //   height: 5,
               // ),
               CustomTextFormAuth(
-                myController: dateTextInput,
+                myController: provider.dateTextInput,
                 pressSuffixIcon: () async {
                   DateTime? pickedDate = await showDatePicker(
                       context: context,
@@ -165,10 +159,7 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
                     String formattedDate =
                         DateFormat('yyyy-MM-dd').format(pickedDate);
                     print(formattedDate);
-                    setState(() {
-                      dateTextInput.text =
-                          formattedDate; //set output date to TextField value.
-                    });
+                    provider.showDateText(formattedDate);
                   } else {}
                 },
                 hintText: 'YYYY/MM/DD',
@@ -192,77 +183,15 @@ class _SignUpPersonalDataState extends State<SignUpPersonalData> {
               CustomButtonPrimary(
                 text: 'continue'.tr,
                 onpressed: () {
-                  Get.toNamed(RouteHelper.diseases);
+                  Get.toNamed(RouteHelper.termsAndConditions);
                 },
               ),
             ]),
           ),
-        ));
+        ));});
   }
 
-  Future _getFromGallery() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
 
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      setState(() => this.imageFile = imageTemp);
-    }
-  }
 
-  Future _getFromCamera() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
 
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      setState(() => this.imageFile = imageTemp);
-    }
-  }
-
-  Widget bottomSheet() {
-    return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
-      height: 220.h,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Text(
-            'changePhoto'.tr,
-          ),
-          SizedBox(
-            height: 8.h,
-          ),
-          CustomButtonPrimary(
-              text: "openCamera".tr,
-              onpressed: () {
-                setState(() {
-                  _getFromCamera();
-                  Navigator.pop(context);
-                });
-              }),
-          SizedBox(height: 10.h,),
-          Text("or".tr),
-          CustomButtonPrimary(
-              text: "openGallery".tr,
-              onpressed: () {
-                setState(() {
-                  _getFromGallery();
-                  Navigator.pop(context);
-                });
-              }),
-        ],
-      ),
-    );
-  }
 }

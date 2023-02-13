@@ -7,7 +7,10 @@ import 'package:future_heroes_customer/locale/locale_controller.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 
 import 'package:future_heroes_customer/routes/route_helper.dart';
+import 'package:future_heroes_customer/services/api_provider.dart';
+import 'package:future_heroes_customer/services/auth_provider.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences shaedpref;
@@ -15,7 +18,16 @@ late SharedPreferences shaedpref;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   shaedpref = await SharedPreferences.getInstance();
-  runApp(MyApp());
+  runApp(
+
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => APIProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

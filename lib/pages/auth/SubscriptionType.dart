@@ -10,25 +10,16 @@ import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:provider/provider.dart';
 
 import '../../routes/route_helper.dart';
+import '../../services/auth_provider.dart';
 
-class SubscriptionType extends StatefulWidget {
-  const SubscriptionType({super.key});
+class SubscriptionType extends StatelessWidget {
+   SubscriptionType({super.key});
 
-  @override
-  State<SubscriptionType> createState() => _SubscriptionTypeState();
-}
 
-class _SubscriptionTypeState extends State<SubscriptionType> {
-  bool isSubscriptionType = false;
-  bool isChecked = false;
-  bool isSelecteOne = false;
-  bool isSelectetwo = false;
-  bool isSelecteThree = false;
-  var price1 = 99.99;
-  var price2 = 179.99;
-  var price3 = 249.99;
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +35,9 @@ class _SubscriptionTypeState extends State<SubscriptionType> {
       return ColorManager.primary;
     }
 
-    return Scaffold(
+    return Consumer<AuthProvider>(
+        builder: (context, provider, x){
+      return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
           margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -68,47 +61,35 @@ class _SubscriptionTypeState extends State<SubscriptionType> {
             ),
             InkWell(
               onTap: () {
-                setState(() {
-                  isSelecteOne = true;
-                  isSelectetwo = false;
-                  isSelecteThree = false;
-                });
+                provider.selectOne();
               },
               child: CardSubscriptionType(
-                isSelecte: isSelecteOne,
+                isSelecte: provider.isSelectedOne,
                 title: 'month'.tr,
                 description: 'packageDetails'.tr,
-                price: '${price1} '+ 'RS'.tr,
+                price: '${provider.price1} '+ 'RS'.tr,
               ),
             ),
             InkWell(
               onTap: () {
-                setState(() {
-                  isSelecteOne = false;
-                  isSelectetwo = true;
-                  isSelecteThree = false;
-                });
+               provider.selectTow();
               },
               child: CardSubscriptionType(
-                isSelecte: isSelectetwo,
+                isSelecte: provider.isSelectedTwo,
                 title: 'month2'.tr,
                 description: 'packageDetails'.tr,
-                price: '${price2} '+ 'RS'.tr,
+                price: '${provider.price2} '+ 'RS'.tr,
               ),
             ),
             InkWell(
               onTap: () {
-                setState(() {
-                  isSelecteOne = false;
-                  isSelectetwo = false;
-                  isSelecteThree = true;
-                });
+               provider.selectThree();
               },
               child: CardSubscriptionType(
-                isSelecte: isSelecteThree,
+                isSelecte: provider.isSelectedThree,
                 title: 'month3'.tr,
                 description: 'packageDetails'.tr,
-                price: '${price3}  '+ 'RS'.tr,
+                price: '${provider.price3}  '+ 'RS'.tr,
               ),
             ),
             Spacer(),
@@ -119,6 +100,6 @@ class _SubscriptionTypeState extends State<SubscriptionType> {
               },
             )
           ])),
-    );
+    );});
   }
 }

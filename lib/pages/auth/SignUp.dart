@@ -15,6 +15,9 @@ import 'package:future_heroes_customer/widgets/textSignUp.dart';
 import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
+import 'package:provider/provider.dart';
+
+import '../../services/auth_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -24,13 +27,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUpScreen> {
-  bool remmberMe = false;
-  bool hidePass = true;
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AuthProvider>(
+        builder: (context, provider, x){
+      return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -74,16 +78,14 @@ class _SignUpState extends State<SignUpScreen> {
               ),
               CustomTextFormAuth(
                 textInputType: TextInputType.visiblePassword,
-                hidepassword: hidePass,
+                hidepassword: provider.hidePass,
                 myController: passwordController,
                 pressSuffixIcon: () {
-                  setState(() {
-                    hidePass = !hidePass;
-                  });
+                  provider.changeHidePass();
                 },
                 hintText: 'كلمة المرور',
                 // labelText: 'كلمة المرور',
-                iconData: hidePass ? Icons.visibility : Icons.visibility_off,
+                iconData: provider.hidePass ? Icons.visibility : Icons.visibility_off,
               ),
               CustomButtonPrimary(
                 text: 'متابعة',
@@ -107,6 +109,6 @@ class _SignUpState extends State<SignUpScreen> {
               ),
             ],
           )),
-    );
+    );});
   }
 }

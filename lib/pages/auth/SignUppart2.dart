@@ -17,19 +17,15 @@ import 'package:future_heroes_customer/widgets/textSignUp.dart';
 import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
+import 'package:provider/provider.dart';
 
-class SignUpScreenPart2 extends StatefulWidget {
-  const SignUpScreenPart2({super.key});
+import '../../services/auth_provider.dart';
 
-  @override
-  State<SignUpScreenPart2> createState() => _SignUpState();
-}
+class SignUpScreenPart2 extends StatelessWidget {
+   SignUpScreenPart2({super.key});
 
-class _SignUpState extends State<SignUpScreenPart2> {
-  bool remmberMe = false;
-  bool hidePass = true;
-  bool isCultural = false;
-  bool isChecked = false;
+
+
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -44,7 +40,9 @@ class _SignUpState extends State<SignUpScreenPart2> {
       return ColorManager.primary;
     }
 
-    return Scaffold(
+    return Consumer<AuthProvider>(
+        builder: (context, provider, x){
+      return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
           margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
@@ -73,7 +71,7 @@ class _SignUpState extends State<SignUpScreenPart2> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        border: isCultural
+                        border: provider.isCultural
                             ? null
                             : Border.all(
                                 color: ColorManager.primary,
@@ -81,9 +79,8 @@ class _SignUpState extends State<SignUpScreenPart2> {
                               )),
                     child: InkWell(
                       onTap: () {
-                        setState(() {
-                          isCultural = false;
-                        });
+                        provider.makeCulturalFalse();
+
                       },
                       child: Column(
                         children: [
@@ -101,13 +98,11 @@ class _SignUpState extends State<SignUpScreenPart2> {
                     focusColor: ColorManager.primary,
                     borderRadius: BorderRadius.circular(10),
                     onTap: () {
-                      setState(() {
-                        isCultural = true;
-                      });
+                      provider.makeCulturalTrue();
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          border: isCultural
+                          border: provider.isCultural
                               ? Border.all(
                                   color: ColorManager.primary,
                                   width: 2,
@@ -127,19 +122,19 @@ class _SignUpState extends State<SignUpScreenPart2> {
                   ),
                 ],
               ),
-              isCultural
+              provider.isCultural
                   ? Column(
                       children: [
                         CardCheckBoxWidget(
-                          isChecked: isChecked,
+                          isChecked: provider.isChecked,
                           title: 'Sculpture'.tr,
                         ),
                         CardCheckBoxWidget(
-                          isChecked: isChecked,
+                          isChecked: provider.isChecked,
                           title: 'font'.tr,
                         ),
                         CardCheckBoxWidget(
-                          isChecked: isChecked,
+                          isChecked: provider.isChecked,
                           title: 'drawing'.tr,
                         ),
                       ],
@@ -147,15 +142,15 @@ class _SignUpState extends State<SignUpScreenPart2> {
                   : Column(
                       children: [
                         CardCheckBoxWidget(
-                          isChecked: isChecked,
+                          isChecked: provider.isChecked,
                           title: 'Karate'.tr,
                         ),
                         CardCheckBoxWidget(
-                          isChecked: isChecked,
+                          isChecked: provider.isChecked,
                           title: 'taekwondo'.tr,
                         ),
                         CardCheckBoxWidget(
-                          isChecked: isChecked,
+                          isChecked: provider.isChecked,
                           title: 'Gymnastics'.tr,
                         ),
                       ],
@@ -167,11 +162,11 @@ class _SignUpState extends State<SignUpScreenPart2> {
                           Titel: 'مرحبا بك',
                           Description: 'قم باكمال عملة التسجيل')
                       .Success();
-                  Get.offNamed(RouteHelper.termsAndConditions);
+                  Get.offNamed(RouteHelper.coachSelection);
                 },
               ),
             ],
           )),
-    );
+    );});
   }
 }

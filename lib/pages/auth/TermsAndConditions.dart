@@ -8,16 +8,14 @@ import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-class TermsAndConditions extends StatefulWidget {
-  const TermsAndConditions({super.key});
+import '../../services/auth_provider.dart';
 
-  @override
-  State<TermsAndConditions> createState() => _TermsAndConditionsState();
-}
+class TermsAndConditions extends StatelessWidget {
+   TermsAndConditions({super.key});
 
-class _TermsAndConditionsState extends State<TermsAndConditions> {
-  bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -32,7 +30,9 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
       return ColorManager.primary;
     }
 
-    return Scaffold(
+    return Consumer<AuthProvider>(
+        builder: (context, provider, x){
+      return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -96,11 +96,9 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                     Checkbox(
                       checkColor: Colors.white,
                       fillColor: MaterialStateProperty.resolveWith(getColor),
-                      value: isChecked,
+                      value: provider.isChecked,
                       onChanged: (bool? value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
+                        provider.changeIsChecked(value);
                       },
                     ),
                     Text(
@@ -113,12 +111,12 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
-                    !isChecked
+                    !provider.isChecked
                         ? snakbarWidget(context,
                         Titel: 'مرحبا بك',
                         Description: 'هذا الحقل مطلوب اجباري')
                         .error()
-                        : Get.offNamed(RouteHelper.signupPersonalData);
+                        : Get.offNamed(RouteHelper.signUpPart2);
                   },
                 ),
               ],
@@ -126,6 +124,6 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
           ),
         ),
       ),
-    );
+    );});
   }
 }

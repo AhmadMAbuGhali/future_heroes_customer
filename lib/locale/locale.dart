@@ -64,6 +64,7 @@ class MyLocale extends Translations {
           "personalDetails": "البيانات الشخصية",
           "userName": "اسم المشترك ",
           "DOB": "تاريخ الميلاد",
+          "choseTime":"إختار وقت التدريب",
           "mobileNumber": "رقم الهاتف",
           "changePhoto": "تغيير الصورة الشخصية",
           "openCamera": "افتح الكاميرا",
@@ -410,6 +411,8 @@ class MyLocale extends Translations {
           "playerLevel": "Your level is",
           "Beginner": "Beginner",
           "middle": "middle",
+          "choseTime":"chose training time",
+
           "expert": "expert",
           "snakbarOffers": "You can go to the club to confirm the request",
         }

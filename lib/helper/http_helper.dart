@@ -9,7 +9,6 @@ class GetOffers {
   static GetOffers getOffers = GetOffers._();
   OfferResponce? offers;
   Dio dio = Dio();
-
   Future<List<OfferResponce>> GetAllOffers() async {
     var response = await dio.get(
         'https://yousef.azurewebsites.net//api/Offer?page=1&pageSize=10&searchText=&sortColumn=&sortDirection=ascending');

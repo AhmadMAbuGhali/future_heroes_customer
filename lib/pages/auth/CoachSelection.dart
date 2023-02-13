@@ -10,36 +10,25 @@ import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:provider/provider.dart';
 
 import '../../resources/styles_manager.dart';
 import '../../routes/route_helper.dart';
+import '../../services/auth_provider.dart';
 
-List<String> list = <String>[
-  '04:00 - 05:00',
-  '01:00 - 02:00',
-  '03:00 - 04:00',
-];
 
-class CoachSelection extends StatefulWidget {
-  const CoachSelection({super.key});
 
-  @override
-  State<CoachSelection> createState() => _CoachSelectionState();
-}
+class CoachSelection extends StatelessWidget {
+   CoachSelection({super.key});
 
-class _CoachSelectionState extends State<CoachSelection> {
-  String dropdownValue = list.first;
-  bool isCoachSelection = false;
-  final List<String> items = [
-    '04:00 - 05:00 ',
-    '01:00 - 02:00 ',
-    '03:00 - 04:00 ',
-  ];
-  String? selectedValue;
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AuthProvider>(
+        builder: (context, provider, x){
+      return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
           margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -61,7 +50,7 @@ class _CoachSelectionState extends State<CoachSelection> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      border: isCoachSelection
+                      border: provider.isCoachSelection
                           ? null
                           : Border.all(
                               color: ColorManager.primary,
@@ -69,9 +58,7 @@ class _CoachSelectionState extends State<CoachSelection> {
                             )),
                   child: InkWell(
                       onTap: () {
-                        setState(() {
-                          isCoachSelection = false;
-                        });
+                        provider.makeCoachSelectionFalse();
                       },
                       child: Column(
                         children: [
@@ -92,13 +79,11 @@ class _CoachSelectionState extends State<CoachSelection> {
                   focusColor: ColorManager.primary,
                   borderRadius: BorderRadius.circular(10),
                   onTap: () {
-                    setState(() {
-                      isCoachSelection = true;
-                    });
+                    provider.makeCoachSelectionTrue();
                   },
                   child: Container(
                       decoration: BoxDecoration(
-                          border: isCoachSelection
+                          border: provider.isCoachSelection
                               ? Border.all(
                                   color: ColorManager.primary,
                                   width: 2,
@@ -121,7 +106,7 @@ class _CoachSelectionState extends State<CoachSelection> {
                 ),
               ],
             ),
-            isCoachSelection
+            provider.isCoachSelection
                 ? Column(
                     children: [
                       Text(
@@ -148,7 +133,7 @@ class _CoachSelectionState extends State<CoachSelection> {
                             color: ColorManager.white,
                             borderRadius: BorderRadius.circular(10)),
                         child: DropdownButton<String>(
-                          value: dropdownValue,
+                          value: provider.dropdownValue,
                           elevation: 16,
                           style: const TextStyle(color: ColorManager.primary),
                           underline: Container(
@@ -156,11 +141,9 @@ class _CoachSelectionState extends State<CoachSelection> {
                             color: Colors.deepPurpleAccent,
                           ),
                           onChanged: (String? value) {
-                            setState(() {
-                              dropdownValue = value!;
-                            });
+                           provider.showDropdownValue(value);
                           },
-                          items: list
+                          items: provider.list
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -177,10 +160,10 @@ class _CoachSelectionState extends State<CoachSelection> {
             CustomButtonPrimary(
               text: 'continue'.tr,
               onpressed: () {
-                Get.toNamed(RouteHelper.subscriptionType);
+                Get.toNamed(RouteHelper.diseases);
               },
             )
           ])),
-    );
+    );});
   }
 }

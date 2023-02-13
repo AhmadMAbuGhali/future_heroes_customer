@@ -9,19 +9,15 @@ import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:provider/provider.dart';
 
 import '../../routes/route_helper.dart';
+import '../../services/auth_provider.dart';
 
-class Diseases extends StatefulWidget {
-  const Diseases({super.key});
+class Diseases extends StatelessWidget {
+   Diseases({super.key});
 
-  @override
-  State<Diseases> createState() => _DiseasesState();
-}
 
-class _DiseasesState extends State<Diseases> {
-  bool isDiseases = true;
-  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +33,9 @@ class _DiseasesState extends State<Diseases> {
       return ColorManager.primary;
     }
 
-    return Scaffold(
+    return Consumer<AuthProvider>(
+        builder: (context, provider, x){
+      return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Container(
           margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -62,7 +60,7 @@ class _DiseasesState extends State<Diseases> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      border: isDiseases
+                      border: provider.isDiseases
                           ? null
                           : Border.all(
                               color: ColorManager.primary,
@@ -70,9 +68,7 @@ class _DiseasesState extends State<Diseases> {
                             )),
                   child: InkWell(
                       onTap: () {
-                        setState(() {
-                          isDiseases = false;
-                        });
+                        provider.makeIsDiseasesFalse();
                       },
                       child: Container(
                         decoration: BoxDecoration(),
@@ -86,9 +82,7 @@ class _DiseasesState extends State<Diseases> {
                   focusColor: ColorManager.primary,
                   borderRadius: BorderRadius.circular(10),
                   onTap: () {
-                    setState(() {
-                      isDiseases = true;
-                    });
+                   provider.makeIsDiseasesTrue();
                   },
                   child: Container(
                       padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -96,7 +90,7 @@ class _DiseasesState extends State<Diseases> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          border: isDiseases
+                          border: provider.isDiseases
                               ? Border.all(
                                   color: ColorManager.primary,
                                   width: 2,
@@ -113,7 +107,7 @@ class _DiseasesState extends State<Diseases> {
                 ),
               ],
             ),
-            !isDiseases
+            !provider.isDiseases
                 ? Column(
                     children: [
                       CustomTextTitle(text: 'choseDisease'.tr),
@@ -121,27 +115,27 @@ class _DiseasesState extends State<Diseases> {
                         height: 10.h,
                       ),
                       CardCheckBoxWidget(
-                        isChecked: isChecked,
+                        isChecked: provider.isChecked,
                         title: 'diabetes'.tr,
                       ),
                       CardCheckBoxWidget(
-                        isChecked: isChecked,
+                        isChecked: provider.isChecked,
                         title: 'pressure'.tr,
                       ),
                       CardCheckBoxWidget(
-                        isChecked: isChecked,
+                        isChecked: provider.isChecked,
                         title: 'anemia'.tr,
                       ),
                       CardCheckBoxWidget(
-                        isChecked: isChecked,
+                        isChecked: provider.isChecked,
                         title: 'muscleTear'.tr,
                       ),
                       CardCheckBoxWidget(
-                        isChecked: isChecked,
+                        isChecked: provider.isChecked,
                         title: 'heartDisease'.tr,
                       ),
                       CardCheckBoxWidget(
-                        isChecked: isChecked,
+                        isChecked: provider.isChecked,
                         title: 'other'.tr,
                       ),
                     ],
@@ -152,10 +146,10 @@ class _DiseasesState extends State<Diseases> {
             CustomButtonPrimary(
               text: 'continue'.tr,
               onpressed: () {
-                Get.toNamed(RouteHelper.coachSelection);
+                Get.toNamed(RouteHelper.subscriptionType);
               },
             )
           ])),
-    );
+    );});
   }
 }
