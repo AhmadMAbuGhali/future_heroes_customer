@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:future_heroes_customer/data/OfferResponce.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/resources/styles_manager.dart';
@@ -52,7 +51,7 @@ class Login extends StatelessWidget {
                 CustomTextFormAuth(
                   hidepassword: false,
                   textInputType: TextInputType.emailAddress,
-
+                  myController: provider.email,
                   hintText: 'email'.tr,
                   //  labelText: 'البريد الالكتروني / رقم الهاتف',
                   //  iconData: Icons.email_outlined,
@@ -73,6 +72,7 @@ class Login extends StatelessWidget {
                   pressSuffixIcon: () {
                     provider.changeHidePass();
                   },
+                  myController: provider.password,
                   hintText: 'password'.tr,
                   // labelText: 'كلمة المرور',
                   iconData: provider.hidePass ? Icons.visibility : Icons.visibility_off,
@@ -108,8 +108,8 @@ class Login extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'login'.tr,
                   onpressed: () {
-
-                    Get.toNamed(RouteHelper.successLogin);
+                    provider.login(provider.email.text, provider.password.text);
+                     Get.toNamed(RouteHelper.successLogin);
                   },
                 ),
                 const SizedBox(
@@ -117,7 +117,7 @@ class Login extends StatelessWidget {
                 ),
                 CustomTextSignUpOrSignin(
                   onTap: () {
-                    Get.toNamed(RouteHelper.signUpPart2);
+                    Get.toNamed(RouteHelper.signUp);
                   },
                   textone: 'dontHaveAccount'.tr,
                   texttwo: 'makeAccount'.tr,

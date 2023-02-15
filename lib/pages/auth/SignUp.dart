@@ -94,7 +94,7 @@ class _SignUpState extends State<SignUpScreen> {
                           Titel: 'مرحبا بك',
                           Description: 'قم باكمال عملة التسجيل')
                       .Success();
-                  Get.offNamed(RouteHelper.signUpPart2);
+                  Get.offNamed(RouteHelper.signupPersonalData);
                 },
               ),
               const SizedBox(

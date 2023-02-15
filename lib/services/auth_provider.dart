@@ -10,22 +10,31 @@ import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../models/login_model.dart';
+import '../models/terms_and_conditions_model.dart';
+import '../pages/auth/CoachSelection.dart';
 import '../widgets/CustomButtonPrimary.dart';
+
+
 
 class AuthProvider extends ChangeNotifier {
   AuthProvider();
+
+  List<String> timeList = <String>[
+    "choseTime".tr,
+    '04:00 - 05:00',
+    '01:00 - 02:00',
+    '03:00 - 04:00',
+  ];
+
   bool hidePass = true;
   bool rememberMe = false;
   File? imageFile;
   bool isChecked = false;
   bool isCultural = false;
-  List<String> list = <String>[
-    '04:00 - 05:00',
-    '01:00 - 02:00',
-    '03:00 - 04:00',
-  ];
+
   bool isCoachSelection = false;
-  String dropdownValue = "choseTime".tr;
+ late String dropdownValue = timeList.first;
   bool isDiseases = true;
 
   bool isSubscriptionType = false;
@@ -37,6 +46,9 @@ class AuthProvider extends ChangeNotifier {
   var price3 = 249.99;
 
 
+  TextEditingController dateTextInput = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   selectOne(){
     isSelectedOne = true;
@@ -65,11 +77,6 @@ class AuthProvider extends ChangeNotifier {
 
 
 
-  final List<String> items = [
-    '04:00 - 05:00 ',
-    '01:00 - 02:00 ',
-    '03:00 - 04:00 ',
-  ];
   String? selectedValue;
   makeCulturalTrue(){
      isCultural = true;
@@ -102,7 +109,6 @@ class AuthProvider extends ChangeNotifier {
 
   }
 
-  TextEditingController dateTextInput = TextEditingController();
 
   showDateText(String date){
     dateTextInput.text = date;
@@ -129,9 +135,54 @@ class AuthProvider extends ChangeNotifier {
     isChecked=value!;
     notifyListeners();
   }
-  login(String userName,String password) async {
+
+
+  login(String email,String password) async {
     try{
-      bool? respontLogin = await DioClient.dioClient.login(userName, password);
+      LoginModel? respontLogin = await DioClient.dioClient.login(email, password);
+      print(respontLogin!.toJson().toString());
+    }on DioError catch(e){
+      String massage=DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(
+            height: 32.h,
+            child:   Center(
+                child: Text(massage ))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+
+    }
+    notifyListeners();
+  }
+
+  register(String email,String password) async {
+    try{
+      LoginModel? respontLogin = await DioClient.dioClient.register(email, password);
+      print(respontLogin!.toJson().toString());
+    }on DioError catch(e){
+      String massage=DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(
+            height: 32.h,
+            child:   Center(
+                child: Text(massage ))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+
+    }
+    notifyListeners();
+  }
+ Future<String?> getTerm()async{
+    try{
+      TermsAndConditionsModel termsAndConditionsModel = await DioClient.dioClient.termsAndConditions();
+      print(termsAndConditionsModel.toJson().toString());
+      return termsAndConditionsModel.description;
     }on DioError catch(e){
       String massage=DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -179,43 +230,13 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  openCamera(){
+  openCamera(BuildContext context){
     _getFromCamera();
     Navigator.pop(context);
   }
-  openGallery(){
+  openGallery(BuildContext context){
     _getFromGallery();
     Navigator.pop(context);
   }
-  Widget bottomSheet() {
-    return Container(
-      decoration:
-      BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
-      height: 220.h,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Text(
-            'changePhoto'.tr,
-          ),
-          SizedBox(
-            height: 8.h,
-          ),
-          CustomButtonPrimary(
-              text: "openCamera".tr,
-              onpressed: () {
-               openCamera();
-              }),
-          SizedBox(height: 10.h,),
-          Text("or".tr),
-          CustomButtonPrimary(
-              text: "openGallery".tr,
-              onpressed: () {
-                openGallery();
-              }),
-        ],
-      ),
-    );
-  }
+
 }

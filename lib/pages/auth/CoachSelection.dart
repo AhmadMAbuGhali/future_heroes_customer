@@ -143,7 +143,7 @@ class CoachSelection extends StatelessWidget {
                           onChanged: (String? value) {
                            provider.showDropdownValue(value);
                           },
-                          items: provider.list
+                          items: provider.timeList
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,

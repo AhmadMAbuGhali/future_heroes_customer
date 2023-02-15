@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/locale/locale_controller.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/resources/strings_manager.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:get/get.dart';
 
@@ -65,7 +66,7 @@ class Language extends StatelessWidget {
                 child: CustomButtonPrimary(
                     text: "اللغة العربية",
                     onpressed: () {
-                      controllerLang.changLocal("ar");
+                      controllerLang.changLocal(AppStrings.ar);
                     })),
             SizedBox(
               height: 40.h,
@@ -75,7 +76,7 @@ class Language extends StatelessWidget {
                 child: CustomButtonPrimary(
                     text: "English",
                     onpressed: () {
-                      controllerLang.changLocal("en");
+                      controllerLang.changLocal(AppStrings.en);
                     })),
           ],
         ),

@@ -25,6 +25,7 @@ import 'package:future_heroes_customer/pages/profile/send_requests.dart';
 import 'package:future_heroes_customer/pages/profile/subscription_upgrade_successfully.dart';
 import 'package:get/get.dart';
 
+import '../pages/auth/SignUp.dart';
 import '../pages/auth/SignUppart2.dart';
 import '../pages/profile/language.dart';
 import '../pages/profile/subscription_upgrade.dart';
@@ -44,6 +45,7 @@ class RouteHelper {
   static const String subscriptionUpgradeSuccessfully =
       "/subscription-upgrade-successfully";
   static const String signUpPart2 = "/signup-part2";
+  static const String signUp = "/signup";
   static const String signupPersonalData = "/signup-personal-data";
   static const String termsAndConditions = "/terms-and-conditions";
   static const String changePassword = "/change-password";
@@ -75,6 +77,7 @@ class RouteHelper {
   static String getSubscriptionUpgradeSuccessfully() =>
       '$subscriptionUpgradeSuccessfully';
   static String getSignUpPart2() => '$signUpPart2';
+  static String getSignUp() => '$signUp';
   static String getSignupPersonalData() => '$signupPersonalData';
   static String getTermsAndConditions() => '$termsAndConditions';
   static String getChangePassword() => '$changePassword';
@@ -167,6 +170,12 @@ class RouteHelper {
       name: signUpPart2,
       page: () {
         return SignUpScreenPart2();
+      },
+    ),
+    GetPage(
+      name: signUp,
+      page: () {
+        return SignUpScreen();
       },
     ),
     GetPage(

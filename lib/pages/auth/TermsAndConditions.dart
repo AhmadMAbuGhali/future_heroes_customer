@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
@@ -80,11 +81,20 @@ class TermsAndConditions extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                      "termBody".tr,
-                        style: TextStyle(fontSize: 10.sp),
+                      FutureBuilder<String?>(
+                      future: provider.getTerm(),
+                  builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasData) {
+                        return Html (data: snapshot.data);
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
+                    }
+                    return const CircularProgressIndicator(); // show a loading indicator while waiting for the data
+                  },
+                ),
 
-                      ),
                     ],
                   ),
                 ),

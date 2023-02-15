@@ -36,9 +36,9 @@ class DioException implements Exception {
   String _handleStatusCode(Response? response) {
     switch (response?.statusCode) {
       case 400:
-        return  response!.data['ErrorList'].toString();
+        return  response!.data.toString();
       case 401:
-        return  response!.data['errorList'].toString();
+        return  response!.data['message'].toString();
       case 403:
         return 'لا تمتلك صلاحيات للعرض';
       case 404:

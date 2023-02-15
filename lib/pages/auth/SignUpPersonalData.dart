@@ -73,7 +73,7 @@ class SignUpPersonalData extends StatelessWidget {
                                 onPressed: () {
                                   showModalBottomSheet(
                                     context: context,
-                                    builder: (builder) => provider.bottomSheet(),
+                                    builder: (builder) => bottomSheet(),
                                   );
                                 },
                                 elevation: 2.0,
@@ -193,5 +193,38 @@ class SignUpPersonalData extends StatelessWidget {
 
 
 
+   Widget bottomSheet() {
+     return Consumer<AuthProvider>(builder: (context,provider,x){
+       return  Container(
+         decoration:
+         BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+         height: 220.h,
+         width: MediaQuery.of(context).size.width,
+         margin: EdgeInsets.all(20),
+         child: Column(
+           children: [
+             Text(
+               'changePhoto'.tr,
+             ),
+             SizedBox(
+               height: 8.h,
+             ),
+             CustomButtonPrimary(
+                 text: "openCamera".tr,
+                 onpressed: () {
+                   provider.openCamera(context);
+                 }),
+             SizedBox(height: 10.h,),
+             Text("or".tr),
+             CustomButtonPrimary(
+                 text: "openGallery".tr,
+                 onpressed: () {
+                   provider.openGallery(context);
+                 }),
+           ],
+         ),
+       );
+     });
 
+   }
 }
