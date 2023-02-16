@@ -93,8 +93,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                   subtitle: Text(
                     "10:30 - 11:30",
                   ),
-                  content: Text(
-                      "classTimeBody".tr),
+                  content: Text("classTimeBody".tr),
                 ))
             .toList(),
         onStepCancel: () {
