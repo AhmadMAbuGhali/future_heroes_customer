@@ -26,7 +26,6 @@ import 'package:future_heroes_customer/pages/profile/send_requests.dart';
 import 'package:future_heroes_customer/pages/profile/subscription_upgrade_successfully.dart';
 import 'package:get/get.dart';
 
-import '../pages/auth/signup/SignUp.dart';
 import '../pages/profile/language.dart';
 import '../pages/profile/subscription_upgrade.dart';
 import '../pages/splash_page/splash_page.dart';
@@ -172,12 +171,7 @@ class RouteHelper {
         return SignUpScreenPart2();
       },
     ),
-    GetPage(
-      name: signUp,
-      page: () {
-        return SignUpScreen();
-      },
-    ),
+
     GetPage(
       name: signupPersonalData,
       page: () {

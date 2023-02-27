@@ -3,6 +3,7 @@ class LoginModel {
   DateTime? expiration;
   String? role;
 
+
   LoginModel({this.token, this.expiration,this.role});
 
   LoginModel.fromJson(Map<String, dynamic> json) {

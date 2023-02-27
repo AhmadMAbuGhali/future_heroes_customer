@@ -104,9 +104,9 @@ class TermsAndConditions extends StatelessWidget {
                       Checkbox(
                         checkColor: Colors.white,
                         fillColor: MaterialStateProperty.resolveWith(getColor),
-                        value: provider.isChecked,
+                        value: provider.isCheckedTerm,
                         onChanged: (bool? value) {
-                          provider.changeIsChecked(value);
+                          provider.changeIsCheckedTerm(value);
                         },
                       ),
                       Text(
@@ -118,7 +118,7 @@ class TermsAndConditions extends StatelessWidget {
                   CustomButtonPrimary(
                     text: 'continue'.tr,
                     onpressed: () {
-                      !provider.isChecked
+                      !provider.isCheckedTerm
                           ? snakbarWidget(context,
                                   Titel: 'مرحبا بك',
                                   Description: 'هذا الحقل مطلوب اجباري')

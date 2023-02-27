@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/data/api/dio_client.dart';
 import 'package:future_heroes_customer/data/api/exception_handling.dart';
+import 'package:future_heroes_customer/models/register_model.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,10 +25,157 @@ class AuthProvider extends ChangeNotifier {
     '03:00 - 04:00',
   ];
 
-  bool hidePass = true;
+// login page
   bool rememberMe = false;
+  bool showPasswordLogin = true;
+  TextEditingController emailLoginPage = TextEditingController();
+  TextEditingController passwordLoginPage = TextEditingController();
+
+  changeShowPasswordLogin() {
+    showPasswordLogin = !showPasswordLogin;
+    notifyListeners();
+  }
+
+  changeShowPasswordSignUP() {
+    showPasswordSignUp = !showPasswordSignUp;
+    notifyListeners();
+  }
+
+  login(String email, String password) async {
+    try {
+      LoginModel? respontLogin =
+          await DioClient.dioClient.login(email, password);
+
+      print(respontLogin!.toJson().toString());
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+  changeRememberMe() {
+    rememberMe = !rememberMe;
+    notifyListeners();
+  }
+
+  // SignUp Page
+  bool showPasswordSignUp = true;
   File? imageFile;
+
+  TextEditingController emailSignUpPage = TextEditingController();
+  TextEditingController passwordSignUpPage = TextEditingController();
+  TextEditingController nameSignUpPage = TextEditingController();
+  TextEditingController dateTextInputSignUPPage = TextEditingController();
+  TextEditingController phoneSignUpPage = TextEditingController();
+
+  register(File image,String fullName,String dob,String phoneNumber,String email,String password) async {
+    try {
+      RegisterModel? respontRegister =
+          await DioClient.dioClient.register(image,fullName,dob,phoneNumber,email,password);
+      print(respontRegister!.toJson().toString());
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+  Future _getFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+
+    if (pickedFile != null) {
+      // File imageFile = File(pickedFile.path);
+      final imageTemp = File(pickedFile.path);
+      this.imageFile = imageTemp;
+      notifyListeners();
+    }
+  }
+
+  openCamera(BuildContext context) {
+    _getFromCamera();
+    Navigator.pop(context);
+  }
+
+  openGallery(BuildContext context) {
+    _getFromGallery();
+    Navigator.pop(context);
+  }
+
+  showDateText(String date) {
+    dateTextInputSignUPPage.text = date;
+    notifyListeners();
+  }
+
+  Future _getFromGallery() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+
+    if (pickedFile != null) {
+      // File imageFile = File(pickedFile.path);
+      final imageTemp = File(pickedFile.path);
+      this.imageFile = imageTemp;
+      notifyListeners();
+    }
+  }
+
+  // term
+
+  bool isCheckedTerm = false;
+
+  changeIsCheckedTerm(bool? value) {
+    isCheckedTerm = value!;
+    notifyListeners();
+  }
+
+  Future<String?> getTerm() async {
+    try {
+      TermsAndConditionsModel termsAndConditionsModel =
+          await DioClient.dioClient.termsAndConditions();
+      print(termsAndConditionsModel.toJson().toString());
+      return termsAndConditionsModel.description;
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+  //  Signup Part 2
+
   bool isChecked = false;
+
+
+  changeIsChecked(bool? value) {
+    isChecked = value!;
+    notifyListeners();
+  }
+
   bool isCultural = false;
 
   bool isCoachSelection = false;
@@ -41,10 +189,6 @@ class AuthProvider extends ChangeNotifier {
   var price1 = 99.99;
   var price2 = 179.99;
   var price3 = 249.99;
-
-  TextEditingController dateTextInput = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
 
   selectOne() {
     isSelectedOne = true;
@@ -68,6 +212,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   String? selectedValue;
+
   makeCulturalTrue() {
     isCultural = true;
     notifyListeners();
@@ -98,123 +243,8 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  showDateText(String date) {
-    dateTextInput.text = date;
-    notifyListeners();
-  }
-
   showDropdownValue(String? date) {
     dropdownValue = date!;
     notifyListeners();
-  }
-
-  changeHidePass() {
-    hidePass = !hidePass;
-    notifyListeners();
-  }
-
-  changeRememberMe() {
-    rememberMe = !rememberMe;
-    notifyListeners();
-  }
-
-  changeIsChecked(bool? value) {
-    isChecked = value!;
-    notifyListeners();
-  }
-
-  login(String email, String password) async {
-    try {
-      LoginModel? respontLogin =
-          await DioClient.dioClient.login(email, password);
-      print(respontLogin!.toJson().toString());
-    } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
-    }
-    notifyListeners();
-  }
-
-  register(String email, String password) async {
-    try {
-      LoginModel? respontLogin =
-          await DioClient.dioClient.register(email, password);
-      print(respontLogin!.toJson().toString());
-    } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
-    }
-    notifyListeners();
-  }
-
-  Future<String?> getTerm() async {
-    try {
-      TermsAndConditionsModel termsAndConditionsModel =
-          await DioClient.dioClient.termsAndConditions();
-      print(termsAndConditionsModel.toJson().toString());
-      return termsAndConditionsModel.description;
-    } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
-    }
-    notifyListeners();
-  }
-
-  Future _getFromGallery() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      this.imageFile = imageTemp;
-      notifyListeners();
-    }
-  }
-
-  Future _getFromCamera() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      this.imageFile = imageTemp;
-      notifyListeners();
-    }
-  }
-
-  openCamera(BuildContext context) {
-    _getFromCamera();
-    Navigator.pop(context);
-  }
-
-  openGallery(BuildContext context) {
-    _getFromGallery();
-    Navigator.pop(context);
   }
 }
