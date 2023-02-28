@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/data/api/dio_client.dart';
 import 'package:future_heroes_customer/data/api/exception_handling.dart';
+import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
@@ -68,18 +69,22 @@ class AuthProvider extends ChangeNotifier {
   // SignUp Page
   bool showPasswordSignUp = true;
   File? imageFile;
-
+  File? imageFileNull;
+  DateTime? pickedDate;
   TextEditingController emailSignUpPage = TextEditingController();
   TextEditingController passwordSignUpPage = TextEditingController();
   TextEditingController nameSignUpPage = TextEditingController();
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
 
-  register(File image,String fullName,String dob,String phoneNumber,String email,String password) async {
+  register(String fullName,DateTime dob,String phoneNumber,String email,String password) async {
     try {
-      RegisterModel? respontRegister =
-          await DioClient.dioClient.register(image,fullName,dob,phoneNumber,email,password);
-      print(respontRegister!.toJson().toString());
+      print("1");
+      RegisterModel? responseRegister =
+          await DioClient.dioClient.register(fullName,dob,phoneNumber,email,password);
+      print("2");
+
+      print(responseRegister!.toJson().toString());
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -153,6 +158,26 @@ class AuthProvider extends ChangeNotifier {
           await DioClient.dioClient.termsAndConditions();
       print(termsAndConditionsModel.toJson().toString());
       return termsAndConditionsModel.description;
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+  //Disease
+  Future<String?> getDisease() async {
+    try {
+      DiseaseModel diseaseModel =
+      await DioClient.dioClient.Disease();
+      print(diseaseModel.toJson().toString());
+      return diseaseModel.name;
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(

@@ -178,15 +178,15 @@ class SignUpPersonalData extends StatelessWidget {
                           return null;
                         },
                         pressSuffixIcon: () async {
-                          DateTime? pickedDate = await showDatePicker(
+                          provider.pickedDate= await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
                               firstDate: DateTime(1950),
                               lastDate: DateTime(2100));
-                          if (pickedDate != null) {
-                            print(pickedDate);
+                          if (provider.pickedDate != null) {
+                            print(provider.pickedDate);
                             String formattedDate =
-                                DateFormat('yyyy-MM-dd').format(pickedDate);
+                                DateFormat('yyyy-MM-dd').format(provider.pickedDate!);
                             print(formattedDate);
                             provider.showDateText(formattedDate);
                           } else {}
@@ -219,8 +219,8 @@ class SignUpPersonalData extends StatelessWidget {
                         text: 'continue'.tr,
                         onpressed: () {
                           if (signUpFormKey.currentState!.validate()) {
-                            provider.register(provider.imageFile!, provider.nameSignUpPage.text, provider.dateTextInputSignUPPage.text, provider.phoneSignUpPage.text, provider.emailSignUpPage.text, provider.passwordSignUpPage.text);
-                            //Get.toNamed(RouteHelper.termsAndConditions);
+                            provider.register( provider.nameSignUpPage.text, provider.pickedDate??DateTime.now(), provider.phoneSignUpPage.text, provider.emailSignUpPage.text, provider.passwordSignUpPage.text);
+                         //  Get.toNamed(RouteHelper.termsAndConditions);
                             print('success');
                           }else{
                             print('failed');

@@ -14,9 +14,14 @@ class RegisterModel {
   RegisterModel.fromJson(Map<String, dynamic> json) {
     imageFile = json['ImageFile'];
     fullName = json['FullName'];
-    if(json['DateOfBirth'] !=null){
-      dateOfBirth=DateTime.parse(json['DateOfBirth']);
-    }
+
+    // if(json['DateOfBirth'] !=null){
+    //   dateOfBirth=DateTime.parse(json['DateOfBirth']);
+    // }
+
+    dateOfBirth = json["DateOfBirth"] == null ? null : DateTime.parse(json["DateOfBirth"]);
+
+
     phoneNumber = json['PhoneNumber'];
     email = json['Email'];
     password = json['Password'];
@@ -27,7 +32,7 @@ class RegisterModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['ImageFile'] = this.imageFile;
     data['FullName'] = this.fullName;
-    data['DateOfBirth'] = this.dateOfBirth;
+    data['DateOfBirth'] = dateOfBirth == null ? null : dateOfBirth?.toIso8601String();
     data['PhoneNumber'] = this.phoneNumber;
     data['Email'] = this.email;
     data['Password'] = this.password;
