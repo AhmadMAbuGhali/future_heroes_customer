@@ -5,7 +5,7 @@ import 'package:future_heroes_customer/resources/styles_manager.dart';
 
 class CustomButtonPrimary extends StatelessWidget {
   final String text;
-  final void Function() onpressed;
+  final void Function()? onpressed;
   Color? textColor;
   Color? buttonColor;
 
@@ -35,7 +35,15 @@ class CustomButtonPrimary extends StatelessWidget {
           ),
         ),
         onPressed: onpressed,
-        child: Text(
+        child:onpressed==null? Center(
+          child: Row(children: [
+            Text(
+              text,
+              style: getRegularStyle(color: textColor!),
+            ),
+            CircularProgressIndicator()
+          ],),
+        ): Text(
           text,
           style: getRegularStyle(color: textColor!),
         ),

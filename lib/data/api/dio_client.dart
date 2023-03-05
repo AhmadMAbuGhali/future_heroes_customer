@@ -31,25 +31,25 @@ class DioClient {
     }
   }
 
-  Future<RegisterModel?> register( String fullName, DateTime dob,
-      String phoneNumber, String email, String password) async {
-    try {
-      FormData formData = FormData.fromMap({
 
+  Future<RegisterModel?> register( File image,String fullName, DateTime dob,
+      String phoneNumber, String email, String password) async {
+
+      FormData formData = FormData.fromMap({
+        "ImageFile":image.path,
         "FullName": fullName,
-        "DateOfBirth": dob,
+        "DateOfBirth": dob.toIso8601String(),
         "PhoneNumber": phoneNumber,
         "Password": password,
         "Email": email,
       });
       Response response = await dio!.post(ApiConstant.register, data: formData);
-
+print('response.statusCode');
+print(response.data);
       RegisterModel registerUser = RegisterModel.fromJson(response.data);
 
       return registerUser;
-    } catch (e) {
-      print(e.toString());
-    }
+
   }
 
   Future<TermsAndConditionsModel> termsAndConditions() async {

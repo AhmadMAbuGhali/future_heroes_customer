@@ -26,6 +26,11 @@ class AuthProvider extends ChangeNotifier {
     '03:00 - 04:00',
   ];
 
+  bool isLoading = false;
+  changeIsLoding(bool value){
+    isLoading =value;
+    notifyListeners();
+  }
 // login page
   bool rememberMe = false;
   bool showPasswordLogin = true;
@@ -77,15 +82,16 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
 
-  register(String fullName,DateTime dob,String phoneNumber,String email,String password) async {
+  register(File image,String fullName,DateTime dob,String phoneNumber,String email,String password) async {
     try {
       print("1");
       RegisterModel? responseRegister =
-          await DioClient.dioClient.register(fullName,dob,phoneNumber,email,password);
+          await DioClient.dioClient.register(image,fullName,dob,phoneNumber,email,password);
       print("2");
-
-      print(responseRegister!.toJson().toString());
+      changeIsLoding(false);
+      // print(responseRegister!.toJson().toString());
     } on DioError catch (e) {
+      changeIsLoding(false);
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),

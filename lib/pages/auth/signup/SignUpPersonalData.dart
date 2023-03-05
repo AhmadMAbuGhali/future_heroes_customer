@@ -105,6 +105,7 @@ class SignUpPersonalData extends StatelessWidget {
                       CustomTextFormAuth(
                         hidepassword: false,
                         textInputType: TextInputType.emailAddress,
+                        myController: provider.emailSignUpPage,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'emailEmpty'.tr;
@@ -126,6 +127,8 @@ class SignUpPersonalData extends StatelessWidget {
                       CustomTextFormAuth(
                         textInputType: TextInputType.visiblePassword,
                         hidepassword: provider.showPasswordSignUp,
+                        myController: provider.passwordSignUpPage,
+
                         pressSuffixIcon: () {
                           provider.changeShowPasswordSignUP();
                         },
@@ -158,6 +161,8 @@ class SignUpPersonalData extends StatelessWidget {
                           return null;
                         },
                         hintText: 'userName'.tr,
+                        myController: provider.nameSignUpPage,
+
 
                         //  labelText: 'البريد الالكتروني / رقم الهاتف',
                         //  iconData: Icons.email_outlined,
@@ -211,16 +216,25 @@ class SignUpPersonalData extends StatelessWidget {
                           }
                           return null;
                         },
+                        myController: provider.phoneSignUpPage,
+
                         hintText: 'mobileNumber'.tr,
                         //  labelText: 'البريد الالكتروني / رقم الهاتف',
                         //  iconData: Icons.email_outlined,
                       ),
                       CustomButtonPrimary(
                         text: 'continue'.tr,
-                        onpressed: () {
+                        onpressed:provider.isLoading==true ?null: () {
+                          provider.changeIsLoding(true);
                           if (signUpFormKey.currentState!.validate()) {
-                            provider.register( provider.nameSignUpPage.text, provider.pickedDate??DateTime.now(), provider.phoneSignUpPage.text, provider.emailSignUpPage.text, provider.passwordSignUpPage.text);
-                         //  Get.toNamed(RouteHelper.termsAndConditions);
+                            print(provider.imageFile!.path.toString());
+                            print(provider.nameSignUpPage.text);
+                            print(provider.phoneSignUpPage.text);
+                            print(provider.pickedDate.toString());
+                            print(provider.emailSignUpPage.text);
+                            print(provider.passwordSignUpPage.text);
+                            provider.register( provider.imageFile!,provider.nameSignUpPage.text, DateTime.now(), provider.phoneSignUpPage.text, provider.emailSignUpPage.text, provider.passwordSignUpPage.text);
+                           Get.toNamed(RouteHelper.termsAndConditions);
                             print('success');
                           }else{
                             print('failed');
