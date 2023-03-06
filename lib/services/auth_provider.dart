@@ -26,6 +26,8 @@ class AuthProvider extends ChangeNotifier {
     '03:00 - 04:00',
   ];
 
+
+
   bool isLoading = false;
   changeIsLoding(bool value){
     isLoading =value;
@@ -277,5 +279,27 @@ class AuthProvider extends ChangeNotifier {
   showDropdownValue(String? date) {
     dropdownValue = date!;
     notifyListeners();
+  }
+}
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+        r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)')
+        .hasMatch(this);
+  }
+  bool isValidPassword() {
+    return RegExp(
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+        .hasMatch(this);
+  }
+  bool isValidName() {
+    return RegExp(
+        r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
+        .hasMatch(this);
+  }
+  bool isValidPhone() {
+    return RegExp(
+        r'^(?:[+0]9)?[0-9]{10}$')
+        .hasMatch(this);
   }
 }

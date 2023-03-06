@@ -18,8 +18,10 @@ import '../../../widgets/textSignUp.dart';
 
 class SignUpPersonalData extends StatelessWidget {
   SignUpPersonalData({super.key});
+
   final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(builder: (context, provider, x) {
@@ -109,9 +111,14 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'emailEmpty'.tr;
+                          } else if (value.isValidEmail() == false) {
+                            return 'invalidEmail'.tr;
+                          } else if (value.isValidEmail() == true) {
+                            return null;
                           }
                           return null;
                         },
+
                         hintText: 'email'.tr,
                         //  labelText: 'البريد الالكتروني / رقم الهاتف',
                         //  iconData: Icons.email_outlined,
@@ -135,6 +142,10 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'passwordEmpty'.tr;
+                          }else if (value.isValidPassword() == false) {
+                            return 'invalidPassword'.tr;
+                          } else if (value.isValidPassword() == true) {
+                            return null;
                           }
                           return null;
                         },
@@ -158,11 +169,15 @@ class SignUpPersonalData extends StatelessWidget {
                           if (value == null || value.isEmpty) {
                             return 'userNameEmpty'.tr;
                           }
+                          else if (value.isValidName() == false) {
+                          return 'invalidName'.tr;
+                          } else if (value.isValidName() == true) {
+                          return null;
+                          }
                           return null;
                         },
                         hintText: 'userName'.tr,
                         myController: provider.nameSignUpPage,
-
 
                         //  labelText: 'البريد الالكتروني / رقم الهاتف',
                         //  iconData: Icons.email_outlined,
@@ -183,15 +198,15 @@ class SignUpPersonalData extends StatelessWidget {
                           return null;
                         },
                         pressSuffixIcon: () async {
-                          provider.pickedDate= await showDatePicker(
+                          provider.pickedDate = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
                               firstDate: DateTime(1950),
                               lastDate: DateTime(2100));
                           if (provider.pickedDate != null) {
                             print(provider.pickedDate);
-                            String formattedDate =
-                                DateFormat('yyyy-MM-dd').format(provider.pickedDate!);
+                            String formattedDate = DateFormat('yyyy-MM-dd')
+                                .format(provider.pickedDate!);
                             print(formattedDate);
                             provider.showDateText(formattedDate);
                           } else {}
@@ -213,6 +228,10 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'mobileNumberEmpty'.tr;
+                          }else if (value.isValidPhone() == false) {
+                            return 'invalidPhone'.tr;
+                          } else if (value.isValidPhone() == true) {
+                            return null;
                           }
                           return null;
                         },
@@ -224,26 +243,33 @@ class SignUpPersonalData extends StatelessWidget {
                       ),
                       CustomButtonPrimary(
                         text: 'continue'.tr,
-                        onpressed:provider.isLoading==true ?null: () {
-                          provider.changeIsLoding(true);
-                          if (signUpFormKey.currentState!.validate()) {
-                            print(provider.imageFile!.path.toString());
-                            print(provider.nameSignUpPage.text);
-                            print(provider.phoneSignUpPage.text);
-                            print(provider.pickedDate.toString());
-                            print(provider.emailSignUpPage.text);
-                            print(provider.passwordSignUpPage.text);
-                            provider.register( provider.imageFile!,provider.nameSignUpPage.text, DateTime.now(), provider.phoneSignUpPage.text, provider.emailSignUpPage.text, provider.passwordSignUpPage.text);
-                           Get.toNamed(RouteHelper.termsAndConditions);
-                            print('success');
-                          }else{
-                            print('failed');
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Data Error')),
-                            );
-                          }
-
-                        },
+                        onpressed: provider.isLoading == true
+                            ? null
+                            : () {
+                                provider.changeIsLoding(true);
+                                if (signUpFormKey.currentState!.validate()) {
+                                  print(provider.imageFile!.path.toString());
+                                  print(provider.nameSignUpPage.text);
+                                  print(provider.phoneSignUpPage.text);
+                                  print(provider.pickedDate.toString());
+                                  print(provider.emailSignUpPage.text);
+                                  print(provider.passwordSignUpPage.text);
+                                  provider.register(
+                                      provider.imageFile!,
+                                      provider.nameSignUpPage.text,
+                                      DateTime.now(),
+                                      provider.phoneSignUpPage.text,
+                                      provider.emailSignUpPage.text,
+                                      provider.passwordSignUpPage.text);
+                                  Get.toNamed(RouteHelper.termsAndConditions);
+                                  print('success');
+                                } else {
+                                  print('failed');
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Data Error')),
+                                  );
+                                }
+                              },
                       ),
                       CustomTextSignUpOrSignin(
                         textone: 'haveAccount'.tr,
