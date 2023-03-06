@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:future_heroes_customer/data/api/apiconst.dart';
+import 'package:future_heroes_customer/main.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/login_model.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
@@ -53,7 +54,12 @@ print(response.data);
   }
 
   Future<TermsAndConditionsModel> termsAndConditions() async {
-    Response response = await dio!.get(ApiConstant.termsAndConditions);
+    Response response = await dio!.get(ApiConstant.termsAndConditions,
+    options: Options(
+      headers: {
+        "Accept-Language": shaedpref.getString("curruntLang")
+      },)
+    );
     TermsAndConditionsModel term =
         TermsAndConditionsModel.fromJson(response.data[0]);
     return term;
