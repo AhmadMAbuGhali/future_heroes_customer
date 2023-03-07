@@ -4,6 +4,7 @@ import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:future_heroes_customer/data/api/dio_client.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
@@ -62,61 +63,92 @@ class SignUpScreenPart2 extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: provider.isCultural
-                              ? null
-                              : Border.all(
-                                  color: ColorManager.primary,
-                                  width: 2,
-                                )),
-                      child: InkWell(
-                        onTap: () {
-                          provider.makeCulturalFalse();
-                        },
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(
-                              ImageAssets.sport,
-                              height: 100.h,
-                              width: 100.h,
-                            ),
-                            Text("sport".tr),
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      focusColor: ColorManager.primary,
-                      borderRadius: BorderRadius.circular(10),
-                      onTap: () {
-                        provider.makeCulturalTrue();
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: provider.isCultural
-                                ? Border.all(
-                                    color: ColorManager.primary,
-                                    width: 2,
-                                  )
-                                : null),
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(
-                              ImageAssets.cultural,
-                              height: 100.h,
-                              width: 100.h,
-                            ),
-                            Text("cultural".tr)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: 200.h,
+                  child: ListView.builder(
+
+                    scrollDirection: Axis.horizontal,
+                      itemCount: provider.categoryMain.length,
+                      itemBuilder: (context,index){
+                      return  Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          decoration: BoxDecoration(
+                              border: provider.isCultural
+                                  ? Border.all(
+                                color: ColorManager.primary,
+                                width: 2,
+                              )
+                                  : null),
+                          child: Column(
+                            children: [
+                              SvgPicture.asset(
+                                ImageAssets.cultural,
+                                height: 100.h,
+                                width: 100.h,
+                              ),
+                              Text(provider.categoryMain[index].name ??' null')
+                            ],
+                          ),
+                        );
+                    return Text(provider.categoryMain[index].name ??' nullß');
+                  }),
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //   children: [
+                //     Container(
+                //       decoration: BoxDecoration(
+                //           border: provider.isCultural
+                //               ? null
+                //               : Border.all(
+                //                   color: ColorManager.primary,
+                //                   width: 2,
+                //                 )),
+                //       child: InkWell(
+                //         onTap: () {
+                //           provider.makeCulturalFalse();
+                //         },
+                //         child: Column(
+                //           children: [
+                //             SvgPicture.asset(
+                //               ImageAssets.sport,
+                //               height: 100.h,
+                //               width: 100.h,
+                //             ),
+                //             Text("sport".tr),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //     InkWell(
+                //       focusColor: ColorManager.primary,
+                //       borderRadius: BorderRadius.circular(10),
+                //       onTap: () {
+                //         provider.makeCulturalTrue();
+                //       },
+                //       child: Container(
+                //         decoration: BoxDecoration(
+                //             border: provider.isCultural
+                //                 ? Border.all(
+                //                     color: ColorManager.primary,
+                //                     width: 2,
+                //                   )
+                //                 : null),
+                //         child: Column(
+                //           children: [
+                //             SvgPicture.asset(
+                //               ImageAssets.cultural,
+                //               height: 100.h,
+                //               width: 100.h,
+                //             ),
+                //             Text("cultural".tr)
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+
                 provider.isCultural
                     ? Column(
                         children: [
@@ -153,7 +185,7 @@ class SignUpScreenPart2 extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
-                    snakbarWidget(context,
+                     snakbarWidget(context,
                             Titel: 'مرحبا بك',
                             Description: 'قم باكمال عملة التسجيل')
                         .Success();

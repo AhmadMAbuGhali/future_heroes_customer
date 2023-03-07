@@ -12,5 +12,7 @@ class ApiConstant {
   static const String termsAndConditions = 'TermsAndConditions';
   static const String trainClass = 'Class';
   static const String offer = 'Offer';
+  static const String category = 'Category';
+  static const String subCategory = 'SubCategory';
 
 }

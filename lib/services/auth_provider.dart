@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/data/api/dio_client.dart';
 import 'package:future_heroes_customer/data/api/exception_handling.dart';
+import 'package:future_heroes_customer/models/category.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
+import 'package:future_heroes_customer/models/sub_category.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +19,9 @@ import '../pages/auth/signup/CoachSelection.dart';
 import '../widgets/CustomButtonPrimary.dart';
 
 class AuthProvider extends ChangeNotifier {
-  AuthProvider();
+  AuthProvider(){
+    getCategory();
+  }
 
   List<String> timeList = <String>[
     // 'choseTime'.tr,
@@ -83,7 +87,11 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController nameSignUpPage = TextEditingController();
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
+    ///////
+  List<Category1> categoryMain=[];
+  List<SubCategory> categorySub =[];
 
+  
   register(File image,String fullName,DateTime dob,String phoneNumber,String email,String password) async {
     try {
       print("1");
@@ -166,6 +174,43 @@ class AuthProvider extends ChangeNotifier {
           await DioClient.dioClient.termsAndConditions();
       print(termsAndConditionsModel.toJson().toString());
       return termsAndConditionsModel.description;
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+  
+  // category 
+  Future<String?> getCategory() async {
+    try {
+      categoryMain =
+          await DioClient.dioClient.getCategory();
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+// subcategory
+  Future<String?> getSubCategory() async {
+    try {
+
+      categorySub = await DioClient.dioClient.getSubCategory();
+
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(

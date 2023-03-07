@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:future_heroes_customer/data/api/apiconst.dart';
 import 'package:future_heroes_customer/main.dart';
+import 'package:future_heroes_customer/models/category.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/login_model.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
+import 'package:future_heroes_customer/models/sub_category.dart';
 import 'package:future_heroes_customer/models/terms_and_conditions_model.dart';
 
 class DioClient {
@@ -63,6 +65,34 @@ print(response.data);
     TermsAndConditionsModel term =
         TermsAndConditionsModel.fromJson(response.data[0]);
     return term;
+  }
+
+  //////////////////
+
+  Future<List<Category1>> getCategory() async {
+    Response response = await dio!.get(ApiConstant.category,
+    options: Options(
+      headers: {
+        "Accept-Language": shaedpref.getString("curruntLang")
+      },)
+    );
+    List<Category1> listcat=[];
+    listcat= (response.data as List).map((e) => Category1.fromJson(e)).toList();
+
+    return listcat;
+  }
+  //////////////////
+  Future<List<SubCategory>> getSubCategory() async {
+    Response response = await dio!.get(ApiConstant.subCategory,
+    options: Options(
+      headers: {
+        "Accept-Language": shaedpref.getString("curruntLang")
+      },)
+    );
+    List<SubCategory> listcat=[];
+    listcat= (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
+
+    return listcat;
   }
 
   Future<DiseaseModel> Disease() async {
