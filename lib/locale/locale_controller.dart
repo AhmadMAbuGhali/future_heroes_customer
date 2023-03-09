@@ -15,7 +15,7 @@ class MyLocalController extends GetxController{
   Locale? intalLang ;
 
   void changLocal(String codeLang) async{
-    Locale locale = new Locale(codeLang);
+    Locale locale = Locale(codeLang);
     shaedpref.setString("curruntLang", codeLang);
 
         Get.updateLocale(locale);

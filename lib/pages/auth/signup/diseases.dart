@@ -105,41 +105,29 @@ class Diseases extends StatelessWidget {
                 ],
               ),
               !provider.isDiseases
-                  ? Column(
-                      children: [
-                        CustomTextTitle(text: 'choseDisease'.tr),
-                        SizedBox(
-                          height: 10.h,
+                  ?  SizedBox(
+                height: 300.h,
+                child: ListView.builder(
+
+                    scrollDirection: Axis.vertical,
+                    itemCount: provider.diseases.length,
+                    itemBuilder: (context,index){
+                      return  Container(
+
+                        margin: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Column(
+                          children: [
+                            CardCheckBoxWidget(
+                              isChecked: provider.isChecked,
+                              title: provider.diseases[index].name ??' null' ,
+                            ),
+                          ],
                         ),
-                        CardCheckBoxWidget(
-                          isChecked: provider.isChecked,
-                          title: 'diabetes'.tr,
-                        ),
-                        CardCheckBoxWidget(
-                          isChecked: provider.isChecked,
-                          title: 'pressure'.tr,
-                        ),
-                        CardCheckBoxWidget(
-                          isChecked: provider.isChecked,
-                          title: 'anemia'.tr,
-                        ),
-                        CardCheckBoxWidget(
-                          isChecked: provider.isChecked,
-                          title: 'muscleTear'.tr,
-                        ),
-                        CardCheckBoxWidget(
-                          isChecked: provider.isChecked,
-                          title: 'heartDisease'.tr,
-                        ),
-                        CardCheckBoxWidget(
-                          isChecked: provider.isChecked,
-                          title: 'other'.tr,
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: [],
-                    ),
+                      );
+                      return Text(provider.categoryMain[index].name ??' nullß');
+                    }),
+              )
+                  : Column(children: [],),
               CustomButtonPrimary(
                 text: 'continue'.tr,
                 onpressed: () {

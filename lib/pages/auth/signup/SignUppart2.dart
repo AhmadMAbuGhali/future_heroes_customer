@@ -21,9 +21,11 @@ import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 import 'package:provider/provider.dart';
 
+import '../../../data/api/apiconst.dart';
+
 class SignUpScreenPart2 extends StatelessWidget {
   SignUpScreenPart2({super.key});
-
+  var id;
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -60,9 +62,7 @@ class SignUpScreenPart2 extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(color: ColorManager.gray),
                 ),
-                SizedBox(
-                  height: 30.h,
-                ),
+
                 SizedBox(
                   height: 200.h,
                   child: ListView.builder(
@@ -70,8 +70,46 @@ class SignUpScreenPart2 extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                       itemCount: provider.categoryMain.length,
                       itemBuilder: (context,index){
-                      return  Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20.w),
+                      return  InkWell(
+                        onTap: (){
+                         id=   provider.categoryMain[index].id;
+
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                            decoration: BoxDecoration(
+                                border: provider.isCultural
+                                    ? Border.all(
+                                  color: ColorManager.primary,
+                                  width: 2,
+                                )
+                                    : null),
+                            child: Column(
+                              children: [
+                               provider.categoryMain[index].imageString==""? SvgPicture.asset(
+                                  ImageAssets.cultural,
+                                  height: 120.h,
+                                  width: 120.w,
+                                ):Image.network(ApiConstant.imageURL+ provider.categoryMain[index].imageString!,height: 120.h,
+                                 width: 120.w,),
+                                Text(provider.categoryMain[index].name ??' null')
+                              ],
+                            ),
+                          ),
+                      );
+                    return Text(provider.categoryMain[index].name ??' nullß');
+                  }),
+                ),
+
+                SizedBox(
+                  height: 170.h,
+                  child: ListView.builder(
+
+                      scrollDirection: Axis.vertical,
+                      itemCount: provider.categoryMain.length,
+                      itemBuilder: (context,index){
+                        return  Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
                           decoration: BoxDecoration(
                               border: provider.isCultural
                                   ? Border.all(
@@ -81,107 +119,17 @@ class SignUpScreenPart2 extends StatelessWidget {
                                   : null),
                           child: Column(
                             children: [
-                              SvgPicture.asset(
-                                ImageAssets.cultural,
-                                height: 100.h,
-                                width: 100.h,
+                              CardCheckBoxWidget(
+                                isChecked: provider.isChecked,
+                                title: provider.categorySub[index].name ??' null' ,
                               ),
-                              Text(provider.categoryMain[index].name ??' null')
                             ],
                           ),
                         );
-                    return Text(provider.categoryMain[index].name ??' nullß');
-                  }),
+                        return Text(provider.categoryMain[index].name ??' nullß');
+                      }),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //   children: [
-                //     Container(
-                //       decoration: BoxDecoration(
-                //           border: provider.isCultural
-                //               ? null
-                //               : Border.all(
-                //                   color: ColorManager.primary,
-                //                   width: 2,
-                //                 )),
-                //       child: InkWell(
-                //         onTap: () {
-                //           provider.makeCulturalFalse();
-                //         },
-                //         child: Column(
-                //           children: [
-                //             SvgPicture.asset(
-                //               ImageAssets.sport,
-                //               height: 100.h,
-                //               width: 100.h,
-                //             ),
-                //             Text("sport".tr),
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //     InkWell(
-                //       focusColor: ColorManager.primary,
-                //       borderRadius: BorderRadius.circular(10),
-                //       onTap: () {
-                //         provider.makeCulturalTrue();
-                //       },
-                //       child: Container(
-                //         decoration: BoxDecoration(
-                //             border: provider.isCultural
-                //                 ? Border.all(
-                //                     color: ColorManager.primary,
-                //                     width: 2,
-                //                   )
-                //                 : null),
-                //         child: Column(
-                //           children: [
-                //             SvgPicture.asset(
-                //               ImageAssets.cultural,
-                //               height: 100.h,
-                //               width: 100.h,
-                //             ),
-                //             Text("cultural".tr)
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
 
-                provider.isCultural
-                    ? Column(
-                        children: [
-                          CardCheckBoxWidget(
-                            isChecked: provider.isChecked,
-                            title: 'Sculpture'.tr,
-                          ),
-                          CardCheckBoxWidget(
-                            isChecked: provider.isChecked,
-                            title: 'font'.tr,
-                          ),
-                          CardCheckBoxWidget(
-                            isChecked: provider.isChecked,
-                            title: 'drawing'.tr,
-                          ),
-                        ],
-                      )
-                    : Column(
-                        children: [
-                          CardCheckBoxWidget(
-                            isChecked: provider.isChecked,
-                            title: 'Karate'.tr,
-                          ),
-                          CardCheckBoxWidget(
-                            isChecked: provider.isChecked,
-                            title: 'taekwondo'.tr,
-                          ),
-                          CardCheckBoxWidget(
-                            isChecked: provider.isChecked,
-                            title: 'Gymnastics'.tr,
-                          ),
-                        ],
-                      ),
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {

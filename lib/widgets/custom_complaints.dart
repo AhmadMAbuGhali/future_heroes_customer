@@ -24,7 +24,7 @@ class CustomComplaints extends StatelessWidget {
                 header: Row(
                   children: [
 
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 3,
                       backgroundColor: ColorManager.primary,
                     ),
@@ -51,7 +51,7 @@ class CustomComplaints extends StatelessWidget {
                   ],
                 ),
                 collapsed: Container(
-                  margin: EdgeInsets.only(right: 55),
+                  margin: const EdgeInsets.only(right: 55),
                   child: Text(
                     "complaintsBody".tr,
                     softWrap: true,
@@ -61,7 +61,7 @@ class CustomComplaints extends StatelessWidget {
                   ),
                 ),
                 expanded: Container(
-                  margin: EdgeInsets.only(right: 55),
+                  margin: const EdgeInsets.only(right: 55),
                   child: Text(
                     "complaintsBody".tr,
                     softWrap: true,

@@ -57,7 +57,7 @@ class CustomTextFeild extends StatelessWidget {
                       hintText: hintText,
                       suffixIcon: obscureText! ?InkWell(onTap: (){
 
-                      },child: showPass?Icon(Icons.remove_red_eye,color: ColorManager.primary,):Icon(Icons.remove_red_eye_outlined,color: ColorManager.primary,),):null,
+                      },child: showPass?const Icon(Icons.remove_red_eye,color: ColorManager.primary,):const Icon(Icons.remove_red_eye_outlined,color: ColorManager.primary,),):null,
                       hintStyle: getRegularStyle(
                           color: ColorManager.otpDesc, fontSize: FontSize.s14),
                       border: OutlineInputBorder(
@@ -66,7 +66,7 @@ class CustomTextFeild extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12.r)),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide(color: ColorManager.primary, width: 1.0),
+                        borderSide: const BorderSide(color: ColorManager.primary, width: 1.0),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),

@@ -24,25 +24,25 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
       width: 15.w,
       height: 15.h,
       decoration:
-          BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
+          const BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
     ),
     Container(
       width: 15.w,
       height: 15.h,
       decoration:
-          BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
+          const BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
     ),
     Container(
       width: 15.w,
       height: 15.h,
       decoration:
-          BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
+          const BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
     ),
     Container(
       width: 15.w,
       height: 15.h,
       decoration:
-          BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
+          const BoxDecoration(shape: BoxShape.circle, color: ColorManager.primary),
     ),
   ];
 
@@ -75,7 +75,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
         horizontalTitlePosition: HorizontalTitlePosition.bottom,
         horizontalLinePosition: HorizontalLinePosition.center,
         currentStep: _index,
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         steps: tuples
             .map((e) => EnhanceStep(
                   icon: Icon(
@@ -90,7 +90,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                     "13/01/2023",
                     style: getRegularStyle(color: ColorManager.primary),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     "10:30 - 11:30",
                   ),
                   content: Text("classTimeBody".tr),
@@ -111,7 +111,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
         controlsBuilder: (BuildContext context, ControlsDetails details) {
           return Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               SizedBox(
@@ -127,7 +127,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                       ElevatedButton.styleFrom(primary: ColorManager.primary),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               SizedBox(
@@ -143,7 +143,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                   ),
                   style: ElevatedButton.styleFrom(
                       primary: ColorManager.white,
-                      side: BorderSide(width: 1, color: ColorManager.primary)),
+                      side: const BorderSide(width: 1, color: ColorManager.primary)),
                 ),
               ),
             ],

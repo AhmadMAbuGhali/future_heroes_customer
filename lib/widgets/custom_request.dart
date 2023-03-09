@@ -62,7 +62,7 @@ class CustomRequest extends StatelessWidget {
                     ],
                   ),
                   collapsed: Container(
-                    margin: EdgeInsets.only(right: 55),
+                    margin: const EdgeInsets.only(right: 55),
                     child: Text(
                       "requestBody".tr,
                       softWrap: true,
@@ -72,7 +72,7 @@ class CustomRequest extends StatelessWidget {
                     ),
                   ),
                   expanded: Container(
-                    margin: EdgeInsets.only(right: 55),
+                    margin: const EdgeInsets.only(right: 55),
                     child: Text(
                       "requestBody".tr,
                       softWrap: true,
@@ -82,7 +82,7 @@ class CustomRequest extends StatelessWidget {
                 SizedBox(
                   height: 5.h,
                 ),
-                Divider(
+                const Divider(
                   thickness: 2,
                   endIndent: 3,
                   height: 2,

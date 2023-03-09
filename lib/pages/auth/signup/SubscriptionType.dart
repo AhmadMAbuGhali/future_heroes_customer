@@ -55,44 +55,41 @@ class SubscriptionType extends StatelessWidget {
               SizedBox(
                 height: 60.h,
               ),
-              InkWell(
-                onTap: () {
-                  provider.selectOne();
-                },
-                child: CardSubscriptionType(
-                  isSelecte: provider.isSelectedOne,
-                  title: 'month'.tr,
-                  description: 'packageDetails'.tr,
-                  price: '${provider.price1} ' + 'RS'.tr,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  provider.selectTow();
-                },
-                child: CardSubscriptionType(
-                  isSelecte: provider.isSelectedTwo,
-                  title: 'month2'.tr,
-                  description: 'packageDetails'.tr,
-                  price: '${provider.price2} ' + 'RS'.tr,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  provider.selectThree();
-                },
-                child: CardSubscriptionType(
-                  isSelecte: provider.isSelectedThree,
-                  title: 'month3'.tr,
-                  description: 'packageDetails'.tr,
-                  price: '${provider.price3}  ' + 'RS'.tr,
-                ),
+              SizedBox(
+                height: 300.h,
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: provider.offerSub.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Column(
+                          children: [
+                            CardSubscriptionType(
+                              isSelecte: provider.isSelectedOne,
+                              title: provider.offerSub[index].name ?? "null",
+                              description:
+                                  provider.offerSub[index].description ??
+                                      "null",
+                              price:
+                                  '${provider.offerSub[index].price ?? "null"} ' +
+                                      'RS'.tr,
+                            ),
+                          ],
+                        ),
+                      );
+                      return Text(
+                          provider.categoryMain[index].name ?? ' nullß');
+                    }),
               ),
               Spacer(),
               CustomButtonPrimary(
                 text: 'continue'.tr,
                 onpressed: () {
-                  Get.toNamed(RouteHelper.endSignUp);
+                  print(
+                    provider.offerSub.length,
+                  );
+                  // Get.toNamed(RouteHelper.endSignUp);
                 },
               )
             ])),

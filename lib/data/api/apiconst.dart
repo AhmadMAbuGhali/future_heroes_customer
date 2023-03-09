@@ -1,6 +1,6 @@
 
 class ApiConstant {
-  static const  String baseUrl ='https://yousef.azurewebsites.net//api/' ;
+  static const  String baseUrl ='https://yousef.azurewebsites.net/api/' ;
   static const String login = 'Authentication/login';
   static const String register = 'Authentication/register';
   static const String completeProfile = 'Authentication/CompleteProfile';
@@ -14,5 +14,7 @@ class ApiConstant {
   static const String offer = 'Offer';
   static const String category = 'Category';
   static const String subCategory = 'SubCategory';
+  static const String imageURL = 'https://yousef.azurewebsites.net/images/';
+
 
 }

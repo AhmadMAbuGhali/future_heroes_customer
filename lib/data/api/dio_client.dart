@@ -8,6 +8,7 @@ import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/login_model.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
 import 'package:future_heroes_customer/models/sub_category.dart';
+import 'package:future_heroes_customer/models/subscribtion_model.dart';
 import 'package:future_heroes_customer/models/terms_and_conditions_model.dart';
 
 class DioClient {
@@ -95,9 +96,32 @@ print(response.data);
     return listcat;
   }
 
-  Future<DiseaseModel> Disease() async {
-    Response response = await dio!.get(ApiConstant.disease);
-    DiseaseModel dis = DiseaseModel.fromJson(response.data);
-    return dis;
+  /////
+  Future<List<DiseaseModel>> getDisease() async {
+    Response response = await dio!.get(ApiConstant.disease,
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang")
+          },)
+    );
+    List<DiseaseModel> listDisease=[];
+    listDisease= (response.data as List).map((e) => DiseaseModel.fromJson(e)).toList();
+    print(listDisease.length);
+
+    return listDisease;
   }
+
+  Future<List<SubscriptionModel>> getOffer() async {
+    Response response = await dio!.get(ApiConstant.offer,
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang")
+          },)
+    );
+    List<SubscriptionModel> listOffer=[];
+    listOffer= (response.data as List).map((e) => SubscriptionModel.fromJson(e)).toList();
+
+    return listOffer;
+  }
+
 }

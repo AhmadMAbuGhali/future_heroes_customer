@@ -9,6 +9,7 @@ import 'package:future_heroes_customer/models/category.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
 import 'package:future_heroes_customer/models/sub_category.dart';
+import 'package:future_heroes_customer/models/subscribtion_model.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,6 +22,9 @@ import '../widgets/CustomButtonPrimary.dart';
 class AuthProvider extends ChangeNotifier {
   AuthProvider(){
     getCategory();
+    getSubCategory();
+    getDisease();
+    getOffer();
   }
 
   List<String> timeList = <String>[
@@ -90,6 +94,8 @@ class AuthProvider extends ChangeNotifier {
     ///////
   List<Category1> categoryMain=[];
   List<SubCategory> categorySub =[];
+  List<DiseaseModel> diseases =[];
+  List<SubscriptionModel> offerSub =[];
 
   
   register(File image,String fullName,DateTime dob,String phoneNumber,String email,String password) async {
@@ -224,13 +230,14 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   //Disease
   Future<String?> getDisease() async {
     try {
-      DiseaseModel diseaseModel =
-      await DioClient.dioClient.Disease();
-      print(diseaseModel.toJson().toString());
-      return diseaseModel.name;
+
+      diseases = await DioClient.dioClient.getDisease();
+
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -244,6 +251,26 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // offer
+
+  Future<String?> getOffer() async {
+    try {
+
+      offerSub = await DioClient.dioClient.getOffer();
+      print(offerSub.length);
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
   //  Signup Part 2
 
   bool isChecked = false;
