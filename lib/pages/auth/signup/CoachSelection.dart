@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:future_heroes_customer/pages/auth/widget/CardWidget.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/widgets/CardWidget.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
@@ -103,36 +103,39 @@ class CoachSelection extends StatelessWidget {
               provider.isCoachSelection
                   ? Column(
                       children: [
-                        Text(
-                          'coachClassDay'.tr,
-                          style: TextStyle(color: ColorManager.black),
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        CardWidget(
-                          title: 'ClassDays'.tr,
-                        ),
+                        // Text(
+                        //   'coachClassDay'.tr,
+                        //   style: TextStyle(color: ColorManager.black),
+                        // ),
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
+                        // CardWidget(
+                        //   title: 'ClassDays'.tr,
+                        // ),
                         Text(
                           'availableTime'.tr,
                           style: TextStyle(color: ColorManager.black),
                         ),
                         Container(
+                          height: 100.h,
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(
                               vertical: 10.h, horizontal: 15.w),
-                          margin: EdgeInsets.symmetric(vertical: 5.h),
+                          margin: EdgeInsets.symmetric(vertical: 10.h),
                           decoration: BoxDecoration(
                               border: Border.all(color: ColorManager.gray),
                               color: ColorManager.white,
                               borderRadius: BorderRadius.circular(10)),
                           child: DropdownButton<String>(
+                            iconEnabledColor: ColorManager.black,
+                            icon: Icon(Icons.arrow_drop_down),
                             value: provider.dropdownValue,
                             elevation: 16,
                             style: const TextStyle(color: ColorManager.primary),
                             underline: Container(
                               height: 2,
-                              color: Colors.deepPurpleAccent,
+                              color: ColorManager.primary,
                             ),
                             onChanged: (String? value) {
                               provider.showDropdownValue(value);

@@ -35,34 +35,29 @@ class DioClient {
     }
   }
 
-
-  Future<RegisterModel?> register( File image,String fullName, DateTime dob,
+  Future<RegisterModel?> register(File image, String fullName, DateTime dob,
       String phoneNumber, String email, String password) async {
+    FormData formData = FormData.fromMap({
+      "ImageFile": image.path,
+      "FullName": fullName,
+      "DateOfBirth": dob.toIso8601String(),
+      "PhoneNumber": phoneNumber,
+      "Password": password,
+      "Email": email,
+    });
+    Response response = await dio!.post(ApiConstant.register, data: formData);
+    print('response.statusCode');
+    print(response.data);
+    RegisterModel registerUser = RegisterModel.fromJson(response.data);
 
-      FormData formData = FormData.fromMap({
-        "ImageFile":image.path,
-        "FullName": fullName,
-        "DateOfBirth": dob.toIso8601String(),
-        "PhoneNumber": phoneNumber,
-        "Password": password,
-        "Email": email,
-      });
-      Response response = await dio!.post(ApiConstant.register, data: formData);
-print('response.statusCode');
-print(response.data);
-      RegisterModel registerUser = RegisterModel.fromJson(response.data);
-
-      return registerUser;
-
+    return registerUser;
   }
 
   Future<TermsAndConditionsModel> termsAndConditions() async {
     Response response = await dio!.get(ApiConstant.termsAndConditions,
-    options: Options(
-      headers: {
-        "Accept-Language": shaedpref.getString("curruntLang")
-      },)
-    );
+        options: Options(
+          headers: {"Accept-Language": shaedpref.getString("curruntLang")},
+        ));
     TermsAndConditionsModel term =
         TermsAndConditionsModel.fromJson(response.data[0]);
     return term;
@@ -72,26 +67,25 @@ print(response.data);
 
   Future<List<Category1>> getCategory() async {
     Response response = await dio!.get(ApiConstant.category,
-    options: Options(
-      headers: {
-        "Accept-Language": shaedpref.getString("curruntLang")
-      },)
-    );
-    List<Category1> listcat=[];
-    listcat= (response.data as List).map((e) => Category1.fromJson(e)).toList();
+        options: Options(
+          headers: {"Accept-Language": shaedpref.getString("curruntLang")},
+        ));
+    List<Category1> listcat = [];
+    listcat =
+        (response.data as List).map((e) => Category1.fromJson(e)).toList();
 
     return listcat;
   }
+
   //////////////////
   Future<List<SubCategory>> getSubCategory() async {
     Response response = await dio!.get(ApiConstant.subCategory,
-    options: Options(
-      headers: {
-        "Accept-Language": shaedpref.getString("curruntLang")
-      },)
-    );
-    List<SubCategory> listcat=[];
-    listcat= (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
+        options: Options(
+          headers: {"Accept-Language": shaedpref.getString("curruntLang")},
+        ));
+    List<SubCategory> listcat = [];
+    listcat =
+        (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
 
     return listcat;
   }
@@ -100,12 +94,11 @@ print(response.data);
   Future<List<DiseaseModel>> getDisease() async {
     Response response = await dio!.get(ApiConstant.disease,
         options: Options(
-          headers: {
-            "Accept-Language": shaedpref.getString("curruntLang")
-          },)
-    );
-    List<DiseaseModel> listDisease=[];
-    listDisease= (response.data as List).map((e) => DiseaseModel.fromJson(e)).toList();
+          headers: {"Accept-Language": shaedpref.getString("curruntLang")},
+        ));
+    List<DiseaseModel> listDisease = [];
+    listDisease =
+        (response.data as List).map((e) => DiseaseModel.fromJson(e)).toList();
     print(listDisease.length);
 
     return listDisease;
@@ -114,14 +107,13 @@ print(response.data);
   Future<List<SubscriptionModel>> getOffer() async {
     Response response = await dio!.get(ApiConstant.offer,
         options: Options(
-          headers: {
-            "Accept-Language": shaedpref.getString("curruntLang")
-          },)
-    );
-    List<SubscriptionModel> listOffer=[];
-    listOffer= (response.data as List).map((e) => SubscriptionModel.fromJson(e)).toList();
+          headers: {"Accept-Language": shaedpref.getString("curruntLang")},
+        ));
+    List<SubscriptionModel> listOffer = [];
+    listOffer = (response.data as List)
+        .map((e) => SubscriptionModel.fromJson(e))
+        .toList();
 
     return listOffer;
   }
-
 }

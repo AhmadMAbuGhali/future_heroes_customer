@@ -7,15 +7,17 @@ import 'package:get/get.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/styles_manager.dart';
+import '../../widgets/CustomButtonPrimary.dart';
+import '../../widgets/snakbar.dart';
 
-class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+class GuestOffers extends StatefulWidget {
+  const GuestOffers({Key? key}) : super(key: key);
 
   @override
-  State<NotificationPage> createState() => _NotificationPageState();
+  State<GuestOffers> createState() => _GuestOffersState();
 }
 
-class _NotificationPageState extends State<NotificationPage> {
+class _GuestOffersState extends State<GuestOffers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,36 +25,48 @@ class _NotificationPageState extends State<NotificationPage> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
+            Container(
+              padding: EdgeInsets.only(
+                top: 45.h,
+                // left: 20.w,
+                // right: 20.w,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: ColorManager.primary,
+                          )),
+                      Text(
+                        "user".tr,
+                        style: getBoldStyle(color: ColorManager.primary),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
             SizedBox(
-              height: 60.h,
+              height: 20.h,
             ),
             Row(
               children: [
                 Text(
-                  "notification".tr,
+                  "offer".tr,
                   style: getBoldStyle(color: ColorManager.black),
                 ),
-                CircleAvatar(
-                  backgroundColor: ColorManager.primary,
-                  radius: 17,
-                  child: Text(
-                    "4",
-                    style: getRegularStyle(color: ColorManager.white),
-                  ),
-                ),
-                Spacer(),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "markAsRead".tr,
-                      style: getBoldStyle(
-                          color: ColorManager.primary, fontSize: 12),
-                    ))
               ],
             ),
             Expanded(
                 child: ListView.builder(
-                    itemCount: 7,
+                    itemCount: 3,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -90,7 +104,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                       width: 15.w,
                                     ),
                                     Text(
-                                      "notificationTitle".tr,
+                                      "offerTitle".tr,
                                       style: getBoldStyle(
                                           color: ColorManager.black,
                                           fontSize: 14),
@@ -98,29 +112,19 @@ class _NotificationPageState extends State<NotificationPage> {
                                   ],
                                 ),
                                 collapsed: Text(
-                                  "notificationBody".tr,
+                                  "offerBody".tr,
                                   softWrap: true,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 expanded: Column(
                                   children: [
-                                    Text("notificationBody".tr),
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          IconAssets.time,
-                                          color: ColorManager.primary,
-                                        ),
-                                        Text(
-                                          "02 ساعات".tr,
-                                          style: getRegularStyle(
-                                              color: ColorManager.primary),
-                                        ),
-                                      ],
-                                    ),
+                                    Text("offerBody".tr),
                                   ],
                                 )),
+                            SizedBox(
+                              height: 10.h,
+                            ),
                             Divider(
                               thickness: 2,
                               endIndent: 3,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:get/get.dart';
 
 class DateWidget extends StatefulWidget {
   DateTime? date;
@@ -128,7 +129,7 @@ class _DateWidgetState extends State<DateWidget> {
                             Row(
                               children: [
                                 Text(
-                                  'الاسم : ',
+                                  'name'.tr,
                                   style: TextStyle(
                                       color: ColorManager.primary,
                                       fontWeight: FontWeight.bold),
@@ -144,7 +145,7 @@ class _DateWidgetState extends State<DateWidget> {
                             Row(
                               children: [
                                 Text(
-                                  'الحصة : ',
+                                  'class'.tr,
                                   style: TextStyle(
                                       color: ColorManager.primary,
                                       fontWeight: FontWeight.bold),
@@ -160,7 +161,7 @@ class _DateWidgetState extends State<DateWidget> {
                             Row(
                               children: [
                                 Text(
-                                  'مدة الحصة : ',
+                                  'classtime'.tr,
                                   style: TextStyle(
                                       color: ColorManager.primary,
                                       fontWeight: FontWeight.bold),
@@ -174,16 +175,19 @@ class _DateWidgetState extends State<DateWidget> {
                               ],
                             ),
                             Container(
-                              //    padding: EdgeInsets.all(value),
-                              width: 100,
+                              //   padding: EdgeInsets.all(8),
+                              // width: 100,
                               //   margin: EdgeInsets.all(10),
                               child: ElevatedButton(
                                 onPressed: widget.onTap,
-                                child: Text(
-                                  'طلب تأجيل',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: ColorManager.primary),
+                                child: Container(
+                                  padding: EdgeInsets.all(6),
+                                  child: Text(
+                                    'requestPostponement'.tr,
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: ColorManager.primary),
+                                  ),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   // shape: RoundedRectangleBorder(

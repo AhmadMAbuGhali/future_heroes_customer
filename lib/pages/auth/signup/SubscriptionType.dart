@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:future_heroes_customer/pages/auth/widget/cardSubscriptionType.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
+import 'package:future_heroes_customer/widgets/cardSubscriptionType.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';

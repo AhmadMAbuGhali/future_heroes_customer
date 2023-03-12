@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:future_heroes_customer/pages/home/dateWidget.dart';
+import 'package:future_heroes_customer/widgets/dateWidget.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';

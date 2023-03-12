@@ -106,8 +106,8 @@ class Login extends StatelessWidget {
                       ),
                       Text(
                         "rememberMe".tr,
-                        style:
-                            getBoldStyle(color: ColorManager.black, fontSize: 12),
+                        style: getBoldStyle(
+                            color: ColorManager.black, fontSize: 12),
                       ),
                       Spacer(),
                       InkWell(
@@ -126,27 +126,34 @@ class Login extends StatelessWidget {
                   CustomButtonPrimary(
                     text: 'login'.tr,
                     onpressed: () {
-                      provider.login(provider.emailLoginPage.text, provider.passwordLoginPage.text);
+                      provider.login(provider.emailLoginPage.text,
+                          provider.passwordLoginPage.text);
 
                       if (loginFormKey.currentState!.validate()) {
                         Get.toNamed(RouteHelper.successLogin);
                         print('success');
-                      }else{
+                      } else {
                         print('failed');
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Data Error')),
                         );
                       }
-
                     },
                   ),
+                  TextButton(
+                      onPressed: () {
+                        Get.offAndToNamed(RouteHelper.guestInitial);
+                      },
+                      child: Text(
+                        'Loginasaguest'.tr,
+                        style: TextStyle(color: ColorManager.primary),
+                      )),
                   const SizedBox(
                     height: 50,
                   ),
                   CustomTextSignUpOrSignin(
                     onTap: () {
                       Get.toNamed(RouteHelper.signupPersonalData);
-
                     },
                     textone: 'dontHaveAccount'.tr,
                     texttwo: 'makeAccount'.tr,

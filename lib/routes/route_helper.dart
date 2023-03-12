@@ -1,6 +1,11 @@
+import 'package:future_heroes_customer/pages/Guest/Guest_Offers.dart';
+import 'package:future_heroes_customer/pages/Guest/Guest_profile_page.dart';
+import 'package:future_heroes_customer/pages/Guest/Guest_qr_code.dart';
+import 'package:future_heroes_customer/pages/Guest/Navbar_Guest.dart';
+import 'package:future_heroes_customer/pages/Guest/NotificationPageGuest.dart';
 import 'package:future_heroes_customer/pages/auth/signup/CoachSelection.dart';
 import 'package:future_heroes_customer/pages/auth/signup/EndSignUp.dart';
-import 'package:future_heroes_customer/pages/auth/NoConnection.dart';
+import 'package:future_heroes_customer/pages/home/NoConnection.dart';
 import 'package:future_heroes_customer/pages/auth/signup/SignUpPersonalData.dart';
 import 'package:future_heroes_customer/pages/auth/signup/SignUppart2.dart';
 import 'package:future_heroes_customer/pages/auth/signup/SubscriptionType.dart';
@@ -26,6 +31,7 @@ import 'package:future_heroes_customer/pages/profile/send_requests.dart';
 import 'package:future_heroes_customer/pages/profile/subscription_upgrade_successfully.dart';
 import 'package:get/get.dart';
 
+import '../pages/Guest/GuestHome.dart';
 import '../pages/profile/language.dart';
 import '../pages/profile/subscription_upgrade.dart';
 import '../pages/splash_page/splash_page.dart';
@@ -62,6 +68,12 @@ class RouteHelper {
   static const String successLogin = "/successLogin";
   static const String homeScreen = "/homeScreen";
   static const String language = "/language";
+  static const String guestHome = "/GuestHome";
+  static const String guestInitial = "/GuestNavBar";
+  static const String notificationPageGuest = "/NotificationPageGuest";
+  static const String guestOffers = "/GuestOffers";
+  static const String guestQRCode = "/GuestQRCode";
+  static const String guestProfilePage = "/GuestProfilePage";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => '$initial';
@@ -94,6 +106,12 @@ class RouteHelper {
   static String getSuccessLogin() => '$successLogin';
   static String getHomeScreen() => '$homeScreen';
   static String getLanguage() => '$language';
+  static String getGuestHome() => '$guestHome';
+  static String getGuestNavBar() => '$guestInitial';
+  static String getNotificationPageGuest() => '$notificationPageGuest';
+  static String getGuestOffers() => '$guestOffers';
+  static String getGuestQRCode() => '$guestQRCode';
+  static String getGuestProfilePage() => '$guestProfilePage';
 
   static List<GetPage> routes = [
     GetPage(
@@ -105,6 +123,36 @@ class RouteHelper {
         name: initial,
         page: () {
           return MainNavBar();
+        }),
+    GetPage(
+        name: notificationPageGuest,
+        page: () {
+          return NotificationPageGuest();
+        }),
+    GetPage(
+        name: guestInitial,
+        page: () {
+          return GuestNavBar();
+        }),
+    GetPage(
+        name: guestProfilePage,
+        page: () {
+          return GuestProfilePage();
+        }),
+    GetPage(
+        name: guestQRCode,
+        page: () {
+          return GuestQRCode();
+        }),
+    GetPage(
+        name: guestOffers,
+        page: () {
+          return GuestOffers();
+        }),
+    GetPage(
+        name: guestHome,
+        page: () {
+          return GuestHome();
         }),
     GetPage(
         name: homeScreen,
@@ -171,7 +219,6 @@ class RouteHelper {
         return SignUpScreenPart2();
       },
     ),
-
     GetPage(
       name: signupPersonalData,
       page: () {

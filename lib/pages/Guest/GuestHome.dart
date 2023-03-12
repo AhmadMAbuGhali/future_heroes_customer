@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_customer/routes/route_helper.dart';
+import 'package:future_heroes_customer/widgets/LogoAuth.dart';
 import 'package:future_heroes_customer/widgets/dateWidget.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
@@ -7,18 +9,17 @@ import 'package:future_heroes_customer/resources/styles_manager.dart';
 import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/class_time_widget.dart';
+import 'package:future_heroes_customer/widgets/guestWidget.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class GuestHome extends StatefulWidget {
+  const GuestHome({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<GuestHome> createState() => _GuestHomeState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  var numberOfDone = 3;
-  bool isExpanded = true;
+class _GuestHomeState extends State<GuestHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,14 +52,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 10.h,
                   ),
                   Text(
-                    "homeTopText1".tr,
+                    "Welcomeourhonorableguest".tr,
                     style: getRegularStyle(color: ColorManager.white),
                   ),
                   SizedBox(
                     height: 5.h,
                   ),
-                  Text("numberOfPostponement".tr + " ${numberOfDone}",
-                      style: getRegularStyle(color: ColorManager.white)),
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: Divider(
@@ -71,10 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Column(
                         children: [
-                          Text("homeTopText2".tr,
+                          Text("GuestTopText1".tr,
                               style: getRegularStyle(
                                   color: ColorManager.white, fontSize: 11)),
-                          Text("homeTopText3".tr,
+                          Text("GuestTopText2".tr,
                               style: getRegularStyle(
                                   color: ColorManager.white, fontSize: 11)),
                         ],
@@ -85,38 +84,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          // Positioned(
-          //   top: 250.h,
-          //   left: 20,
-          //   right: 20,
-          //   child: ClassTimeWidget(),
-          // ),
           Positioned(
               top: 300.h,
               left: 20,
               right: 20,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    DateWidget(
-                      time: DateTime.now(),
-                      date: DateTime.now(),
-                      name: 'يوسف الجزار',
-                      duration: 60,
-                      type: 'تايكواندو',
-                      onTap: () {},
-                    ),
-                    DateWidget(
-                      time: DateTime.now(),
-                      date: DateTime.now(),
-                      name: 'يوسف الجزار',
-                      duration: 60,
-                      type: 'تايكواندو',
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+                child: GuestWidget(),
               )),
         ],
       ),

@@ -20,7 +20,7 @@ import '../pages/auth/signup/CoachSelection.dart';
 import '../widgets/CustomButtonPrimary.dart';
 
 class AuthProvider extends ChangeNotifier {
-  AuthProvider(){
+  AuthProvider() {
     getCategory();
     getSubCategory();
     getDisease();
@@ -29,18 +29,17 @@ class AuthProvider extends ChangeNotifier {
 
   List<String> timeList = <String>[
     // 'choseTime'.tr,
-    '04:00 - 05:00',
+    '01:00 - 02:00',
     '01:00 - 02:00',
     '03:00 - 04:00',
   ];
 
-
-
   bool isLoading = false;
-  changeIsLoding(bool value){
-    isLoading =value;
+  changeIsLoding(bool value) {
+    isLoading = value;
     notifyListeners();
   }
+
 // login page
   bool rememberMe = false;
   bool showPasswordLogin = true;
@@ -91,18 +90,18 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController nameSignUpPage = TextEditingController();
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
-    ///////
-  List<Category1> categoryMain=[];
-  List<SubCategory> categorySub =[];
-  List<DiseaseModel> diseases =[];
-  List<SubscriptionModel> offerSub =[];
+  ///////
+  List<Category1> categoryMain = [];
+  List<SubCategory> categorySub = [];
+  List<DiseaseModel> diseases = [];
+  List<SubscriptionModel> offerSub = [];
 
-  
-  register(File image,String fullName,DateTime dob,String phoneNumber,String email,String password) async {
+  register(File image, String fullName, DateTime dob, String phoneNumber,
+      String email, String password) async {
     try {
       print("1");
-      RegisterModel? responseRegister =
-          await DioClient.dioClient.register(image,fullName,dob,phoneNumber,email,password);
+      RegisterModel? responseRegister = await DioClient.dioClient
+          .register(image, fullName, dob, phoneNumber, email, password);
       print("2");
       changeIsLoding(false);
       // print(responseRegister!.toJson().toString());
@@ -192,13 +191,11 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-  
-  // category 
+
+  // category
   Future<String?> getCategory() async {
     try {
-      categoryMain =
-          await DioClient.dioClient.getCategory();
-
+      categoryMain = await DioClient.dioClient.getCategory();
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -211,12 +208,11 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
 // subcategory
   Future<String?> getSubCategory() async {
     try {
-
       categorySub = await DioClient.dioClient.getSubCategory();
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -229,15 +225,11 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-
 
   //Disease
   Future<String?> getDisease() async {
     try {
-
       diseases = await DioClient.dioClient.getDisease();
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -255,10 +247,8 @@ class AuthProvider extends ChangeNotifier {
 
   Future<String?> getOffer() async {
     try {
-
       offerSub = await DioClient.dioClient.getOffer();
       print(offerSub.length);
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -274,7 +264,6 @@ class AuthProvider extends ChangeNotifier {
   //  Signup Part 2
 
   bool isChecked = false;
-
 
   changeIsChecked(bool? value) {
     isChecked = value!;
@@ -353,25 +342,26 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
 extension EmailValidator on String {
   bool isValidEmail() {
     return RegExp(
-        r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)')
+            r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)')
         .hasMatch(this);
   }
+
   bool isValidPassword() {
     return RegExp(
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
         .hasMatch(this);
   }
+
   bool isValidName() {
-    return RegExp(
-        r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
+    return RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
         .hasMatch(this);
   }
+
   bool isValidPhone() {
-    return RegExp(
-        r'^(?:[+0]9)?[0-9]{10}$')
-        .hasMatch(this);
+    return RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(this);
   }
 }

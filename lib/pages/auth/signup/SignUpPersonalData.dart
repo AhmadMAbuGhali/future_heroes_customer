@@ -142,7 +142,7 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'passwordEmpty'.tr;
-                          }else if (value.isValidPassword() == false) {
+                          } else if (value.isValidPassword() == false) {
                             return 'invalidPassword'.tr;
                           } else if (value.isValidPassword() == true) {
                             return null;
@@ -168,11 +168,10 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'userNameEmpty'.tr;
-                          }
-                          else if (value.isValidName() == false) {
-                          return 'invalidName'.tr;
+                          } else if (value.isValidName() == false) {
+                            return 'invalidName'.tr;
                           } else if (value.isValidName() == true) {
-                          return null;
+                            return null;
                           }
                           return null;
                         },
@@ -228,7 +227,7 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'mobileNumberEmpty'.tr;
-                          }else if (value.isValidPhone() == false) {
+                          } else if (value.isValidPhone() == false) {
                             return 'invalidPhone'.tr;
                           } else if (value.isValidPhone() == true) {
                             return null;

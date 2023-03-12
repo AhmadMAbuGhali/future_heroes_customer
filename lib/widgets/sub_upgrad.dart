@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:future_heroes_customer/pages/auth/widget/cardSubscriptionType.dart';
+import 'package:future_heroes_customer/widgets/cardSubscriptionType.dart';
 import 'package:get/get_utils/get_utils.dart';
 
 import '../resources/color_manager.dart';
