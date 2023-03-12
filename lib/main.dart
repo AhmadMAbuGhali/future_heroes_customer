@@ -16,7 +16,6 @@ void main() async {
   shaedpref = await SharedPreferences.getInstance();
 
   runApp(
-
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
@@ -32,7 +31,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     MyLocalController controller = Get.put(MyLocalController());
     shaedpref.setString("curruntLang", "ar");
     return ScreenUtilInit(
@@ -47,13 +45,12 @@ class MyApp extends StatelessWidget {
             translations: MyLocale(),
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              fontFamily: 'DroidKufi',
-              primaryColor: const Color(0xFF8A57DC),
-              checkboxTheme: CheckboxThemeData(
-                checkColor: MaterialStateProperty.all<Color>(Color(0xFF8A57DC)),
-
-              )
-            ),
+                fontFamily: 'DroidKufi',
+                primaryColor: const Color(0xFF8A57DC),
+                checkboxTheme: CheckboxThemeData(
+                  checkColor:
+                      MaterialStateProperty.all<Color>(Color(0xFF8A57DC)),
+                )),
             initialRoute: RouteHelper.getSplashScreen(),
             getPages: RouteHelper.routes,
           );
