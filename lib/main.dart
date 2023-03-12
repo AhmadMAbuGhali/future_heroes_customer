@@ -14,6 +14,7 @@ late SharedPreferences shaedpref;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   shaedpref = await SharedPreferences.getInstance();
+
   runApp(
 
     MultiProvider(
@@ -31,7 +32,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     MyLocalController controller = Get.put(MyLocalController());
+    shaedpref.setString("curruntLang", "ar");
     return ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
@@ -46,6 +49,10 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               fontFamily: 'DroidKufi',
               primaryColor: const Color(0xFF8A57DC),
+              checkboxTheme: CheckboxThemeData(
+                checkColor: MaterialStateProperty.all<Color>(Color(0xFF8A57DC)),
+
+              )
             ),
             initialRoute: RouteHelper.getSplashScreen(),
             getPages: RouteHelper.routes,

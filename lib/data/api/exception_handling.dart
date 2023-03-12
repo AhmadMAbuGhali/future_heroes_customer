@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class DioException implements Exception {
-    String errorMessage='error';
+  String errorMessage='error';
 
   DioException.fromDioError(DioError dioError) {
     switch (dioError.type){
@@ -19,7 +19,7 @@ class DioException implements Exception {
         break;
       case DioErrorType.response:
         errorMessage = _handleStatusCode(dioError.response);
-         break;
+        break;
       case DioErrorType.other:
         if (dioError.message.contains('SocketException')) {
           errorMessage = 'تحقق من اتصال الإنترنت';
@@ -42,7 +42,7 @@ class DioException implements Exception {
       case 403:
         return 'لا تمتلك صلاحيات للعرض';
       case 404:
-        return  response!.data['errorList'].toString();
+        return  response!.data['message'].toString();
       case 405:
         return 'Method not allowed. Please check the Allow header for the allowed HTTP methods.';
       case 415:

@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../main.dart';
 import '../../../widgets/textSignUp.dart';
 
 class SignUpPersonalData extends StatelessWidget {
@@ -55,20 +56,20 @@ class SignUpPersonalData extends StatelessWidget {
                               CircleAvatar(
                                 foregroundImage: provider.imageFile == null
                                     ? Image.asset(
-                                        ImageAssets.avatar,
-                                      ).image
+                                  ImageAssets.avatar,
+                                ).image
                                     : Image.file(
-                                        provider.imageFile!,
-                                        fit: BoxFit.cover,
-                                      ).image,
+                                  provider.imageFile!,
+                                  fit: BoxFit.cover,
+                                ).image,
                                 backgroundImage: provider.imageFile == null
                                     ? Image.asset(
-                                        ImageAssets.avatar,
-                                      ).image
+                                  ImageAssets.avatar,
+                                ).image
                                     : Image.file(
-                                        provider.imageFile!,
-                                        fit: BoxFit.cover,
-                                      ).image,
+                                  provider.imageFile!,
+                                  fit: BoxFit.cover,
+                                ).image,
                               ),
                               Positioned(
                                   bottom: -7.h,
@@ -142,7 +143,7 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'passwordEmpty'.tr;
-                          } else if (value.isValidPassword() == false) {
+                          }else if (value.isValidPassword() == false) {
                             return 'invalidPassword'.tr;
                           } else if (value.isValidPassword() == true) {
                             return null;
@@ -168,7 +169,8 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'userNameEmpty'.tr;
-                          } else if (value.isValidName() == false) {
+                          }
+                          else if (value.isValidName() == false) {
                             return 'invalidName'.tr;
                           } else if (value.isValidName() == true) {
                             return null;
@@ -227,7 +229,7 @@ class SignUpPersonalData extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'mobileNumberEmpty'.tr;
-                          } else if (value.isValidPhone() == false) {
+                          }else if (value.isValidPhone() == false) {
                             return 'invalidPhone'.tr;
                           } else if (value.isValidPhone() == true) {
                             return null;
@@ -245,30 +247,31 @@ class SignUpPersonalData extends StatelessWidget {
                         onpressed: provider.isLoading == true
                             ? null
                             : () {
-                                provider.changeIsLoding(true);
-                                if (signUpFormKey.currentState!.validate()) {
-                                  print(provider.imageFile!.path.toString());
-                                  print(provider.nameSignUpPage.text);
-                                  print(provider.phoneSignUpPage.text);
-                                  print(provider.pickedDate.toString());
-                                  print(provider.emailSignUpPage.text);
-                                  print(provider.passwordSignUpPage.text);
-                                  provider.register(
-                                      provider.imageFile!,
-                                      provider.nameSignUpPage.text,
-                                      DateTime.now(),
-                                      provider.phoneSignUpPage.text,
-                                      provider.emailSignUpPage.text,
-                                      provider.passwordSignUpPage.text);
-                                  Get.toNamed(RouteHelper.termsAndConditions);
-                                  print('success');
-                                } else {
-                                  print('failed');
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Data Error')),
-                                  );
-                                }
-                              },
+                          provider.changeIsLoding(true);
+                          if (signUpFormKey.currentState!.validate()) {
+                            print(provider.imageFile!.path.toString());
+                            print(provider.nameSignUpPage.text);
+                            print(provider.phoneSignUpPage.text);
+                            print(provider.pickedDate.toString());
+                            print(provider.emailSignUpPage.text);
+                            print(provider.passwordSignUpPage.text);
+                            provider.register(
+                                provider.imageFile!,
+                                provider.nameSignUpPage.text,
+                                DateTime.now(),
+                                provider.phoneSignUpPage.text,
+                                provider.emailSignUpPage.text,
+                                provider.passwordSignUpPage.text);
+                            Get.toNamed(RouteHelper.termsAndConditions);
+                            print('success');
+                            print(shaedpref.getString("curruntLang"));
+                          } else {
+                            print('failed');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Data Error')),
+                            );
+                          }
+                        },
                       ),
                       CustomTextSignUpOrSignin(
                         textone: 'haveAccount'.tr,
@@ -288,7 +291,7 @@ class SignUpPersonalData extends StatelessWidget {
     return Consumer<AuthProvider>(builder: (context, provider, x) {
       return Container(
         decoration:
-            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+        BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
         height: 220.h,
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.all(20),
@@ -320,3 +323,4 @@ class SignUpPersonalData extends StatelessWidget {
     });
   }
 }
+

@@ -11,26 +11,27 @@ class CardSubscriptionType extends StatelessWidget {
   bool isSelecte;
   CardSubscriptionType(
       {super.key,
-      required this.isSelecte,
-      required this.title,
-      required this.description,
-      required this.price});
+        required this.isSelecte,
+        required this.title,
+        required this.description,
+        required this.price});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      // height: 80.h,
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
       margin: EdgeInsets.symmetric(vertical: 5.h),
       decoration: !isSelecte
           ? BoxDecoration(
-              border: Border.all(color: ColorManager.gray, width: 1),
-              color: ColorManager.white,
-              borderRadius: BorderRadius.circular(10))
+          border: Border.all(color: ColorManager.gray, width: 1),
+          color: ColorManager.white,
+          borderRadius: BorderRadius.circular(10))
           : BoxDecoration(
-              border: Border.all(color: ColorManager.primary, width: 2),
-              color: ColorManager.white,
-              borderRadius: BorderRadius.circular(10)),
+          border: Border.all(color: ColorManager.primary, width: 2),
+          color: ColorManager.white,
+          borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           Row(
@@ -50,3 +51,4 @@ class CardSubscriptionType extends StatelessWidget {
     );
   }
 }
+

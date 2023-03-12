@@ -6,7 +6,6 @@ import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
-import 'package:future_heroes_customer/widgets/cardSubscriptionType.dart';
 import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
@@ -14,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import '../../../routes/route_helper.dart';
 import '../../../services/auth_provider.dart';
+import '../../../widgets/cardSubscriptionType.dart';
 
 class SubscriptionType extends StatelessWidget {
   SubscriptionType({super.key});
@@ -53,10 +53,10 @@ class SubscriptionType extends StatelessWidget {
                 style: TextStyle(color: ColorManager.gray),
               ),
               SizedBox(
-                height: 60.h,
+                height: 30.h,
               ),
               SizedBox(
-                height: 300.h,
+                height: 440.h,
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     itemCount: provider.offerSub.length,
@@ -69,11 +69,11 @@ class SubscriptionType extends StatelessWidget {
                               isSelecte: provider.isSelectedOne,
                               title: provider.offerSub[index].name ?? "null",
                               description:
-                                  provider.offerSub[index].description ??
-                                      "null",
+                              provider.offerSub[index].description ??
+                                  "null",
                               price:
-                                  '${provider.offerSub[index].price ?? "null"} ' +
-                                      'RS'.tr,
+                              '${provider.offerSub[index].price.toStringAsFixed(2) ?? "null"} ' +
+                                  'RS'.tr,
                             ),
                           ],
                         ),
@@ -82,7 +82,7 @@ class SubscriptionType extends StatelessWidget {
                           provider.categoryMain[index].name ?? ' nullß');
                     }),
               ),
-              Spacer(),
+              SizedBox(height: 100.h,),
               CustomButtonPrimary(
                 text: 'continue'.tr,
                 onpressed: () {
@@ -97,3 +97,4 @@ class SubscriptionType extends StatelessWidget {
     });
   }
 }
+

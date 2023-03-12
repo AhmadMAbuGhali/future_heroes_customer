@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../models/login_model.dart';
+import '../models/respons_massage_code.dart';
 import '../models/terms_and_conditions_model.dart';
 import '../pages/auth/signup/CoachSelection.dart';
 import '../widgets/CustomButtonPrimary.dart';
@@ -29,12 +30,18 @@ class AuthProvider extends ChangeNotifier {
 
   List<String> timeList = <String>[
     // 'choseTime'.tr,
-    '01:00 - 02:00',
+    '04:00 - 05:00',
     '01:00 - 02:00',
     '03:00 - 04:00',
   ];
 
   bool isLoading = false;
+
+  // changeIsLoading() {
+  //   isLoading = !isLoading;
+  //   notifyListeners();
+  // }
+
   changeIsLoding(bool value) {
     isLoading = value;
     notifyListeners();
@@ -59,7 +66,7 @@ class AuthProvider extends ChangeNotifier {
   login(String email, String password) async {
     try {
       LoginModel? respontLogin =
-          await DioClient.dioClient.login(email, password);
+      await DioClient.dioClient.login(email, password);
 
       print(respontLogin!.toJson().toString());
     } on DioError catch (e) {
@@ -90,9 +97,11 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController nameSignUpPage = TextEditingController();
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
+
   ///////
   List<Category1> categoryMain = [];
   List<SubCategory> categorySub = [];
+  List<SubCategory> categorySubforcat = [];
   List<DiseaseModel> diseases = [];
   List<SubscriptionModel> offerSub = [];
 
@@ -176,7 +185,7 @@ class AuthProvider extends ChangeNotifier {
   Future<String?> getTerm() async {
     try {
       TermsAndConditionsModel termsAndConditionsModel =
-          await DioClient.dioClient.termsAndConditions();
+      await DioClient.dioClient.termsAndConditions();
       print(termsAndConditionsModel.toJson().toString());
       return termsAndConditionsModel.description;
     } on DioError catch (e) {
@@ -196,6 +205,8 @@ class AuthProvider extends ChangeNotifier {
   Future<String?> getCategory() async {
     try {
       categoryMain = await DioClient.dioClient.getCategory();
+      idSelectedCategory = categoryMain.first.id ?? 0;
+      getSubCategorysForCategor(categoryMain.first.id ?? 0);
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -210,7 +221,23 @@ class AuthProvider extends ChangeNotifier {
   }
 
 // subcategory
-  Future<String?> getSubCategory() async {
+
+  List<int> subCatId = [];
+
+  removeIdSub(int index) {
+    subCatId.remove(categorySubforcat[index].id);
+    notifyListeners();
+  }
+
+  addIdSub(int index) {
+    subCatId.add(categorySubforcat[index].id ?? 0);
+    subCatId.toSet().toList();
+
+    print(subCatId.length);
+    notifyListeners();
+  }
+
+  Future<dynamic> getSubCategory() async {
     try {
       categorySub = await DioClient.dioClient.getSubCategory();
     } on DioError catch (e) {
@@ -225,6 +252,51 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future<dynamic> getSubCategorysForCategor(int id) async {
+    try {
+      idSelectedCategory = id;
+      notifyListeners();
+      categorySubforcat = [];
+      categorySubforcat =
+      await DioClient.dioClient.getSubCategorysForCategor(id);
+      notifyListeners();
+    } on DioError catch (e) {
+      print(e.toString());
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+  Future<dynamic> getChoesenCoach(int id) async {
+    try {
+      idSelectedCategory = id;
+      notifyListeners();
+      categorySubforcat = [];
+      categorySubforcat =
+      await DioClient.dioClient.getSubCategorysForCategor(id);
+      notifyListeners();
+    } on DioError catch (e) {
+      print(e.toString());
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
 
   //Disease
   Future<String?> getDisease() async {
@@ -261,6 +333,7 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
   //  Signup Part 2
 
   bool isChecked = false;
@@ -270,7 +343,9 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isCultural = false;
+  int idSelectedCategory = 0;
+
+  int isSelectedCoach = 0;
 
   bool isCoachSelection = false;
   late String dropdownValue = timeList.first;
@@ -307,15 +382,15 @@ class AuthProvider extends ChangeNotifier {
 
   String? selectedValue;
 
-  makeCulturalTrue() {
-    isCultural = true;
-    notifyListeners();
-  }
-
-  makeCulturalFalse() {
-    isCultural = false;
-    notifyListeners();
-  }
+  // makeCulturalTrue() {
+  //   isCultural = true;
+  //   notifyListeners();
+  // }
+  //
+  // makeCulturalFalse() {
+  //   isCultural = false;
+  //   notifyListeners();
+  // }
 
   makeIsDiseasesTrue() {
     isDiseases = true;
@@ -341,18 +416,89 @@ class AuthProvider extends ChangeNotifier {
     dropdownValue = date!;
     notifyListeners();
   }
+
+  // forgetPass
+
+  TextEditingController emailSendCodeController = TextEditingController();
+  TextEditingController sendCodeController = TextEditingController();
+
+
+  bool hideNewPasswordForget = true;
+  bool hideConfirmPasswordForget = true;
+
+  changeHideNewPasswordForget() {
+    hideNewPasswordForget = !hideNewPasswordForget;
+    notifyListeners();
+  }
+
+  changeHideConfirmPasswordForget() {
+    hideConfirmPasswordForget = !hideConfirmPasswordForget;
+    notifyListeners();
+
+  }
+
+  Future<String?> resetSendCode() async {
+    try {
+      ResponsMassageCode? success = await DioClient.dioClient
+          .resetSendCode(emailSendCodeController.text.trim());
+      if (success!.message != null) {
+        notifyListeners();
+        return 'true';
+      } else {
+        return 'false';
+      }
+    } on DioError catch (e) {
+      notifyListeners();
+      print(e.response?.data['message'].toString());
+      return e.response?.data['message'].toString();
+    }
+  }
+
+  Future<String?> verifyResetSendCode() async {
+    try {
+      ResponsMassageCode? success = await DioClient.dioClient
+          .verifyResetSendCode(
+          emailSendCodeController.text.trim(), sendCodeController.text);
+      if (success!.message != null) {
+        notifyListeners();
+        return 'true';
+      }
+    } on DioError catch (e) {
+      notifyListeners();
+      return e.response?.data['errorList'].toString();
+    }
+    return null;
+  }
+
+  Future<String?> resetPassword(String pass, String conPass) async {
+    try {
+      print(emailSendCodeController.text.trim());
+      ResponsMassageCode? success = await DioClient.dioClient
+          .resetPassword(emailSendCodeController.text.trim(), pass, conPass);
+
+      if (success!.message != null) {
+        notifyListeners();
+        return 'true';
+      }
+    } on DioError catch (e) {
+      notifyListeners();
+      print(e.toString());
+      return e.response?.data['message'].toString();
+    }
+    return null;
+  }
 }
 
 extension EmailValidator on String {
   bool isValidEmail() {
     return RegExp(
-            r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)')
+        r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)')
         .hasMatch(this);
   }
 
   bool isValidPassword() {
     return RegExp(
-            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
         .hasMatch(this);
   }
 
@@ -365,3 +511,4 @@ extension EmailValidator on String {
     return RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(this);
   }
 }
+

@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:future_heroes_customer/data/api/dio_client.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/resources/styles_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/services/auth_provider.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
@@ -25,7 +26,9 @@ import '../../../data/api/apiconst.dart';
 
 class SignUpScreenPart2 extends StatelessWidget {
   SignUpScreenPart2({super.key});
+
   var id;
+
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -62,23 +65,24 @@ class SignUpScreenPart2 extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(color: ColorManager.gray),
                 ),
-
                 SizedBox(
-                  height: 200.h,
+                  height: 150.h,
                   child: ListView.builder(
-
-                    scrollDirection: Axis.horizontal,
+                      scrollDirection: Axis.horizontal,
                       itemCount: provider.categoryMain.length,
-                      itemBuilder: (context,index){
-                      return  InkWell(
-                        onTap: (){
-                         id=   provider.categoryMain[index].id;
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            id = provider.categoryMain[index].id;
 
-                        },
-                        child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                            provider.getSubCategorysForCategor(id);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            margin: EdgeInsets.symmetric(horizontal: 20.w),
                             decoration: BoxDecoration(
-                                border: provider.isCultural
+                                border: provider.idSelectedCategory ==
+                                    provider.categoryMain[index].id
                                     ? Border.all(
                                   color: ColorManager.primary,
                                   width: 2,
@@ -86,56 +90,76 @@ class SignUpScreenPart2 extends StatelessWidget {
                                     : null),
                             child: Column(
                               children: [
-                               provider.categoryMain[index].imageString==""? SvgPicture.asset(
+                                provider.categoryMain[index].imageString == ""
+                                    ? SvgPicture.asset(
                                   ImageAssets.cultural,
                                   height: 120.h,
                                   width: 120.w,
-                                ):Image.network(ApiConstant.imageURL+ provider.categoryMain[index].imageString!,height: 120.h,
-                                 width: 120.w,),
-                                Text(provider.categoryMain[index].name ??' null')
+                                )
+                                    : Image.network(
+                                  ApiConstant.imageURL +
+                                      provider.categoryMain[index]
+                                          .imageString!,
+                                  height: 120.h,
+                                  width: 120.w,
+                                ),
+                                Text(provider.categoryMain[index].name ??
+                                    ' null')
                               ],
                             ),
                           ),
-                      );
-                    return Text(provider.categoryMain[index].name ??' nullß');
-                  }),
-                ),
-
-                SizedBox(
-                  height: 170.h,
-                  child: ListView.builder(
-
-                      scrollDirection: Axis.vertical,
-                      itemCount: provider.categoryMain.length,
-                      itemBuilder: (context,index){
-                        return  Container(
-                          margin: EdgeInsets.symmetric(horizontal: 20.w),
-                          decoration: BoxDecoration(
-                              border: provider.isCultural
-                                  ? Border.all(
-                                color: ColorManager.primary,
-                                width: 2,
-                              )
-                                  : null),
-                          child: Column(
-                            children: [
-                              CardCheckBoxWidget(
-                                isChecked: provider.isChecked,
-                                title: provider.categorySub[index].name ??' null' ,
-                              ),
-                            ],
-                          ),
                         );
-                        return Text(provider.categoryMain[index].name ??' nullß');
+                        return Text(
+                            provider.categoryMain[index].name ?? ' nullß');
                       }),
                 ),
-
+                SizedBox(
+                  height: 30.h,
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                      children: List.generate(
+                          provider.categorySubforcat.length,
+                              (index) => Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 2,
+                                  color: ColorManager.primary,
+                                ),
+                                borderRadius: BorderRadius.circular(15.r)),
+                            child: CheckboxListTile(
+                              checkColor: ColorManager.primary,
+                              value: provider.subCatId.contains(
+                                  provider.categorySubforcat[index].id),
+                              onChanged: (selected) {
+                                if (provider.subCatId.contains(provider
+                                    .categorySubforcat[index].id) ==
+                                    true) {
+                                  provider.removeIdSub(index);
+                                } else {
+                                  provider.addIdSub(index);
+                                }
+                                // provider.onUserSelect(selected??false, index);
+                              },
+                              selected: true,
+                              title: Text(
+                                provider.categorySubforcat[index].name ??
+                                    '',
+                                style: getRegularStyle(
+                                    color: ColorManager.primary),
+                              ),
+                            ),
+                          ))),
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
-                     snakbarWidget(context,
-                            Titel: 'مرحبا بك',
-                            Description: 'قم باكمال عملة التسجيل')
+                    snakbarWidget(context,
+                        Titel: 'مرحبا بك',
+                        Description: 'قم باكمال عملة التسجيل')
                         .Success();
                     Get.offNamed(RouteHelper.coachSelection);
                   },
@@ -146,3 +170,4 @@ class SignUpScreenPart2 extends StatelessWidget {
     });
   }
 }
+

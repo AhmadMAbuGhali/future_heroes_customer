@@ -8,12 +8,17 @@ class CustomTextTitle extends StatelessWidget {
   final String text;
   FontSize? fontSize ;
 
-   CustomTextTitle({super.key, required this.text,this.fontSize});
+  CustomTextTitle({super.key, required this.text,this.fontSize});
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
-        textAlign: TextAlign.center,
-        style: getBoldStyle(color: Colors.black,fontSize: FontSize.s16));
+    return SizedBox(
+      width: 170,
+      child: Text(text,
+          textAlign: TextAlign.start,
+          // overflow: TextOverflow.ellipsis,
+          style: getRegularStyle(color: Colors.black,fontSize: FontSize.s14,)),
+    );
   }
 }
+
