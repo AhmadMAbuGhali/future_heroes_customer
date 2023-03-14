@@ -31,20 +31,9 @@ class AuthProvider extends ChangeNotifier {
     getOffer();
   }
 
-  // List<String> timeList = <String>[
-  //   // 'choseTime'.tr,
-  //   '04:00 - 05:00',
-  //   '01:00 - 02:00',
-  //   '03:00 - 04:00',
-  // ];
 
+  // general
   bool isLoading = false;
-
-  // changeIsLoading() {
-  //   isLoading = !isLoading;
-  //   notifyListeners();
-  // }
-
   changeIsLoding(bool value) {
     isLoading = value;
     notifyListeners();
@@ -60,12 +49,6 @@ class AuthProvider extends ChangeNotifier {
     showPasswordLogin = !showPasswordLogin;
     notifyListeners();
   }
-
-  changeShowPasswordSignUP() {
-    showPasswordSignUp = !showPasswordSignUp;
-    notifyListeners();
-  }
-
   login(String email, String password) async {
     try {
       LoginModel? respontLogin =
@@ -90,6 +73,8 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   // SignUp Page
   bool showPasswordSignUp = true;
   File? imageFile;
@@ -100,26 +85,19 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController nameSignUpPage = TextEditingController();
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
-
-  ///////
-  List<Category1> categoryMain = [];
-  List<SubCategory> categorySub = [];
-  List<ChoessCoachModel> coachFromId = [];
-  List<SubCategory> categorySubforcat = [];
-  List<DiseaseModel> diseases = [];
-  List<SubscriptionModel> offerSub = [];
+  changeShowPasswordSignUP() {
+    showPasswordSignUp = !showPasswordSignUp;
+    notifyListeners();
+  }
 
   register(File image, String fullName, DateTime dob, String phoneNumber,
       String email, String password) async {
     try {
-      print("1");
       RegisterModel? responseRegister = await DioClient.dioClient
           .register(image, fullName, dob, phoneNumber, email, password);
-      print("2");
       changeIsLoding(false);
-      // print(responseRegister!.toJson().toString());
     } on DioError catch (e) {
-      changeIsLoding(false);
+      changeIsLoding(true);
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -205,7 +183,20 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
+  //
+
+
+  List<ChoessCoachModel> coachFromId = [];
+
+
+
+
+
+
   // category
+  List<Category1> categoryMain = [];
   Future<String?> getCategory() async {
     try {
       categoryMain = await DioClient.dioClient.getCategory();
@@ -225,9 +216,10 @@ class AuthProvider extends ChangeNotifier {
   }
 
 // subcategory
-
+  int idSelectedCategory = 0;
   List<int> subCatId = [];
-
+  List<SubCategory> categorySubforcat = [];
+  List<SubCategory> categorySub = [];
   removeIdSub(int index) {
     subCatId.remove(categorySubforcat[index].id);
     notifyListeners();
@@ -236,10 +228,9 @@ class AuthProvider extends ChangeNotifier {
   addIdSub(int index) {
     subCatId.add(categorySubforcat[index].id ?? 0);
     subCatId.toSet().toList();
-
-    print(subCatId.length);
     notifyListeners();
   }
+
 
   Future<dynamic> getSubCategory() async {
     try {
@@ -278,6 +269,8 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  //Coach Selection
   List<TimeList>  listTime=[];
   List<String> timeListString=[];
    String timeString='';
@@ -326,7 +319,7 @@ class AuthProvider extends ChangeNotifier {
   }
   Future<dynamic> getChoesenCoach(List<int> id) async {
     try {
-print(id);
+      print(id);
       coachFromId = [];
       coachFromId=await DioClient.dioClient.getSendSubId(id);
       notifyListeners();
@@ -346,6 +339,8 @@ print(id);
 
 
   //Disease
+  List<DiseaseModel> diseases = [];
+
   Future<String?> getDisease() async {
     try {
       diseases = await DioClient.dioClient.getDisease();
@@ -363,7 +358,7 @@ print(id);
   }
 
   // offer
-
+  List<SubscriptionModel> offerSub = [];
   Future<String?> getOffer() async {
     try {
       offerSub = await DioClient.dioClient.getOffer();
@@ -390,12 +385,6 @@ print(id);
     notifyListeners();
   }
 
-  int idSelectedCategory = 0;
-  int idSelectedCoach = 0;
-
-  int isSelectedCoach = 0;
-
-  bool isCoachSelection = false;
   // late String dropdownValue = timeList.first;
   bool isDiseases = true;
 
@@ -403,42 +392,10 @@ print(id);
   bool isSelectedOne = false;
   bool isSelectedTwo = false;
   bool isSelectedThree = false;
-  var price1 = 99.99;
-  var price2 = 179.99;
-  var price3 = 249.99;
 
-  selectOne() {
-    isSelectedOne = true;
-    isSelectedTwo = false;
-    isSelectedThree = false;
-    notifyListeners();
-  }
 
-  selectTow() {
-    isSelectedOne = false;
-    isSelectedTwo = true;
-    isSelectedThree = false;
-    notifyListeners();
-  }
-
-  selectThree() {
-    isSelectedOne = false;
-    isSelectedTwo = false;
-    isSelectedThree = true;
-    notifyListeners();
-  }
 
   String? selectedValue;
-
-  // makeCulturalTrue() {
-  //   isCultural = true;
-  //   notifyListeners();
-  // }
-  //
-  // makeCulturalFalse() {
-  //   isCultural = false;
-  //   notifyListeners();
-  // }
 
   makeIsDiseasesTrue() {
     isDiseases = true;
@@ -450,27 +407,12 @@ print(id);
     notifyListeners();
   }
 
-  makeCoachSelectionTrue() {
-    isCoachSelection = true;
-    notifyListeners();
-  }
 
-  makeCoachSelectionFalse() {
-    isCoachSelection = false;
-    notifyListeners();
-  }
 
-  // showDropdownValue(String? date) {
-  //   dropdownValue = date!;
-  //   notifyListeners();
-  // }
-
-  // forgetPass
+  //ForgetPassword
 
   TextEditingController emailSendCodeController = TextEditingController();
   TextEditingController sendCodeController = TextEditingController();
-
-
   bool hideNewPasswordForget = true;
   bool hideConfirmPasswordForget = true;
 
@@ -537,6 +479,8 @@ print(id);
   }
 }
 
+
+// Validator
 extension EmailValidator on String {
   bool isValidEmail() {
     return RegExp(

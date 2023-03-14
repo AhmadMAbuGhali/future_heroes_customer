@@ -249,16 +249,11 @@ class SignUpPersonalData extends StatelessWidget {
                             : () {
                           provider.changeIsLoding(true);
                           if (signUpFormKey.currentState!.validate()) {
-                            print(provider.imageFile!.path.toString());
-                            print(provider.nameSignUpPage.text);
-                            print(provider.phoneSignUpPage.text);
-                            print(provider.pickedDate.toString());
-                            print(provider.emailSignUpPage.text);
-                            print(provider.passwordSignUpPage.text);
+
                             provider.register(
                                 provider.imageFile!,
                                 provider.nameSignUpPage.text,
-                                DateTime.now(),
+                                provider.pickedDate??DateTime.now(),
                                 provider.phoneSignUpPage.text,
                                 provider.emailSignUpPage.text,
                                 provider.passwordSignUpPage.text);

@@ -62,9 +62,8 @@ class CoachSelection extends StatelessWidget {
                                 itemBuilder:(context,index2){
                                   return  Container(
                                     decoration: BoxDecoration(
-                                        border: provider.isCoachSelection
-                                            ? null
-                                            : Border.all(
+                                        border:
+                                             Border.all(
                                           color: ColorManager.primary,
                                           width: 2,
                                         )),

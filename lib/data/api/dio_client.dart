@@ -20,6 +20,7 @@ class DioClient {
     initDio();
   }
 
+  // initDio
   static final DioClient dioClient = DioClient._();
   Dio? dio;
 
@@ -28,6 +29,7 @@ class DioClient {
     dio?.options.baseUrl = ApiConstant.baseUrl;
   }
 
+// Login
   Future<LoginModel?> login(String email, String password) async {
     Response response = await dio!
         .post(ApiConstant.login, data: {"email": email, "password": password});
@@ -39,7 +41,7 @@ class DioClient {
     }
   }
 
-
+// register
   Future<RegisterModel?> register( File image,String fullName, DateTime dob,
       String phoneNumber, String email, String password) async {
 
@@ -60,6 +62,7 @@ class DioClient {
 
   }
 
+  // term
   Future<TermsAndConditionsModel> termsAndConditions() async {
     Response response = await dio!.get(ApiConstant.termsAndConditions,
         options: Options(
@@ -72,7 +75,7 @@ class DioClient {
     return term;
   }
 
-  //////////////////
+  //category
 
   Future<List<Category1>> getCategory() async {
     Response response = await dio!.get(ApiConstant.category,
@@ -86,22 +89,7 @@ class DioClient {
 
     return listcat;
   }
-  //////////////////
-  Future<List<TimeList>> getTimeList(String emailUser) async {
-    Response response = await dio!.get(ApiConstant.timeList,
-        options: Options(
-          headers: {
-            "Accept-Language": shaedpref.getString("curruntLang")
-          },),
-      queryParameters: {
-      "userEmail":emailUser
-      }
-    );
-    List<TimeList> listcat=[];
-    listcat= (response.data as List).map((e) => TimeList.fromJson(e)).toList();
-    print(listcat.toString());
-    return listcat;
-  }
+  //subCategory
   Future<List<SubCategory>> getSubCategory() async {
     Response response = await dio!.get(ApiConstant.subCategory,
         options: Options(
@@ -131,7 +119,7 @@ class DioClient {
 
     return listsubcatforcat;
   }
-///////////
+//Coach Selection
   Future<List<ChoessCoachModel>> getSendSubId(List<int> id) async {
     Response response = await dio!.post(ApiConstant.sendSubId,
         data: id,
@@ -148,8 +136,23 @@ class DioClient {
 
     return listChoessCoach;
   }
+  Future<List<TimeList>> getTimeList(String emailUser) async {
+    Response response = await dio!.get(ApiConstant.timeList,
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang")
+          },),
+        queryParameters: {
+          "userEmail":emailUser
+        }
+    );
+    List<TimeList> listcat=[];
+    listcat= (response.data as List).map((e) => TimeList.fromJson(e)).toList();
+    print(listcat.toString());
+    return listcat;
+  }
 
-  /////
+  //Disease
   Future<List<DiseaseModel>> getDisease() async {
     Response response = await dio!.get(ApiConstant.disease,
         options: Options(
@@ -163,7 +166,7 @@ class DioClient {
 
     return listDisease;
   }
-
+//Subscription
   Future<List<SubscriptionModel>> getOffer() async {
     Response response = await dio!.get(ApiConstant.offer,
         options: Options(
@@ -179,6 +182,8 @@ class DioClient {
 
 
 
+
+//ForgetPassword
   Future<ResponsMassageCode?> resetSendCode(String email) async {
     Response response =
     await dio!.post(ApiConstant.forgetPassword, queryParameters: {"email": email});

@@ -126,8 +126,10 @@ class Login extends StatelessWidget {
                   CustomButtonPrimary(
                     text: 'login'.tr,
                     onpressed: () {
+
                       provider.login(provider.emailLoginPage.text,
                           provider.passwordLoginPage.text);
+
 
                       if (loginFormKey.currentState!.validate()) {
                         Get.toNamed(RouteHelper.successLogin);
