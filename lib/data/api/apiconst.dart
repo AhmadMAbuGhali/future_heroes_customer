@@ -14,6 +14,7 @@ class ApiConstant {
   static const String offer = 'Offer';
   static const String category = 'Category';
   static const String subCategory = 'SubCategory';
+  static const String timeList = 'Class/GetClassByUserEmailAsync';
   static const String getSubCategorysForCategor = 'SubCategory/GetSubCategorysForCategory';
   static const String sendSubId = 'Authentication/UserSubCategorysRequest';
   static const String forgetPassword = 'Authentication/ForgetPassword';

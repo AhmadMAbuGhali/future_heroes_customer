@@ -10,10 +10,13 @@ import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
 import 'package:future_heroes_customer/models/sub_category.dart';
 import 'package:future_heroes_customer/models/subscribtion_model.dart';
+import 'package:future_heroes_customer/models/time_list.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../models/choess_coach_model.dart';
 import '../models/login_model.dart';
 import '../models/respons_massage_code.dart';
 import '../models/terms_and_conditions_model.dart';
@@ -28,12 +31,12 @@ class AuthProvider extends ChangeNotifier {
     getOffer();
   }
 
-  List<String> timeList = <String>[
-    // 'choseTime'.tr,
-    '04:00 - 05:00',
-    '01:00 - 02:00',
-    '03:00 - 04:00',
-  ];
+  // List<String> timeList = <String>[
+  //   // 'choseTime'.tr,
+  //   '04:00 - 05:00',
+  //   '01:00 - 02:00',
+  //   '03:00 - 04:00',
+  // ];
 
   bool isLoading = false;
 
@@ -101,6 +104,7 @@ class AuthProvider extends ChangeNotifier {
   ///////
   List<Category1> categoryMain = [];
   List<SubCategory> categorySub = [];
+  List<ChoessCoachModel> coachFromId = [];
   List<SubCategory> categorySubforcat = [];
   List<DiseaseModel> diseases = [];
   List<SubscriptionModel> offerSub = [];
@@ -274,14 +278,57 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+  List<TimeList>  listTime=[];
+  List<String> timeListString=[];
+   String timeString='';
+   changeTime(TimeList timeOb){
 
-  Future<dynamic> getChoesenCoach(int id) async {
+       String days='';
+       for(ClassDateTimes listvalue in timeOb.classDateTimes??[]){
+         days+=listvalue.dayAsString??'';
+         days+='/';
+       }
+       days+='\n${timeOb.classDateTimes!.first.startClass}->${timeOb.classDateTimes!.first.endClass}';
+
+
+     timeString=days;
+   }
+  Future<dynamic> getTimeList(String emailUser) async {
     try {
-      idSelectedCategory = id;
+
+      listTime= await DioClient.dioClient.getTimeList(emailUser);
+      timeListString=[];
+      for(TimeList value in listTime){
+         String days='';
+         for(ClassDateTimes listvalue in value.classDateTimes??[]){
+           days+=listvalue.dayAsString??'';
+           days+='/';
+         }
+         days+='\n${value.classDateTimes!.first.startClass}->${value.classDateTimes!.first.endClass}';
+         timeListString.add(days);
+
+
+      }
+      print(timeListString.toString());
       notifyListeners();
-      categorySubforcat = [];
-      categorySubforcat =
-      await DioClient.dioClient.getSubCategorysForCategor(id);
+    } on DioError catch (e) {
+      print(e.toString());
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+  Future<dynamic> getChoesenCoach(List<int> id) async {
+    try {
+print(id);
+      coachFromId = [];
+      coachFromId=await DioClient.dioClient.getSendSubId(id);
       notifyListeners();
     } on DioError catch (e) {
       print(e.toString());
@@ -344,11 +391,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
   int idSelectedCategory = 0;
+  int idSelectedCoach = 0;
 
   int isSelectedCoach = 0;
 
   bool isCoachSelection = false;
-  late String dropdownValue = timeList.first;
+  // late String dropdownValue = timeList.first;
   bool isDiseases = true;
 
   bool isSubscriptionType = false;
@@ -412,10 +460,10 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  showDropdownValue(String? date) {
-    dropdownValue = date!;
-    notifyListeners();
-  }
+  // showDropdownValue(String? date) {
+  //   dropdownValue = date!;
+  //   notifyListeners();
+  // }
 
   // forgetPass
 

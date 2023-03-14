@@ -11,6 +11,7 @@ import 'package:future_heroes_customer/models/register_model.dart';
 import 'package:future_heroes_customer/models/sub_category.dart';
 import 'package:future_heroes_customer/models/subscribtion_model.dart';
 import 'package:future_heroes_customer/models/terms_and_conditions_model.dart';
+import 'package:future_heroes_customer/models/time_list.dart';
 
 import '../../models/respons_massage_code.dart';
 
@@ -86,6 +87,21 @@ class DioClient {
     return listcat;
   }
   //////////////////
+  Future<List<TimeList>> getTimeList(String emailUser) async {
+    Response response = await dio!.get(ApiConstant.timeList,
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang")
+          },),
+      queryParameters: {
+      "userEmail":emailUser
+      }
+    );
+    List<TimeList> listcat=[];
+    listcat= (response.data as List).map((e) => TimeList.fromJson(e)).toList();
+    print(listcat.toString());
+    return listcat;
+  }
   Future<List<SubCategory>> getSubCategory() async {
     Response response = await dio!.get(ApiConstant.subCategory,
         options: Options(
@@ -118,9 +134,7 @@ class DioClient {
 ///////////
   Future<List<ChoessCoachModel>> getSendSubId(List<int> id) async {
     Response response = await dio!.post(ApiConstant.sendSubId,
-        data: {
-          id
-        },
+        data: id,
         options: Options(
 
           headers: {
@@ -130,6 +144,7 @@ class DioClient {
     );
     List<ChoessCoachModel> listChoessCoach=[];
     listChoessCoach= (response.data as List).map((e) => ChoessCoachModel.fromJson(e)).toList();
+    print(response.data.toString());
 
     return listChoessCoach;
   }

@@ -157,6 +157,9 @@ class SignUpScreenPart2 extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
+
+                    provider.getChoesenCoach(provider.subCatId);
+
                     snakbarWidget(context,
                         Titel: 'مرحبا بك',
                         Description: 'قم باكمال عملة التسجيل')
