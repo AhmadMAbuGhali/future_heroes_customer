@@ -273,6 +273,7 @@ class AuthProvider extends ChangeNotifier {
   //Coach Selection
   List<TimeList>  listTime=[];
   List<String> timeListString=[];
+  Map<int, String> maptimeListString = {};
    String timeString='';
    changeTime(TimeList timeOb){
 
@@ -288,9 +289,9 @@ class AuthProvider extends ChangeNotifier {
    }
   Future<dynamic> getTimeList(String emailUser) async {
     try {
-
       listTime= await DioClient.dioClient.getTimeList(emailUser);
       timeListString=[];
+      print(listTime.length);
       for(TimeList value in listTime){
          String days='';
          for(ClassDateTimes listvalue in value.classDateTimes??[]){
@@ -298,6 +299,7 @@ class AuthProvider extends ChangeNotifier {
            days+='/';
          }
          days+='\n${value.classDateTimes!.first.startClass}->${value.classDateTimes!.first.endClass}';
+         maptimeListString[value.id??0]=days;
          timeListString.add(days);
 
 
@@ -305,6 +307,7 @@ class AuthProvider extends ChangeNotifier {
       print(timeListString.toString());
       notifyListeners();
     } on DioError catch (e) {
+      print('e.toString()');
       print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -322,6 +325,7 @@ class AuthProvider extends ChangeNotifier {
       print(id);
       coachFromId = [];
       coachFromId=await DioClient.dioClient.getSendSubId(id);
+      await  getTimeList(coachFromId.first.coaches!.first.email ??'') ;
       notifyListeners();
     } on DioError catch (e) {
       print(e.toString());
@@ -344,6 +348,8 @@ class AuthProvider extends ChangeNotifier {
   Future<String?> getDisease() async {
     try {
       diseases = await DioClient.dioClient.getDisease();
+      print(diseases.length);
+      notifyListeners();
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(

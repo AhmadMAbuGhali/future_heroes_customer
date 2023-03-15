@@ -148,7 +148,8 @@ class DioClient {
     );
     List<TimeList> listcat=[];
     listcat= (response.data as List).map((e) => TimeList.fromJson(e)).toList();
-    print(listcat.toString());
+    print('listcat.length');
+    print(listcat.length);
     return listcat;
   }
 

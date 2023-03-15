@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -68,9 +69,9 @@ class CoachSelection extends StatelessWidget {
                                           width: 2,
                                         )),
                                     child: InkWell(
-                                        onTap: () {
+                                        onTap: () async{
                                           // provider.makeCoachSelectionFalse();
-                                         provider.getTimeList(provider.coachFromId[index].coaches![index2].email ??'') ;
+                                       await  provider.getTimeList(provider.coachFromId[index].coaches![index2].email ??'') ;
                                         },
                                         child: Column(
                                           children: [
@@ -96,40 +97,81 @@ class CoachSelection extends StatelessWidget {
                             'availableTime'.tr,
                             style: TextStyle(color: ColorManager.black),
                           ),
-                          Container(
-                            height: 100.h,
-                            width: double.infinity,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.h, horizontal: 15.w),
-                            margin: EdgeInsets.symmetric(vertical: 10.h),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: ColorManager.gray),
-                                color: ColorManager.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: DropdownButton<TimeList>(
-                              iconEnabledColor: ColorManager.black,
-                              icon: Icon(Icons.arrow_drop_down),
-                              value:  provider.listTime.first,
-                              elevation: 16,
-                              style: const TextStyle(color: ColorManager.primary),
-                              underline: Container(
-                                height: 2,
-                                color: ColorManager.primary,
+                          // Container(
+                          //   height: 100.h,
+                          //   width: double.infinity,
+                          //   padding: EdgeInsets.symmetric(
+                          //       vertical: 10.h, horizontal: 15.w),
+                          //   margin: EdgeInsets.symmetric(vertical: 10.h),
+                          //   decoration: BoxDecoration(
+                          //       border: Border.all(color: ColorManager.gray),
+                          //       color: ColorManager.white,
+                          //       borderRadius: BorderRadius.circular(10)),
+                          //   child: DropdownButton<TimeList>(
+                          //     iconEnabledColor: ColorManager.black,
+                          //     icon: Icon(Icons.arrow_drop_down),
+                          //     value:  provider.listTime.first,
+                          //     elevation: 16,
+                          //     style: const TextStyle(color: ColorManager.primary),
+                          //     underline: Container(
+                          //       height: 2,
+                          //       color: ColorManager.primary,
+                          //     ),
+                          //     onChanged: (  value) {
+                          //       provider.changeTime(value!);
+                          //       // provider.showDropdownValue(value);
+                          //     },
+                          //     items: provider.listTime
+                          //         .map<DropdownMenuItem<TimeList>>(( value) {
+                          //       return DropdownMenuItem<TimeList>(
+                          //         value: value,
+                          //         child: Text(provider.timeString),
+                          //       );
+                          //     }).toList(),
+                          //   ),
+                          // ),
+                          DropdownButtonFormField2(
+                            decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: EdgeInsets.zero,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12.r),
                               ),
-                              onChanged: (  value) {
-                                provider.changeTime(value!);
-                                // provider.showDropdownValue(value);
-                              },
-                              items: provider.listTime
-                                  .map<DropdownMenuItem<TimeList>>(( value) {
-                                return DropdownMenuItem<TimeList>(
-                                  value: value,
-                                  child: Text(provider.timeString),
-                                );
-                              }).toList(),
                             ),
+                            isExpanded: true,
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: ColorManager.primary,
+                            ),
+                            iconSize: 30.sp,
+                            buttonHeight: 41.h,
+                            buttonPadding: const EdgeInsets.only(left: 12, right: 12),
+                            dropdownDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            items: provider.listTime
+                                .map((item) => DropdownMenuItem<String>(
+                              value: item.id.toString(),
+                              child: Text(
+                               provider.maptimeListString[item.id!]! ,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList(),
+                            validator: (value) {
+                              if (value == null) {
+                                return 'يجب تحديد تصنيف المهمة';
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              print(value);
+                              // TaskCategoryItem? h2 = value as TaskCategoryItem?;
+                              // provider.selectedCategoryId = h2!.id!;
+                            },
                           ),
-
 
                         ],
                       ),
