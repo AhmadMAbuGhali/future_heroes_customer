@@ -275,7 +275,24 @@ class AuthProvider extends ChangeNotifier {
   List<String> timeListString=[];
   Map<int, String> maptimeListString = {};
    String timeString='';
-   changeTime(TimeList timeOb){
+  int idSelectedTime = 0;
+  List<int> timeId = [];
+
+  removeIdTime(int index) {
+    timeId.remove(index);
+    notifyListeners();
+  }
+
+  addIdTime(int index) {
+    timeId.add(index);
+    subCatId.toSet().toList();
+    notifyListeners();
+  }
+
+
+  changeTime(TimeList timeOb){
+     notifyListeners();
+     categorySubforcat = [];
 
        String days='';
        for(ClassDateTimes listvalue in timeOb.classDateTimes??[]){
@@ -298,7 +315,7 @@ class AuthProvider extends ChangeNotifier {
            days+=listvalue.dayAsString??'';
            days+='/';
          }
-         days+='\n${value.classDateTimes!.first.startClass}->${value.classDateTimes!.first.endClass}';
+         days+='\n${int.parse(value.classDateTimes!.first.startClass!.split(":").first)} ---> ${int.parse(value.classDateTimes!.first.endClass!.split(":").first)}';
          maptimeListString[value.id??0]=days;
          timeListString.add(days);
 
