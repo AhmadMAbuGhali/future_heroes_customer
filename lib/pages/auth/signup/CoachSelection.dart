@@ -19,6 +19,7 @@ import '../../../resources/styles_manager.dart';
 import '../../../routes/route_helper.dart';
 import '../../../services/auth_provider.dart';
 
+
 class CoachSelection extends StatelessWidget {
   CoachSelection({super.key});
 
@@ -133,210 +134,92 @@ class CoachSelection extends StatelessWidget {
                               SizedBox(
                                 height: 15.h,
                               ),
-                              SingleChildScrollView(
-                                child: Column(
-                                    children: List.generate(
-                                        provider.listTime.length,
-                                        (index) => Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    width: 2,
-                                                    color: ColorManager.primary,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.r)),
-                                              child: CheckboxListTile(
-                                                checkColor:
-                                                    ColorManager.primary,
-                                                value: (provider.timeId.contains(provider.listTime[index].id)),
-
-                                                 onChanged: (selected) {
-                                                  if (provider.timeId.contains(provider.listTime[index].id) ==
-                                                      true) {
-                                                    provider.removeIdTime(provider.listTime[index].id??0);
-                                                  } else {
-                                                    provider.addIdTime(provider.listTime[index].id??0);
-                                                  }
-                                                  print(selected);
-                                                  // provider.onUserSelect(selected??false, index);
-                                                },
-                                                selected: true,
-                                                title: Text(
-                                                  provider.maptimeListString[
-                                               provider.listTime[index].id] ??
-                                                      '',
-                                                  style: getRegularStyle(
-                                                      color:
-                                                          ColorManager.primary),
-                                                ),
-                                              ),
-                                            ))),
-                              ),
-                              // DropdownButtonFormField2(
-                              //   decoration: InputDecoration(
-                              //     isDense: true,
-                              //     contentPadding: EdgeInsets.zero,
-                              //     border: OutlineInputBorder(
-                              //       borderRadius: BorderRadius.circular(12.r),
-                              //     ),
-                              //   ),
-                              //   isExpanded: true,
-                              //   icon: const Icon(
-                              //     Icons.arrow_drop_down,
-                              //     color: ColorManager.primary,
-                              //   ),
-                              //   iconSize: 30.sp,
-                              //   buttonHeight: 50.h,
-                              //   buttonPadding: const EdgeInsets.only(left: 12, right: 12),
-                              //   dropdownDecoration: BoxDecoration(
-                              //     borderRadius: BorderRadius.circular(12.r),
-                              //   ),
-                              //   items: provider.listTime
-                              //       .map((item) => DropdownMenuItem<String>(
-                              //     value: provider.maptimeListString[item.id!],
-                              //     child: Text(
-                              //      provider.maptimeListString[item.id!]! ,
-                              //       style: const TextStyle(
-                              //         fontSize: 14,
-                              //       ),
-                              //     ),
-                              //   ))
-                              //       .toList(),
-                              //   // validator: (value) {
-                              //   //   if (value == null) {
-                              //   //     return 'يجب تحديد تصنيف المهمة';
-                              //   //   }
-                              //   //   return null;
-                              //   // },
-                              //   onChanged: (value) {
-                              //     print(value);
-                              //     // TaskCategoryItem? h2 = value as TaskCategoryItem?;
-                              //     // provider.selectedCategoryId = h2!.id!;
-                              //   },
+                              // SingleChildScrollView(
+                              //   child: Column(
+                              //       children: List.generate(
+                              //           provider.listTime.length,
+                              //           (index) => Container(
+                              //                 decoration: BoxDecoration(
+                              //                     border: Border.all(
+                              //                       width: 2,
+                              //                       color: ColorManager.primary,
+                              //                     ),
+                              //                     borderRadius:
+                              //                         BorderRadius.circular(
+                              //                             15.r)),
+                              //                 child: CheckboxListTile(
+                              //                   checkColor:
+                              //                       ColorManager.primary,
+                              //                   value: (provider.timeId.contains(provider.listTime[index].id)),
+                              //
+                              //                    onChanged: (selected) {
+                              //                     if (provider.timeId.contains(provider.listTime[index].id) ==
+                              //                         true) {
+                              //                       provider.removeIdTime(provider.listTime[index].id??0);
+                              //                     } else {
+                              //                       provider.addIdTime(provider.listTime[index].id??0);
+                              //                     }
+                              //                     print(selected);
+                              //                     // provider.onUserSelect(selected??false, index);
+                              //                   },
+                              //                   selected: true,
+                              //                   title: Text(
+                              //                     provider.maptimeListString[
+                              //                  provider.listTime[index].id] ??
+                              //                         '',
+                              //                     style: getRegularStyle(
+                              //                         color:
+                              //                             ColorManager.primary),
+                              //                   ),
+                              //                 ),
+                              //               ))),
                               // ),
+                              DropdownButtonFormField2(
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.zero,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                  ),
+                                ),
+                                isExpanded: true,
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: ColorManager.primary,
+                                ),
+                                iconSize: 30.sp,
+                                buttonHeight: 50.h,
+                                buttonPadding: const EdgeInsets.only(left: 12, right: 12),
+                                dropdownDecoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                items: provider.listTime
+                                    .map((item) => DropdownMenuItem<String>(
+                                  value: provider.maptimeListString[item.id!]??"احتر الحصة",
+                                  child: Text(
+                                   provider.maptimeListString[item.id!]! ,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                                    .toList(),
+                                // validator: (value) {
+                                //   if (value == null) {
+                                //     return 'يجب تحديد تصنيف المهمة';
+                                //   }
+                                //   return null;
+                                // },
+                                onChanged: (value) {
+                                  print(value);
+                                  // TaskCategoryItem? h2 = value as TaskCategoryItem?;
+                                  // provider.selectedCategoryId = h2!.id!;
+                                },
+                              ),
                             ],
                           ),
                         );
-                        //   Column(children: [
-                        //   Text(provider.coachFromId[index].subCategoryName!.tr),
-                        //
-                        //   Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //     children: [
-                        //       Container(
-                        //         decoration: BoxDecoration(
-                        //             border: provider.isCoachSelection
-                        //                 ? null
-                        //                 : Border.all(
-                        //               color: ColorManager.primary,
-                        //               width: 2,
-                        //             )),
-                        //         child: InkWell(
-                        //             onTap: () {
-                        //               provider.makeCoachSelectionFalse();
-                        //             },
-                        //             child: Column(
-                        //               children: [
-                        //                 Image.asset(
-                        //                   'assets/images/avatar.png',
-                        //                   height: 100,
-                        //                   width: 100,
-                        //                 ),
-                        //                 Text(
-                        //                   'coach1'.tr,
-                        //                   style:
-                        //                   getRegularStyle(color: ColorManager.primary),
-                        //                 ),
-                        //               ],
-                        //             )),
-                        //       ),
-                        //       InkWell(
-                        //         focusColor: ColorManager.primary,
-                        //         borderRadius: BorderRadius.circular(10),
-                        //         onTap: () {
-                        //           provider.makeCoachSelectionTrue();
-                        //         },
-                        //         child: Container(
-                        //             decoration: BoxDecoration(
-                        //                 border: provider.isCoachSelection
-                        //                     ? Border.all(
-                        //                   color: ColorManager.primary,
-                        //                   width: 2,
-                        //                 )
-                        //                     : null),
-                        //             child: Column(
-                        //               children: [
-                        //                 Image.asset(
-                        //                   'assets/images/avatar.png',
-                        //                   height: 100,
-                        //                   width: 100,
-                        //                 ),
-                        //                 Text(
-                        //                   'coach2'.tr,
-                        //                   style:
-                        //                   getRegularStyle(color: ColorManager.primary),
-                        //                 ),
-                        //               ],
-                        //             )),
-                        //       ),
-                        //     ],
-                        //   ),
-                        //   provider.isCoachSelection
-                        //       ? Column(
-                        //     children: [
-                        //       // Text(
-                        //       //   'coachClassDay'.tr,
-                        //       //   style: TextStyle(color: ColorManager.black),
-                        //       // ),
-                        //       // SizedBox(
-                        //       //   height: 20.h,
-                        //       // ),
-                        //       // CardWidget(
-                        //       //   title: 'ClassDays'.tr,
-                        //       // ),
-                        //       Text(
-                        //         'availableTime'.tr,
-                        //         style: TextStyle(color: ColorManager.black),
-                        //       ),
-                        //       Container(
-                        //         height: 100.h,
-                        //         width: double.infinity,
-                        //         padding: EdgeInsets.symmetric(
-                        //             vertical: 10.h, horizontal: 15.w),
-                        //         margin: EdgeInsets.symmetric(vertical: 10.h),
-                        //         decoration: BoxDecoration(
-                        //             border: Border.all(color: ColorManager.gray),
-                        //             color: ColorManager.white,
-                        //             borderRadius: BorderRadius.circular(10)),
-                        //         child: DropdownButton<String>(
-                        //           iconEnabledColor: ColorManager.black,
-                        //           icon: Icon(Icons.arrow_drop_down),
-                        //           value: provider.dropdownValue,
-                        //           elevation: 16,
-                        //           style: const TextStyle(color: ColorManager.primary),
-                        //           underline: Container(
-                        //             height: 2,
-                        //             color: ColorManager.primary,
-                        //           ),
-                        //           onChanged: (String? value) {
-                        //             provider.showDropdownValue(value);
-                        //           },
-                        //           items: provider.timeList
-                        //               .map<DropdownMenuItem<String>>((String value) {
-                        //             return DropdownMenuItem<String>(
-                        //               value: value,
-                        //               child: Text(value),
-                        //             );
-                        //           }).toList(),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   )
-                        //       : Column(
-                        //     children: [],
-                        //   ),
-                        // ],);
+
                       }),
                 ),
                 CustomButtonPrimary(
