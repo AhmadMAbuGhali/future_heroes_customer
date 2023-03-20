@@ -71,6 +71,7 @@ class CoachSelection extends StatelessWidget {
                                         child: InkWell(
                                             onTap: () async {
                                               // provider.makeCoachSelectionFalse();
+                                              provider.listTime = [];
                                               await provider.getTimeList(
                                                   provider
                                                           .coachFromId[index]
@@ -183,6 +184,7 @@ class CoachSelection extends StatelessWidget {
                                   ),
                                 ),
                                 isExpanded: true,
+                                key: UniqueKey(),
                                 icon: const Icon(
                                   Icons.arrow_drop_down,
                                   color: ColorManager.primary,
@@ -212,6 +214,8 @@ class CoachSelection extends StatelessWidget {
                                 // },
                                 onChanged: (value) {
                                   print(value);
+                                  provider.listTime =[];
+                                  print(provider.listTime);
                                   // TaskCategoryItem? h2 = value as TaskCategoryItem?;
                                   // provider.selectedCategoryId = h2!.id!;
                                 },

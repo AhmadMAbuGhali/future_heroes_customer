@@ -272,6 +272,7 @@ class AuthProvider extends ChangeNotifier {
 
   //Coach Selection
   List<TimeList>  listTime=[];
+  List<List<TimeList>> timeListMain =[];
   List<String> timeListString=[];
   Map<int, String> maptimeListString = {};
    String timeString='';
@@ -306,7 +307,10 @@ class AuthProvider extends ChangeNotifier {
    }
   Future<dynamic> getTimeList(String emailUser) async {
     try {
+
       listTime= await DioClient.dioClient.getTimeList(emailUser);
+      print("timeListMain");
+      print(timeListMain.toString());
       timeListString=[];
       print(listTime.length);
       for(TimeList value in listTime){
@@ -318,6 +322,7 @@ class AuthProvider extends ChangeNotifier {
          days+='\n${int.parse(value.classDateTimes!.first.startClass!.split(":").first)} ---> ${int.parse(value.classDateTimes!.first.endClass!.split(":").first)}';
          maptimeListString[value.id??0]=days;
          timeListString.add(days);
+
 
 
       }
@@ -337,6 +342,8 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+
   Future<dynamic> getChoesenCoach(List<int> id) async {
     try {
       print(id);
@@ -418,7 +425,7 @@ class AuthProvider extends ChangeNotifier {
 
 
 
-  String? selectedValue;
+
 
   makeIsDiseasesTrue() {
     isDiseases = true;
