@@ -23,6 +23,7 @@ import '../../../services/auth_provider.dart';
 class CoachSelection extends StatelessWidget {
   CoachSelection({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(builder: (context, provider, x) {
@@ -59,8 +60,10 @@ class CoachSelection extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text("الحصة : "+provider.categorySub[index].name!,style: getBoldStyle(color: ColorManager.primary),),
+                              SizedBox(height: 20.h,),
                               SizedBox(
-                                height: 200,
+                                height: 190,
                                 width: MediaQuery.of(context).size.width,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
@@ -133,48 +136,9 @@ class CoachSelection extends StatelessWidget {
                                 textAlign: TextAlign.start,
                               ),
                               SizedBox(
-                                height: 15.h,
+                                height: 10.h,
                               ),
-                              // SingleChildScrollView(
-                              //   child: Column(
-                              //       children: List.generate(
-                              //           provider.listTime.length,
-                              //           (index) => Container(
-                              //                 decoration: BoxDecoration(
-                              //                     border: Border.all(
-                              //                       width: 2,
-                              //                       color: ColorManager.primary,
-                              //                     ),
-                              //                     borderRadius:
-                              //                         BorderRadius.circular(
-                              //                             15.r)),
-                              //                 child: CheckboxListTile(
-                              //                   checkColor:
-                              //                       ColorManager.primary,
-                              //                   value: (provider.timeId.contains(provider.listTime[index].id)),
-                              //
-                              //                    onChanged: (selected) {
-                              //                     if (provider.timeId.contains(provider.listTime[index].id) ==
-                              //                         true) {
-                              //                       provider.removeIdTime(provider.listTime[index].id??0);
-                              //                     } else {
-                              //                       provider.addIdTime(provider.listTime[index].id??0);
-                              //                     }
-                              //                     print(selected);
-                              //                     // provider.onUserSelect(selected??false, index);
-                              //                   },
-                              //                   selected: true,
-                              //                   title: Text(
-                              //                     provider.maptimeListString[
-                              //                  provider.listTime[index].id] ??
-                              //                         '',
-                              //                     style: getRegularStyle(
-                              //                         color:
-                              //                             ColorManager.primary),
-                              //                   ),
-                              //                 ),
-                              //               ))),
-                              // ),
+
                               DropdownButtonFormField2(
                                 decoration: InputDecoration(
                                   isDense: true,
@@ -213,9 +177,8 @@ class CoachSelection extends StatelessWidget {
                                 //   return null;
                                 // },
                                 onChanged: (value) {
-                                  print(value);
-                                  provider.listTime =[];
-                                  print(provider.listTime);
+                                  var key = provider.maptimeListString.keys.firstWhere((k) => provider.maptimeListString[k] == value, orElse: () => 0);
+                                  print(key);
                                   // TaskCategoryItem? h2 = value as TaskCategoryItem?;
                                   // provider.selectedCategoryId = h2!.id!;
                                 },
@@ -229,7 +192,9 @@ class CoachSelection extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
+                    provider.getClassTime([35]);
                     Get.toNamed(RouteHelper.diseases);
+
                   },
                 ),
               ],

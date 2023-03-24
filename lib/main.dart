@@ -5,15 +5,23 @@ import 'package:future_heroes_customer/locale/locale_controller.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/services/api_provider.dart';
 import 'package:future_heroes_customer/services/auth_provider.dart';
+import 'package:future_heroes_customer/services/shared_preference_helper.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences shaedpref;
+GetIt getIt = GetIt.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   shaedpref = await SharedPreferences.getInstance();
+  final prefs = await SharedPreferences.getInstance();
+  getIt.registerLazySingleton<SharedPreferenceHelper>(
+          () => SharedPreferenceHelper(prefs: prefs));
+  getIt.registerLazySingleton<SharedPreferences>(() => prefs);
+  getIt.registerLazySingleton<AuthProvider>(() => AuthProvider());
 
   runApp(
     MultiProvider(

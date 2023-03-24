@@ -35,7 +35,7 @@ class CardSubscriptionType extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomTextTitle(text: title),
               Text(price,

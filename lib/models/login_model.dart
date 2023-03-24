@@ -2,9 +2,10 @@ class LoginModel {
   String? token;
   DateTime? expiration;
   String? role;
+  bool? isActive;
 
 
-  LoginModel({this.token, this.expiration,this.role});
+  LoginModel({this.token, this.expiration,this.role,this.isActive});
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
@@ -12,6 +13,7 @@ class LoginModel {
       expiration=DateTime.parse(json['expiration']);
     }
     role=json["role"];
+    isActive=json["isActive"];
 
   }
 
@@ -20,6 +22,7 @@ class LoginModel {
     data['token'] = token;
     data['expiration'] = expiration;
     data["role"]= role;
+    data["isActive"]= isActive;
     return data;
   }
 }

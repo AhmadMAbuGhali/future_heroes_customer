@@ -5,6 +5,7 @@ import 'package:future_heroes_customer/pages/Guest/Navbar_Guest.dart';
 import 'package:future_heroes_customer/pages/Guest/NotificationPageGuest.dart';
 import 'package:future_heroes_customer/pages/auth/signup/CoachSelection.dart';
 import 'package:future_heroes_customer/pages/auth/signup/EndSignUp.dart';
+import 'package:future_heroes_customer/pages/auth/signup/confirm_code.dart';
 import 'package:future_heroes_customer/pages/home/NoConnection.dart';
 import 'package:future_heroes_customer/pages/auth/signup/SignUpPersonalData.dart';
 import 'package:future_heroes_customer/pages/auth/signup/SignUppart2.dart';
@@ -55,6 +56,7 @@ class RouteHelper {
   static const String termsAndConditions = "/terms-and-conditions";
   static const String changePassword = "/change-password";
   static const String classTime = "/class-time";
+  static const String confirmCode = "/confirm-code";
   static const String diseases = "/diseases";
   static const String coachSelection = "/coachSelection";
   static const String subscriptionType = "/subscriptionType";
@@ -93,6 +95,7 @@ class RouteHelper {
   static String getTermsAndConditions() => '$termsAndConditions';
   static String getChangePassword() => '$changePassword';
   static String getClassTime() => '$classTime';
+  static String getConfirmCode() => '$confirmCode';
   static String getDiseases() => '$diseases';
   static String getCoachSelection() => '$coachSelection';
   static String getSubscriptionType() => '$subscriptionType';
@@ -181,6 +184,12 @@ class RouteHelper {
       name: login,
       page: () {
         return Login();
+      },
+    ),
+    GetPage(
+      name: confirmCode,
+      page: () {
+        return ConfirmCode();
       },
     ),
     GetPage(

@@ -13,7 +13,7 @@ class CustomTextTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 170,
+      width: 150,
       child: Text(text,
           textAlign: TextAlign.start,
           // overflow: TextOverflow.ellipsis,

@@ -14,6 +14,7 @@ import 'package:future_heroes_customer/models/terms_and_conditions_model.dart';
 import 'package:future_heroes_customer/models/time_list.dart';
 
 import '../../models/respons_massage_code.dart';
+import '../../services/shared_preference_helper.dart';
 
 class DioClient {
   DioClient._() {
@@ -55,7 +56,7 @@ class DioClient {
     });
     Response response = await dio!.post(ApiConstant.register, data: formData);
     print('response.statusCode');
-    print(response.data);
+    print(response.data.toString());
     RegisterModel registerUser = RegisterModel.fromJson(response.data);
 
     return registerUser;
@@ -152,6 +153,26 @@ class DioClient {
     print(listcat.length);
     return listcat;
   }
+  Future<List<TimeList>> getClassId(List<int> id) async {
+    Response response = await dio!.post(ApiConstant.traineeClass,
+        data: {
+      "classId":id
+        },
+        options: Options(
+
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+            'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+
+          },)
+    );
+    List<TimeList> lisTime=[];
+    lisTime= (response.data as List).map((e) => TimeList.fromJson(e)).toList();
+    print(response.data.toString());
+
+    return lisTime;
+  }
 
   //Disease
   Future<List<DiseaseModel>> getDisease() async {
@@ -181,6 +202,27 @@ class DioClient {
     return listOffer;
   }
 
+  Future<List<SubscriptionModel>> sendOfferId(int id) async {
+    Response response = await dio!.post(ApiConstant.userOffer,
+        data: {
+          "offerId":id
+        },
+        options: Options(
+
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+            'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+
+          },)
+    );
+    List<SubscriptionModel> offer=[];
+    offer= (response.data as List).map((e) => SubscriptionModel.fromJson(e)).toList();
+    print(response.data.toString());
+
+    return offer;
+  }
+
 
 
 
@@ -196,6 +238,14 @@ class DioClient {
   Future<ResponsMassageCode?> verifyResetSendCode(
       String email, String code) async {
     Response response = await dio!.post(ApiConstant.confirmCode,
+        data: {"email": email, "code": code});
+    ResponsMassageCode responseMassage =
+    ResponsMassageCode.fromJson(response.data);
+    return responseMassage;
+  }
+  Future<ResponsMassageCode?> sendEmailConfirmation(
+      String email, String code) async {
+    Response response = await dio!.put(ApiConstant.sendEmailConfirmation,
         data: {"email": email, "code": code});
     ResponsMassageCode responseMassage =
     ResponsMassageCode.fromJson(response.data);

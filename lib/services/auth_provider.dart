@@ -1,5 +1,7 @@
 import 'dart:io';
-
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:future_heroes_customer/services/shared_preference_helper.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +18,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../main.dart';
 import '../models/choess_coach_model.dart';
 import '../models/login_model.dart';
 import '../models/respons_massage_code.dart';
@@ -51,8 +54,18 @@ class AuthProvider extends ChangeNotifier {
   }
   login(String email, String password) async {
     try {
-      LoginModel? respontLogin =
-      await DioClient.dioClient.login(email, password);
+
+      LoginModel? respontLogin = await DioClient.dioClient.login(email, password);
+      if (rememberMe) {
+        getIt<SharedPreferenceHelper>().setIsLogin(isLogint: true);
+      }
+      String? token=respontLogin?.token!.toString();
+      getIt<SharedPreferenceHelper>()
+          .setUserToken(userToken: token!);
+      bool? isActive = respontLogin?.isActive!;
+      getIt<SharedPreferenceHelper>()
+          .setActiveStat(activeStat: isActive!);
+
 
       print(respontLogin!.toJson().toString());
     } on DioError catch (e) {
@@ -189,6 +202,7 @@ class AuthProvider extends ChangeNotifier {
 
 
   List<ChoessCoachModel> coachFromId = [];
+  List<TimeList> classTime = [];
 
 
 
@@ -364,6 +378,26 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+  Future<dynamic> getClassTime(List<int> id) async {
+    try {
+      print(id);
+      classTime = [];
+      classTime=await DioClient.dioClient.getClassId(id);
+
+      notifyListeners();
+    } on DioError catch (e) {
+      print(e.toString());
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
 
 
   //Disease
@@ -387,7 +421,15 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   // offer
+
+  bool isSelected = false;
+  isSelectedChange(){
+    isSelected=!isSelected;
+    notifyListeners();
+  }
   List<SubscriptionModel> offerSub = [];
   Future<String?> getOffer() async {
     try {
@@ -405,6 +447,30 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  sendOfferId(int Id) async {
+    try {
+
+      List<SubscriptionModel?> subscriptionModel = await DioClient.dioClient.sendOfferId(Id);
+      if (rememberMe) {
+        getIt<SharedPreferenceHelper>().setIsLogin(isLogint: true);
+      }
+      return subscriptionModel;
+
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
 
   //  Signup Part 2
 
@@ -443,6 +509,7 @@ class AuthProvider extends ChangeNotifier {
 
   TextEditingController emailSendCodeController = TextEditingController();
   TextEditingController sendCodeController = TextEditingController();
+  TextEditingController sendCodeConfController = TextEditingController();
   bool hideNewPasswordForget = true;
   bool hideConfirmPasswordForget = true;
 
@@ -486,6 +553,21 @@ class AuthProvider extends ChangeNotifier {
     } on DioError catch (e) {
       notifyListeners();
       return e.response?.data['errorList'].toString();
+    }
+    return null;
+  }
+  Future<String?> sendEmailConfirmation(String email,String code) async {
+    try {
+      ResponsMassageCode? success = await DioClient.dioClient
+          .sendEmailConfirmation(
+          email,code);
+      if (success!.message != null) {
+        notifyListeners();
+        return 'true';
+      }
+    } on DioError catch (e) {
+      notifyListeners();
+      return e.response?.data['message'].toString();
     }
     return null;
   }
@@ -534,3 +616,12 @@ extension EmailValidator on String {
   }
 }
 
+
+Future<File> getImageFileFromAssets(String path) async {
+  final byteData = await rootBundle.load('assets/$path');
+
+  final file = File('${(await getTemporaryDirectory()).path}/$path');
+  await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+  return file;
+}

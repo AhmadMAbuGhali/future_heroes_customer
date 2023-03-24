@@ -17,6 +17,7 @@ import '../../../widgets/cardSubscriptionType.dart';
 
 class SubscriptionType extends StatelessWidget {
   SubscriptionType({super.key});
+  int? id ;
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +66,25 @@ class SubscriptionType extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 20.w),
                         child: Column(
                           children: [
-                            CardSubscriptionType(
-                              isSelecte: provider.isSelectedOne,
-                              title: provider.offerSub[index].name ?? "null",
-                              description:
-                              provider.offerSub[index].description ??
-                                  "null",
-                              price:
-                              '${provider.offerSub[index].price.toStringAsFixed(2) ?? "null"} ' +
-                                  'RS'.tr,
+                            InkWell(
+                              onTap:(){
+
+                                id = provider.offerSub[index].id;
+                             print(provider.offerSub[index].id);
+                             print(id);
+                             provider.isSelectedChange();
+
+                              },
+                              child: CardSubscriptionType(
+                                isSelecte: provider.isSelected,
+                                title: provider.offerSub[index].name ?? "null",
+                                description:
+                                provider.offerSub[index].description ??
+                                    "null",
+                                price:
+                                '${provider.offerSub[index].price.toStringAsFixed(2) ?? "null"} ' +
+                                    'RS'.tr,
+                              ),
                             ),
                           ],
                         ),
@@ -86,6 +97,8 @@ class SubscriptionType extends StatelessWidget {
               CustomButtonPrimary(
                 text: 'continue'.tr,
                 onpressed: () {
+
+                  provider.sendOfferId(id!);
                   print(
                     provider.offerSub.length,
                   );

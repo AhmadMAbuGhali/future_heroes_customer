@@ -123,7 +123,7 @@ class TermsAndConditions extends StatelessWidget {
                                   Titel: 'مرحبا بك',
                                   Description: 'هذا الحقل مطلوب اجباري')
                               .error()
-                          : Get.offNamed(RouteHelper.signUpPart2);
+                          : Get.offNamed(RouteHelper.confirmCode);
                     },
                   ),
                 ],
