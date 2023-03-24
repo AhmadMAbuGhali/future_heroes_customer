@@ -70,7 +70,7 @@ class DioClient {
     return term;
   }
 
-  //category
+//category
 
   Future<List<Category1>> getCategory() async {
     Response response = await dio!.get(ApiConstant.category,
