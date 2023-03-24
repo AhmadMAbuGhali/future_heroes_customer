@@ -17,8 +17,7 @@ import '../../../widgets/cardSubscriptionType.dart';
 
 class SubscriptionType extends StatelessWidget {
   SubscriptionType({super.key});
-  int? id ;
-
+  int? id;
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -67,41 +66,33 @@ class SubscriptionType extends StatelessWidget {
                         child: Column(
                           children: [
                             InkWell(
-                              onTap:(){
-
+                              onTap: () {
                                 id = provider.offerSub[index].id;
-                             print(provider.offerSub[index].id);
-                             print(id);
-                             provider.isSelectedChange();
-
+                                print(provider.offerSub[index].id);
+                                print(id);
+                                provider.isSelectedChange(index);
                               },
                               child: CardSubscriptionType(
-                                isSelecte: provider.isSelected,
+                                isSelecte: provider.offerSelected[index],
                                 title: provider.offerSub[index].name ?? "null",
-                                description:
-                                provider.offerSub[index].description ??
-                                    "null",
-                                price:
-                                '${provider.offerSub[index].price.toStringAsFixed(2) ?? "null"} ' +
-                                    'RS'.tr,
+                                description: provider.offerSub[index].description ?? "null",
+                                price: '${provider.offerSub[index].price.toStringAsFixed(2) ?? "null"} ' + 'RS'.tr,
                               ),
                             ),
                           ],
                         ),
                       );
-                      return Text(
-                          provider.categoryMain[index].name ?? ' nullß');
+                      return Text(provider.categoryMain[index].name ?? ' nullß');
                     }),
               ),
-              SizedBox(height: 100.h,),
+              SizedBox(
+                height: 100.h,
+              ),
               CustomButtonPrimary(
                 text: 'continue'.tr,
                 onpressed: () {
-
                   provider.sendOfferId(id!);
-                  print(
-                    provider.offerSub.length,
-                  );
+                  print(id);
                   // Get.toNamed(RouteHelper.endSignUp);
                 },
               )
@@ -110,4 +101,3 @@ class SubscriptionType extends StatelessWidget {
     });
   }
 }
-

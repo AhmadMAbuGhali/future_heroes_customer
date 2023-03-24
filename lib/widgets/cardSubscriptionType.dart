@@ -9,12 +9,7 @@ class CardSubscriptionType extends StatelessWidget {
   String description;
   String price;
   bool isSelecte;
-  CardSubscriptionType(
-      {super.key,
-        required this.isSelecte,
-        required this.title,
-        required this.description,
-        required this.price});
+  CardSubscriptionType({super.key, required this.isSelecte, required this.title, required this.description, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -25,30 +20,25 @@ class CardSubscriptionType extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 5.h),
       decoration: !isSelecte
           ? BoxDecoration(
-          border: Border.all(color: ColorManager.gray, width: 1),
-          color: ColorManager.white,
-          borderRadius: BorderRadius.circular(10))
+              border: Border.all(color: ColorManager.gray, width: 1),
+              color: ColorManager.white,
+              borderRadius: BorderRadius.circular(10))
           : BoxDecoration(
-          border: Border.all(color: ColorManager.primary, width: 2),
-          color: ColorManager.white,
-          borderRadius: BorderRadius.circular(10)),
+              border: Border.all(color: ColorManager.primary, width: 2),
+              color: ColorManager.white,
+              borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomTextTitle(text: title),
-              Text(price,
-                  style: TextStyle(
-                      color: ColorManager.primary, fontWeight: FontWeight.bold))
+              Text(price, style: TextStyle(color: ColorManager.primary, fontWeight: FontWeight.bold))
             ],
           ),
-          Text(description,
-              textAlign: TextAlign.left,
-              style: getRegularStyle(color: ColorManager.gray))
+          Text(description, textAlign: TextAlign.left, style: getRegularStyle(color: ColorManager.gray))
         ],
       ),
     );
   }
 }
-

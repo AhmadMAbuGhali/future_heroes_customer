@@ -34,7 +34,6 @@ class AuthProvider extends ChangeNotifier {
     getOffer();
   }
 
-
   // general
   bool isLoading = false;
   changeIsLoding(bool value) {
@@ -52,20 +51,17 @@ class AuthProvider extends ChangeNotifier {
     showPasswordLogin = !showPasswordLogin;
     notifyListeners();
   }
+
   login(String email, String password) async {
     try {
-
       LoginModel? respontLogin = await DioClient.dioClient.login(email, password);
       if (rememberMe) {
         getIt<SharedPreferenceHelper>().setIsLogin(isLogint: true);
       }
-      String? token=respontLogin?.token!.toString();
-      getIt<SharedPreferenceHelper>()
-          .setUserToken(userToken: token!);
+      String? token = respontLogin?.token!.toString();
+      getIt<SharedPreferenceHelper>().setUserToken(userToken: token!);
       bool? isActive = respontLogin?.isActive!;
-      getIt<SharedPreferenceHelper>()
-          .setActiveStat(activeStat: isActive!);
-
+      getIt<SharedPreferenceHelper>().setActiveStat(activeStat: isActive!);
 
       print(respontLogin!.toJson().toString());
     } on DioError catch (e) {
@@ -86,8 +82,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   // SignUp Page
   bool showPasswordSignUp = true;
   File? imageFile;
@@ -103,11 +97,9 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  register(File image, String fullName, DateTime dob, String phoneNumber,
-      String email, String password) async {
+  register(File image, String fullName, DateTime dob, String phoneNumber, String email, String password) async {
     try {
-      RegisterModel? responseRegister = await DioClient.dioClient
-          .register(image, fullName, dob, phoneNumber, email, password);
+      RegisterModel? responseRegister = await DioClient.dioClient.register(image, fullName, dob, phoneNumber, email, password);
       changeIsLoding(false);
     } on DioError catch (e) {
       changeIsLoding(true);
@@ -179,8 +171,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<String?> getTerm() async {
     try {
-      TermsAndConditionsModel termsAndConditionsModel =
-      await DioClient.dioClient.termsAndConditions();
+      TermsAndConditionsModel termsAndConditionsModel = await DioClient.dioClient.termsAndConditions();
       print(termsAndConditionsModel.toJson().toString());
       return termsAndConditionsModel.description;
     } on DioError catch (e) {
@@ -196,18 +187,10 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   //
-
 
   List<ChoessCoachModel> coachFromId = [];
   List<TimeList> classTime = [];
-
-
-
-
-
 
   // category
   List<Category1> categoryMain = [];
@@ -245,7 +228,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<dynamic> getSubCategory() async {
     try {
       categorySub = await DioClient.dioClient.getSubCategory();
@@ -267,8 +249,7 @@ class AuthProvider extends ChangeNotifier {
       idSelectedCategory = id;
       notifyListeners();
       categorySubforcat = [];
-      categorySubforcat =
-      await DioClient.dioClient.getSubCategorysForCategor(id);
+      categorySubforcat = await DioClient.dioClient.getSubCategorysForCategor(id);
       notifyListeners();
     } on DioError catch (e) {
       print(e.toString());
@@ -285,11 +266,11 @@ class AuthProvider extends ChangeNotifier {
   }
 
   //Coach Selection
-  List<TimeList>  listTime=[];
-  List<List<TimeList>> timeListMain =[];
-  List<String> timeListString=[];
+  List<TimeList> listTime = [];
+  List<List<TimeList>> timeListMain = [];
+  List<String> timeListString = [];
   Map<int, String> maptimeListString = {};
-   String timeString='';
+  String timeString = '';
   int idSelectedTime = 0;
   List<int> timeId = [];
 
@@ -304,41 +285,37 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  changeTime(TimeList timeOb) {
+    notifyListeners();
+    categorySubforcat = [];
 
-  changeTime(TimeList timeOb){
-     notifyListeners();
-     categorySubforcat = [];
+    String days = '';
+    for (ClassDateTimes listvalue in timeOb.classDateTimes ?? []) {
+      days += listvalue.dayAsString ?? '';
+      days += '/';
+    }
+    days += '\n${timeOb.classDateTimes!.first.startClass}->${timeOb.classDateTimes!.first.endClass}';
 
-       String days='';
-       for(ClassDateTimes listvalue in timeOb.classDateTimes??[]){
-         days+=listvalue.dayAsString??'';
-         days+='/';
-       }
-       days+='\n${timeOb.classDateTimes!.first.startClass}->${timeOb.classDateTimes!.first.endClass}';
+    timeString = days;
+  }
 
-
-     timeString=days;
-   }
   Future<dynamic> getTimeList(String emailUser) async {
     try {
-
-      listTime= await DioClient.dioClient.getTimeList(emailUser);
+      listTime = await DioClient.dioClient.getTimeList(emailUser);
       print("timeListMain");
       print(timeListMain.toString());
-      timeListString=[];
+      timeListString = [];
       print(listTime.length);
-      for(TimeList value in listTime){
-         String days='';
-         for(ClassDateTimes listvalue in value.classDateTimes??[]){
-           days+=listvalue.dayAsString??'';
-           days+='/';
-         }
-         days+='\n${int.parse(value.classDateTimes!.first.startClass!.split(":").first)} ---> ${int.parse(value.classDateTimes!.first.endClass!.split(":").first)}';
-         maptimeListString[value.id??0]=days;
-         timeListString.add(days);
-
-
-
+      for (TimeList value in listTime) {
+        String days = '';
+        for (ClassDateTimes listvalue in value.classDateTimes ?? []) {
+          days += listvalue.dayAsString ?? '';
+          days += '/';
+        }
+        days +=
+            '\n${int.parse(value.classDateTimes!.first.startClass!.split(":").first)} ---> ${int.parse(value.classDateTimes!.first.endClass!.split(":").first)}';
+        maptimeListString[value.id ?? 0] = days;
+        timeListString.add(days);
       }
       print(timeListString.toString());
       notifyListeners();
@@ -357,13 +334,12 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<dynamic> getChoesenCoach(List<int> id) async {
     try {
       print(id);
       coachFromId = [];
-      coachFromId=await DioClient.dioClient.getSendSubId(id);
-      await  getTimeList(coachFromId.first.coaches!.first.email ??'') ;
+      coachFromId = await DioClient.dioClient.getSendSubId(id);
+      await getTimeList(coachFromId.first.coaches!.first.email ?? '');
       notifyListeners();
     } on DioError catch (e) {
       print(e.toString());
@@ -378,11 +354,12 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
   Future<dynamic> getClassTime(List<int> id) async {
     try {
       print(id);
       classTime = [];
-      classTime=await DioClient.dioClient.getClassId(id);
+      classTime = await DioClient.dioClient.getClassId(id);
 
       notifyListeners();
     } on DioError catch (e) {
@@ -398,7 +375,6 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
 
   //Disease
   List<DiseaseModel> diseases = [];
@@ -421,20 +397,21 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   // offer
 
-  bool isSelected = false;
-  isSelectedChange(){
-    isSelected=!isSelected;
+  List<bool> offerSelected = [];
+  isSelectedChange(int select) {
+    offerSelected = List.filled(offerSelected.length, false);
+    offerSelected[select] = true;
     notifyListeners();
   }
+
   List<SubscriptionModel> offerSub = [];
   Future<String?> getOffer() async {
     try {
       offerSub = await DioClient.dioClient.getOffer();
       print(offerSub.length);
+      offerSelected = List.filled(offerSub.length, false);
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -450,14 +427,11 @@ class AuthProvider extends ChangeNotifier {
 
   sendOfferId(int Id) async {
     try {
-
       List<SubscriptionModel?> subscriptionModel = await DioClient.dioClient.sendOfferId(Id);
       if (rememberMe) {
         getIt<SharedPreferenceHelper>().setIsLogin(isLogint: true);
       }
       return subscriptionModel;
-
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -470,7 +444,6 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
 
   //  Signup Part 2
 
@@ -489,10 +462,6 @@ class AuthProvider extends ChangeNotifier {
   bool isSelectedTwo = false;
   bool isSelectedThree = false;
 
-
-
-
-
   makeIsDiseasesTrue() {
     isDiseases = true;
     notifyListeners();
@@ -502,8 +471,6 @@ class AuthProvider extends ChangeNotifier {
     isDiseases = false;
     notifyListeners();
   }
-
-
 
   //ForgetPassword
 
@@ -521,13 +488,11 @@ class AuthProvider extends ChangeNotifier {
   changeHideConfirmPasswordForget() {
     hideConfirmPasswordForget = !hideConfirmPasswordForget;
     notifyListeners();
-
   }
 
   Future<String?> resetSendCode() async {
     try {
-      ResponsMassageCode? success = await DioClient.dioClient
-          .resetSendCode(emailSendCodeController.text.trim());
+      ResponsMassageCode? success = await DioClient.dioClient.resetSendCode(emailSendCodeController.text.trim());
       if (success!.message != null) {
         notifyListeners();
         return 'true';
@@ -543,9 +508,8 @@ class AuthProvider extends ChangeNotifier {
 
   Future<String?> verifyResetSendCode() async {
     try {
-      ResponsMassageCode? success = await DioClient.dioClient
-          .verifyResetSendCode(
-          emailSendCodeController.text.trim(), sendCodeController.text);
+      ResponsMassageCode? success =
+          await DioClient.dioClient.verifyResetSendCode(emailSendCodeController.text.trim(), sendCodeController.text);
       if (success!.message != null) {
         notifyListeners();
         return 'true';
@@ -556,11 +520,10 @@ class AuthProvider extends ChangeNotifier {
     }
     return null;
   }
-  Future<String?> sendEmailConfirmation(String email,String code) async {
+
+  Future<String?> sendEmailConfirmation(String email, String code) async {
     try {
-      ResponsMassageCode? success = await DioClient.dioClient
-          .sendEmailConfirmation(
-          email,code);
+      ResponsMassageCode? success = await DioClient.dioClient.sendEmailConfirmation(email, code);
       if (success!.message != null) {
         notifyListeners();
         return 'true';
@@ -575,8 +538,7 @@ class AuthProvider extends ChangeNotifier {
   Future<String?> resetPassword(String pass, String conPass) async {
     try {
       print(emailSendCodeController.text.trim());
-      ResponsMassageCode? success = await DioClient.dioClient
-          .resetPassword(emailSendCodeController.text.trim(), pass, conPass);
+      ResponsMassageCode? success = await DioClient.dioClient.resetPassword(emailSendCodeController.text.trim(), pass, conPass);
 
       if (success!.message != null) {
         notifyListeners();
@@ -591,31 +553,24 @@ class AuthProvider extends ChangeNotifier {
   }
 }
 
-
 // Validator
 extension EmailValidator on String {
   bool isValidEmail() {
-    return RegExp(
-        r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)')
-        .hasMatch(this);
+    return RegExp(r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)').hasMatch(this);
   }
 
   bool isValidPassword() {
-    return RegExp(
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-        .hasMatch(this);
+    return RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(this);
   }
 
   bool isValidName() {
-    return RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
-        .hasMatch(this);
+    return RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$").hasMatch(this);
   }
 
   bool isValidPhone() {
     return RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(this);
   }
 }
-
 
 Future<File> getImageFileFromAssets(String path) async {
   final byteData = await rootBundle.load('assets/$path');
