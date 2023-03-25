@@ -5,9 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
+import 'package:future_heroes_customer/services/app_provider.dart';
 import 'package:future_heroes_customer/widgets/profile_section.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import '../../resources/assets_manager.dart';
 import '../../resources/styles_manager.dart';
@@ -24,7 +26,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return SafeArea(
       child: Scaffold(
         body: Center(
           child: Padding(
@@ -122,6 +125,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     haveArrow: true,
                     icon: IconAssets.user,
                     onTap: () {
+                      provider.getProfileData();
+
                       Get.toNamed(RouteHelper.personalData);
                     }),
 
@@ -196,7 +201,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-    );
+    );});
   }
 
   Future _getFromGallery() async {

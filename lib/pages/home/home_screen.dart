@@ -110,7 +110,9 @@ class HomeScreen extends StatelessWidget {
                       name: 'يوسف الجزار',
                       duration: 60,
                       type: 'تايكواندو',
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(RouteHelper.postponeAnAppointment);
+                      },
                     ),
                     DateWidget(
                       time: DateTime.now(),
@@ -123,6 +125,88 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               )),
+        ],
+      ):getIt<SharedPreferenceHelper>().getWaitingStat()==false?Stack(
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 300,
+              width: double.infinity,
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage(ImageAssets.mainImage),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 40.h,
+                  ),
+                  Image.asset(
+                    ImageAssets.avatar,
+                    width: 100,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    "homeTopText1".tr,
+                    style: getRegularStyle(color: ColorManager.white),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Text("numberOfPostponement".tr + " ${numberOfDone}",
+                      style: getRegularStyle(color: ColorManager.white)),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      child: Divider(
+                        thickness: 1,
+                        color: ColorManager.white,
+                        endIndent: 1,
+                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Text("homeTopText2".tr,
+                              style: getRegularStyle(
+                                  color: ColorManager.white, fontSize: 11)),
+                          Text("homeTopText3".tr,
+                              style: getRegularStyle(
+                                  color: ColorManager.white, fontSize: 11)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Positioned(
+          //   top: 250.h,
+          //   left: 20,
+          //   right: 20,
+          //   child: ClassTimeWidget(),
+          // ),
+          Positioned(
+              top: 300.h,
+              left: 20,
+              right: 20,
+              child: Center(
+                child: Column(children: [
+                  Image.asset(ImageAssets.mustReg,width: 300,height: 300,),
+                  Text("عليك اكمال انتظار الموافثة على طلب انضمامك",textAlign: TextAlign.center,),
+
+
+                ],),
+              )
+          ),
         ],
       ):Stack(
         children: [

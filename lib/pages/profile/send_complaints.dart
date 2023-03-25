@@ -3,19 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
+import '../../main.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../../routes/route_helper.dart';
+import '../../services/app_provider.dart';
+import '../../services/shared_preference_helper.dart';
 import '../../widgets/CustomButtonPrimary.dart';
 
 class SendComplaints extends StatelessWidget {
-  const SendComplaints({Key? key}) : super(key: key);
+   SendComplaints({Key? key}) : super(key: key);
+  TextEditingController titleController = TextEditingController();
+  TextEditingController subjectController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
         child: Column(
@@ -66,6 +73,7 @@ class SendComplaints extends StatelessWidget {
             CustomTextFormAuth(
                 hidepassword: false,
                 textInputType: TextInputType.text,
+                myController: titleController,
                 hintText: 'AddressHint'.tr),
             SizedBox(
               height: 10.h,
@@ -77,6 +85,7 @@ class SendComplaints extends StatelessWidget {
             TextField(
               keyboardType: TextInputType.multiline,
               maxLines: 8,
+              controller: subjectController,
               decoration: InputDecoration(
                 fillColor: ColorManager.white,
                 filled: true,
@@ -115,11 +124,16 @@ class SendComplaints extends StatelessWidget {
             CustomButtonPrimary(
                 text: "sendComplaint".tr,
                 onpressed: () {
+                  print(titleController.text.trim());
+                  print(subjectController.text.trim());
+                  print({getIt<SharedPreferenceHelper>()
+                      .getUserToken()});
+                  provider.postComplaint(titleController.text.trim(), subjectController.text.trim());
                   Get.toNamed(RouteHelper.requestsAndComplaints);
                 }),
           ],
         ),
       ),
-    );
+    );});
   }
 }

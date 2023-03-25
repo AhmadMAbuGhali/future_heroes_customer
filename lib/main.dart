@@ -4,6 +4,7 @@ import 'package:future_heroes_customer/locale/locale.dart';
 import 'package:future_heroes_customer/locale/locale_controller.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/services/api_provider.dart';
+import 'package:future_heroes_customer/services/app_provider.dart';
 import 'package:future_heroes_customer/services/auth_provider.dart';
 import 'package:future_heroes_customer/services/shared_preference_helper.dart';
 import 'package:get/get.dart';
@@ -22,11 +23,13 @@ void main() async {
           () => SharedPreferenceHelper(prefs: prefs));
   getIt.registerLazySingleton<SharedPreferences>(() => prefs);
   getIt.registerLazySingleton<AuthProvider>(() => AuthProvider());
+  getIt.registerLazySingleton<AppProvider>(() => AppProvider());
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => AppProvider()),
         ChangeNotifierProvider(create: (_) => APIProvider()),
       ],
       child: const MyApp(),

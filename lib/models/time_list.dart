@@ -1,10 +1,13 @@
 class TimeList {
   int? id;
+  int? subCategoryId;
   List<ClassDateTimes>? classDateTimes;
+
   TimeList({this.id, this.classDateTimes});
 
   TimeList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    subCategoryId = json['subCategoryId'];
     if (json['classDateTimes'] != null) {
       classDateTimes = <ClassDateTimes>[];
       json['classDateTimes'].forEach((v) {
@@ -16,6 +19,7 @@ class TimeList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
+    data['subCategoryId'] = subCategoryId;
     if (classDateTimes != null) {
       data['classDateTimes'] =
           classDateTimes!.map((v) => v.toJson()).toList();

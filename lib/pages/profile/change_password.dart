@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
+import '../../main.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../../routes/route_helper.dart';
+import '../../services/app_provider.dart';
+import '../../services/shared_preference_helper.dart';
 import '../../widgets/CustomButtonPrimary.dart';
 import '../../widgets/CustomTextFormAuth.dart';
 
-class ChangePassword extends StatefulWidget {
-  const ChangePassword({Key? key}) : super(key: key);
+class ChangePassword extends StatelessWidget {
 
-  @override
-  State<ChangePassword> createState() => _ChangePasswordState();
-}
 
-class _ChangePasswordState extends State<ChangePassword> {
-  bool hideLastPass = true;
-  bool hideNewPass = true;
-  bool hideRepeatPass = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -30,8 +27,7 @@ class _ChangePasswordState extends State<ChangePassword> {
             Container(
               padding: EdgeInsets.only(
                 top: 45.h,
-                left: 20.w,
-                right: 20.w,
+
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -64,16 +60,12 @@ class _ChangePasswordState extends State<ChangePassword> {
             ),
             CustomTextFormAuth(
               textInputType: TextInputType.visiblePassword,
-              hidepassword: hideLastPass,
-              pressSuffixIcon: () {
-                setState(() {
-                  hideLastPass = !hideLastPass;
-                });
-              },
+              hidepassword: provider.showOldPasswordAuth,
+              pressSuffixIcon: (){provider.changeShowOldPasswordAuth();},
               hintText: '*********',
-
+              myController: provider.oldPass,
               // labelText: 'كلمة المرور',
-              iconData: hideLastPass ? Icons.visibility : Icons.visibility_off,
+              iconData: provider.showOldPasswordAuth ? Icons.visibility : Icons.visibility_off,
             ),
             SizedBox(
               height: 10.h,
@@ -84,16 +76,12 @@ class _ChangePasswordState extends State<ChangePassword> {
             ),
             CustomTextFormAuth(
               textInputType: TextInputType.visiblePassword,
-              hidepassword: hideNewPass,
-              pressSuffixIcon: () {
-                setState(() {
-                  hideNewPass = !hideNewPass;
-                });
-              },
+              hidepassword: provider.showNewPasswordAuth,
+              pressSuffixIcon:(){provider.changeShowNewPasswordAuth();} ,
               hintText: '*********',
-
+              myController: provider.newPass,
               // labelText: 'كلمة المرور',
-              iconData: hideNewPass ? Icons.visibility : Icons.visibility_off,
+              iconData: provider.showNewPasswordAuth ? Icons.visibility : Icons.visibility_off,
             ),
             SizedBox(
               height: 10.h,
@@ -104,17 +92,12 @@ class _ChangePasswordState extends State<ChangePassword> {
             ),
             CustomTextFormAuth(
               textInputType: TextInputType.visiblePassword,
-              hidepassword: hideRepeatPass,
-              pressSuffixIcon: () {
-                setState(() {
-                  hideRepeatPass = !hideRepeatPass;
-                });
-              },
+              hidepassword: provider.showConfPasswordAuth,
+              pressSuffixIcon:(){provider.changeShowConfPasswordAuth();} ,
               hintText: '*********',
-
+              myController: provider.confPass,
               // labelText: 'كلمة المرور',
-              iconData:
-                  hideRepeatPass ? Icons.visibility : Icons.visibility_off,
+              iconData: provider.showConfPasswordAuth ? Icons.visibility : Icons.visibility_off,
             ),
             SizedBox(
               height: 10.h,
@@ -122,11 +105,19 @@ class _ChangePasswordState extends State<ChangePassword> {
             CustomButtonPrimary(
                 text: "save".tr,
                 onpressed: () {
-                  Get.toNamed(RouteHelper.initial);
+                  if(provider.newPass.text==provider.confPass.text){
+                    print({getIt<SharedPreferenceHelper>()
+                        .getUserToken()});
+                    provider.resetPasswordAuthorize(provider.oldPass.text.trim(),provider.newPass.text.trim(),provider.confPass.text.trim());
+                    // Get.toNamed(RouteHelper.initial);
+                  }else{
+                    print("الباسورد يا خرا مش زي بعض ");
+                  }
+
                 }),
           ],
         ),
       ),
-    );
+    );});
   }
 }

@@ -11,8 +11,10 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
+import '../../../main.dart';
 import '../../../routes/route_helper.dart';
 import '../../../services/auth_provider.dart';
+import '../../../services/shared_preference_helper.dart';
 import '../../../widgets/cardSubscriptionType.dart';
 
 class SubscriptionType extends StatelessWidget {
@@ -92,7 +94,9 @@ class SubscriptionType extends StatelessWidget {
                 text: 'continue'.tr,
                 onpressed: () {
                   provider.sendOfferId(id!);
+                  getIt<SharedPreferenceHelper>().setWaitingStat(waitingStat: true);
                   print(id);
+                  Get.toNamed(RouteHelper.homeScreen);
                   // Get.toNamed(RouteHelper.endSignUp);
                 },
               )

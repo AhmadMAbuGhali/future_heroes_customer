@@ -19,10 +19,10 @@ import '../../../resources/styles_manager.dart';
 import '../../../routes/route_helper.dart';
 import '../../../services/auth_provider.dart';
 
-
 class CoachSelection extends StatelessWidget {
   CoachSelection({super.key});
 
+  List<int> classId = [];
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +60,14 @@ class CoachSelection extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("الحصة : "+provider.categorySub[index].name!,style: getBoldStyle(color: ColorManager.primary),),
-                              SizedBox(height: 20.h,),
+                              Text(
+                                "الحصة : " + provider.categorySub[index].name!,
+                                style:
+                                    getBoldStyle(color: ColorManager.primary),
+                              ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
                               SizedBox(
                                 height: 190,
                                 width: MediaQuery.of(context).size.width,
@@ -74,7 +80,7 @@ class CoachSelection extends StatelessWidget {
                                         child: InkWell(
                                             onTap: () async {
                                               // provider.makeCoachSelectionFalse();
-                                              provider.listTime = [];
+
                                               await provider.getTimeList(
                                                   provider
                                                           .coachFromId[index]
@@ -128,7 +134,6 @@ class CoachSelection extends StatelessWidget {
                                       );
                                     }),
                               ),
-
                               Text(
                                 'availableTime'.tr,
                                 style:
@@ -138,7 +143,6 @@ class CoachSelection extends StatelessWidget {
                               SizedBox(
                                 height: 10.h,
                               ),
-
                               DropdownButtonFormField2(
                                 decoration: InputDecoration(
                                   isDense: true,
@@ -155,20 +159,28 @@ class CoachSelection extends StatelessWidget {
                                 ),
                                 iconSize: 30.sp,
                                 buttonHeight: 50.h,
-                                buttonPadding: const EdgeInsets.only(left: 12, right: 12),
+                                buttonPadding:
+                                    const EdgeInsets.only(left: 12, right: 12),
                                 dropdownDecoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.r),
                                 ),
                                 items: provider.listTime
+                                    .where((element) =>
+                                        element.subCategoryId ==
+                                        provider
+                                            .coachFromId[index].subCategoryId)
                                     .map((item) => DropdownMenuItem<String>(
-                                  value: provider.maptimeListString[item.id!]??"احتر الحصة",
-                                  child: Text(
-                                   provider.maptimeListString[item.id!]! ,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                                          value: provider.maptimeListString[
+                                                  item.id!] ??
+                                              "احتر الحصة",
+                                          child: Text(
+                                            provider
+                                                .maptimeListString[item.id!]!,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ))
                                     .toList(),
                                 // validator: (value) {
                                 //   if (value == null) {
@@ -177,8 +189,16 @@ class CoachSelection extends StatelessWidget {
                                 //   return null;
                                 // },
                                 onChanged: (value) {
-                                  var key = provider.maptimeListString.keys.firstWhere((k) => provider.maptimeListString[k] == value, orElse: () => 0);
+                                  var key = provider.maptimeListString.keys
+                                      .firstWhere(
+                                          (k) =>
+                                              provider.maptimeListString[k] ==
+                                              value,
+                                          orElse: () => 0);
                                   print(key);
+                                  classId.remove(key);
+                                  classId.add(key);
+
                                   // TaskCategoryItem? h2 = value as TaskCategoryItem?;
                                   // provider.selectedCategoryId = h2!.id!;
                                 },
@@ -186,15 +206,13 @@ class CoachSelection extends StatelessWidget {
                             ],
                           ),
                         );
-
                       }),
                 ),
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
-                    provider.getClassTime([35]);
+                    provider.sendClassTime(classId);
                     Get.toNamed(RouteHelper.diseases);
-
                   },
                 ),
               ],

@@ -41,7 +41,6 @@ class CustomTextFormAuth extends StatelessWidget {
               controller: myController,
               focusNode: FocusNode(),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => validator!(value),
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: ColorManager.primary),

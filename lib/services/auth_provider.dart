@@ -355,12 +355,10 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<dynamic> getClassTime(List<int> id) async {
+   sendClassTime(List<int> id) async {
     try {
       print(id);
-      classTime = [];
-      classTime = await DioClient.dioClient.getClassId(id);
-
+     await DioClient.dioClient.sendClassId(id);
       notifyListeners();
     } on DioError catch (e) {
       print(e.toString());
@@ -427,11 +425,8 @@ class AuthProvider extends ChangeNotifier {
 
   sendOfferId(int Id) async {
     try {
-      List<SubscriptionModel?> subscriptionModel = await DioClient.dioClient.sendOfferId(Id);
-      if (rememberMe) {
-        getIt<SharedPreferenceHelper>().setIsLogin(isLogint: true);
-      }
-      return subscriptionModel;
+      return await DioClient.dioClient.sendOfferId(Id);
+
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(

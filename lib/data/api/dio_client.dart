@@ -7,6 +7,7 @@ import 'package:future_heroes_customer/models/category.dart';
 import 'package:future_heroes_customer/models/choess_coach_model.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/login_model.dart';
+import 'package:future_heroes_customer/models/profile_data.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
 import 'package:future_heroes_customer/models/sub_category.dart';
 import 'package:future_heroes_customer/models/subscribtion_model.dart';
@@ -32,7 +33,8 @@ class DioClient {
 
 // Login
   Future<LoginModel?> login(String email, String password) async {
-    Response response = await dio!.post(ApiConstant.login, data: {"email": email, "password": password});
+    Response response = await dio!
+        .post(ApiConstant.login, data: {"email": email, "password": password});
     LoginModel user = LoginModel.fromJson(response.data);
     if (user.role == "User") {
       return user;
@@ -42,10 +44,10 @@ class DioClient {
   }
 
 // register
-  Future<RegisterModel?> register(
-      File image, String fullName, DateTime dob, String phoneNumber, String email, String password) async {
+  Future<RegisterModel?> register(File image, String fullName, DateTime dob,
+      String phoneNumber, String email, String password) async {
     FormData formData = FormData.fromMap({
-      "ImageFile": image.path,
+      "ImageFile": image,
       "FullName": fullName,
       "DateOfBirth": dob.toIso8601String(),
       "PhoneNumber": phoneNumber,
@@ -66,7 +68,8 @@ class DioClient {
         options: Options(
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
-    TermsAndConditionsModel term = TermsAndConditionsModel.fromJson(response.data[0]);
+    TermsAndConditionsModel term =
+        TermsAndConditionsModel.fromJson(response.data[0]);
     return term;
   }
 
@@ -78,7 +81,8 @@ class DioClient {
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
     List<Category1> listcat = [];
-    listcat = (response.data as List).map((e) => Category1.fromJson(e)).toList();
+    listcat =
+        (response.data as List).map((e) => Category1.fromJson(e)).toList();
 
     return listcat;
   }
@@ -90,7 +94,8 @@ class DioClient {
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
     List<SubCategory> listcat = [];
-    listcat = (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
+    listcat =
+        (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
 
     return listcat;
   }
@@ -102,7 +107,8 @@ class DioClient {
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
     List<SubCategory> listsubcatforcat = [];
-    listsubcatforcat = (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
+    listsubcatforcat =
+        (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
 
     return listsubcatforcat;
   }
@@ -115,7 +121,9 @@ class DioClient {
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
     List<ChoessCoachModel> listChoessCoach = [];
-    listChoessCoach = (response.data as List).map((e) => ChoessCoachModel.fromJson(e)).toList();
+    listChoessCoach = (response.data as List)
+        .map((e) => ChoessCoachModel.fromJson(e))
+        .toList();
     print(response.data.toString());
 
     return listChoessCoach;
@@ -134,20 +142,16 @@ class DioClient {
     return listcat;
   }
 
-  Future<List<TimeList>> getClassId(List<int> id) async {
-    Response response = await dio!.post(ApiConstant.traineeClass,
+  Future<void> sendClassId(List<int> id) async {
+    await dio!.post(ApiConstant.traineeClass,
         data: {"classId": id},
         options: Options(
           headers: {
             "Accept-Language": shaedpref.getString("curruntLang"),
-            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           },
         ));
-    List<TimeList> lisTime = [];
-    lisTime = (response.data as List).map((e) => TimeList.fromJson(e)).toList();
-    print(response.data.toString());
-
-    return lisTime;
   }
 
   //Disease
@@ -157,7 +161,8 @@ class DioClient {
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
     List<DiseaseModel> listDisease = [];
-    listDisease = (response.data as List).map((e) => DiseaseModel.fromJson(e)).toList();
+    listDisease =
+        (response.data as List).map((e) => DiseaseModel.fromJson(e)).toList();
     print(listDisease.length);
 
     return listDisease;
@@ -170,51 +175,119 @@ class DioClient {
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
     List<SubscriptionModel> listOffer = [];
-    listOffer = (response.data as List).map((e) => SubscriptionModel.fromJson(e)).toList();
+    listOffer = (response.data as List)
+        .map((e) => SubscriptionModel.fromJson(e))
+        .toList();
 
     return listOffer;
   }
 
-  Future<List<SubscriptionModel>> sendOfferId(int id) async {
-    Response response = await dio!.post(ApiConstant.userOffer,
+  Future<void> sendOfferId(int id) async {
+    await dio!.post(ApiConstant.userOrder,
         data: {"offerId": id},
         options: Options(
           headers: {
             "Accept-Language": shaedpref.getString("curruntLang"),
-            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           },
         ));
-    List<SubscriptionModel> offer = [];
-    print(response.data);
-    offer = (response.data as List).map((e) => SubscriptionModel.fromJson(e)).toList();
-    print(response.data.toString());
-
-    return offer;
   }
+
+  Future<ProfileData> getProfileData() async {
+    Response response = await dio!.get(ApiConstant.getProfileData,
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+        ));
+
+    ProfileData profileData = ProfileData.fromJson(response.data);
+    return profileData;
+  }
+  Future<ResponsMassageCode?> postComplaint(String title, String subject) async {
+    try {
+      await dio!.post(ApiConstant.complaint, data: {
+        "title": title,
+        "subject": subject,
+      }, options: Options(headers: {
+        "Accept-Language": shaedpref.getString("curruntLang"),
+        'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+      }));
+      print("Post complaint success");
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 500) {
+        print("Server error occurred: ${e.message}");
+      }
+      print(e.toString());
+    }
+  }
+
+
+
 
 //ForgetPassword
   Future<ResponsMassageCode?> resetSendCode(String email) async {
-    Response response = await dio!.post(ApiConstant.forgetPassword, queryParameters: {"email": email});
-    ResponsMassageCode responseMassage = ResponsMassageCode.fromJson(response.data);
-    return responseMassage;
-  }
-
-  Future<ResponsMassageCode?> verifyResetSendCode(String email, String code) async {
-    Response response = await dio!.post(ApiConstant.confirmCode, data: {"email": email, "code": code});
-    ResponsMassageCode responseMassage = ResponsMassageCode.fromJson(response.data);
-    return responseMassage;
-  }
-
-  Future<ResponsMassageCode?> sendEmailConfirmation(String email, String code) async {
-    Response response = await dio!.put(ApiConstant.sendEmailConfirmation, data: {"email": email, "code": code});
-    ResponsMassageCode responseMassage = ResponsMassageCode.fromJson(response.data);
-    return responseMassage;
-  }
-
-  Future<ResponsMassageCode?> resetPassword(String email, String password, String confirmPassword) async {
     Response response = await dio!
-        .put(ApiConstant.resetPassword, data: {"email": email, "password": password, "confirmPassword": confirmPassword});
-    ResponsMassageCode responseMassage = ResponsMassageCode.fromJson(response.data);
+        .post(ApiConstant.forgetPassword, queryParameters: {"email": email});
+    ResponsMassageCode responseMassage =
+        ResponsMassageCode.fromJson(response.data);
     return responseMassage;
+  }
+
+  Future<ResponsMassageCode?> verifyResetSendCode(
+      String email, String code) async {
+    Response response = await dio!
+        .post(ApiConstant.confirmCode, data: {"email": email, "code": code});
+    ResponsMassageCode responseMassage =
+        ResponsMassageCode.fromJson(response.data);
+    return responseMassage;
+  }
+
+  Future<ResponsMassageCode?> sendEmailConfirmation(
+      String email, String code) async {
+    Response response = await dio!.put(ApiConstant.sendEmailConfirmation,
+        data: {"email": email, "code": code});
+    ResponsMassageCode responseMassage =
+        ResponsMassageCode.fromJson(response.data);
+    return responseMassage;
+  }
+
+  Future<ResponsMassageCode?> resetPassword(
+      String email, String password, String confirmPassword) async {
+    Response response = await dio!.put(ApiConstant.resetPassword, data: {
+      "email": email,
+      "password": password,
+      "confirmPassword": confirmPassword
+    });
+    ResponsMassageCode responseMassage =
+        ResponsMassageCode.fromJson(response.data);
+    return responseMassage;
+  }
+
+  Future<ResponsMassageCode?> resetPasswordAuthorize(
+      String oldPass, String password, String confirmPassword) async {
+    try {
+      print("1");
+      Response response =
+          await dio!.put(ApiConstant.resetPasswordAuthorize, data: {
+        "oldPassword": oldPass,
+        "newPassword": password,
+        "confirmPassword": confirmPassword
+      },
+            options: Options(headers: {
+            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          }),
+          );
+
+      print("2");
+      ResponsMassageCode responseMassage =
+          ResponsMassageCode.fromJson(response.data);
+      return responseMassage;
+    } catch (e) {
+      print("3");
+    }
   }
 }

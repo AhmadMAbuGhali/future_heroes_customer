@@ -12,7 +12,7 @@ class ApiConstant {
   static const String termsAndConditions = 'TermsAndConditions';
   static const String trainClass = 'Class';
   static const String offer = 'Offer';
-  static const String userOffer = 'UserOffer';
+  static const String userOrder = 'UserOrder';
   static const String category = 'Category';
   static const String subCategory = 'SubCategory';
   static const String timeList = 'Class/GetClassByUserEmailAsync';
@@ -21,8 +21,11 @@ class ApiConstant {
   static const String sendEmailConfirmation = 'Authentication/EmailConfirmationAsync';
   static const String forgetPassword = 'Authentication/ForgetPassword';
   static const String traineeClass = 'TraineeClass';
+  static const String complaint = 'Complaint';
   static const String confirmCode = 'Authentication/ConfirmCode';
   static const String resetPassword = 'Authentication/ResetPassword';
+  static const String resetPasswordAuthorize = 'Authentication/ResetPasswordAuthorize';
+  static const String getProfileData = '/Authentication/UserProfileGetAsync';
   static const String imageURL = 'https://yousef.azurewebsites.net/images/';
 
 

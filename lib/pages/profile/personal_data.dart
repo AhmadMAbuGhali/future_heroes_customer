@@ -5,9 +5,13 @@ import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/custom_text_feild.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../../main.dart';
 import '../../resources/styles_manager.dart';
 import '../../routes/route_helper.dart';
+import '../../services/app_provider.dart';
+import '../../services/shared_preference_helper.dart';
 import '../../widgets/CustomButtonPrimary.dart';
 import '../../widgets/CustomTextFormAuth.dart';
 
@@ -25,7 +29,8 @@ class _PersonalDataState extends State<PersonalData> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return Scaffold(
       backgroundColor: ColorManager.backGround,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -78,50 +83,55 @@ class _PersonalDataState extends State<PersonalData> {
             // const SizedBox(
             //   height: 5,
             // ),
-            CustomTextFormAuth(
-              hidepassword: false,
-              textInputType: TextInputType.emailAddress,
-
-              hintText: 'email'.tr,
-
-              //  labelText: 'البريد الالكتروني / رقم الهاتف',
-              //  iconData: Icons.email_outlined,
+            SizedBox(
+              height: 10.h,
             ),
-            //  const SizedBox(
-            //     height: 10,
-            //   ),
-            Text(
-              'password'.tr,
-              style: TextStyle(fontSize: 12.sp),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              width: double.infinity,
+              height: 44.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: ColorManager.primary,width: 1)
+              ),
+              child: Text(provider.profileData!.email??"",style: getRegularStyle(color: ColorManager.black),),
             ),
-
-            CustomTextFormAuth(
-              textInputType: TextInputType.visiblePassword,
-              hidepassword: hidePass,
-              pressSuffixIcon: () {
-                setState(() {
-                  hidePass = !hidePass;
-                });
-              },
-              hintText: 'password'.tr,
-              // labelText: 'كلمة المرور',
-              iconData: hidePass ? Icons.visibility : Icons.visibility_off,
+            // CustomTextFormAuth(
+            //   hidepassword: false,
+            //   textInputType: TextInputType.emailAddress,
+            //
+            //   hintText: provider.profileData!.email??"",
+            //
+            //   //  labelText: 'البريد الالكتروني / رقم الهاتف',
+            //   //  iconData: Icons.email_outlined,
+            // ),
+            //
+            SizedBox(
+              height: 10.h,
             ),
             Text(
               'userName'.tr,
               style: TextStyle(fontSize: 12),
             ),
+            SizedBox(
+              height: 10.h,
+            ),
             // const SizedBox(
             //   height: 5,
             // ),
-            CustomTextFormAuth(
-              hidepassword: false,
-              textInputType: TextInputType.emailAddress,
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+              width: double.infinity,
+              height: 44.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: ColorManager.primary,width: 1)
+              ),
+              child: Text(provider.profileData!.fullName??"",style: getRegularStyle(color: ColorManager.black),),
+            ),
 
-              hintText: 'userName'.tr,
-
-              //  labelText: 'البريد الالكتروني / رقم الهاتف',
-              //  iconData: Icons.email_outlined,
+            SizedBox(
+              height: 10.h,
             ),
             Text(
               'DOB'.tr,
@@ -130,27 +140,21 @@ class _PersonalDataState extends State<PersonalData> {
             // const SizedBox(
             //   height: 5,
             // ),
-            CustomTextFormAuth(
-              myController: dateInput,
-              pressSuffixIcon: () async {
-                DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1950),
-                    lastDate: DateTime(2100));
-                if (pickedDate != null) {
-                  print(pickedDate);
-                  String formattedDate =
-                      DateFormat('yyyy-MM-dd').format(pickedDate);
-                  print(formattedDate);
-                  setState(() {
-                    dateInput.text =
-                        formattedDate; //set output date to TextField value.
-                  });
-                } else {}
-              },
-              hintText: 'YYYY/MM/DD',
-              iconData: Icons.calendar_month_outlined,
+            SizedBox(
+              height: 10.h,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              width: double.infinity,
+              height: 44.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: ColorManager.primary,width: 1)
+              ),
+              child: Text(provider.profileData!.dateOfBirth??"",style: getRegularStyle(color: ColorManager.black),),
+            ),
+            SizedBox(
+              height: 10.h,
             ),
             Text(
               'mobileNumber'.tr,
@@ -159,13 +163,18 @@ class _PersonalDataState extends State<PersonalData> {
             // const SizedBox(
             //   height: 5,
             // ),
-            CustomTextFormAuth(
-              hidepassword: false,
-              textInputType: TextInputType.number,
-              iconData: Icons.phone,
-              hintText: 'mobileNumber'.tr,
-              //  labelText: 'البريد الالكتروني / رقم الهاتف',
-              //  iconData: Icons.email_outlined,
+            SizedBox(
+              height: 10.h,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              width: double.infinity,
+              height: 44.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: ColorManager.primary,width: 1)
+              ),
+              child: Text(provider.profileData!.phoneNumber??"",style: getRegularStyle(color: ColorManager.black),),
             ),
             SizedBox(
               height: 20.h,
@@ -173,6 +182,8 @@ class _PersonalDataState extends State<PersonalData> {
             Center(
                 child: TextButton(
                     onPressed: () {
+                      print({getIt<SharedPreferenceHelper>()
+                          .getUserToken()});
                       Get.toNamed(RouteHelper.changePassword);
                     },
                     child: Text(
@@ -192,6 +203,6 @@ class _PersonalDataState extends State<PersonalData> {
           ],
         ),
       ),
-    );
+    );});
   }
 }
