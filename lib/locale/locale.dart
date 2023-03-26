@@ -9,6 +9,7 @@ class MyLocale extends Translations {
           "changeDisplayLang": "تغيير لغة العرض ",
           "next": "التالي",
           "skip": "تخطي",
+          "replayOnComp": "الرد على شكوى ",
           "onBoardingText1": "تفوق طفلك مسؤوليتنا",
           "onBoardingBody1":
               "الاستمرار بالتمرين يصنع منك شخص من حديد يتمتع بكامل النشاط والحيوية .. ويساعد ذهنك على التركيز على جميع نواحي حياتك اليومية",
@@ -237,6 +238,7 @@ class MyLocale extends Translations {
           "changeDisplayLang": "Change Display Language",
           "next": "Next",
           "skip": "skip",
+          "replayOnComp": "Reply to Complaint",
           "onBoardingText1": "Your Child's Excellence is Our Responsibility",
           "onBoardingBody1":
               "Continuing to exercise makes you a person of iron with full activity and vitality..and helps your mind focus on all aspects of your daily life.",

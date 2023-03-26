@@ -136,6 +136,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     haveArrow: true,
                     icon: IconAssets.paper,
                     onTap: () {
+                      provider.getComplaintReplay();
+                      provider.getOrderReplay();
                       Get.toNamed(RouteHelper.requestsAndComplaints);
                     }),
 

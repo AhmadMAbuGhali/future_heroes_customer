@@ -6,14 +6,18 @@ import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/resources/styles_manager.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+import '../services/app_provider.dart';
 
 class CustomRequest extends StatelessWidget {
   const CustomRequest({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 7,
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return ListView.builder(
+        itemCount: provider.orderReplay.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Padding(
@@ -52,7 +56,7 @@ class CustomRequest extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          "requestTitle".tr,
+                          provider.orderReplay[index].title!,
                           overflow: TextOverflow.ellipsis,                        softWrap: true,
                           maxLines: 1,
                           style: getBoldStyle(
@@ -64,7 +68,7 @@ class CustomRequest extends StatelessWidget {
                   collapsed: Container(
                     margin: const EdgeInsets.only(right: 55),
                     child: Text(
-                      "requestBody".tr,
+          provider.orderReplay[index].respone!,
                       softWrap: true,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -74,7 +78,7 @@ class CustomRequest extends StatelessWidget {
                   expanded: Container(
                     margin: const EdgeInsets.only(right: 55),
                     child: Text(
-                      "requestBody".tr,
+                      provider.orderReplay[index].respone!,
                       softWrap: true,
                     ),
                   ),
@@ -90,6 +94,6 @@ class CustomRequest extends StatelessWidget {
               ],
             ),
           );
-        });
+        });});
   }
 }

@@ -6,16 +6,19 @@ import 'package:flutter_svg/svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../resources/styles_manager.dart';
+import '../services/app_provider.dart';
 
 class CustomComplaints extends StatelessWidget {
   const CustomComplaints ({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 7,
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return ListView.builder(
+        itemCount: provider.complaintReplay.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Column(
@@ -47,13 +50,13 @@ class CustomComplaints extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 15.w,),
-                    Text("complaintsTitle".tr,style: getBoldStyle(color: ColorManager.black,fontSize: 12),),
+                    Text("replayOnComp".tr+" "+provider.complaintReplay[index].title!,style: getBoldStyle(color: ColorManager.black,fontSize: 12),),
                   ],
                 ),
                 collapsed: Container(
                   margin: const EdgeInsets.only(right: 55),
                   child: Text(
-                    "complaintsBody".tr,
+                    provider.complaintReplay[index].respone!,
                     softWrap: true,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -63,7 +66,7 @@ class CustomComplaints extends StatelessWidget {
                 expanded: Container(
                   margin: const EdgeInsets.only(right: 55),
                   child: Text(
-                    "complaintsBody".tr,
+                    provider.complaintReplay[index].respone!,
                     softWrap: true,
                   ),
                 ),
@@ -76,6 +79,6 @@ class CustomComplaints extends StatelessWidget {
               )
             ],
           );
-        });
+        });});
   }
 }

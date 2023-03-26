@@ -8,6 +8,7 @@ class ApiConstant {
   static const String getAllCoaches = 'Authentication/GetAllCoaches';
   static const String createRespationUser = 'Authentication/CreateRespationUser';
   static const String getAllRespationUsers = 'Authentication/GetAllRespationUsers';
+  static const String getUserPresenceAsync = 'Authentication/GetUserPresenceAsync';
   static const String disease = 'Disease';
   static const String termsAndConditions = 'TermsAndConditions';
   static const String trainClass = 'Class';
@@ -22,6 +23,8 @@ class ApiConstant {
   static const String forgetPassword = 'Authentication/ForgetPassword';
   static const String traineeClass = 'TraineeClass';
   static const String complaint = 'Complaint';
+  static const String getUserComplaint = '/Complaint/GetUserComplaint';
+  static const String getUserOrders = 'UserOrder/GetUserOrders';
   static const String confirmCode = 'Authentication/ConfirmCode';
   static const String resetPassword = 'Authentication/ResetPassword';
   static const String resetPasswordAuthorize = 'Authentication/ResetPasswordAuthorize';

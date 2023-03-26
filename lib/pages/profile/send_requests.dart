@@ -3,19 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../../routes/route_helper.dart';
+import '../../services/app_provider.dart';
 import '../../widgets/CustomButtonPrimary.dart';
 
 class SendRequests extends StatelessWidget {
-  const SendRequests({Key? key}) : super(key: key);
-
+   SendRequests({Key? key}) : super(key: key);
+  TextEditingController titleController = TextEditingController();
+  TextEditingController subjectController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
         child: Column(
@@ -24,8 +28,7 @@ class SendRequests extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(
                 top: 45.h,
-                left: 20.w,
-                right: 20.w,
+
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -66,6 +69,7 @@ class SendRequests extends StatelessWidget {
             CustomTextFormAuth(
                 hidepassword: false,
                 textInputType: TextInputType.text,
+                myController: titleController,
                 hintText: 'AddressHint'.tr),
             SizedBox(
               height: 10.h,
@@ -77,6 +81,7 @@ class SendRequests extends StatelessWidget {
             TextField(
               keyboardType: TextInputType.multiline,
               maxLines: 8,
+              controller: subjectController,
               decoration: InputDecoration(
                 fillColor: ColorManager.white,
                 filled: true,
@@ -115,11 +120,13 @@ class SendRequests extends StatelessWidget {
             CustomButtonPrimary(
                 text: "sendRequest".tr,
                 onpressed: () {
+                  provider.postOrder(titleController.text.trim(), subjectController.text.trim());
+
                   Get.toNamed(RouteHelper.requestsAndComplaints);
                 }),
           ],
         ),
       ),
-    );
+    );});
   }
 }

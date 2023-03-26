@@ -10,14 +10,9 @@ import '../../resources/styles_manager.dart';
 import '../../widgets/CustomButtonPrimary.dart';
 import '../../widgets/snakbar.dart';
 
-class OfferPage extends StatefulWidget {
+class OfferPage extends StatelessWidget {
   const OfferPage({Key? key}) : super(key: key);
 
-  @override
-  State<OfferPage> createState() => _OfferPageState();
-}
-
-class _OfferPageState extends State<OfferPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

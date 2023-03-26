@@ -20,6 +20,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../main.dart';
 import '../models/choess_coach_model.dart';
+import '../models/class_time_model.dart';
 import '../models/login_model.dart';
 import '../models/respons_massage_code.dart';
 import '../models/terms_and_conditions_model.dart';
@@ -32,8 +33,26 @@ class AuthProvider extends ChangeNotifier {
     getSubCategory();
     getDisease();
     getOffer();
+    getClassTime();
   }
+  List<ClassTime> classTime = [];
+  Future<ClassTime?> getClassTime() async {
+    try {
+      classTime = await DioClient.dioClient.getLecture();
 
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
   // general
   bool isLoading = false;
   changeIsLoding(bool value) {
@@ -190,7 +209,7 @@ class AuthProvider extends ChangeNotifier {
   //
 
   List<ChoessCoachModel> coachFromId = [];
-  List<TimeList> classTime = [];
+  List<TimeList> timeList = [];
 
   // category
   List<Category1> categoryMain = [];

@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -5,8 +6,11 @@ import 'package:future_heroes_customer/data/api/apiconst.dart';
 import 'package:future_heroes_customer/main.dart';
 import 'package:future_heroes_customer/models/category.dart';
 import 'package:future_heroes_customer/models/choess_coach_model.dart';
+import 'package:future_heroes_customer/models/class_time_model.dart';
+import 'package:future_heroes_customer/models/complaint_replay.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/login_model.dart';
+import 'package:future_heroes_customer/models/order_replay.dart';
 import 'package:future_heroes_customer/models/profile_data.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
 import 'package:future_heroes_customer/models/sub_category.dart';
@@ -207,6 +211,8 @@ class DioClient {
     ProfileData profileData = ProfileData.fromJson(response.data);
     return profileData;
   }
+
+
   Future<ResponsMassageCode?> postComplaint(String title, String subject) async {
     try {
       await dio!.post(ApiConstant.complaint, data: {
@@ -224,7 +230,70 @@ class DioClient {
       print(e.toString());
     }
   }
+  Future<ResponsMassageCode?> postOrder(String title, String subject) async {
+    try {
+      await dio!.post(ApiConstant.userOrder, data: {
+        "title": title,
+        "subject": subject,
+        "offerId":null
+      }, options: Options(headers: {
+        "Accept-Language": shaedpref.getString("curruntLang"),
+        'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+      }));
+      print("Post Order success");
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 500) {
+        print("Server error occurred: ${e.message}");
+      }
+      print(e.toString());
+    }
+  }
+  Future<List<ComplaintReplay>> getComplaintReplay() async {
+    Response response = await dio!.get(ApiConstant.getUserComplaint,
+        options: Options(
+          headers: {"Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
 
+        ),
+       );
+    List<ComplaintReplay> complaintReplay = [];
+    complaintReplay = (response.data as List).map((e) => ComplaintReplay.fromJson(e)).toList();
+    print('listcat.length');
+    print(complaintReplay.length);
+    return complaintReplay;
+  }
+
+  Future<List<OrderReplay>> getOrderReplay() async {
+    Response response = await dio!.get(ApiConstant.getUserOrders,
+        options: Options(
+          headers: {"Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+
+        ),
+       );
+    List<OrderReplay> orderReplay = [];
+    orderReplay = (response.data as List).map((e) => OrderReplay.fromJson(e)).toList();
+    print('listcat.length');
+    print(orderReplay.length);
+    return orderReplay;
+  }
+  Future<List<ClassTime>> getLecture() async {
+    Response response = await dio!.get(ApiConstant.getUserPresenceAsync,
+      options: Options(
+        headers: {"Accept-Language": shaedpref.getString("curruntLang"),
+          'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+        },
+
+      ),
+    );
+    List<ClassTime> classTime = [];
+    classTime = (response.data as List).map((e) => ClassTime.fromJson(e)).toList();
+    print('listcat.length');
+    print(classTime.length);
+    return classTime;
+  }
 
 
 

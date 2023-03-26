@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/main.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
+import 'package:future_heroes_customer/services/app_provider.dart';
 import 'package:future_heroes_customer/widgets/dateWidget.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
@@ -86,6 +87,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
+
                 ],
               ),
             ),
@@ -102,29 +105,23 @@ class HomeScreen extends StatelessWidget {
               right: 20,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    DateWidget(
-                      time: DateTime.now(),
-                      date: DateTime.now(),
-                      name: 'يوسف الجزار',
-                      duration: 60,
-                      type: 'تايكواندو',
-                      onTap: () {
-                        Get.toNamed(RouteHelper.postponeAnAppointment);
-                      },
-                    ),
-                    DateWidget(
-                      time: DateTime.now(),
-                      date: DateTime.now(),
-                      name: 'يوسف الجزار',
-                      duration: 60,
-                      type: 'تايكواندو',
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+child:  Container(
+  height: 350.h,
+  child:   ListView.builder(
+      itemCount: provider.classTime.length,
+      itemBuilder: (context,index){return DateWidget(
+        timeStart: provider.classTime[index]!.startTime,
+        timeEnd: provider.classTime[index]!.endTime,
+        date: provider.classTime[index]!.classEnd!.split("T").first,
+        name: provider.classTime[index]!.classLecture!.coachName,
+        duration: provider.classTime[index]!.duration,
+        type: provider.classTime[index]!.classLecture!.name,
+        onTap: () {},
+      ); }),
+),
               )),
+
+
         ],
       ):getIt<SharedPreferenceHelper>().getWaitingStat()==false?Stack(
         children: [

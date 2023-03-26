@@ -4,16 +4,18 @@ import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
 
 class DateWidget extends StatefulWidget {
-  DateTime? date;
-  DateTime? time;
+  String? date;
+  String? timeStart;
+  String? timeEnd;
   String? name;
   String? type;
-  int? duration;
+  String? duration;
   Function()? onTap;
   DateWidget(
       {super.key,
       this.date,
-      this.time,
+      this.timeStart,
+      this.timeEnd,
       this.name,
       this.type,
       this.duration,
@@ -62,11 +64,22 @@ class _DateWidgetState extends State<DateWidget> {
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              widget.time.toString(),
-                              style: TextStyle(
-                                  color: ColorManager.gray,
-                                  fontWeight: FontWeight.normal),
+                            Row(
+                              children: [
+                                Text(
+                                  widget.timeStart.toString(),
+                                  style: TextStyle(
+                                      color: ColorManager.gray,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                Text("--"),
+                                Text(
+                                  widget.timeEnd.toString(),
+                                  style: TextStyle(
+                                      color: ColorManager.gray,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -120,11 +133,22 @@ class _DateWidgetState extends State<DateWidget> {
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              widget.time.toString(),
-                              style: TextStyle(
-                                  color: ColorManager.gray,
-                                  fontWeight: FontWeight.normal),
+                            Row(
+                              children: [
+                                Text(
+                                  widget.timeStart.toString(),
+                                  style: TextStyle(
+                                      color: ColorManager.gray,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                Text("--"),
+                                Text(
+                                  widget.timeEnd.toString(),
+                                  style: TextStyle(
+                                      color: ColorManager.gray,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
                             ),
                             Row(
                               children: [
