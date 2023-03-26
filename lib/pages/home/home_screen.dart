@@ -17,8 +17,7 @@ import '../../services/auth_provider.dart';
 import '../../services/shared_preference_helper.dart';
 
 class HomeScreen extends StatelessWidget {
-
-   HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
 
   var numberOfDone = 3;
 
@@ -28,268 +27,311 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(builder: (context, provider, x) {
       return Scaffold(
-      backgroundColor: ColorManager.backGround,
-      body: getIt<SharedPreferenceHelper>().getActiveStat()==true?Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 300,
-              width: double.infinity,
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage(ImageAssets.mainImage),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Column(
+        backgroundColor: ColorManager.backGround,
+        body: getIt<SharedPreferenceHelper>().getActiveStat() == true
+            ? Stack(
                 children: [
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  Image.asset(
-                    ImageAssets.avatar,
-                    width: 100,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    "homeTopText1".tr,
-                    style: getRegularStyle(color: ColorManager.white),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Text("numberOfPostponement".tr + " ${numberOfDone}",
-                      style: getRegularStyle(color: ColorManager.white)),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: Divider(
-                        thickness: 1,
-                        color: ColorManager.white,
-                        endIndent: 1,
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 300,
+                      width: double.infinity,
+                      decoration: new BoxDecoration(
+                        image: new DecorationImage(
+                          image: new AssetImage(ImageAssets.mainImage),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Column(
                         children: [
-                          Text("homeTopText2".tr,
-                              style: getRegularStyle(
-                                  color: ColorManager.white, fontSize: 11)),
-                          Text("homeTopText3".tr,
-                              style: getRegularStyle(
-                                  color: ColorManager.white, fontSize: 11)),
+                          SizedBox(
+                            height: 40.h,
+                          ),
+                          Image.asset(
+                            ImageAssets.avatar,
+                            width: 100,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(
+                            "homeTopText1".tr,
+                            style: getRegularStyle(color: ColorManager.white),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Text("numberOfPostponement".tr + " ${numberOfDone}",
+                              style:
+                                  getRegularStyle(color: ColorManager.white)),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              child: Divider(
+                                thickness: 1,
+                                color: ColorManager.white,
+                                endIndent: 1,
+                              )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  Text("homeTopText2".tr,
+                                      style: getRegularStyle(
+                                          color: ColorManager.white,
+                                          fontSize: 11)),
+                                  Text("homeTopText3".tr,
+                                      style: getRegularStyle(
+                                          color: ColorManager.white,
+                                          fontSize: 11)),
+                                ],
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-
-
-                ],
-              ),
-            ),
-          ),
-          // Positioned(
-          //   top: 250.h,
-          //   left: 20,
-          //   right: 20,
-          //   child: ClassTimeWidget(),
-          // ),
-          Positioned(
-              top: 300.h,
-              left: 20,
-              right: 20,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-child:  Container(
-  height: 350.h,
-  child:   ListView.builder(
-      itemCount: provider.classTime.length,
-      itemBuilder: (context,index){return DateWidget(
-        timeStart: provider.classTime[index]!.startTime,
-        timeEnd: provider.classTime[index]!.endTime,
-        date: provider.classTime[index]!.classEnd!.split("T").first,
-        name: provider.classTime[index]!.classLecture!.coachName,
-        duration: provider.classTime[index]!.duration,
-        type: provider.classTime[index]!.classLecture!.name,
-        onTap: () {},
-      ); }),
-),
-              )),
-
-
-        ],
-      ):getIt<SharedPreferenceHelper>().getWaitingStat()==false?Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 300,
-              width: double.infinity,
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage(ImageAssets.mainImage),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  Image.asset(
-                    ImageAssets.avatar,
-                    width: 100,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    "homeTopText1".tr,
-                    style: getRegularStyle(color: ColorManager.white),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Text("numberOfPostponement".tr + " ${numberOfDone}",
-                      style: getRegularStyle(color: ColorManager.white)),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: Divider(
-                        thickness: 1,
-                        color: ColorManager.white,
-                        endIndent: 1,
+                  // Positioned(
+                  //   top: 250.h,
+                  //   left: 20,
+                  //   right: 20,
+                  //   child: ClassTimeWidget(),
+                  // ),
+                  Positioned(
+                      top: 220.h,
+                      left: 20,
+                      right: 20,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 479.h,
+                          child: ListView.builder(
+                              itemCount: provider.classTime.length,
+                              itemBuilder: (context, index) {
+                                return DateWidget(
+                                  timeStart:
+                                      provider.classTime[index]!.startTime,
+                                  timeEnd: provider.classTime[index]!.endTime,
+                                  date: provider.classTime[index]!.classEnd!
+                                      .split("T")
+                                      .first,
+                                  name: provider.classTime[index]!.classLecture!
+                                      .coachName,
+                                  duration: provider.classTime[index]!.duration,
+                                  type: provider
+                                      .classTime[index]!.classLecture!.name,
+                                  onTap: () {},
+                                );
+                              }),
+                        ),
                       )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          Text("homeTopText2".tr,
-                              style: getRegularStyle(
-                                  color: ColorManager.white, fontSize: 11)),
-                          Text("homeTopText3".tr,
-                              style: getRegularStyle(
-                                  color: ColorManager.white, fontSize: 11)),
-                        ],
-                      ),
-                    ],
-                  ),
                 ],
-              ),
-            ),
-          ),
-          // Positioned(
-          //   top: 250.h,
-          //   left: 20,
-          //   right: 20,
-          //   child: ClassTimeWidget(),
-          // ),
-          Positioned(
-              top: 300.h,
-              left: 20,
-              right: 20,
-              child: Center(
-                child: Column(children: [
-                  Image.asset(ImageAssets.mustReg,width: 300,height: 300,),
-                  Text("عليك اكمال انتظار الموافثة على طلب انضمامك",textAlign: TextAlign.center,),
-
-
-                ],),
               )
-          ),
-        ],
-      ):Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 300,
-              width: double.infinity,
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage(ImageAssets.mainImage),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  Image.asset(
-                    ImageAssets.avatar,
-                    width: 100,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    "homeTopText1".tr,
-                    style: getRegularStyle(color: ColorManager.white),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Text("numberOfPostponement".tr + " ${numberOfDone}",
-                      style: getRegularStyle(color: ColorManager.white)),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: Divider(
-                        thickness: 1,
-                        color: ColorManager.white,
-                        endIndent: 1,
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+            : getIt<SharedPreferenceHelper>().getWaitingStat() == false
+                ? Stack(
                     children: [
-                      Column(
-                        children: [
-                          Text("homeTopText2".tr,
-                              style: getRegularStyle(
-                                  color: ColorManager.white, fontSize: 11)),
-                          Text("homeTopText3".tr,
-                              style: getRegularStyle(
-                                  color: ColorManager.white, fontSize: 11)),
-                        ],
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          height: 300,
+                          width: double.infinity,
+                          decoration: new BoxDecoration(
+                            image: new DecorationImage(
+                              image: new AssetImage(ImageAssets.mainImage),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 40.h,
+                              ),
+                              Image.asset(
+                                ImageAssets.avatar,
+                                width: 100,
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Text(
+                                "homeTopText1".tr,
+                                style:
+                                    getRegularStyle(color: ColorManager.white),
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Text(
+                                  "numberOfPostponement".tr +
+                                      " ${numberOfDone}",
+                                  style: getRegularStyle(
+                                      color: ColorManager.white)),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  child: Divider(
+                                    thickness: 1,
+                                    color: ColorManager.white,
+                                    endIndent: 1,
+                                  )),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text("homeTopText2".tr,
+                                          style: getRegularStyle(
+                                              color: ColorManager.white,
+                                              fontSize: 11)),
+                                      Text("homeTopText3".tr,
+                                          style: getRegularStyle(
+                                              color: ColorManager.white,
+                                              fontSize: 11)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
+                      // Positioned(
+                      //   top: 250.h,
+                      //   left: 20,
+                      //   right: 20,
+                      //   child: ClassTimeWidget(),
+                      // ),
+                      Positioned(
+                          top: 300.h,
+                          left: 20,
+                          right: 20,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  ImageAssets.mustReg,
+                                  width: 300,
+                                  height: 300,
+                                ),
+                                Text(
+                                  "عليك اكمال انتظار الموافثة على طلب انضمامك",
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          )),
+                    ],
+                  )
+                : Stack(
+                    children: [
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          height: 300,
+                          width: double.infinity,
+                          decoration: new BoxDecoration(
+                            image: new DecorationImage(
+                              image: new AssetImage(ImageAssets.mainImage),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 40.h,
+                              ),
+                              Image.asset(
+                                ImageAssets.avatar,
+                                width: 100,
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Text(
+                                "homeTopText1".tr,
+                                style:
+                                    getRegularStyle(color: ColorManager.white),
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Text(
+                                  "numberOfPostponement".tr +
+                                      " ${numberOfDone}",
+                                  style: getRegularStyle(
+                                      color: ColorManager.white)),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  child: Divider(
+                                    thickness: 1,
+                                    color: ColorManager.white,
+                                    endIndent: 1,
+                                  )),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text("homeTopText2".tr,
+                                          style: getRegularStyle(
+                                              color: ColorManager.white,
+                                              fontSize: 11)),
+                                      Text("homeTopText3".tr,
+                                          style: getRegularStyle(
+                                              color: ColorManager.white,
+                                              fontSize: 11)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Positioned(
+                      //   top: 250.h,
+                      //   left: 20,
+                      //   right: 20,
+                      //   child: ClassTimeWidget(),
+                      // ),
+                      Positioned(
+                          top: 300.h,
+                          left: 20,
+                          right: 20,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  ImageAssets.mustReg,
+                                  width: 300,
+                                  height: 300,
+                                ),
+                                Text(
+                                  "عليك اكمال عملية التسجيل  لتتمكن من عرض الصفحة الحالية",
+                                  textAlign: TextAlign.center,
+                                ),
+                                CustomButtonPrimary(
+                                  text: 'اكمال التسجيل',
+                                  onpressed: () {
+                                    Get.toNamed(RouteHelper.signUpPart2);
+                                  },
+                                )
+                              ],
+                            ),
+                          )),
                     ],
                   ),
-                ],
-              ),
-            ),
-          ),
-          // Positioned(
-          //   top: 250.h,
-          //   left: 20,
-          //   right: 20,
-          //   child: ClassTimeWidget(),
-          // ),
-          Positioned(
-              top: 300.h,
-              left: 20,
-              right: 20,
-              child: Center(
-                child: Column(children: [
-                  Image.asset(ImageAssets.mustReg,width: 300,height: 300,),
-                  Text("عليك اكمال عملية التسجيل  لتتمكن من عرض الصفحة الحالية",textAlign: TextAlign.center,),
-
-                  CustomButtonPrimary(text: 'اكمال التسجيل', onpressed: () {
-                    Get.toNamed(RouteHelper.signUpPart2);
-                  },)
-                ],),
-              )
-          ),
-        ],
-      ),
-    );
-  });}
+      );
+    });
+  }
 }
