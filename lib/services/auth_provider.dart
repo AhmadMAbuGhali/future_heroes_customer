@@ -236,6 +236,8 @@ class AuthProvider extends ChangeNotifier {
 
   int idSelectedCategory = 0;
   List<int> subCatId = [];
+
+
   List<SubCategory> categorySubforcat = [];
   List<SubCategory> categorySub = [];
   removeIdSub(int index) {
@@ -248,6 +250,8 @@ class AuthProvider extends ChangeNotifier {
     subCatId.toSet().toList();
     notifyListeners();
   }
+
+
 
   Future<dynamic> getSubCategory() async {
     try {
@@ -403,6 +407,38 @@ class AuthProvider extends ChangeNotifier {
 
   //Disease
   List<DiseaseModel> diseases = [];
+  List<int> diseasesId = [];
+  removediseasesId(int index) {
+    diseasesId.remove(diseases[index].id);
+    notifyListeners();
+  }
+
+  adddiseasesId(int index) {
+    diseasesId.add(diseases[index].id ?? 0);
+    diseasesId.toSet().toList();
+    notifyListeners();
+  }
+
+  sendDiseasesId(List<int> id) async {
+    try {
+      print(id);
+      await DioClient.dioClient.sendDiseases(id);
+      notifyListeners();
+    } on DioError catch (e) {
+      print(e.toString());
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+
 
   Future<String?> getDisease() async {
     try {

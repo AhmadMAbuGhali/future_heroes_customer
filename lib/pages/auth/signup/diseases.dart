@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
+import '../../../resources/styles_manager.dart';
 import '../../../routes/route_helper.dart';
 import '../../../services/auth_provider.dart';
 
@@ -130,34 +131,46 @@ class Diseases extends StatelessWidget {
                   ],
                 ),
                 !provider.isDiseases
-                    ? SizedBox(
-                        height: 400.h,
-                        child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: provider.diseases.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.symmetric(horizontal: 20.w),
-                                child: Column(
-                                  children: [
-                                    CardCheckBoxWidget(
-                                      isChecked: provider.isChecked,
-                                      title: provider.diseases[index].name ??
-                                          ' null',
-                                    ),
-                                  ],
+                    ? SingleChildScrollView(
+                  child: Column(
+                      children: List.generate(
+                          provider.diseases.length,
+                              (index) => Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 2,
+                                  color: ColorManager.primary,
                                 ),
-                              );
-                              return Text(provider.categoryMain[index].name ??
-                                  ' nullß');
-                            }),
-                      )
-                    : Column(
-                        children: [],
-                      ),
+                                borderRadius: BorderRadius.circular(15.r)),
+                            child: CheckboxListTile(
+                              checkColor: ColorManager.primary,
+                              value: provider.diseasesId.contains(
+                                  provider.diseases[index].id),
+                              onChanged: (selected) {
+                                if (provider.diseases.contains(provider
+                                    .diseases[index].id) ==
+                                    true) {
+                                  provider.removediseasesId(index);
+                                } else {
+                                  provider.adddiseasesId(index);
+                                }
+                                // provider.onUserSelect(selected??false, index);
+                              },
+                              selected: true,
+                              title: Text(
+                                provider.diseases[index].name ??
+                                    '',
+                                style: getRegularStyle(
+                                    color: ColorManager.primary),
+                              ),
+                            ),
+                          ))),
+                )
+                    :  Column(children: [],),
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
+                    provider.sendClassTime(provider.diseasesId);
                     Get.toNamed(RouteHelper.subscriptionType);
                   },
                 )

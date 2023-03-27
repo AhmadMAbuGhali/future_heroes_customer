@@ -158,6 +158,18 @@ class DioClient {
         ));
   }
 
+  Future<void> sendDiseases(List<int> id) async {
+    await dio!.post(ApiConstant.userDiseases,
+        data: {"diseaseId": id},
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+        ));
+  }
+
   //Disease
   Future<List<DiseaseModel>> getDisease() async {
     Response response = await dio!.get(ApiConstant.disease,
