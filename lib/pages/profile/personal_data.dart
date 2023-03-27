@@ -151,7 +151,7 @@ class _PersonalDataState extends State<PersonalData> {
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(color: ColorManager.primary,width: 1)
               ),
-              child: Text(provider.profileData!.dateOfBirth??"",style: getRegularStyle(color: ColorManager.black),),
+              child: Text(provider.profileData!.dateOfBirth!.split("T").first??"",style: getRegularStyle(color: ColorManager.black),),
             ),
             SizedBox(
               height: 10.h,

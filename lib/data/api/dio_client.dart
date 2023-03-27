@@ -248,6 +248,25 @@ class DioClient {
       print(e.toString());
     }
   }
+
+  Future<ResponsMassageCode?> postUserPostponement(int id,String reason, String details) async {
+    try {
+      await dio!.post(ApiConstant.userPostponement, data: {
+        "userPresenceId": id,
+        "reason": reason,
+        "details":details
+      }, options: Options(headers: {
+        "Accept-Language": shaedpref.getString("curruntLang"),
+        'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+      }));
+      print("Post Order success");
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 500) {
+        print("Server error occurred: ${e.message}");
+      }
+      print(e.toString());
+    }
+  }
   Future<List<ComplaintReplay>> getComplaintReplay() async {
     Response response = await dio!.get(ApiConstant.getUserComplaint,
         options: Options(
@@ -278,6 +297,18 @@ class DioClient {
     print('listcat.length');
     print(orderReplay.length);
     return orderReplay;
+  }
+
+  Future<bool?> getIsActive() async {
+    await dio!.get(ApiConstant.isActiveStatus!,
+        options: Options(
+          headers: {"Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+
+        ),
+       );
+
   }
   Future<List<ClassTime>> getLecture() async {
     Response response = await dio!.get(ApiConstant.getUserPresenceAsync,

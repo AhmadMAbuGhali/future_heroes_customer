@@ -85,7 +85,11 @@ class _ClassTimeState extends State<ClassTime> {
                 name: provider.classTime[index]!.classLecture!.coachName,
                 duration: provider.classTime[index]!.duration,
                 type: provider.classTime[index]!.classLecture!.name,
-                onTap: () {},
+                onTap: () {
+                  provider.setId(provider.classTime[index]!.id!);
+                  print(provider.id);
+                  Get.toNamed(RouteHelper.postponeAnAppointment);
+                },
               ); }),
             )
 

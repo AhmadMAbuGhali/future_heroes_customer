@@ -15,6 +15,7 @@ import '../data/api/exception_handling.dart';
 import '../main.dart';
 import '../models/respons_massage_code.dart';
 import '../resources/color_manager.dart';
+import 'auth_provider.dart';
 
 class AppProvider extends ChangeNotifier {
   AppProvider(){
@@ -22,6 +23,15 @@ class AppProvider extends ChangeNotifier {
     getOrderReplay();
     getClassTime();
     getProfileData();
+  }
+
+  int? _id;
+
+  int get id => _id!;
+
+  void setId(int id) {
+    _id = id;
+    notifyListeners();
   }
 
   bool isLoading = false;
@@ -161,6 +171,28 @@ class AppProvider extends ChangeNotifier {
   }
 
 
+  final TextEditingController reasonController = TextEditingController();
+  final TextEditingController detailsController = TextEditingController();
+  Future<String?> postUserPostponement(int id,String reason, String details) async {
+    try {
+      await DioClient.dioClient.postUserPostponement(id,reason, details);
+      print("Done");
+      notifyListeners();
+    } on DioError catch (e) {
+      print(e.toString());
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+
   Future<String?> resetPasswordAuthorize(
       String oldPass, String pass, String conPass) async {
     try {
@@ -234,6 +266,84 @@ class AppProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+  }
+
+  Future<bool?> getIsActive() async {
+    try {
+    bool? isActive=  await DioClient.dioClient.getIsActive();
+      getIt<SharedPreferenceHelper>().setActiveStat(activeStat:isActive! ) ;
+
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+  bool firstTime=true;
+  changeFirstTime(bool value){
+    firstTime=value;
+    notifyListeners();
+  }
+
+  logOut() {
+
+    getIt<SharedPreferenceHelper>().setIsLogin(isLogint: false);
+    getIt<SharedPreferenceHelper>().setUserToken(userToken: '');
+    clearAllData();
+  }
+
+  clearAllData(){
+
+    getIt<AuthProvider>().listTime=[];
+
+
+    getIt<AuthProvider>().coachFromId = []; // نشطة
+    getIt<AuthProvider>().offerSub = []; //مغلقة
+    getIt<AuthProvider>().offerSelected = []; //مسودة
+    getIt<AuthProvider>().diseases = [];
+    getIt<AuthProvider>().timeId = [];
+    getIt<AuthProvider>().timeListString=[];
+    getIt<AuthProvider>().timeListMain=[];
+    getIt<AuthProvider>().categorySubforcat=[];
+    getIt<AuthProvider>().subCatId=[];
+    getIt<AuthProvider>().categorySub=[];
+    getIt<AuthProvider>().categoryMain=[];
+
+    getIt<AppProvider>().complaintReplay=[];
+    getIt<AppProvider>().orderReplay = [];
+    getIt<AppProvider>().classTime = [];
+
+
+
+  }
+
+  getAllData(){
+    getIt<AuthProvider>().listTime;
+
+
+    getIt<AuthProvider>().coachFromId; // نشطة
+    getIt<AuthProvider>().offerSub; //مغلقة
+    getIt<AuthProvider>().offerSelected; //مسودة
+    getIt<AuthProvider>().diseases;
+    getIt<AuthProvider>().timeId;
+    getIt<AuthProvider>().timeListString;
+    getIt<AuthProvider>().timeListMain;
+    getIt<AuthProvider>().categorySubforcat;
+    getIt<AuthProvider>().subCatId;
+    getIt<AuthProvider>().categorySub;
+    getIt<AuthProvider>().categoryMain;
+
+    getIt<AppProvider>().complaintReplay;
+    getIt<AppProvider>().orderReplay ;
+    getIt<AppProvider>().classTime ;
+
   }
 
 }

@@ -225,6 +225,7 @@ class SignUpPersonalData extends StatelessWidget {
                       CustomTextFormAuth(
                         hidepassword: false,
                         textInputType: TextInputType.number,
+
                         iconData: Icons.phone,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -239,8 +240,7 @@ class SignUpPersonalData extends StatelessWidget {
                         myController: provider.phoneSignUpPage,
 
                         hintText: 'mobileNumber'.tr,
-                        //  labelText: 'البريد الالكتروني / رقم الهاتف',
-                        //  iconData: Icons.email_outlined,
+
                       ),
                       CustomButtonPrimary(
                         text: 'continue'.tr,

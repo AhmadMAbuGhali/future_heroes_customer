@@ -24,8 +24,7 @@ import '../models/class_time_model.dart';
 import '../models/login_model.dart';
 import '../models/respons_massage_code.dart';
 import '../models/terms_and_conditions_model.dart';
-import '../pages/auth/signup/CoachSelection.dart';
-import '../widgets/CustomButtonPrimary.dart';
+import 'app_provider.dart';
 
 class AuthProvider extends ChangeNotifier {
   AuthProvider() {
@@ -33,26 +32,14 @@ class AuthProvider extends ChangeNotifier {
     getSubCategory();
     getDisease();
     getOffer();
-    getClassTime();
+
   }
-  List<ClassTime> classTime = [];
-  Future<ClassTime?> getClassTime() async {
-    try {
-      classTime = await DioClient.dioClient.getLecture();
 
 
-    } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
-    }
-    notifyListeners();
-  }
+  bool _isAuthenticated = false;
+
+  bool get isAuthenticated => _isAuthenticated;
+
   // general
   bool isLoading = false;
   changeIsLoding(bool value) {
@@ -81,6 +68,9 @@ class AuthProvider extends ChangeNotifier {
       getIt<SharedPreferenceHelper>().setUserToken(userToken: token!);
       bool? isActive = respontLogin?.isActive!;
       getIt<SharedPreferenceHelper>().setActiveStat(activeStat: isActive!);
+      bool loginSuccess =  getIt<SharedPreferenceHelper>().getUserToken()==null;
+      _isAuthenticated = loginSuccess;
+      notifyListeners();
 
       print(respontLogin!.toJson().toString());
     } on DioError catch (e) {
@@ -232,6 +222,13 @@ class AuthProvider extends ChangeNotifier {
   }
 
 // subcategory
+  int currentStep = 0 ;
+  addStep(){
+    currentStep+=1;
+  }
+  backStep(){
+    currentStep-=1;
+  }
   int idSelectedCategory = 0;
   List<int> subCatId = [];
   List<SubCategory> categorySubforcat = [];
@@ -285,11 +282,15 @@ class AuthProvider extends ChangeNotifier {
   }
 
   //Coach Selection
+
   List<TimeList> listTime = [];
+
   List<List<TimeList>> timeListMain = [];
   List<String> timeListString = [];
   Map<int, String> maptimeListString = {};
   String timeString = '';
+
+  String? selectedTime;
   int idSelectedTime = 0;
   List<int> timeId = [];
 
@@ -565,7 +566,68 @@ class AuthProvider extends ChangeNotifier {
     }
     return null;
   }
+
+  bool firstTime=true;
+  changeFirstTime(bool value){
+    firstTime=value;
+    notifyListeners();
+  }
+
+  logOut() {
+
+    getIt<SharedPreferenceHelper>().setIsLogin(isLogint: false);
+    getIt<SharedPreferenceHelper>().setUserToken(userToken: '');
+    clearAllData();
+  }
+
+  clearAllData(){
+
+    getIt<AuthProvider>().listTime=[];
+
+
+    getIt<AuthProvider>().coachFromId = []; // نشطة
+    getIt<AuthProvider>().offerSub = []; //مغلقة
+    getIt<AuthProvider>().offerSelected = []; //مسودة
+    getIt<AuthProvider>().diseases = [];
+    getIt<AuthProvider>().timeId = [];
+    getIt<AuthProvider>().timeListString=[];
+    getIt<AuthProvider>().timeListMain=[];
+    getIt<AuthProvider>().categorySubforcat=[];
+    getIt<AuthProvider>().subCatId=[];
+    getIt<AuthProvider>().categorySub=[];
+    getIt<AuthProvider>().categoryMain=[];
+
+    getIt<AppProvider>().complaintReplay=[];
+    getIt<AppProvider>().orderReplay = [];
+    getIt<AppProvider>().classTime = [];
+
+
+
+  }
+
+  getAllData(){
+    getIt<AuthProvider>().listTime;
+
+
+    getIt<AuthProvider>().coachFromId; // نشطة
+    getIt<AuthProvider>().offerSub; //مغلقة
+    getIt<AuthProvider>().offerSelected; //مسودة
+    getIt<AuthProvider>().diseases;
+    getIt<AuthProvider>().timeId;
+    getIt<AuthProvider>().timeListString;
+    getIt<AuthProvider>().timeListMain;
+    getIt<AuthProvider>().categorySubforcat;
+    getIt<AuthProvider>().subCatId;
+    getIt<AuthProvider>().categorySub;
+    getIt<AuthProvider>().categoryMain;
+
+    getIt<AppProvider>().complaintReplay;
+    getIt<AppProvider>().orderReplay ;
+    getIt<AppProvider>().classTime ;
+
+  }
 }
+
 
 // Validator
 extension EmailValidator on String {

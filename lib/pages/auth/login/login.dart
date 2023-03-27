@@ -14,12 +14,16 @@ import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/LogoAuth.dart';
 import 'package:future_heroes_customer/widgets/textSignUp.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
+import '../../../main.dart';
+import '../../../services/shared_preference_helper.dart';
 import '../../../widgets/snakbar.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
+
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -85,6 +89,10 @@ class Login extends StatelessWidget {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'passwordEmpty'.tr;
+                      } else if (value.isValidPassword() == false) {
+                        return 'invalidPassword'.tr;
+                      } else if (value.isValidPassword() == true) {
+                        return null;
                       }
                       return null;
                     },
@@ -126,12 +134,12 @@ class Login extends StatelessWidget {
                   CustomButtonPrimary(
                     text: 'login'.tr,
                     onpressed: () {
-
                       provider.login(provider.emailLoginPage.text,
                           provider.passwordLoginPage.text);
 
-
-                      if (loginFormKey.currentState!.validate()) {
+                      if (loginFormKey.currentState!.validate() &&
+                          getIt<SharedPreferenceHelper>().getUserToken() !=
+                              null) {
                         Get.toNamed(RouteHelper.successLogin);
                         print('success');
                       } else {

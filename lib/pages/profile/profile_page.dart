@@ -27,6 +27,96 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
+
+      Future<void> _logoutDialog() async {
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Column(
+                children: [
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        IconAssets.alert,
+                        color: Colors.red,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                ],
+              ),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    Text('logoutPopUpText'.tr),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                SizedBox(
+                  height: 20.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        provider.logOut();
+                        Get.toNamed(RouteHelper.login);
+                      },
+                      child: Container(
+                        width: 100.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.red)),
+                        child: Center(
+                            child: Text(
+                              'yes'.tr,
+                              style: getBoldStyle(color: Colors.white),
+                            )),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        width: 100.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                            color: ColorManager.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                            border: Border.all(color: Colors.red)),
+                        child: Center(
+                            child: Text(
+                              'cancel'.tr,
+                              textAlign: TextAlign.center,
+                              style: getBoldStyle(
+                                color: Colors.red,
+                              ),
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+              ],
+            );
+          },
+        );
+      }
       return SafeArea(
       child: Scaffold(
         body: Center(
@@ -285,96 +375,10 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+
   }
 
-  Future<void> _logoutDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Column(
-            children: [
-              SizedBox(
-                height: 20.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    IconAssets.alert,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-            ],
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: [
-                Text('logoutPopUpText'.tr),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            SizedBox(
-              height: 20.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(RouteHelper.login);
-                  },
-                  child: Container(
-                    width: 100.w,
-                    height: 30.h,
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.red)),
-                    child: Center(
-                        child: Text(
-                      'yes'.tr,
-                      style: getBoldStyle(color: Colors.white),
-                    )),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    width: 100.w,
-                    height: 30.h,
-                    decoration: BoxDecoration(
-                        color: ColorManager.white,
-                        borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(color: Colors.red)),
-                    child: Center(
-                        child: Text(
-                      'cancel'.tr,
-                      textAlign: TextAlign.center,
-                      style: getBoldStyle(
-                        color: Colors.red,
-                      ),
-                    )),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-          ],
-        );
-      },
-    );
-  }
+
 
   Future<void> _deleteAccountDialog() async {
     return showDialog<void>(
@@ -418,6 +422,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     GestureDetector(
                       onTap: () {
+
                         Navigator.of(context).pop();
                       },
                       child: Container(

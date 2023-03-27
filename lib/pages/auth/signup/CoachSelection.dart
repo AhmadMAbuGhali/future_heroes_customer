@@ -20,6 +20,8 @@ import '../../../routes/route_helper.dart';
 import '../../../services/auth_provider.dart';
 
 class CoachSelection extends StatelessWidget {
+
+
   CoachSelection({super.key});
 
   List<int> classId = [];
@@ -182,6 +184,7 @@ class CoachSelection extends StatelessWidget {
                                           ),
                                         ))
                                     .toList(),
+
                                 // validator: (value) {
                                 //   if (value == null) {
                                 //     return 'يجب تحديد تصنيف المهمة';
@@ -189,6 +192,8 @@ class CoachSelection extends StatelessWidget {
                                 //   return null;
                                 // },
                                 onChanged: (value) {
+
+
                                   var key = provider.maptimeListString.keys
                                       .firstWhere(
                                           (k) =>

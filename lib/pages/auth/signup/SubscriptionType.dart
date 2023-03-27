@@ -96,7 +96,7 @@ class SubscriptionType extends StatelessWidget {
                   provider.sendOfferId(id!);
                   getIt<SharedPreferenceHelper>().setWaitingStat(waitingStat: true);
                   print(id);
-                  Get.toNamed(RouteHelper.homeScreen);
+                  Get.toNamed(RouteHelper.initial);
                   // Get.toNamed(RouteHelper.endSignUp);
                 },
               )
