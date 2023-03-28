@@ -34,6 +34,9 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImp> {
                 CustomTextTitle(
                   text: onBoardingList[i].title ?? '',
                 ),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Container(
                     alignment: Alignment.center,
                     width: double.infinity,

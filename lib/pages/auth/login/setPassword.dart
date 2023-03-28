@@ -23,147 +23,171 @@ class SetPassword extends StatelessWidget {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<
-      ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(builder: (context, provider, x) {
-      return Scaffold(
-          key: _scaffoldKey,
-          backgroundColor: ColorManager.backGround,
-          body: Form(
-            key: newPasswordFormKey,
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 30.h),
-              child: Column(children: [
-                SvgPicture.asset(ImageAssets.set_password),
-                SizedBox(
-                  height: 10.h,
-                ),
-                CustomTextTitle(
-                  text: 'typeNewPassword'.tr,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  'typeNewPassword'.tr,
-                  style: TextStyle(fontSize: 12),
-                ),
-                CustomTextFormAuth(
-                  textInputType: TextInputType.visiblePassword,
-                  hidepassword: provider.hideNewPasswordForget,
-                  myController: newPasswordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'passwordEmpty'.tr;
-                    }else if (value.isValidPassword() == false) {
-                      return 'invalidPassword'.tr;
-                    } else if (value.isValidPassword() == true) {
-                      return null;
-                    }
-                    return null;
-                  },
-                  pressSuffixIcon: () {
-                    provider.changeHideNewPasswordForget();
-                  },
-                  hintText: '*********',
-
-                  // labelText: 'كلمة المرور',
-                  iconData: provider.hideNewPasswordForget
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  'retypePassword'.tr,
-                  style: TextStyle(fontSize: 12),
-                ),
-                CustomTextFormAuth(
-                  textInputType: TextInputType.visiblePassword,
-                  hidepassword: provider.hideConfirmPasswordForget,
-                  myController: confirmPasswordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'passwordEmpty'.tr;
-                    }else if (value.isValidPassword() == false) {
-                      return 'invalidPassword'.tr;
-                    } else if (value.isValidPassword() == true) {
-                      return null;
-                    }
-                    return null;
-                  },
-                  pressSuffixIcon:() {
-                    provider.changeHideConfirmPasswordForget();
-                  },
-                  hintText: '*********',
-
-                  // labelText: 'كلمة المرور',
-                  iconData:
-                  provider.hideConfirmPasswordForget ? Icons.visibility : Icons
-                      .visibility_off,
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 44.h,
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: ColorManager.primary, // Background color
-                      ),
-                      onPressed: () async{
-
-                        print(newPasswordController.text.trim());
-                        print(confirmPasswordController.text.trim());
-                        if (newPasswordFormKey.currentState!.validate()) {
-                          newPasswordFormKey.currentState!.save();
-                          if(newPasswordController.text.trim()==confirmPasswordController.text.trim()){
-                            provider.changeIsLoding(true);
-                            String? success= await provider.resetPassword(newPasswordController.text.trim(),confirmPasswordController.text.trim());
-                            if(success=='true'){
-                              provider.changeIsLoding(false);
-                              showCustomDialog(context,'assets/animation/successTick.json');
-                              Future.delayed(const Duration(seconds: 3), () {
-                                Get.toNamed(RouteHelper.login);
-                              });
-                            }else{
-                              provider.changeIsLoding(true);
-                              showCustomDialog(context,'assets/animation/error.json');
-                            }
-                          }else{
-                            final snackBar = SnackBar(
-                              content: const Text('كلمة المرور غير متشابهة'),
-                              backgroundColor: ColorManager.red,
-                            );
-                            rootScaffoldMessengerKey.currentState
-                                ?.showSnackBar(snackBar);
-                          }
-
-                        }
-                      },
-                      child:provider.isLoading?Row(children: [
-                        Text('passwordReset'.tr, style: getMediumStyle(color: ColorManager.white, fontSize: FontSize.s18.sp)),
-                        SizedBox(width: 10.w,),
-                        CircularProgressIndicator(color: ColorManager.white)
-                      ],):Text('passwordReset'.tr, style: getMediumStyle(color: ColorManager.white, fontSize: FontSize.s18.sp))
+      return SafeArea(
+        child: Scaffold(
+            key: _scaffoldKey,
+            resizeToAvoidBottomInset: false,
+            backgroundColor: ColorManager.backGround,
+            body: Form(
+              key: newPasswordFormKey,
+              child: Container(
+                padding: EdgeInsets.all(16),
+                child: Column(children: [
+                  SvgPicture.asset(ImageAssets.set_password),
+                  SizedBox(
+                    height: 20.h,
                   ),
-                ),
+                  CustomTextTitle(
+                    text: 'typeNewPassword'.tr,
+                  ),
+                  SizedBox(
+                    height: 40.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'typeNewPassword'.tr,
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                  CustomTextFormAuth(
+                    textInputType: TextInputType.visiblePassword,
+                    hidepassword: provider.hideNewPasswordForget,
+                    myController: newPasswordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'passwordEmpty'.tr;
+                      } else if (value.isValidPassword() == false) {
+                        return 'invalidPassword'.tr;
+                      } else if (value.isValidPassword() == true) {
+                        return null;
+                      }
+                      return null;
+                    },
+                    pressSuffixIcon: () {
+                      provider.changeHideNewPasswordForget();
+                    },
+                    hintText: '*********',
 
+                    // labelText: 'كلمة المرور',
+                    iconData: provider.hideNewPasswordForget
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'retypePassword'.tr,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  CustomTextFormAuth(
+                    textInputType: TextInputType.visiblePassword,
+                    hidepassword: provider.hideConfirmPasswordForget,
+                    myController: confirmPasswordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'passwordEmpty'.tr;
+                      } else if (value.isValidPassword() == false) {
+                        return 'invalidPassword'.tr;
+                      } else if (value.isValidPassword() == true) {
+                        return null;
+                      }
+                      return null;
+                    },
+                    pressSuffixIcon: () {
+                      provider.changeHideConfirmPasswordForget();
+                    },
+                    hintText: '*********',
 
-
-              ]),
-            ),
-          ));
+                    // labelText: 'كلمة المرور',
+                    iconData: provider.hideConfirmPasswordForget
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 44.h,
+                    //  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorManager.primary, // Background color
+                        ),
+                        onPressed: () async {
+                          print(newPasswordController.text.trim());
+                          print(confirmPasswordController.text.trim());
+                          if (newPasswordFormKey.currentState!.validate()) {
+                            newPasswordFormKey.currentState!.save();
+                            if (newPasswordController.text.trim() ==
+                                confirmPasswordController.text.trim()) {
+                              provider.changeIsLoding(true);
+                              String? success = await provider.resetPassword(
+                                  newPasswordController.text.trim(),
+                                  confirmPasswordController.text.trim());
+                              if (success == 'true') {
+                                provider.changeIsLoding(false);
+                                showCustomDialog(context,
+                                    'assets/animation/successTick.json');
+                                Future.delayed(const Duration(seconds: 3), () {
+                                  Get.toNamed(RouteHelper.login);
+                                });
+                              } else {
+                                provider.changeIsLoding(true);
+                                showCustomDialog(
+                                    context, 'assets/animation/error.json');
+                              }
+                            } else {
+                              final snackBar = SnackBar(
+                                content: const Text('كلمة المرور غير متشابهة'),
+                                backgroundColor: ColorManager.red,
+                              );
+                              rootScaffoldMessengerKey.currentState
+                                  ?.showSnackBar(snackBar);
+                            }
+                          }
+                        },
+                        child: provider.isLoading
+                            ? Row(
+                                children: [
+                                  Text('passwordReset'.tr,
+                                      style: getMediumStyle(
+                                          color: ColorManager.white,
+                                          fontSize: FontSize.s18.sp)),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  CircularProgressIndicator(
+                                      color: ColorManager.white)
+                                ],
+                              )
+                            : Text('passwordReset'.tr,
+                                style: getMediumStyle(
+                                    color: ColorManager.white,
+                                    fontSize: FontSize.s18.sp))),
+                  ),
+                ]),
+              ),
+            )),
+      );
     });
   }
 
@@ -182,21 +206,24 @@ class SetPassword extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 20.w),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(22.r)),
-            child: Column(children: [
-              SizedBox(
-                width: 120.w,
-                height: 120.h,
-                child: Lottie.asset(
-                    animation,
-                    width: 120.w,
-                    height: 120.h,
-                    fit: BoxFit.cover
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 120.w,
+                  height: 120.h,
+                  child: Lottie.asset(animation,
+                      width: 120.w, height: 120.h, fit: BoxFit.cover),
                 ),
-              ),
-              SizedBox(height: 15.h,),
-              Text('allOk'.tr, style: getBoldStyle(
-                  color: ColorManager.black, fontSize: FontSize.s22),)
-            ],),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Text(
+                  'allOk'.tr,
+                  style: getBoldStyle(
+                      color: ColorManager.black, fontSize: FontSize.s22),
+                )
+              ],
+            ),
           ),
         );
       },

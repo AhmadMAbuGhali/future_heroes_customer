@@ -29,19 +29,20 @@ class CodeVerification extends StatefulWidget {
 class _CodeVerificationState extends State<CodeVerification> {
   int _start = 60;
   Timer? _timer;
-  final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
     _timer = new Timer.periodic(
         oneSec,
-            (Timer timer) => setState(() {
-          if (_start < 1) {
-            timer.cancel();
-          } else {
-            _start = _start - 1;
-          }
-        }));
+        (Timer timer) => setState(() {
+              if (_start < 1) {
+                timer.cancel();
+              } else {
+                _start = _start - 1;
+              }
+            }));
   }
 
   @override
@@ -65,15 +66,19 @@ class _CodeVerificationState extends State<CodeVerification> {
                 Trans('codeWasSend').tr,
                 textAlign: TextAlign.center,
                 style:
-                getRegularStyle(color: ColorManager.gray, fontSize: 16.sp),
+                    getRegularStyle(color: ColorManager.gray, fontSize: 16.sp),
               ),
               SizedBox(
                 height: 15.h,
               ),
-              Text(
-                '${provider.emailSendCodeController.text.trim().substring(0, 3)}*******.com',
-                style: getMediumStyle(
-                    color: ColorManager.black, fontSize: FontSize.s14.sp),
+              Center(
+                child: Text(provider.emailSendCodeController.text.trim()),
+                // child: Text(
+                //   '${provider.emailSendCodeController.text.trim().substring(0, 3)}******* ' +
+                //       '${provider.emailSendCodeController.text.trim().substring(provider.emailSendCodeController.text.trim().length - 7)}',
+                //   style: getMediumStyle(
+                //       color: ColorManager.black, fontSize: FontSize.s14.sp),
+                // ),
               ),
               SizedBox(
                 height: 30.h,
@@ -83,9 +88,9 @@ class _CodeVerificationState extends State<CodeVerification> {
                 child: PinFieldAutoFill(
                   decoration: UnderlineDecoration(
                     textStyle:
-                    TextStyle(fontSize: 20, color: ColorManager.primary),
+                        TextStyle(fontSize: 20, color: ColorManager.primary),
                     colorBuilder:
-                    FixedColorBuilder(Colors.black.withOpacity(0.3)),
+                        FixedColorBuilder(Colors.black.withOpacity(0.3)),
                   ),
                   codeLength: 4,
                   controller: provider.sendCodeController,
@@ -102,22 +107,23 @@ class _CodeVerificationState extends State<CodeVerification> {
                   },
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(Trans('sendCodeAgain').tr),
-                  Text(
-                    "$_start",
-                    style: TextStyle(color: ColorManager.primary),
-                  ),
-                  Text(Trans("seconds").tr),
-                ],
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text(Trans('sendCodeAgain').tr),
+              //     Text(
+              //       "$_start",
+              //       style: TextStyle(color: ColorManager.primary),
+              //     ),
+              //     Text(Trans("seconds").tr),
+              //   ],
+              // ),
+              SizedBox(
+                height: 70.h,
               ),
-
               Container(
-                width: MediaQuery.of(context).size.width,
+                width: double.infinity,
                 height: 44.h,
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: ColorManager.primary, // Background color
@@ -125,61 +131,57 @@ class _CodeVerificationState extends State<CodeVerification> {
                     onPressed: provider.isLoading
                         ? null
                         : () async {
-                      if (provider.sendCodeController.text
-                          .trim()
-                          .length ==
-                          4) {
-                        provider.changeIsLoding(true);
-                        String? success =
-                        await provider.verifyResetSendCode();
-                        if (success == 'true') {
-                          provider.changeIsLoding(false);
-                          Get.toNamed(RouteHelper.setPassword);
-                        } else {
-                          provider.changeIsLoding(false);
-                          final snackBar = SnackBar(
-                            content: const Text('الرمز غير صحيح'),
-                            duration: const Duration(seconds: 2),
-                            backgroundColor: ColorManager.red,
-                          );
-                          rootScaffoldMessengerKey
-                              .currentState
-                              ?.showSnackBar(snackBar);
-                        }
-                      } else {
-                        final snackBar = SnackBar(
-                          content:  Text(Trans('enterCode').tr),
-                          backgroundColor: ColorManager.red,
-                          duration: const Duration(seconds: 1),
-                        );
-                        rootScaffoldMessengerKey
-                            .currentState
-                            ?.showSnackBar(snackBar);
-                      }
-                    },
+                            if (provider.sendCodeController.text
+                                    .trim()
+                                    .length ==
+                                4) {
+                              provider.changeIsLoding(true);
+                              String? success =
+                                  await provider.verifyResetSendCode();
+                              if (success == 'true') {
+                                provider.changeIsLoding(false);
+                                Get.toNamed(RouteHelper.setPassword);
+                              } else {
+                                provider.changeIsLoding(false);
+                                final snackBar = SnackBar(
+                                  content: const Text('الرمز غير صحيح'),
+                                  duration: const Duration(seconds: 2),
+                                  backgroundColor: ColorManager.red,
+                                );
+                                rootScaffoldMessengerKey.currentState
+                                    ?.showSnackBar(snackBar);
+                              }
+                            } else {
+                              final snackBar = SnackBar(
+                                content: Text(Trans('enterCode').tr),
+                                backgroundColor: ColorManager.red,
+                                duration: const Duration(seconds: 1),
+                              );
+                              rootScaffoldMessengerKey.currentState
+                                  ?.showSnackBar(snackBar);
+                            }
+                          },
                     child: provider.isLoading
                         ? Row(
-                      children: [
-                        Text(Trans('verification').tr,
+                            children: [
+                              Text(Trans('verification').tr,
+                                  style: getMediumStyle(
+                                      color: ColorManager.white,
+                                      fontSize: FontSize.s18.sp)),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              CircularProgressIndicator(
+                                  color: ColorManager.white)
+                            ],
+                          )
+                        : Text(Trans('verification').tr,
                             style: getMediumStyle(
                                 color: ColorManager.white,
-                                fontSize: FontSize.s18.sp)),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        CircularProgressIndicator(
-                            color: ColorManager.white)
-                      ],
-                    )
-                        : Text(Trans('verification').tr,
-                        style: getMediumStyle(
-                            color: ColorManager.white,
-                            fontSize: FontSize.s18.sp))),
+                                fontSize: FontSize.s18.sp))),
               ),
-
             ]),
           ));
     });
   }
 }
-

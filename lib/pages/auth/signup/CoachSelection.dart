@@ -20,8 +20,6 @@ import '../../../routes/route_helper.dart';
 import '../../../services/auth_provider.dart';
 
 class CoachSelection extends StatelessWidget {
-
-
   CoachSelection({super.key});
 
   List<int> classId = [];
@@ -155,12 +153,13 @@ class CoachSelection extends StatelessWidget {
                                 ),
                                 isExpanded: true,
                                 key: UniqueKey(),
+                                itemHeight: 60,
                                 icon: const Icon(
                                   Icons.arrow_drop_down,
                                   color: ColorManager.primary,
                                 ),
                                 iconSize: 30.sp,
-                                buttonHeight: 50.h,
+                                buttonHeight: 60.h,
                                 buttonPadding:
                                     const EdgeInsets.only(left: 12, right: 12),
                                 dropdownDecoration: BoxDecoration(
@@ -192,8 +191,6 @@ class CoachSelection extends StatelessWidget {
                                 //   return null;
                                 // },
                                 onChanged: (value) {
-
-
                                   var key = provider.maptimeListString.keys
                                       .firstWhere(
                                           (k) =>

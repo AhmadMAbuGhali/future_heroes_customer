@@ -20,7 +20,8 @@ class ForgetPassword extends StatelessWidget {
 
   final GlobalKey<FormState> forgetPasswordFormKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +38,20 @@ class ForgetPassword extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                CustomTextTitle(
-                  text: 'didYouForgotPassword'.tr,
+                Center(
+                  child: CustomTextTitle(
+                    text: 'didYouForgotPassword'.tr,
+                  ),
                 ),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: 50.h,
                 ),
                 Text(
                   'email'.tr,
                   style: getBoldStyle(color: ColorManager.black),
                 ),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: 10.h,
                 ),
                 CustomTextFormAuth(
                   hidepassword: false,
@@ -69,11 +72,10 @@ class ForgetPassword extends StatelessWidget {
                   //  labelText: 'البريد الالكتروني / رقم الهاتف',
                   //  iconData: Icons.email_outlined,
                 ),
-
                 Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: double.infinity,
                   height: 44.h,
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  //   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: ColorManager.primary, // Background color
@@ -81,64 +83,65 @@ class ForgetPassword extends StatelessWidget {
                       onPressed: provider.isLoading
                           ? null
                           : () async {
-                        if (forgetPasswordFormKey.currentState!.validate()) {
-                          provider.    changeIsLoding(true);
-                          forgetPasswordFormKey.currentState!.save();
-                          String? success;
-                          success = await provider.resetSendCode();
-                          provider.changeIsLoding(false);
-                          if (success == 'true') {
-                            Get.toNamed(RouteHelper.codeVerification);
-                          } else {
-                            final snackBar = SnackBar(
-                              content: SizedBox(
-                                  height: 32.h,
-                                  child: Center(
-                                    child: Text(success ??
-                                        'emailNotExist'.tr),
-                                  )),
-                              backgroundColor: ColorManager.red,
-                              behavior: SnackBarBehavior.floating,
-                              width: 300.w,
-                              duration: const Duration(seconds: 2),
-                            );
-                            rootScaffoldMessengerKey.currentState
-                                ?.showSnackBar(snackBar);
-                          }
-                        }
-                      },
+                              if (forgetPasswordFormKey.currentState!
+                                  .validate()) {
+                                provider.changeIsLoding(true);
+                                forgetPasswordFormKey.currentState!.save();
+                                String? success;
+                                success = await provider.resetSendCode();
+                                provider.changeIsLoding(false);
+                                if (success == 'true') {
+                                  Get.toNamed(RouteHelper.codeVerification);
+                                } else {
+                                  final snackBar = SnackBar(
+                                    content: SizedBox(
+                                        height: 32.h,
+                                        child: Center(
+                                          child: Text(
+                                              success ?? 'emailNotExist'.tr),
+                                        )),
+                                    backgroundColor: ColorManager.red,
+                                    behavior: SnackBarBehavior.floating,
+                                    width: 300.w,
+                                    duration: const Duration(seconds: 2),
+                                  );
+                                  rootScaffoldMessengerKey.currentState
+                                      ?.showSnackBar(snackBar);
+                                }
+                              }
+                            },
                       child: provider.isLoading
                           ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('sentVerification'.tr,
-                              style: getMediumStyle(
-                                  color: ColorManager.white,
-                                  fontSize: FontSize.s16.sp)),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Icon(Icons.email),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          CircularProgressIndicator(
-                              color: ColorManager.white)
-                        ],
-                      )
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('sentVerification'.tr,
+                                    style: getMediumStyle(
+                                        color: ColorManager.white,
+                                        fontSize: FontSize.s16.sp)),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const Icon(Icons.email),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                CircularProgressIndicator(
+                                    color: ColorManager.white)
+                              ],
+                            )
                           : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('sentVerification'.tr,
-                              style: getMediumStyle(
-                                  color: ColorManager.white,
-                                  fontSize: FontSize.s16.sp)),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Icon(Icons.email),
-                        ],
-                      )),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('sentVerification'.tr,
+                                    style: getMediumStyle(
+                                        color: ColorManager.white,
+                                        fontSize: FontSize.s16.sp)),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const Icon(Icons.email),
+                              ],
+                            )),
                 ),
               ]),
             ),
@@ -146,4 +149,3 @@ class ForgetPassword extends StatelessWidget {
     });
   }
 }
-

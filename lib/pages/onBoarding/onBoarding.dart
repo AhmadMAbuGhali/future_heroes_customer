@@ -15,10 +15,10 @@ class OnBoarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(OnBoardingControllerImp());
-    return Scaffold(
-        body: SafeArea(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+    return SafeArea(
+      child: Scaffold(
+          body: Container(
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             const Expanded(flex: 4, child: CustomSliderOnBoarding()),
@@ -27,10 +27,16 @@ class OnBoarding extends StatelessWidget {
                 child: Column(
                   children: [
                     const CustomDotControllerOnBoarding(),
+                    SizedBox(
+                      height: 16.h,
+                    ),
                     CustomButtonOnBoarding(
                       textColor: ColorManager.white,
                       buttonColor: ColorManager.primary,
                       text: 'next'.tr,
+                    ),
+                    SizedBox(
+                      height: 10.h,
                     ),
                     CustomButtonPrimary(
                       onpressed: () {
@@ -44,7 +50,7 @@ class OnBoarding extends StatelessWidget {
                 ))
           ],
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

@@ -30,179 +30,205 @@ class _PersonalDataState extends State<PersonalData> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
-      return Scaffold(
-      backgroundColor: ColorManager.backGround,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.only(
-                top: 45.h,
-                left: 20.w,
-                right: 20.w,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
+      return SafeArea(
+        child: Scaffold(
+          backgroundColor: ColorManager.backGround,
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: ColorManager.primary,
-                          )),
-                      Text(
-                        "user".tr,
-                        style: getBoldStyle(color: ColorManager.primary),
-                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: Icon(
+                                Icons.arrow_back,
+                                color: ColorManager.primary,
+                              )),
+                          Text(
+                            "user".tr,
+                            style: getBoldStyle(color: ColorManager.primary),
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 40.h,
-            ),
-            Center(
-                child: CustomTextTitle(
-              text: 'personalDetails'.tr,
-            )),
-            SizedBox(
-              height: 10.h,
-            ),
-            Text(
-              'email'.tr,
-              style: getRegularStyle(color: Colors.black),
-            ),
-            // const SizedBox(
-            //   height: 5,
-            // ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-              width: double.infinity,
-              height: 44.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: ColorManager.primary,width: 1)
-              ),
-              child: Text(provider.profileData!.email??"",style: getRegularStyle(color: ColorManager.black),),
-            ),
-            // CustomTextFormAuth(
-            //   hidepassword: false,
-            //   textInputType: TextInputType.emailAddress,
-            //
-            //   hintText: provider.profileData!.email??"",
-            //
-            //   //  labelText: 'البريد الالكتروني / رقم الهاتف',
-            //   //  iconData: Icons.email_outlined,
-            // ),
-            //
-            SizedBox(
-              height: 10.h,
-            ),
-            Text(
-              'userName'.tr,
-              style: TextStyle(fontSize: 12),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            // const SizedBox(
-            //   height: 5,
-            // ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
-              width: double.infinity,
-              height: 44.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: ColorManager.primary,width: 1)
-              ),
-              child: Text(provider.profileData!.fullName??"",style: getRegularStyle(color: ColorManager.black),),
-            ),
+                  ),
+                ),
+                SizedBox(
+                  height: 40.h,
+                ),
+                Center(
+                    child: CustomTextTitle(
+                  text: 'personalDetails'.tr,
+                )),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  'email'.tr,
+                  style: getRegularStyle(color: Colors.black),
+                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 44.h,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: ColorManager.gray, width: 1)),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            provider.profileData!.email ?? "",
+                            style: getRegularStyle(color: ColorManager.gray),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
 
-            SizedBox(
-              height: 10.h,
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  'userName'.tr,
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+
+                Container(
+                  width: double.infinity,
+                  height: 44.h,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: ColorManager.gray, width: 1)),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            provider.profileData!.fullName ?? "",
+                            style: getRegularStyle(color: ColorManager.gray),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  'DOB'.tr,
+                  style: TextStyle(fontSize: 12.sp),
+                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 44.h,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: ColorManager.gray, width: 1)),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            provider.profileData!.dateOfBirth!
+                                    .split("T")
+                                    .first ??
+                                "",
+                            style: getRegularStyle(color: ColorManager.gray),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  'mobileNumber'.tr,
+                  style: TextStyle(fontSize: 12.sp),
+                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 44.h,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: ColorManager.gray, width: 1)),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            provider.profileData!.phoneNumber ?? "",
+                            style: getRegularStyle(color: ColorManager.gray),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                CustomButtonPrimary(
+                  text: "changePassword".tr,
+                  onpressed: () {
+                    print({getIt<SharedPreferenceHelper>().getUserToken()});
+                    Get.toNamed(RouteHelper.changePassword);
+                  },
+                ),
+              ],
             ),
-            Text(
-              'DOB'.tr,
-              style: TextStyle(fontSize: 12.sp),
-            ),
-            // const SizedBox(
-            //   height: 5,
-            // ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-              width: double.infinity,
-              height: 44.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: ColorManager.primary,width: 1)
-              ),
-              child: Text(provider.profileData!.dateOfBirth!.split("T").first??"",style: getRegularStyle(color: ColorManager.black),),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Text(
-              'mobileNumber'.tr,
-              style: TextStyle(fontSize: 12.sp),
-            ),
-            // const SizedBox(
-            //   height: 5,
-            // ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-              width: double.infinity,
-              height: 44.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: ColorManager.primary,width: 1)
-              ),
-              child: Text(provider.profileData!.phoneNumber??"",style: getRegularStyle(color: ColorManager.black),),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Center(
-                child: TextButton(
-                    onPressed: () {
-                      print({getIt<SharedPreferenceHelper>()
-                          .getUserToken()});
-                      Get.toNamed(RouteHelper.changePassword);
-                    },
-                    child: Text(
-                      'changePassword'.tr,
-                      textAlign: TextAlign.center,
-                      style: getBoldStyle(
-                          color: ColorManager.primary, fontSize: 14.sp),
-                    ))),
-            SizedBox(
-              height: 20.h,
-            ),
-            CustomButtonPrimary(
-                text: "save".tr,
-                onpressed: () {
-                  Get.toNamed(RouteHelper.initial);
-                }),
-          ],
+          ),
         ),
-      ),
-    );});
+      );
+    });
   }
 }

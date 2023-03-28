@@ -19,39 +19,41 @@ class NotificationPageGuest extends StatefulWidget {
 class _NotificationPageGuestState extends State<NotificationPageGuest> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 60.h,
-            ),
-            Row(
-              children: [
-                Text(
-                  "notification".tr,
-                  style: getBoldStyle(color: ColorManager.black),
-                ),
-                Spacer(),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "markAsRead".tr,
-                      style: getBoldStyle(
-                          color: ColorManager.primary, fontSize: 12),
-                    ))
-              ],
-            ),
-            SizedBox(
-              height: 100.h,
-            ),
-            Column(
-              children: [
-                GuestWidget(),
-              ],
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20.h,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "notification".tr,
+                    style: getBoldStyle(color: ColorManager.black),
+                  ),
+                  Spacer(),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "markAsRead".tr,
+                        style: getBoldStyle(
+                            color: ColorManager.primary, fontSize: 12),
+                      ))
+                ],
+              ),
+              SizedBox(
+                height: 100.h,
+              ),
+              Column(
+                children: [
+                  GuestWidget(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

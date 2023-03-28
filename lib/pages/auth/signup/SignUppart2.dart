@@ -66,7 +66,7 @@ class SignUpScreenPart2 extends StatelessWidget {
                   style: TextStyle(color: ColorManager.gray),
                 ),
                 SizedBox(
-                  height: 150.h,
+                  height: 170.h,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: provider.categoryMain.length,
@@ -78,31 +78,31 @@ class SignUpScreenPart2 extends StatelessWidget {
                             provider.getSubCategorysForCategor(id);
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
                             margin: EdgeInsets.symmetric(horizontal: 20.w),
                             decoration: BoxDecoration(
                                 border: provider.idSelectedCategory ==
-                                    provider.categoryMain[index].id
+                                        provider.categoryMain[index].id
                                     ? Border.all(
-                                  color: ColorManager.primary,
-                                  width: 2,
-                                )
+                                        color: ColorManager.primary,
+                                        width: 2,
+                                      )
                                     : null),
                             child: Column(
                               children: [
                                 provider.categoryMain[index].imageString == ""
                                     ? SvgPicture.asset(
-                                  ImageAssets.cultural,
-                                  height: 120.h,
-                                  width: 120.w,
-                                )
+                                        ImageAssets.cultural,
+                                        height: 120.h,
+                                        width: 120.w,
+                                      )
                                     : Image.network(
-                                  ApiConstant.imageURL +
-                                      provider.categoryMain[index]
-                                          .imageString!,
-                                  height: 120.h,
-                                  width: 120.w,
-                                ),
+                                        ApiConstant.imageURL +
+                                            provider.categoryMain[index]
+                                                .imageString!,
+                                        height: 120.h,
+                                        width: 120.w,
+                                      ),
                                 Text(provider.categoryMain[index].name ??
                                     ' null')
                               ],
@@ -120,36 +120,36 @@ class SignUpScreenPart2 extends StatelessWidget {
                   child: Column(
                       children: List.generate(
                           provider.categorySubforcat.length,
-                              (index) => Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 2,
-                                  color: ColorManager.primary,
+                          (index) => Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 2,
+                                      color: ColorManager.primary,
+                                    ),
+                                    borderRadius: BorderRadius.circular(15.r)),
+                                child: CheckboxListTile(
+                                  checkColor: ColorManager.primary,
+                                  value: provider.subCatId.contains(
+                                      provider.categorySubforcat[index].id),
+                                  onChanged: (selected) {
+                                    if (provider.subCatId.contains(provider
+                                            .categorySubforcat[index].id) ==
+                                        true) {
+                                      provider.removeIdSub(index);
+                                    } else {
+                                      provider.addIdSub(index);
+                                    }
+                                    // provider.onUserSelect(selected??false, index);
+                                  },
+                                  selected: true,
+                                  title: Text(
+                                    provider.categorySubforcat[index].name ??
+                                        '',
+                                    style: getRegularStyle(
+                                        color: ColorManager.primary),
+                                  ),
                                 ),
-                                borderRadius: BorderRadius.circular(15.r)),
-                            child: CheckboxListTile(
-                              checkColor: ColorManager.primary,
-                              value: provider.subCatId.contains(
-                                  provider.categorySubforcat[index].id),
-                              onChanged: (selected) {
-                                if (provider.subCatId.contains(provider
-                                    .categorySubforcat[index].id) ==
-                                    true) {
-                                  provider.removeIdSub(index);
-                                } else {
-                                  provider.addIdSub(index);
-                                }
-                                // provider.onUserSelect(selected??false, index);
-                              },
-                              selected: true,
-                              title: Text(
-                                provider.categorySubforcat[index].name ??
-                                    '',
-                                style: getRegularStyle(
-                                    color: ColorManager.primary),
-                              ),
-                            ),
-                          ))),
+                              ))),
                 ),
                 SizedBox(
                   height: 15.h,
@@ -157,12 +157,11 @@ class SignUpScreenPart2 extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
-
                     provider.getChoesenCoach(provider.subCatId);
 
                     snakbarWidget(context,
-                        Titel: 'مرحبا بك',
-                        Description: 'قم باكمال عملة التسجيل')
+                            Titel: 'مرحبا بك',
+                            Description: 'قم باكمال عملة التسجيل')
                         .Success();
                     Get.offNamed(RouteHelper.coachSelection);
                   },
@@ -173,4 +172,3 @@ class SignUpScreenPart2 extends StatelessWidget {
     });
   }
 }
-

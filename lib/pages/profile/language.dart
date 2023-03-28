@@ -15,70 +15,72 @@ class Language extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyLocalController controllerLang = Get.find();
-    return Scaffold(
-      backgroundColor: ColorManager.backGround,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.only(
-                top: 45.h,
-                // left: 20.w,
-                // right: 20.w,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: ColorManager.backGround,
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(
+                    //  top: 45.h,
+                    // left: 20.w,
+                    // right: 20.w,
+                    ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: ColorManager.primary,
+                            )),
+                        Text(
+                          "user".tr,
+                          style: getBoldStyle(color: ColorManager.primary),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: ColorManager.primary,
-                          )),
-                      Text(
-                        "user".tr,
-                        style: getBoldStyle(color: ColorManager.primary),
-                      ),
-                    ],
-                  )
-                ],
+              SizedBox(
+                height: 40.h,
               ),
-            ),
-            SizedBox(
-              height: 40.h,
-            ),
-            Center(
-                child: CustomTextTitle(
-              text: "changeDisplayLang".tr,
-            )),
-            SizedBox(
-              height: 100.h,
-            ),
-            SizedBox(
-                height: 50.h,
-                child: CustomButtonPrimary(
-                    text: "اللغة العربية",
-                    onpressed: () {
-                      controllerLang.changLocal(AppStrings.ar);
-                    })),
-            SizedBox(
-              height: 40.h,
-            ),
-            SizedBox(
-                height: 50.h,
-                child: CustomButtonPrimary(
-                    text: "English",
-                    onpressed: () {
-                      controllerLang.changLocal(AppStrings.en);
-                    })),
-          ],
+              Center(
+                  child: CustomTextTitle(
+                text: "changeDisplayLang".tr,
+              )),
+              SizedBox(
+                height: 100.h,
+              ),
+              SizedBox(
+                  height: 50.h,
+                  child: CustomButtonPrimary(
+                      text: "اللغة العربية",
+                      onpressed: () {
+                        controllerLang.changLocal(AppStrings.ar);
+                      })),
+              SizedBox(
+                height: 40.h,
+              ),
+              SizedBox(
+                  height: 50.h,
+                  child: CustomButtonPrimary(
+                      text: "English",
+                      onpressed: () {
+                        controllerLang.changLocal(AppStrings.en);
+                      })),
+            ],
+          ),
         ),
       ),
     );

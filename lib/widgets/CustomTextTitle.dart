@@ -6,19 +6,21 @@ import 'package:future_heroes_customer/resources/styles_manager.dart';
 
 class CustomTextTitle extends StatelessWidget {
   final String text;
-  FontSize? fontSize ;
+  FontSize? fontSize;
 
-  CustomTextTitle({super.key, required this.text,this.fontSize});
+  CustomTextTitle({super.key, required this.text, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
+      //    width: 150,
       child: Text(text,
           textAlign: TextAlign.start,
           // overflow: TextOverflow.ellipsis,
-          style: getRegularStyle(color: Colors.black,fontSize: FontSize.s14,)),
+          style: getRegularStyle(
+            color: Colors.black,
+            fontSize: FontSize.s14,
+          )),
     );
   }
 }
-

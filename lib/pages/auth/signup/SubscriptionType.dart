@@ -35,72 +35,79 @@ class SubscriptionType extends StatelessWidget {
     }
 
     return Consumer<AuthProvider>(builder: (context, provider, x) {
-      return Scaffold(
-        backgroundColor: ColorManager.backGround,
-        body: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-            child: Column(children: [
-              SizedBox(
-                height: 60.h,
-              ),
-              CustomTextTitle(
-                text: 'lastStep'.tr,
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Text(
-                'chosePackage'.tr,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: ColorManager.gray),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              SizedBox(
-                height: 440.h,
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: provider.offerSub.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                id = provider.offerSub[index].id;
-                                print(provider.offerSub[index].id);
-                                print(id);
-                                provider.isSelectedChange(index);
-                              },
-                              child: CardSubscriptionType(
-                                isSelecte: provider.offerSelected[index],
-                                title: provider.offerSub[index].name ?? "null",
-                                description: provider.offerSub[index].description ?? "null",
-                                price: '${provider.offerSub[index].price.toStringAsFixed(2) ?? "null"} ' + 'RS'.tr,
+      return SafeArea(
+        child: Scaffold(
+          backgroundColor: ColorManager.backGround,
+          body: Container(
+              padding: EdgeInsets.all(16),
+              child: Column(children: [
+                SizedBox(
+                  height: 24.h,
+                ),
+                CustomTextTitle(
+                  text: 'lastStep'.tr,
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+                Text(
+                  'chosePackage'.tr,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: ColorManager.gray),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                SizedBox(
+                  height: 440.h,
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: provider.offerSub.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  id = provider.offerSub[index].id;
+                                  print(provider.offerSub[index].id);
+                                  print(id);
+                                  provider.isSelectedChange(index);
+                                },
+                                child: CardSubscriptionType(
+                                  isSelecte: provider.offerSelected[index],
+                                  title:
+                                      provider.offerSub[index].name ?? "null",
+                                  description:
+                                      provider.offerSub[index].description ??
+                                          "null",
+                                  price:
+                                      '${provider.offerSub[index].price.toStringAsFixed(2) ?? "null"} ' +
+                                          'RS'.tr,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                      return Text(provider.categoryMain[index].name ?? ' nullß');
-                    }),
-              ),
-              SizedBox(
-                height: 100.h,
-              ),
-              CustomButtonPrimary(
-                text: 'continue'.tr,
-                onpressed: () {
-                  provider.sendOfferId(id!);
-                  getIt<SharedPreferenceHelper>().setWaitingStat(waitingStat: true);
-                  print(id);
-                  Get.toNamed(RouteHelper.initial);
-                  // Get.toNamed(RouteHelper.endSignUp);
-                },
-              )
-            ])),
+                            ],
+                          ),
+                        );
+                      }),
+                ),
+                SizedBox(
+                  height: 100.h,
+                ),
+                CustomButtonPrimary(
+                  text: 'continue'.tr,
+                  onpressed: () {
+                    provider.sendOfferId(id!);
+                    getIt<SharedPreferenceHelper>()
+                        .setWaitingStat(waitingStat: true);
+                    print(id);
+                    Get.toNamed(RouteHelper.initial);
+                    // Get.toNamed(RouteHelper.endSignUp);
+                  },
+                )
+              ])),
+        ),
       );
     });
   }

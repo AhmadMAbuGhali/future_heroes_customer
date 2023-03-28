@@ -20,14 +20,14 @@ class CustomButtonPrimary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin:  EdgeInsets.only(top: 10.h),
+      // margin:  EdgeInsets.only(top: 10.h),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
           foregroundColor: ColorManager.white,
           side: BorderSide(color: ColorManager.primary),
-          padding:  EdgeInsets.symmetric(vertical: 10.h),
+          padding: EdgeInsets.symmetric(vertical: 10.h),
           primary: buttonColor,
           textStyle: TextStyle(
             fontFamily: 'DroidKufi',
@@ -35,18 +35,22 @@ class CustomButtonPrimary extends StatelessWidget {
           ),
         ),
         onPressed: onpressed,
-        child:onpressed==null? Center(
-          child: Row(children: [
-            Text(
-              text,
-              style: getRegularStyle(color: textColor!),
-            ),
-            CircularProgressIndicator()
-          ],),
-        ): Text(
-          text,
-          style: getRegularStyle(color: textColor!),
-        ),
+        child: onpressed == null
+            ? Center(
+                child: Row(
+                  children: [
+                    Text(
+                      text,
+                      style: getRegularStyle(color: textColor!),
+                    ),
+                    CircularProgressIndicator()
+                  ],
+                ),
+              )
+            : Text(
+                text,
+                style: getRegularStyle(color: textColor!),
+              ),
       ),
     );
   }
