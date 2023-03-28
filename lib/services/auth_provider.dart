@@ -24,6 +24,7 @@ import '../models/class_time_model.dart';
 import '../models/login_model.dart';
 import '../models/respons_massage_code.dart';
 import '../models/terms_and_conditions_model.dart';
+import '../widgets/snakbar.dart';
 import 'app_provider.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -56,36 +57,32 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  login(String email, String password) async {
+  login(String email, String password,BuildContext context) async {
     try {
-      LoginModel? respontLogin =
-          await DioClient.dioClient.login(email, password);
-      if (rememberMe) {
-        getIt<SharedPreferenceHelper>().setIsLogin(isLogint: true);
+      LoginModel? response = await DioClient.dioClient.login(email, password);
+
+      if (response != null) {
+        getIt<SharedPreferenceHelper>().setUserToken(
+            userToken: response.token!);
+        getIt<SharedPreferenceHelper>().setActiveStat(
+            activeStat: response.isActive!);
+        _isAuthenticated = true;
+        notifyListeners();
+      } else {
+        snakbarWidget(context,
+            Titel: 'dataErorr'.tr,
+            Description:
+            'Make sure that Data is Good'.tr)
+            .error();
       }
-      String? token = respontLogin?.token!.toString();
-      getIt<SharedPreferenceHelper>().setUserToken(userToken: token!);
-      bool? isActive = respontLogin?.isActive!;
-      getIt<SharedPreferenceHelper>().setActiveStat(activeStat: isActive!);
-      bool loginSuccess =
-          getIt<SharedPreferenceHelper>().getUserToken() == null;
-      _isAuthenticated = loginSuccess;
-      notifyListeners();
-
-      print(respontLogin!.toJson().toString());
-    } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
+    } catch (e) {
+      snakbarWidget(context,
+          Titel: 'Network Error'.tr,
+          Description:
+          'Make sure that Network is Good'.tr)
+          .error();
     }
-    notifyListeners();
   }
-
   changeRememberMe() {
     rememberMe = !rememberMe;
     notifyListeners();

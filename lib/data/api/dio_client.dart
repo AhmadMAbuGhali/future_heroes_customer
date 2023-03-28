@@ -17,7 +17,6 @@ import 'package:future_heroes_customer/models/sub_category.dart';
 import 'package:future_heroes_customer/models/subscribtion_model.dart';
 import 'package:future_heroes_customer/models/terms_and_conditions_model.dart';
 import 'package:future_heroes_customer/models/time_list.dart';
-
 import '../../models/respons_massage_code.dart';
 import '../../services/shared_preference_helper.dart';
 
@@ -158,17 +157,7 @@ class DioClient {
         ));
   }
 
-  Future<void> sendDiseases(List<int> id) async {
-    await dio!.post(ApiConstant.userDiseases,
-        data: {"diseaseId": id},
-        options: Options(
-          headers: {
-            "Accept-Language": shaedpref.getString("curruntLang"),
-            'Authorization':
-                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-          },
-        ));
-  }
+
 
   //Disease
   Future<List<DiseaseModel>> getDisease() async {
@@ -184,6 +173,17 @@ class DioClient {
     return listDisease;
   }
 
+  Future<void> sendDiseases(List<int> id) async {
+    await dio!.post(ApiConstant.userDiseases,
+        data: {"diseaseId": id},
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+            'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+        ));
+  }
 //Subscription
   Future<List<SubscriptionModel>> getOffer() async {
     Response response = await dio!.get(ApiConstant.offer,
@@ -209,6 +209,8 @@ class DioClient {
           },
         ));
   }
+
+  //profileData
 
   Future<ProfileData> getProfileData() async {
     Response response = await dio!.get(ApiConstant.getProfileData,

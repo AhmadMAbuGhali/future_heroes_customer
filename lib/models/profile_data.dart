@@ -4,13 +4,19 @@ class ProfileData {
   String? fullName;
   String? dateOfBirth;
   String? phoneNumber;
+  String? endDate;
+  int? remainingPostponements;
+  int? membershipNo;
 
   ProfileData(
       {this.imageString,
         this.email,
         this.fullName,
         this.dateOfBirth,
-        this.phoneNumber});
+        this.phoneNumber,
+        this.endDate,
+        this.remainingPostponements,
+        this.membershipNo});
 
   ProfileData.fromJson(Map<String, dynamic> json) {
     imageString = json['imageString'];
@@ -18,6 +24,9 @@ class ProfileData {
     fullName = json['fullName'];
     dateOfBirth = json['dateOfBirth'];
     phoneNumber = json['phoneNumber'];
+    endDate = json['endDate'];
+    remainingPostponements = json['remainingPostponements'];
+    membershipNo = json['membershipNo'];
   }
 
   Map<String, dynamic> toJson() {
@@ -27,6 +36,9 @@ class ProfileData {
     data['fullName'] = fullName;
     data['dateOfBirth'] = dateOfBirth;
     data['phoneNumber'] = phoneNumber;
+    data['endDate'] = endDate;
+    data['remainingPostponements'] = remainingPostponements;
+    data['membershipNo'] = membershipNo;
     return data;
   }
 }

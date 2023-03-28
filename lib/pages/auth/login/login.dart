@@ -136,21 +136,35 @@ class Login extends StatelessWidget {
                     ),
                     CustomButtonPrimary(
                       text: 'login'.tr,
-                      onpressed: () {
-                        provider.login(provider.emailLoginPage.text,
-                            provider.passwordLoginPage.text);
+                      onpressed:provider.isLoading?null: () {
+                        provider.changeIsLoding(true);
 
-                        if (loginFormKey.currentState!.validate() &&
-                            getIt<SharedPreferenceHelper>().getUserToken() !=
-                                null) {
-                          Get.toNamed(RouteHelper.successLogin);
-                          print('success');
+
+                        loginFormKey.currentState!.save();
+                        provider.login(
+                            provider.emailLoginPage.text,
+                            provider.passwordLoginPage.text,
+                            context
+                        );
+                        if (loginFormKey.currentState!.validate()) {
+                          String? userToken = getIt<SharedPreferenceHelper>().getUserToken();
+                          if (userToken != null) {
+                            Get.toNamed(RouteHelper.successLogin);
+                          } else {
+                            snakbarWidget(
+                              context,
+                              Titel: 'dataErorr'.tr,
+                              Description: 'Make sure that Data is Good'.tr,
+                            ).error();
+                          }
                         } else {
-                          print('failed');
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Data Error')),
-                          );
+                          snakbarWidget(
+                            context,
+                            Titel: 'dataErorr'.tr,
+                            Description: 'Make sure that Data is Good'.tr,
+                          ).error();
                         }
+
                       },
                     ),
                     TextButton(
