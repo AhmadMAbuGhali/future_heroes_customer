@@ -40,6 +40,7 @@ class CustomTextFormAuth extends StatelessWidget {
               obscureText: hidepassword ?? false,
               controller: myController,
               focusNode: FocusNode(),
+              validator:(value)=> validator!(value),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
@@ -56,6 +57,7 @@ class CustomTextFormAuth extends StatelessWidget {
                   onPressed: pressSuffixIcon,
                 ),
                 hintText: hintText,
+
                 hintStyle: TextStyle(color: ColorManager.gray, fontSize: 13.sp),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.r)),

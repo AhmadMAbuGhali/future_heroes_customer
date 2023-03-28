@@ -164,6 +164,7 @@ class SignUpPersonalData extends StatelessWidget {
                           hidepassword: false,
                           textInputType: TextInputType.text,
                           validator: (value) {
+                            print(value!.isValidName().toString());
                             if (value == null || value.isEmpty) {
                               return 'userNameEmpty'.tr;
                             } else if (value.isValidName() == false) {
@@ -221,6 +222,7 @@ class SignUpPersonalData extends StatelessWidget {
                               signed: true, decimal: true),
                           iconData: Icons.phone,
                           validator: (value) {
+                            print(value);
                             if (value == null || value.isEmpty) {
                               return 'mobileNumberEmpty'.tr;
                             } else if (value.isValidPhone() == false) {

@@ -295,6 +295,7 @@ class AuthProvider extends ChangeNotifier {
 
   List<TimeList> listTime = [];
 
+  Map<int,List<TimeList>> timeListMap = {};
   List<List<TimeList>> timeListMain = [];
   List<String> timeListString = [];
   Map<int, String> maptimeListString = {};
@@ -330,9 +331,12 @@ class AuthProvider extends ChangeNotifier {
     timeString = days;
   }
 
-  Future<dynamic> getTimeList(String emailUser) async {
+  Future<dynamic> getTimeList(String emailUser, int subCatId) async {
     try {
       listTime = await DioClient.dioClient.getTimeList(emailUser);
+      timeListMap[subCatId]=listTime;
+      timeListMain.add(listTime);
+
       print("timeListMain");
       print(timeListMain.toString());
       timeListString = [];
@@ -370,7 +374,7 @@ class AuthProvider extends ChangeNotifier {
       print(id);
       coachFromId = [];
       coachFromId = await DioClient.dioClient.getSendSubId(id);
-      await getTimeList(coachFromId.first.coaches!.first.email ?? '');
+      await getTimeList(coachFromId.first.coaches!.first.email ?? '',id.first);
       notifyListeners();
     } on DioError catch (e) {
       print(e.toString());

@@ -86,7 +86,7 @@ class CoachSelection extends StatelessWidget {
                                                           .coachFromId[index]
                                                           .coaches![index2]
                                                           .email ??
-                                                      '');
+                                                      '',provider.categorySub[index].id!);
                                             },
                                             child: Container(
                                               margin: EdgeInsets.symmetric(
@@ -152,7 +152,7 @@ class CoachSelection extends StatelessWidget {
                                   ),
                                 ),
                                 isExpanded: true,
-                                key: UniqueKey(),
+                                key: Key('$index'),
                                 itemHeight: 60,
                                 icon: const Icon(
                                   Icons.arrow_drop_down,
@@ -165,24 +165,17 @@ class CoachSelection extends StatelessWidget {
                                 dropdownDecoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.r),
                                 ),
-                                items: provider.listTime
-                                    .where((element) =>
-                                        element.subCategoryId ==
-                                        provider
-                                            .coachFromId[index].subCategoryId)
+                                items: provider.timeListMap[provider.categorySub[index].id]?.where((element) =>
+                                element.subCategoryId ==
+                                    provider
+                                        .coachFromId[index].subCategoryId)
                                     .map((item) => DropdownMenuItem<String>(
-                                          value: provider.maptimeListString[
-                                                  item.id!] ??
-                                              "احتر الحصة",
-                                          child: Text(
-                                            provider
-                                                .maptimeListString[item.id!]!,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
+                                  value: provider.maptimeListString[item.id!] ?? "احتر الحصة",
+                                  child: Text(
+                                    provider.maptimeListString[item.id!]!,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                )).toList() ?? [],
 
                                 // validator: (value) {
                                 //   if (value == null) {
@@ -215,6 +208,7 @@ class CoachSelection extends StatelessWidget {
                   onpressed: () {
                     provider.sendClassTime(classId);
                     Get.toNamed(RouteHelper.diseases);
+                    Get.delete(force: true);
                   },
                 ),
               ],

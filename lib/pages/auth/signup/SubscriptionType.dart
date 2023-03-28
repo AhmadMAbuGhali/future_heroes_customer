@@ -93,7 +93,7 @@ class SubscriptionType extends StatelessWidget {
                       }),
                 ),
                 SizedBox(
-                  height: 100.h,
+                  height: 70.h,
                 ),
                 CustomButtonPrimary(
                   text: 'continue'.tr,

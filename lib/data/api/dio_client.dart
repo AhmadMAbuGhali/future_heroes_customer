@@ -51,7 +51,7 @@ class DioClient {
   Future<RegisterModel?> register(File image, String fullName, DateTime dob,
       String phoneNumber, String email, String password) async {
     FormData formData = FormData.fromMap({
-      "ImageFile": image,
+      "ImageFile": await MultipartFile.fromFile(image.path, filename: image.path),
       "FullName": fullName,
       "DateOfBirth": dob.toIso8601String(),
       "PhoneNumber": phoneNumber,
