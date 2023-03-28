@@ -36,21 +36,28 @@ class DioClient {
 
 // Login
   Future<LoginModel?> login(String email, String password) async {
-    Response response = await dio!
-        .post(ApiConstant.login, data: {"email": email, "password": password});
-    LoginModel user = LoginModel.fromJson(response.data);
-    if (user.role == "User") {
-      return user;
-    } else {
-      return null;
+
+    try{
+      Response response = await dio!
+          .post(ApiConstant.login, data: {"email": email, "password": password});
+      LoginModel user = LoginModel.fromJson(response.data);
+      if (user.role == "User") {
+        return user;
+      } else {
+        return null;
+      }
+    }catch(error){
+      rethrow;
     }
+
   }
 
 // register
   Future<RegisterModel?> register(File image, String fullName, DateTime dob,
       String phoneNumber, String email, String password) async {
     FormData formData = FormData.fromMap({
-      "ImageFile": await MultipartFile.fromFile(image.path, filename: image.path),
+      "ImageFile":
+          await MultipartFile.fromFile(image.path, filename: image.path),
       "FullName": fullName,
       "DateOfBirth": dob.toIso8601String(),
       "PhoneNumber": phoneNumber,
@@ -157,8 +164,6 @@ class DioClient {
         ));
   }
 
-
-
   //Disease
   Future<List<DiseaseModel>> getDisease() async {
     Response response = await dio!.get(ApiConstant.disease,
@@ -180,10 +185,11 @@ class DioClient {
           headers: {
             "Accept-Language": shaedpref.getString("curruntLang"),
             'Authorization':
-            'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           },
         ));
   }
+
 //Subscription
   Future<List<SubscriptionModel>> getOffer() async {
     Response response = await dio!.get(ApiConstant.offer,
@@ -226,16 +232,19 @@ class DioClient {
     return profileData;
   }
 
-
-  Future<ResponsMassageCode?> postComplaint(String title, String subject) async {
+  Future<ResponsMassageCode?> postComplaint(
+      String title, String subject) async {
     try {
-      await dio!.post(ApiConstant.complaint, data: {
-        "title": title,
-        "subject": subject,
-      }, options: Options(headers: {
-        "Accept-Language": shaedpref.getString("curruntLang"),
-        'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-      }));
+      await dio!.post(ApiConstant.complaint,
+          data: {
+            "title": title,
+            "subject": subject,
+          },
+          options: Options(headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          }));
       print("Post complaint success");
     } on DioError catch (e) {
       if (e.response?.statusCode == 500) {
@@ -244,16 +253,16 @@ class DioClient {
       print(e.toString());
     }
   }
+
   Future<ResponsMassageCode?> postOrder(String title, String subject) async {
     try {
-      await dio!.post(ApiConstant.userOrder, data: {
-        "title": title,
-        "subject": subject,
-        "offerId":null
-      }, options: Options(headers: {
-        "Accept-Language": shaedpref.getString("curruntLang"),
-        'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-      }));
+      await dio!.post(ApiConstant.userOrder,
+          data: {"title": title, "subject": subject, "offerId": null},
+          options: Options(headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          }));
       print("Post Order success");
     } on DioError catch (e) {
       if (e.response?.statusCode == 500) {
@@ -263,16 +272,16 @@ class DioClient {
     }
   }
 
-  Future<ResponsMassageCode?> postUserPostponement(int id,String reason, String details) async {
+  Future<ResponsMassageCode?> postUserPostponement(
+      int id, String reason, String details) async {
     try {
-      await dio!.post(ApiConstant.userPostponement, data: {
-        "userPresenceId": id,
-        "reason": reason,
-        "details":details
-      }, options: Options(headers: {
-        "Accept-Language": shaedpref.getString("curruntLang"),
-        'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-      }));
+      await dio!.post(ApiConstant.userPostponement,
+          data: {"userPresenceId": id, "reason": reason, "details": details},
+          options: Options(headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          }));
       print("Post Order success");
     } on DioError catch (e) {
       if (e.response?.statusCode == 500) {
@@ -281,66 +290,77 @@ class DioClient {
       print(e.toString());
     }
   }
-  Future<List<ComplaintReplay>> getComplaintReplay() async {
-    Response response = await dio!.get(ApiConstant.getUserComplaint,
-        options: Options(
-          headers: {"Accept-Language": shaedpref.getString("curruntLang"),
-            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-          },
 
-        ),
-       );
+  Future<List<ComplaintReplay>> getComplaintReplay() async {
+    Response response = await dio!.get(
+      ApiConstant.getUserComplaint,
+      options: Options(
+        headers: {
+          "Accept-Language": shaedpref.getString("curruntLang"),
+          'Authorization':
+              'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+        },
+      ),
+    );
     List<ComplaintReplay> complaintReplay = [];
-    complaintReplay = (response.data as List).map((e) => ComplaintReplay.fromJson(e)).toList();
+    complaintReplay = (response.data as List)
+        .map((e) => ComplaintReplay.fromJson(e))
+        .toList();
     print('listcat.length');
     print(complaintReplay.length);
     return complaintReplay;
   }
 
   Future<List<OrderReplay>> getOrderReplay() async {
-    Response response = await dio!.get(ApiConstant.getUserOrders,
-        options: Options(
-          headers: {"Accept-Language": shaedpref.getString("curruntLang"),
-            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-          },
-
-        ),
-       );
+    Response response = await dio!.get(
+      ApiConstant.getUserOrders,
+      options: Options(
+        headers: {
+          "Accept-Language": shaedpref.getString("curruntLang"),
+          'Authorization':
+              'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+        },
+      ),
+    );
     List<OrderReplay> orderReplay = [];
-    orderReplay = (response.data as List).map((e) => OrderReplay.fromJson(e)).toList();
+    orderReplay =
+        (response.data as List).map((e) => OrderReplay.fromJson(e)).toList();
     print('listcat.length');
     print(orderReplay.length);
     return orderReplay;
   }
 
   Future<bool?> getIsActive() async {
-    await dio!.get(ApiConstant.isActiveStatus!,
-        options: Options(
-          headers: {"Accept-Language": shaedpref.getString("curruntLang"),
-            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-          },
-
-        ),
-       );
-
-  }
-  Future<List<ClassTime>> getLecture() async {
-    Response response = await dio!.get(ApiConstant.getUserPresenceAsync,
+    await dio!.get(
+      ApiConstant.isActiveStatus!,
       options: Options(
-        headers: {"Accept-Language": shaedpref.getString("curruntLang"),
-          'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+        headers: {
+          "Accept-Language": shaedpref.getString("curruntLang"),
+          'Authorization':
+              'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
         },
+      ),
+    );
+  }
 
+  Future<List<ClassTime>> getLecture() async {
+    Response response = await dio!.get(
+      ApiConstant.getUserPresenceAsync,
+      options: Options(
+        headers: {
+          "Accept-Language": shaedpref.getString("curruntLang"),
+          'Authorization':
+              'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+        },
       ),
     );
     List<ClassTime> classTime = [];
-    classTime = (response.data as List).map((e) => ClassTime.fromJson(e)).toList();
+    classTime =
+        (response.data as List).map((e) => ClassTime.fromJson(e)).toList();
     print('listcat.length');
     print(classTime.length);
     return classTime;
   }
-
-
 
 //ForgetPassword
   Future<ResponsMassageCode?> resetSendCode(String email) async {
@@ -385,16 +405,18 @@ class DioClient {
       String oldPass, String password, String confirmPassword) async {
     try {
       print("1");
-      Response response =
-          await dio!.put(ApiConstant.resetPasswordAuthorize, data: {
-        "oldPassword": oldPass,
-        "newPassword": password,
-        "confirmPassword": confirmPassword
-      },
-            options: Options(headers: {
-            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-          }),
-          );
+      Response response = await dio!.put(
+        ApiConstant.resetPasswordAuthorize,
+        data: {
+          "oldPassword": oldPass,
+          "newPassword": password,
+          "confirmPassword": confirmPassword
+        },
+        options: Options(headers: {
+          'Authorization':
+              'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+        }),
+      );
 
       print("2");
       ResponsMassageCode responseMassage =

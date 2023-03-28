@@ -2,6 +2,7 @@ class LoginModel {
   String? token;
   DateTime? expiration;
   String? role;
+  String? status;
   bool? isActive;
 
 
@@ -13,6 +14,7 @@ class LoginModel {
       expiration=DateTime.parse(json['expiration']);
     }
     role=json["role"];
+    status=json["status"];
     isActive=json["isActive"];
 
   }
@@ -22,6 +24,7 @@ class LoginModel {
     data['token'] = token;
     data['expiration'] = expiration;
     data["role"]= role;
+    data["status"]= status;
     data["isActive"]= isActive;
     return data;
   }

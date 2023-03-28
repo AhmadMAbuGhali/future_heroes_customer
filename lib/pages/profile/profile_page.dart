@@ -10,9 +10,11 @@ import 'package:future_heroes_customer/widgets/profile_section.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../resources/assets_manager.dart';
 import '../../resources/styles_manager.dart';
+import '../../services/shared_preference_helper.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -68,7 +70,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.clear();
                         provider.logOut();
                         Get.toNamed(RouteHelper.login);
                       },
@@ -177,17 +181,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
 
                 SizedBox(
-                  height: 5.h,
+                  height: 8.h,
                 ),
                 Text(
-                  "يوسف الجزار ",
+                  provider.profileData!.fullName!,
                   style: getBoldStyle(color: Colors.black),
                 ),
                 SizedBox(
                   height: 5.h,
                 ),
                 Text(
-                  "Yousef.n.aljazzar@gmail.com",
+                  "membershipNumber".tr+"${provider.profileData!.membershipNo??0}",
                   style: getRegularStyle(color: Colors.black),
                 ),
                 SizedBox(

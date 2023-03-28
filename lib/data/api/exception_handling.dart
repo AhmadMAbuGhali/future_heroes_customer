@@ -38,7 +38,7 @@ class DioException implements Exception {
       case 400:
         return  response!.data.toString();
       case 401:
-        return  response!.data['errors'].toString();
+        return  response!.data['message'].toString();
       case 403:
         return 'لا تمتلك صلاحيات للعرض';
       case 404:

@@ -27,7 +27,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
       return RefreshIndicator(
-        onRefresh: () async{  provider.getIsActive(); },
+        onRefresh: () async{
+          provider.getIsActive();
+          },
         child: Scaffold(
           backgroundColor: ColorManager.backGround,
           body: getIt<SharedPreferenceHelper>().getActiveStat() == true
@@ -38,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                       left: 0,
                       right: 0,
                       child: Container(
-                        height: 300,
+                        height: 280,
                         width: double.infinity,
                         decoration: new BoxDecoration(
                           image: new DecorationImage(
@@ -49,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: 40.h,
+                              height: 60.h,
                             ),
                             Image.asset(
                               ImageAssets.avatar,
@@ -59,13 +61,13 @@ class HomeScreen extends StatelessWidget {
                               height: 10.h,
                             ),
                             Text(
-                              "homeTopText1".tr,
+                              "homeTopText1".tr+provider.profileData!.fullName!??"",
                               style: getRegularStyle(color: ColorManager.white),
                             ),
                             SizedBox(
                               height: 5.h,
                             ),
-                            Text("numberOfPostponement".tr + " ${numberOfDone}",
+                            Text("numberOfPostponement".tr + " ${provider.profileData!.remainingPostponements!}",
                                 style:
                                     getRegularStyle(color: ColorManager.white)),
                             SizedBox(
@@ -79,15 +81,15 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Column(
+
                                   children: [
-                                    Text("homeTopText2".tr,
-                                        style: getRegularStyle(
-                                            color: ColorManager.white,
-                                            fontSize: 11)),
-                                    Text("homeTopText3".tr,
-                                        style: getRegularStyle(
-                                            color: ColorManager.white,
-                                            fontSize: 11)),
+
+                                    Center(
+                                      child: Text("homeTopText3".tr + " ${provider.profileData!.endDate!.split("T").first}",
+                                          style: getRegularStyle(
+                                              color: ColorManager.white,
+                                              fontSize: 11)),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -103,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                     //   child: ClassTimeWidget(),
                     // ),
                     Positioned(
-                        top: 300.h,
+                        top: 250.h,
                         left: 20,
                         right: 20,
                         child: Padding(
@@ -125,7 +127,11 @@ class HomeScreen extends StatelessWidget {
                                     duration: provider.classTime[index]!.duration,
                                     type: provider
                                         .classTime[index]!.classLecture!.name,
-                                    onTap: () {},
+                                    onTap: () {
+                                      provider.setId(provider.classTime[index]!.id!);
+                                      print(provider.id);
+                                      Get.toNamed(RouteHelper.postponeAnAppointment);
+                                    },
                                   );
                                 }),
                           ),

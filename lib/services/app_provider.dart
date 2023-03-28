@@ -25,6 +25,7 @@ class AppProvider extends ChangeNotifier {
     getProfileData();
   }
 
+
   int? _id;
 
   int get id => _id!;

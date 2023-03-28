@@ -40,7 +40,11 @@ class AuthProvider extends ChangeNotifier {
   bool get isAuthenticated => _isAuthenticated;
 
   // general
+  bool _loading = false;
   bool isLoading = false;
+
+  bool get loading => _loading;
+
   changeIsLoding(bool value) {
     isLoading = value;
     notifyListeners();
@@ -57,32 +61,35 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  login(String email, String password,BuildContext context) async {
+  login(String email, String password, BuildContext context) async {
+    _loading = true;
+    notifyListeners();
     try {
       LoginModel? response = await DioClient.dioClient.login(email, password);
-
-      if (response != null) {
-        getIt<SharedPreferenceHelper>().setUserToken(
-            userToken: response.token!);
-        getIt<SharedPreferenceHelper>().setActiveStat(
-            activeStat: response.isActive!);
-        _isAuthenticated = true;
+      if (response!.status== "success") {
+        getIt<SharedPreferenceHelper>()
+            .setUserToken(userToken: response.token!);
+        getIt<SharedPreferenceHelper>()
+            .setStatus(statusString: response.status!);
+        getIt<SharedPreferenceHelper>()
+            .setActiveStat(activeStat: response.isActive!);
+        _loading = false;
         notifyListeners();
-      } else {
-        snakbarWidget(context,
-            Titel: 'dataErorr'.tr,
-            Description:
-            'Make sure that Data is Good'.tr)
-            .error();
       }
     } catch (e) {
+      _loading = false;
+
       snakbarWidget(context,
-          Titel: 'Network Error'.tr,
-          Description:
-          'Make sure that Network is Good'.tr)
+              Titel: 'Network Error'.tr,
+              Description: 'Make sure that Network is Good'.tr)
           .error();
+      notifyListeners();
+    } finally {
+      _loading = false;
+      notifyListeners();
     }
   }
+
   changeRememberMe() {
     rememberMe = !rememberMe;
     notifyListeners();
@@ -98,6 +105,7 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController nameSignUpPage = TextEditingController();
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
+
   changeShowPasswordSignUP() {
     showPasswordSignUp = !showPasswordSignUp;
     notifyListeners();
@@ -203,6 +211,7 @@ class AuthProvider extends ChangeNotifier {
 
   // category
   List<Category1> categoryMain = [];
+
   Future<String?> getCategory() async {
     try {
       categoryMain = await DioClient.dioClient.getCategory();
@@ -223,6 +232,7 @@ class AuthProvider extends ChangeNotifier {
 
 // subcategory
   int currentStep = 0;
+
   addStep() {
     currentStep += 1;
   }
@@ -234,9 +244,9 @@ class AuthProvider extends ChangeNotifier {
   int idSelectedCategory = 0;
   List<int> subCatId = [];
 
-
   List<SubCategory> categorySubforcat = [];
   List<SubCategory> categorySub = [];
+
   removeIdSub(int index) {
     subCatId.remove(categorySubforcat[index].id);
     notifyListeners();
@@ -247,8 +257,6 @@ class AuthProvider extends ChangeNotifier {
     subCatId.toSet().toList();
     notifyListeners();
   }
-
-
 
   Future<dynamic> getSubCategory() async {
     try {
@@ -292,7 +300,7 @@ class AuthProvider extends ChangeNotifier {
 
   List<TimeList> listTime = [];
 
-  Map<int,List<TimeList>> timeListMap = {};
+  Map<int, List<TimeList>> timeListMap = {};
   List<List<TimeList>> timeListMain = [];
   List<String> timeListString = [];
   Map<int, String> maptimeListString = {};
@@ -331,7 +339,7 @@ class AuthProvider extends ChangeNotifier {
   Future<dynamic> getTimeList(String emailUser, int subCatId) async {
     try {
       listTime = await DioClient.dioClient.getTimeList(emailUser);
-      timeListMap[subCatId]=listTime;
+      timeListMap[subCatId] = listTime;
       timeListMain.add(listTime);
 
       print("timeListMain");
@@ -371,7 +379,7 @@ class AuthProvider extends ChangeNotifier {
       print(id);
       coachFromId = [];
       coachFromId = await DioClient.dioClient.getSendSubId(id);
-      await getTimeList(coachFromId.first.coaches!.first.email ?? '',id.first);
+      await getTimeList(coachFromId.first.coaches!.first.email ?? '', id.first);
       notifyListeners();
     } on DioError catch (e) {
       print(e.toString());
@@ -409,6 +417,7 @@ class AuthProvider extends ChangeNotifier {
   //Disease
   List<DiseaseModel> diseases = [];
   List<int> diseasesId = [];
+
   removediseasesId(int index) {
     diseasesId.remove(diseases[index].id);
     notifyListeners();
@@ -439,8 +448,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   Future<String?> getDisease() async {
     try {
       diseases = await DioClient.dioClient.getDisease();
@@ -462,6 +469,7 @@ class AuthProvider extends ChangeNotifier {
   // offer
 
   List<bool> offerSelected = [];
+
   isSelectedChange(int select) {
     offerSelected = List.filled(offerSelected.length, false);
     offerSelected[select] = true;
@@ -469,6 +477,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   List<SubscriptionModel> offerSub = [];
+
   Future<String?> getOffer() async {
     try {
       offerSub = await DioClient.dioClient.getOffer();
@@ -615,6 +624,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   bool firstTime = true;
+
   changeFirstTime(bool value) {
     firstTime = value;
     notifyListeners();

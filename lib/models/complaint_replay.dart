@@ -4,7 +4,7 @@ class ComplaintReplay {
   String? respone;
   int? id;
   String? createdAt;
-  Null? updatedAt;
+
 
   ComplaintReplay(
       {this.title,
@@ -12,7 +12,7 @@ class ComplaintReplay {
         this.respone,
         this.id,
         this.createdAt,
-        this.updatedAt});
+       });
 
   ComplaintReplay.fromJson(Map<String, dynamic> json) {
     title = json['title'];
@@ -20,7 +20,7 @@ class ComplaintReplay {
     respone = json['respone'];
     id = json['id'];
     createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
+    ;
   }
 
   Map<String, dynamic> toJson() {
@@ -30,7 +30,7 @@ class ComplaintReplay {
     data['respone'] = respone;
     data['id'] = id;
     data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
+
     return data;
   }
 }

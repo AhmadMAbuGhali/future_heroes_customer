@@ -40,7 +40,7 @@ class _DateWidgetState extends State<DateWidget> {
             child: Column(
               children: [
                 Container(
-                  height: 80.h,
+                  height: 65.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: ColorManager.primary),
@@ -57,13 +57,17 @@ class _DateWidgetState extends State<DateWidget> {
                           width: 10.w,
                         ),
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               widget.date.toString(),
+                              textAlign: TextAlign.start,
                               style: TextStyle(
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
+                            SizedBox(height: 5.h,),
                             Row(
                               children: [
                                 Text(
@@ -72,7 +76,7 @@ class _DateWidgetState extends State<DateWidget> {
                                       color: ColorManager.gray,
                                       fontWeight: FontWeight.normal),
                                 ),
-                                Text("--"),
+                                Text(" --> "),
                                 Text(
                                   widget.timeEnd.toString(),
                                   style: TextStyle(
@@ -133,6 +137,7 @@ class _DateWidgetState extends State<DateWidget> {
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
+                            SizedBox(height:7.h ,),
                             Row(
                               children: [
                                 Text(
@@ -141,7 +146,7 @@ class _DateWidgetState extends State<DateWidget> {
                                       color: ColorManager.gray,
                                       fontWeight: FontWeight.normal),
                                 ),
-                                Text("--"),
+                                Text(" --> "),
                                 Text(
                                   widget.timeEnd.toString(),
                                   style: TextStyle(
@@ -150,6 +155,7 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
+                            SizedBox(height:7.h ,),
                             Row(
                               children: [
                                 Text(
@@ -166,6 +172,7 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
+                            SizedBox(height:7.h ,),
                             Row(
                               children: [
                                 Text(
@@ -182,6 +189,7 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
+                            SizedBox(height:7.h ,),
                             Row(
                               children: [
                                 Text(
@@ -198,19 +206,25 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
+                            SizedBox(height:7.h ,),
                             Container(
                               //   padding: EdgeInsets.all(8),
                               // width: 100,
                               //   margin: EdgeInsets.all(10),
                               child: ElevatedButton(
                                 onPressed: widget.onTap,
+
                                 child: Container(
+                                  width: 100.w,
+                                  height: 30.h,
                                   padding: EdgeInsets.all(6),
-                                  child: Text(
-                                    'requestPostponement'.tr,
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: ColorManager.primary),
+                                  child: Center(
+                                    child: Text(
+                                      'requestPostponement'.tr,
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: ColorManager.primary),
+                                    ),
                                   ),
                                 ),
                                 style: ElevatedButton.styleFrom(
@@ -227,7 +241,8 @@ class _DateWidgetState extends State<DateWidget> {
                                   ),
                                 ),
                               ),
-                            )
+                            ),
+                            SizedBox(height: 5.h,)
                             //    CustomButtonPrimary(
                             //   onpressed: () {},
                             //   text: 'طلب تأجيل',
@@ -246,7 +261,7 @@ class _DateWidgetState extends State<DateWidget> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20.h,
                 ),
               ],
             ),

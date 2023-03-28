@@ -4,6 +4,7 @@ class SharedPreferenceHelper {
   static const String isActive = "isActive";
   static const String isWaiting = "isWaiting";
   static const String isLogin = 'isLogin';
+  static const String status = 'status';
   static const String userEmail = 'userEmail';
   static const String userDOB = 'userDOB';
   static const String userPhoneNumber = 'userPhoneNumber';
@@ -13,8 +14,12 @@ class SharedPreferenceHelper {
   SharedPreferenceHelper({required this.prefs});
 
 
+
   Future<void> setUserToken({required String userToken}) async {
     await prefs.setString(token, userToken);
+  }
+  Future<void> setStatus({required String statusString}) async {
+    await prefs.setString(status, statusString);
   }
 
   Future<void> setEmail({required String email}) async {
@@ -36,6 +41,10 @@ class SharedPreferenceHelper {
   String? getUserToken() {
     final userToken = prefs.getString(token);
     return userToken;
+  }
+  String? getStatus() {
+    final statusString = prefs.getString(status);
+    return statusString;
   }
 
   String? getUserEmail() {
@@ -67,4 +76,6 @@ class SharedPreferenceHelper {
     final userLogin = prefs.getBool(isLogin);
     return userLogin;
   }
+
+
 }

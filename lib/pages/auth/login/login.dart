@@ -136,35 +136,35 @@ class Login extends StatelessWidget {
                     ),
                     CustomButtonPrimary(
                       text: 'login'.tr,
-                      onpressed:provider.isLoading?null: () {
+                      onpressed: () async {
                         provider.changeIsLoding(true);
-
-
-                        loginFormKey.currentState!.save();
-                        provider.login(
-                            provider.emailLoginPage.text,
-                            provider.passwordLoginPage.text,
-                            context
-                        );
-                        if (loginFormKey.currentState!.validate()) {
-                          String? userToken = getIt<SharedPreferenceHelper>().getUserToken();
-                          if (userToken != null) {
-                            Get.toNamed(RouteHelper.successLogin);
+                        if (provider.loading == false) {
+                          loginFormKey.currentState!.save();
+                          await provider.login(provider.emailLoginPage.text,
+                              provider.passwordLoginPage.text, context);
+                          if (loginFormKey.currentState!.validate()) {
+                            String? statusString =
+                                getIt<SharedPreferenceHelper>().getStatus();
+                            if (statusString =='success') {
+                              await Get.offNamed(RouteHelper.successLogin);
+                            } else {
+                              snakbarWidget(
+                                context,
+                                Titel: 'dataErorr'.tr,
+                                Description: 'Make sure that Data is Good'.tr,
+                              ).error();
+                            }
                           } else {
                             snakbarWidget(
                               context,
                               Titel: 'dataErorr'.tr,
-                              Description: 'Make sure that Data is Good'.tr,
+                              Description:
+                                  'Make sure asdas that Data is Good'.tr,
                             ).error();
                           }
                         } else {
-                          snakbarWidget(
-                            context,
-                            Titel: 'dataErorr'.tr,
-                            Description: 'Make sure that Data is Good'.tr,
-                          ).error();
+                          CircularProgressIndicator();
                         }
-
                       },
                     ),
                     TextButton(
