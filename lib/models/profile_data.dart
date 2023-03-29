@@ -6,7 +6,7 @@ class ProfileData {
   String? phoneNumber;
   String? endDate;
   int? remainingPostponements;
-  int? membershipNo;
+  String? membershipNo;
 
   ProfileData(
       {this.imageString,

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:future_heroes_customer/data/api/apiconst.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/services/app_provider.dart';
@@ -140,22 +141,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     fit: StackFit.expand,
                     children: [
                       CircleAvatar(
-                        foregroundImage: imageFile == null
+                        foregroundImage: provider.profileData!.imageString == null
                             ? Image.asset(
                                 ImageAssets.avatar,
                               ).image
-                            : Image.file(
-                                imageFile!,
-                                fit: BoxFit.cover,
-                              ).image,
-                        backgroundImage: imageFile == null
+                            : NetworkImage(ApiConstant.imageURL+provider.profileData!.imageString!),
+                        backgroundImage: provider.profileData!.imageString == null
                             ? Image.asset(
                                 ImageAssets.avatar,
                               ).image
-                            : Image.file(
-                                imageFile!,
-                                fit: BoxFit.cover,
-                              ).image,
+                            : NetworkImage(ApiConstant.imageURL+provider.profileData!.imageString!),
+
                       ),
                       Positioned(
                           bottom: -10.h,
@@ -219,6 +215,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     haveArrow: true,
                     icon: IconAssets.user,
                     onTap: () {
+                      print(ApiConstant.imageURL+provider.profileData!.imageString!);
                       provider.getProfileData();
 
                       Get.toNamed(RouteHelper.personalData);

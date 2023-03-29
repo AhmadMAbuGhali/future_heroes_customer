@@ -13,6 +13,7 @@ import 'package:future_heroes_customer/widgets/class_time_widget.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/api/apiconst.dart';
 import '../../services/auth_provider.dart';
 import '../../services/shared_preference_helper.dart';
 
@@ -53,9 +54,19 @@ class HomeScreen extends StatelessWidget {
                             SizedBox(
                               height: 60.h,
                             ),
-                            Image.asset(
-                              ImageAssets.avatar,
-                              width: 100,
+                            CircleAvatar(
+                              radius: 50,
+                              foregroundImage: provider.profileData!.imageString == null
+                                  ? Image.asset(
+                                ImageAssets.avatar,
+                              ).image
+                                  : NetworkImage(ApiConstant.imageURL+provider.profileData!.imageString!),
+                              backgroundImage: provider.profileData!.imageString == null
+                                  ? Image.asset(
+                                ImageAssets.avatar,
+                              ).image
+                                  : NetworkImage(ApiConstant.imageURL+provider.profileData!.imageString!),
+
                             ),
                             SizedBox(
                               height: 10.h,

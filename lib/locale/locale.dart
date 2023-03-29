@@ -30,7 +30,7 @@ class MyLocale extends Translations {
           "invalidPassword": "يرجى كتابة كلمة مرور صالحة  ",
           "invalidPhone": "يرجى كتابة رقم هاتف صالح   ",
           "invalidName": "يرجى كتابة اسم  صحيح   ",
-          "name": "الإسم : ",
+          "nameCoach": "إسم المدرب : ",
           "class": "الحصة : ",
           "classtime": "مدة الحصة : ",
           "Loginasaguest": "تسجيل الدخول ك زائر",
@@ -250,7 +250,7 @@ class MyLocale extends Translations {
           "onBoardingBody3":
               "It's not just punches and kicks🥋 We create the best version of your child💪 2021 champions across the Kingdom.",
           "email": "Email",
-          "name": "Name : ",
+          "nameCoach": "Coach Name : ",
           "class": "Class :",
           "classtime": "class Time : ",
           "Loginasaguest": "Login as Aguest",

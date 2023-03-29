@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_customer/data/api/apiconst.dart';
+import 'package:future_heroes_customer/main.dart';
 import 'package:future_heroes_customer/models/time_list.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/services/shared_preference_helper.dart';
 import 'package:future_heroes_customer/widgets/CardWidget.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
@@ -190,6 +192,7 @@ class CoachSelection extends StatelessWidget {
                                               provider.maptimeListString[k] ==
                                               value,
                                           orElse: () => 0);
+                                  print(getIt<SharedPreferenceHelper>().getUserToken());
                                   print(key);
                                   classId.remove(key);
                                   classId.add(key);

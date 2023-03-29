@@ -159,7 +159,7 @@ class _DateWidgetState extends State<DateWidget> {
                             Row(
                               children: [
                                 Text(
-                                  'name'.tr,
+                                  'nameCoach'.tr,
                                   style: TextStyle(
                                       color: ColorManager.primary,
                                       fontWeight: FontWeight.bold),

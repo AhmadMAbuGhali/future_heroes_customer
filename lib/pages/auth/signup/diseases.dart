@@ -170,7 +170,7 @@ class Diseases extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
-                    provider.sendClassTime(provider.diseasesId);
+                    provider.sendDiseasesId(provider.diseasesId);
                     Get.toNamed(RouteHelper.subscriptionType);
                   },
                 )
