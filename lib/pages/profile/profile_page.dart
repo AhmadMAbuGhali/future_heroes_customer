@@ -160,7 +160,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             onPressed: () {
                               showModalBottomSheet(
                                 context: context,
-                                builder: (builder) => bottomSheet(),
+                                builder: (builder) => provider.bottomSheet(context),
                               );
                             },
                             elevation: 2.0,
@@ -311,73 +311,9 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  Future _getFromCamera() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
 
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      setState(() => this.imageFile = imageTemp);
-    }
-  }
 
-  Widget bottomSheet() {
-    return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
-      height: 200.h,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Text(
-            'changePhoto'.tr,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _getFromCamera();
-                Navigator.pop(context);
-              });
-            },
-            child: Text('openCamera'.tr),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 5),
-            ),
-          ),
-          SizedBox(
-            height: 7.h,
-          ),
-          Text('or'.tr),
-          SizedBox(
-            height: 7.h,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _getFromGallery();
-                Navigator.pop(context);
-              });
-            },
-            child: Text('openGallery'.tr),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 95, vertical: 5),
-            ),
-          ),
-        ],
-      ),
-    );
 
-  }
 
 
 

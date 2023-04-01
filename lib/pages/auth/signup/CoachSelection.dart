@@ -24,7 +24,7 @@ import '../../../services/auth_provider.dart';
 class CoachSelection extends StatelessWidget {
   CoachSelection({super.key});
 
-  List<int> classId = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -194,8 +194,8 @@ class CoachSelection extends StatelessWidget {
                                           orElse: () => 0);
                                   print(getIt<SharedPreferenceHelper>().getUserToken());
                                   print(key);
-                                  classId.remove(key);
-                                  classId.add(key);
+                                  provider.classId.remove(key);
+                                  provider.classId.add(key);
 
                                   // TaskCategoryItem? h2 = value as TaskCategoryItem?;
                                   // provider.selectedCategoryId = h2!.id!;
@@ -209,8 +209,8 @@ class CoachSelection extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
-                    provider.sendClassTime(classId);
-                    Get.toNamed(RouteHelper.diseases);
+
+                    Get.offNamed(RouteHelper.diseases);
                     Get.delete(force: true);
                   },
                 ),

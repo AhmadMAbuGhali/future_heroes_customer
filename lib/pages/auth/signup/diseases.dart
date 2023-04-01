@@ -170,8 +170,8 @@ class Diseases extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
-                    provider.sendDiseasesId(provider.diseasesId);
-                    Get.toNamed(RouteHelper.subscriptionType);
+
+                    Get.offNamed(RouteHelper.subscriptionType);
                   },
                 )
               ])),

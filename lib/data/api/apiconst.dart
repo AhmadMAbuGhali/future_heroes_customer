@@ -22,6 +22,7 @@ class ApiConstant {
   static const String sendEmailConfirmation = 'Authentication/EmailConfirmationAsync';
   static const String forgetPassword = 'Authentication/ForgetPassword';
   static const String traineeClass = 'TraineeClass';
+  static const String updateImageProfile = 'Authentication/UpdateImageProfile';
   static const String complaint = 'Complaint';
   static const String getUserComplaint = '/Complaint/GetUserComplaint';
   static const String getUserOrders = 'UserOrder/GetUserOrders';

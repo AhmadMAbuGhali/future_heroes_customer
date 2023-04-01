@@ -39,6 +39,9 @@ class AuthProvider extends ChangeNotifier {
 
   bool get isAuthenticated => _isAuthenticated;
 
+
+
+  List<int> classId = [];
   // general
   bool _loading = false;
   bool isLoading = false;

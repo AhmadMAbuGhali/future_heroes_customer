@@ -72,6 +72,14 @@ class DioClient {
     return registerUser;
   }
 
+  Future<void> updateImage(File image) async{
+    FormData formData = FormData.fromMap({
+      "ImageFile":
+      await MultipartFile.fromFile(image.path, filename: image.path),
+    });
+    Response response = await dio!.put(ApiConstant.updateImageProfile, data: formData);
+  }
+
   // term
   Future<TermsAndConditionsModel> termsAndConditions() async {
     Response response = await dio!.get(ApiConstant.termsAndConditions,
@@ -332,7 +340,7 @@ class DioClient {
 
   Future<bool?> getIsActive() async {
     await dio!.get(
-      ApiConstant.isActiveStatus!,
+      ApiConstant.isActiveStatus,
       options: Options(
         headers: {
           "Accept-Language": shaedpref.getString("curruntLang"),

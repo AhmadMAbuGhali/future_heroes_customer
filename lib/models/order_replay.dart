@@ -5,7 +5,6 @@ class OrderReplay {
   UserOrderOfferRespone? userOrderOfferRespone;
   int? id;
   String? createdAt;
-  Null? updatedAt;
 
   OrderReplay(
       {this.title,
@@ -14,7 +13,7 @@ class OrderReplay {
         this.userOrderOfferRespone,
         this.id,
         this.createdAt,
-        this.updatedAt});
+       });
 
   OrderReplay.fromJson(Map<String, dynamic> json) {
     title = json['title'];
@@ -25,7 +24,6 @@ class OrderReplay {
         : null;
     id = json['id'];
     createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
@@ -38,7 +36,6 @@ class OrderReplay {
     }
     data['id'] = id;
     data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
     return data;
   }
 }

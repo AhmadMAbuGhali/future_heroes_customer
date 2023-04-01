@@ -8,6 +8,7 @@ import 'package:future_heroes_customer/models/complaint_replay.dart';
 import 'package:future_heroes_customer/models/order_replay.dart';
 import 'package:future_heroes_customer/models/profile_data.dart';
 import 'package:future_heroes_customer/services/shared_preference_helper.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../data/api/dio_client.dart';
@@ -94,6 +95,26 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<String?> updateImage(File image) async{
+    try {
+      await DioClient.dioClient
+          .updateImage(image);
+
+    } on DioError catch (e) {
+
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+
+  }
+
   Future _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
@@ -105,6 +126,7 @@ class AppProvider extends ChangeNotifier {
       // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
       this.imageFile = imageTemp;
+      updateImage(imageTemp);
       notifyListeners();
     }
   }
@@ -130,8 +152,64 @@ class AppProvider extends ChangeNotifier {
       // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
       this.imageFile = imageTemp;
+      updateImage(imageTemp);
+
       notifyListeners();
     }
+  }
+
+  Widget bottomSheet(BuildContext context) {
+    return Container(
+      decoration:
+      BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+      height: 200.h,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Text(
+            'changePhoto'.tr,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {
+
+                _getFromCamera();
+                Navigator.pop(context);
+           notifyListeners();
+            },
+            child: Text('openCamera'.tr),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorManager.primary,
+              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 5),
+            ),
+          ),
+          SizedBox(
+            height: 7.h,
+          ),
+          Text('or'.tr),
+          SizedBox(
+            height: 7.h,
+          ),
+          ElevatedButton(
+            onPressed: () {
+
+                _getFromGallery();
+                Navigator.pop(context);
+                notifyListeners();
+            },
+            child: Text('openGallery'.tr),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorManager.primary,
+              padding: EdgeInsets.symmetric(horizontal: 95, vertical: 5),
+            ),
+          ),
+        ],
+      ),
+    );
+
   }
 
   Future<String?> postComplaint(String title, String subject) async {
@@ -272,6 +350,8 @@ class AppProvider extends ChangeNotifier {
   Future<bool?> getIsActive() async {
     try {
     bool? isActive=  await DioClient.dioClient.getIsActive();
+    print("is Active");
+    print(isActive.toString());
       getIt<SharedPreferenceHelper>().setActiveStat(activeStat:isActive! ) ;
 
 

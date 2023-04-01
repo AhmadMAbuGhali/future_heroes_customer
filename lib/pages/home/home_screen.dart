@@ -149,7 +149,7 @@ class HomeScreen extends StatelessWidget {
                         )),
                   ],
                 )
-              : getIt<SharedPreferenceHelper>().getWaitingStat() == false
+              : getIt<SharedPreferenceHelper>().getWaitingStat() == true
                   ? Stack(
                       children: [
                         Positioned(

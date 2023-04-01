@@ -97,12 +97,17 @@ class SubscriptionType extends StatelessWidget {
                 ),
                 CustomButtonPrimary(
                   text: 'continue'.tr,
-                  onpressed: () {
-                    provider.sendOfferId(id!);
+                  onpressed: ()async {
+
+                    await  provider.sendClassTime(provider.classId);
+                    await provider.sendDiseasesId(provider.diseasesId);
+
+                 await   provider.sendOfferId(id!);
+
                     getIt<SharedPreferenceHelper>()
                         .setWaitingStat(waitingStat: true);
-                    print(id);
-                    Get.toNamed(RouteHelper.initial);
+
+                    Get.offNamed(RouteHelper.initial);
                     // Get.toNamed(RouteHelper.endSignUp);
                   },
                 )

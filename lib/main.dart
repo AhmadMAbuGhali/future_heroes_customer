@@ -16,6 +16,7 @@ late SharedPreferences shaedpref;
 GetIt getIt = GetIt.instance;
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   shaedpref = await SharedPreferences.getInstance();
   final prefs = await SharedPreferences.getInstance();
