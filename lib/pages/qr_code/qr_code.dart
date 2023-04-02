@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 import '../../data/api/dio_client.dart';
+import '../../widgets/snakbar.dart';
 
 class QRCode extends StatefulWidget {
   const QRCode({Key? key}) : super(key: key);
@@ -136,10 +137,17 @@ class _QRCodeState extends State<QRCode> {
     controller.scannedDataStream.listen((scanData) async {
       if(result!= null && result!.code=="FutureHeroes")
       {
-        print(result!.code);
+
         try {
-          await DioClient.dioClient.presenceRegistration();
-          await Get.offNamed(RouteHelper.initial);
+          print(result!.code);
+           DioClient.dioClient.presenceRegistration();
+           Get.offNamed(RouteHelper.initial);
+          snakbarWidget(context,
+              Titel:
+              'takeOfferSnackBar'.tr,
+              Description:
+              'snakbarOffers'.tr)
+              .Success();
 
           print(scanData.toString());
         } catch (e) {
