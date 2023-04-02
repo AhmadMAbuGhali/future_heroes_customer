@@ -2,6 +2,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPreferenceHelper {
   static const String token = "token";
   static const String isActive = "isActive";
+  static const String isRememberMe = "isRememberMe";
+  static const String isFirstTime = "isFirstTime";
   static const String isWaiting = "isWaiting";
   static const String isLogin = 'isLogin';
   static const String status = 'status';
@@ -14,7 +16,7 @@ class SharedPreferenceHelper {
   SharedPreferenceHelper({required this.prefs});
 
 
-
+//setter
   Future<void> setUserToken({required String userToken}) async {
     await prefs.setString(token, userToken);
   }
@@ -34,10 +36,20 @@ class SharedPreferenceHelper {
   Future<void> setActiveStat({required bool activeStat}) async {
     await prefs.setBool(isActive, activeStat);
   }
+  Future<void> setRememberMe({required bool rememberMe}) async {
+    await prefs.setBool(isRememberMe, rememberMe);
+  }
+
+  Future<void> setFirstTime({required bool firstTime}) async {
+    await prefs.setBool(isFirstTime, firstTime);
+  }
 
   Future<void> setWaitingStat({required bool waitingStat}) async {
     await prefs.setBool(isWaiting, waitingStat);
   }
+
+  //getter
+
   String? getUserToken() {
     final userToken = prefs.getString(token);
     return userToken;
@@ -62,6 +74,14 @@ class SharedPreferenceHelper {
   bool? getActiveStat() {
     final isActiveStat = prefs.getBool(isActive);
     return isActiveStat;
+  }
+  bool? getRememberMe() {
+    final rememberMe = prefs.getBool(isRememberMe);
+    return rememberMe;
+  }
+  bool? getFirstTime() {
+    final firstTime = prefs.getBool(isFirstTime);
+    return firstTime;
   }
 
   bool? getWaitingStat() {

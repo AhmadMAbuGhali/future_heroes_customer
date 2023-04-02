@@ -74,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: () async {
                         final prefs = await SharedPreferences.getInstance();
                         await prefs.clear();
-                        provider.logOut();
+                        await provider.logOut();
                         Get.toNamed(RouteHelper.login);
                       },
                       child: Container(

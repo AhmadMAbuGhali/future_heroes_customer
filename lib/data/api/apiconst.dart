@@ -12,7 +12,9 @@ class ApiConstant {
   static const String disease = 'Disease';
   static const String termsAndConditions = 'TermsAndConditions';
   static const String trainClass = 'Class';
-  static const String offer = 'Offer';
+  static const String getPakages = 'Offer/GetPakages';
+  static const String presenceRegistration = 'Authentication/PresenceRegistration';
+  static const String getOffers = 'Offer/GetOffers';
   static const String userOrder = 'UserOrder';
   static const String category = 'Category';
   static const String subCategory = 'SubCategory';

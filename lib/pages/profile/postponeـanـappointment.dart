@@ -128,7 +128,7 @@ class PostponeAnAppointment extends StatelessWidget {
             CustomButtonPrimary(
                 text: 'sendRequest'.tr,
                 onpressed: () {
-                  provider.postUserPostponement(provider.id, provider.reasonController.text.trim(),  provider.detailsController.text.trim());
+                  provider.postUserPostponement(provider.idPostpone, provider.reasonController.text.trim(),  provider.detailsController.text.trim());
                   Get.toNamed(RouteHelper.initial);
                 }),
           ],

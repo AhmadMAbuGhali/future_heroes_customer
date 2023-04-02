@@ -47,6 +47,7 @@ class SuccessLogin extends StatelessWidget {
                 onpressed: ()  async{
                  await provider.getProfileData();
                  await provider.getUserNotification();
+                 await provider.getOffers();
                await  Get.offNamed(RouteHelper.initial);
                 },
               )

@@ -62,7 +62,7 @@ class SubscriptionType extends StatelessWidget {
                   height: 440.h,
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
-                      itemCount: provider.offerSub.length,
+                      itemCount: provider.listPackages.length,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: EdgeInsets.symmetric(horizontal: 20.w),
@@ -70,20 +70,20 @@ class SubscriptionType extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  id = provider.offerSub[index].id;
-                                  print(provider.offerSub[index].id);
+                                  id = provider.listPackages[index].id;
+                                  print(provider.listPackages[index].id);
                                   print(id);
                                   provider.isSelectedChange(index);
                                 },
                                 child: CardSubscriptionType(
                                   isSelecte: provider.offerSelected[index],
                                   title:
-                                      provider.offerSub[index].name ?? "null",
+                                      provider.listPackages[index].name ?? "null",
                                   description:
-                                      provider.offerSub[index].description ??
+                                      provider.listPackages[index].description ??
                                           "null",
                                   price:
-                                      '${provider.offerSub[index].price.toStringAsFixed(2) ?? "null"} ' +
+                                      '${provider.listPackages[index].price.toStringAsFixed(2) ?? "null"} ' +
                                           'RS'.tr,
                                 ),
                               ),

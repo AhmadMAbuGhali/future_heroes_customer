@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/styles_manager.dart';
+import '../../services/app_provider.dart';
 import '../../widgets/CustomButtonPrimary.dart';
 import '../../widgets/snakbar.dart';
 
@@ -15,7 +17,8 @@ class OfferPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AppProvider>(builder: (context,provider,index){
+      return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -29,11 +32,12 @@ class OfferPage extends StatelessWidget {
                   "offer".tr,
                   style: getBoldStyle(color: ColorManager.black),
                 ),
+                SizedBox(width: 10.w,),
                 CircleAvatar(
                   backgroundColor: ColorManager.primary,
                   radius: 17,
                   child: Text(
-                    "4",
+                    "${provider.listOffer.length}",
                     style: getRegularStyle(color: ColorManager.white),
                   ),
                 ),
@@ -41,7 +45,7 @@ class OfferPage extends StatelessWidget {
             ),
             Expanded(
                 child: ListView.builder(
-                    itemCount: 7,
+                    itemCount: provider.listOffer.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -78,8 +82,9 @@ class OfferPage extends StatelessWidget {
                                     SizedBox(
                                       width: 15.w,
                                     ),
-                                    Text(
-                                      "offerTitle".tr,
+
+                                           Text(
+                                           provider.listOffer[index].name?? "",
                                       style: getBoldStyle(
                                           color: ColorManager.black,
                                           fontSize: 14),
@@ -87,42 +92,40 @@ class OfferPage extends StatelessWidget {
                                   ],
                                 ),
                                 collapsed: Text(
-                                  "offerBody".tr,
+                                  provider.listOffer[index].description!,
+
                                   softWrap: true,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.start,
                                 ),
                                 expanded: Column(
                                   children: [
-                                    Text("offerBody".tr),
+                                    Text( provider.listOffer[index].description!,  textAlign: TextAlign.start,),
+SizedBox(height: 10.h,),
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        SvgPicture.asset(
-                                          IconAssets.time,
-                                          color: ColorManager.primary,
-                                        ),
-                                        Text(
-                                          "02 ساعات",
-                                          style: getRegularStyle(
-                                              color: ColorManager.primary),
-                                        ),
+                                        SizedBox(
+                                            width: 150.w,
+                                            child: CustomButtonPrimary(
+                                              text: 'takeOfferButton'.tr,
+                                              onpressed: () async{
+                                              await  provider.sendOfferId(provider.listOffer[index].id!);
+
+                                                snakbarWidget(context,
+                                                        Titel:
+                                                            'takeOfferSnackBar'.tr,
+                                                        Description:
+                                                            'snakbarOffers'.tr)
+                                                    .Success();
+                                              },
+                                              textColor: ColorManager.primary,
+                                              buttonColor: ColorManager.white,
+                                            )),
                                       ],
                                     ),
-                                    SizedBox(
-                                        width: 150.w,
-                                        child: CustomButtonPrimary(
-                                          text: 'takeOfferButton'.tr,
-                                          onpressed: () {
-                                            snakbarWidget(context,
-                                                    Titel:
-                                                        'takeOfferSnackBar'.tr,
-                                                    Description:
-                                                        'snakbarOffers'.tr)
-                                                .Success();
-                                          },
-                                          textColor: ColorManager.primary,
-                                          buttonColor: ColorManager.white,
-                                        ))
+                                    SizedBox(height: 10.h,),
                                   ],
                                 )),
                             SizedBox(
@@ -140,6 +143,6 @@ class OfferPage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    );});
   }
 }

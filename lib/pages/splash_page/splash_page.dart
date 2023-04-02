@@ -9,7 +9,9 @@ import 'package:future_heroes_customer/resources/color_manager.dart';
 
 import 'package:get/get.dart';
 
+import '../../main.dart';
 import '../../routes/route_helper.dart';
+import '../../services/shared_preference_helper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -40,7 +42,18 @@ class _SplashScreenState extends State<SplashScreen>
     animation = CurvedAnimation(parent: controller, curve: Curves.linear);
     Timer(
       const Duration(seconds: 3),
-      () => Get.offNamed(RouteHelper.onBoarding),
+      () {
+        if( getIt<SharedPreferenceHelper>().getRememberMe()==true){
+
+          Get.offNamed(RouteHelper.successLogin);
+        }else if(getIt<SharedPreferenceHelper>().getFirstTime()==false){
+          Get.offNamed(RouteHelper.login);
+        }else{
+          Get.offNamed(RouteHelper.onBoarding);
+        }
+
+
+      },
     );
   }
 

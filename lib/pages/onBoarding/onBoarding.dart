@@ -9,12 +9,16 @@ import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:get/get.dart';
 
+import '../../main.dart';
+import '../../services/shared_preference_helper.dart';
+
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});
 
   @override
   Widget build(BuildContext context) {
     Get.put(OnBoardingControllerImp());
+    getIt<SharedPreferenceHelper>().setFirstTime(firstTime: true);
     return SafeArea(
       child: Scaffold(
           body: Container(
@@ -40,6 +44,7 @@ class OnBoarding extends StatelessWidget {
                     ),
                     CustomButtonPrimary(
                       onpressed: () {
+                        getIt<SharedPreferenceHelper>().setFirstTime(firstTime: false);
                         Get.offAllNamed(RouteHelper.login);
                       },
                       textColor: ColorManager.primary,

@@ -139,8 +139,8 @@ class HomeScreen extends StatelessWidget {
                                     type: provider
                                         .classTime[index]!.classLecture!.name,
                                     onTap: () {
-                                      provider.setId(provider.classTime[index]!.id!);
-                                      print(provider.id);
+                                      provider.setPostponeId(provider.classTime[index]!.id!);
+                                      print(provider.idPostpone);
                                       Get.toNamed(RouteHelper.postponeAnAppointment);
                                     },
                                   );

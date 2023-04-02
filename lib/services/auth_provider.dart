@@ -32,16 +32,14 @@ class AuthProvider extends ChangeNotifier {
     getCategory();
     getSubCategory();
     getDisease();
-    getOffer();
+    getPackages();
   }
 
   bool _isAuthenticated = false;
 
   bool get isAuthenticated => _isAuthenticated;
 
-
-
-  List<int> classId = [];
+  @override
   // general
   bool _loading = false;
   bool isLoading = false;
@@ -59,6 +57,11 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController emailLoginPage = TextEditingController();
   TextEditingController passwordLoginPage = TextEditingController();
 
+  changeRememberMe() {
+    rememberMe = !rememberMe;
+    notifyListeners();
+  }
+
   changeShowPasswordLogin() {
     showPasswordLogin = !showPasswordLogin;
     notifyListeners();
@@ -69,13 +72,16 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     try {
       LoginModel? response = await DioClient.dioClient.login(email, password);
-      if (response!.status== "success") {
+      if (response!.status == "success") {
         getIt<SharedPreferenceHelper>()
             .setUserToken(userToken: response.token!);
         getIt<SharedPreferenceHelper>()
             .setStatus(statusString: response.status!);
         getIt<SharedPreferenceHelper>()
             .setActiveStat(activeStat: response.isActive!);
+        getIt<SharedPreferenceHelper>()
+            .setRememberMe(rememberMe: rememberMe);
+
         _loading = false;
         notifyListeners();
       }
@@ -93,10 +99,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  changeRememberMe() {
-    rememberMe = !rememberMe;
-    notifyListeners();
-  }
 
   // SignUp Page
   bool showPasswordSignUp = true;
@@ -209,10 +211,7 @@ class AuthProvider extends ChangeNotifier {
 
   //
 
-  List<ChoessCoachModel> coachFromId = [];
-  List<TimeList> timeList = [];
-
-  // category
+  //Main category
   List<Category1> categoryMain = [];
 
   Future<String?> getCategory() async {
@@ -234,19 +233,10 @@ class AuthProvider extends ChangeNotifier {
   }
 
 // subcategory
-  int currentStep = 0;
-
-  addStep() {
-    currentStep += 1;
-  }
-
-  backStep() {
-    currentStep -= 1;
-  }
 
   int idSelectedCategory = 0;
   List<int> subCatId = [];
-
+  List<ChoessCoachModel> coachFromId = [];
   List<SubCategory> categorySubforcat = [];
   List<SubCategory> categorySub = [];
 
@@ -309,7 +299,6 @@ class AuthProvider extends ChangeNotifier {
   Map<int, String> maptimeListString = {};
   String timeString = '';
 
-  String? selectedTime;
   int idSelectedTime = 0;
   List<int> timeId = [];
 
@@ -398,6 +387,8 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<int> classId = [];
+
   sendClassTime(List<int> id) async {
     try {
       print(id);
@@ -469,6 +460,18 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool isDiseases = true;
+
+  makeIsDiseasesTrue() {
+    isDiseases = true;
+    notifyListeners();
+  }
+
+  makeIsDiseasesFalse() {
+    isDiseases = false;
+    notifyListeners();
+  }
+
   // offer
 
   List<bool> offerSelected = [];
@@ -479,13 +482,13 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<SubscriptionModel> offerSub = [];
+  List<SubscriptionModel> listPackages = [];
 
-  Future<String?> getOffer() async {
+  Future<String?> getPackages() async {
     try {
-      offerSub = await DioClient.dioClient.getOffer();
-      print(offerSub.length);
-      offerSelected = List.filled(offerSub.length, false);
+      listPackages = await DioClient.dioClient.getPackages();
+      print(listPackages.length);
+      offerSelected = List.filled(listPackages.length, false);
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -512,33 +515,6 @@ class AuthProvider extends ChangeNotifier {
         duration: const Duration(seconds: 1),
       );
     }
-    notifyListeners();
-  }
-
-  //  Signup Part 2
-
-  bool isChecked = false;
-
-  changeIsChecked(bool? value) {
-    isChecked = value!;
-    notifyListeners();
-  }
-
-  // late String dropdownValue = timeList.first;
-  bool isDiseases = true;
-
-  bool isSubscriptionType = false;
-  bool isSelectedOne = false;
-  bool isSelectedTwo = false;
-  bool isSelectedThree = false;
-
-  makeIsDiseasesTrue() {
-    isDiseases = true;
-    notifyListeners();
-  }
-
-  makeIsDiseasesFalse() {
-    isDiseases = false;
     notifyListeners();
   }
 
@@ -593,21 +569,6 @@ class AuthProvider extends ChangeNotifier {
     return null;
   }
 
-  Future<String?> sendEmailConfirmation(String email, String code) async {
-    try {
-      ResponsMassageCode? success =
-          await DioClient.dioClient.sendEmailConfirmation(email, code);
-      if (success!.message != null) {
-        notifyListeners();
-        return 'true';
-      }
-    } on DioError catch (e) {
-      notifyListeners();
-      return e.response?.data['message'].toString();
-    }
-    return null;
-  }
-
   Future<String?> resetPassword(String pass, String conPass) async {
     try {
       print(emailSendCodeController.text.trim());
@@ -626,57 +587,36 @@ class AuthProvider extends ChangeNotifier {
     return null;
   }
 
-  bool firstTime = true;
-
-  changeFirstTime(bool value) {
-    firstTime = value;
-    notifyListeners();
+  //send Email Confirmation
+  Future<String?> sendEmailConfirmation(String email, String code) async {
+    try {
+      ResponsMassageCode? success =
+          await DioClient.dioClient.sendEmailConfirmation(email, code);
+      if (success!.message != null) {
+        notifyListeners();
+        return 'true';
+      }
+    } on DioError catch (e) {
+      notifyListeners();
+      return e.response?.data['message'].toString();
+    }
+    return null;
   }
 
-  logOut() {
-    getIt<SharedPreferenceHelper>().setIsLogin(isLogint: false);
-    getIt<SharedPreferenceHelper>().setUserToken(userToken: '');
-    clearAllData();
-  }
+  void dispose() {
+    // TODO: implement dispose
+    emailLoginPage.dispose();
+    passwordLoginPage.dispose();
+    emailSendCodeController.dispose();
+    sendCodeController.dispose();
+    sendCodeConfController.dispose();
+    emailSignUpPage.dispose();
+    passwordSignUpPage.dispose();
+    nameSignUpPage.dispose();
+    phoneSignUpPage.dispose();
+    dateTextInputSignUPPage.dispose();
 
-  clearAllData() {
-    getIt<AuthProvider>().listTime = [];
-
-    getIt<AuthProvider>().coachFromId = []; // نشطة
-    getIt<AuthProvider>().offerSub = []; //مغلقة
-    getIt<AuthProvider>().offerSelected = []; //مسودة
-    getIt<AuthProvider>().diseases = [];
-    getIt<AuthProvider>().timeId = [];
-    getIt<AuthProvider>().timeListString = [];
-    getIt<AuthProvider>().timeListMain = [];
-    getIt<AuthProvider>().categorySubforcat = [];
-    getIt<AuthProvider>().subCatId = [];
-    getIt<AuthProvider>().categorySub = [];
-    getIt<AuthProvider>().categoryMain = [];
-
-    getIt<AppProvider>().complaintReplay = [];
-    getIt<AppProvider>().orderReplay = [];
-    getIt<AppProvider>().classTime = [];
-  }
-
-  getAllData() {
-    getIt<AuthProvider>().listTime;
-
-    getIt<AuthProvider>().coachFromId; // نشطة
-    getIt<AuthProvider>().offerSub; //مغلقة
-    getIt<AuthProvider>().offerSelected; //مسودة
-    getIt<AuthProvider>().diseases;
-    getIt<AuthProvider>().timeId;
-    getIt<AuthProvider>().timeListString;
-    getIt<AuthProvider>().timeListMain;
-    getIt<AuthProvider>().categorySubforcat;
-    getIt<AuthProvider>().subCatId;
-    getIt<AuthProvider>().categorySub;
-    getIt<AuthProvider>().categoryMain;
-
-    getIt<AppProvider>().complaintReplay;
-    getIt<AppProvider>().orderReplay;
-    getIt<AppProvider>().classTime;
+    super.dispose();
   }
 }
 

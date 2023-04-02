@@ -40,7 +40,7 @@ class _DateWidgetState extends State<DateWidget> {
             child: Column(
               children: [
                 Container(
-                  height: 65.h,
+                  height: 80.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: ColorManager.primary),

@@ -132,7 +132,7 @@ class _MainNavBarState extends State<MainNavBar> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
-          NavBarStyle.style15, // Choose the nav bar style with this property.
+          NavBarStyle.style3, // Choose the nav bar style with this property.
     );
   }
 }

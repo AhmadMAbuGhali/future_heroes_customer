@@ -18,6 +18,7 @@ import 'package:future_heroes_customer/models/sub_category.dart';
 import 'package:future_heroes_customer/models/subscribtion_model.dart';
 import 'package:future_heroes_customer/models/terms_and_conditions_model.dart';
 import 'package:future_heroes_customer/models/time_list.dart';
+import '../../models/offer_model.dart';
 import '../../models/respons_massage_code.dart';
 import '../../services/shared_preference_helper.dart';
 
@@ -206,19 +207,41 @@ class DioClient {
           },
         ));
   }
+  Future<void> presenceRegistration() async {
+    await dio!.put(ApiConstant.presenceRegistration,
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+        ));
+  }
 
 //Subscription
-  Future<List<SubscriptionModel>> getOffer() async {
-    Response response = await dio!.get(ApiConstant.offer,
+  Future<List<OffersModel>> getOffer() async {
+    Response response = await dio!.get(ApiConstant.getOffers,
         options: Options(
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
-    List<SubscriptionModel> listOffer = [];
+    List<OffersModel> listOffer = [];
     listOffer = (response.data as List)
-        .map((e) => SubscriptionModel.fromJson(e))
+        .map((e) => OffersModel.fromJson(e))
         .toList();
 
     return listOffer;
+  }
+  Future<List<SubscriptionModel>> getPackages() async {
+    Response response = await dio!.get(ApiConstant.getPakages,
+        options: Options(
+          headers: {"Accept-Language": shaedpref.getString("curruntLang")},
+        ));
+    List<SubscriptionModel> listPackages = [];
+    listPackages = (response.data as List)
+        .map((e) => SubscriptionModel.fromJson(e))
+        .toList();
+
+    return listPackages;
   }
 
   Future<void> sendOfferId(int id) async {

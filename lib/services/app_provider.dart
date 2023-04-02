@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/models/class_time_model.dart';
 import 'package:future_heroes_customer/models/complaint_replay.dart';
 import 'package:future_heroes_customer/models/notification_model.dart';
+import 'package:future_heroes_customer/models/offer_model.dart';
 import 'package:future_heroes_customer/models/order_replay.dart';
 import 'package:future_heroes_customer/models/profile_data.dart';
 import 'package:future_heroes_customer/services/shared_preference_helper.dart';
@@ -26,15 +27,16 @@ class AppProvider extends ChangeNotifier {
     getClassTime();
     getProfileData();
     getUserNotification();
+    getOffers();
   }
 
 
-  int? _id;
+  int? _idPostpone;
 
-  int get id => _id!;
+  int get idPostpone => _idPostpone!;
 
-  void setId(int id) {
-    _id = id;
+  void setPostponeId(int idPostpone) {
+    _idPostpone = idPostpone;
     notifyListeners();
   }
 
@@ -45,14 +47,14 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  File? imageFile;
-  File? imageFileNull;
 
-  ProfileData? profileData;
 
+
+  //reset Password from Personal Page
   TextEditingController oldPass = TextEditingController();
   TextEditingController newPass = TextEditingController();
   TextEditingController confPass = TextEditingController();
+
 
   bool showOldPasswordAuth = true;
   bool showNewPasswordAuth = true;
@@ -72,6 +74,29 @@ class AppProvider extends ChangeNotifier {
     showConfPasswordAuth = !showConfPasswordAuth;
     notifyListeners();
   }
+
+  Future<String?> resetPasswordAuthorize(
+      String oldPass, String pass, String conPass) async {
+    try {
+      ResponsMassageCode? success = await DioClient.dioClient
+          .resetPasswordAuthorize(oldPass, pass, conPass);
+
+      if (success!.message != null) {
+        notifyListeners();
+        return 'true';
+      }
+    } on DioError catch (e) {
+      notifyListeners();
+      print(e.toString());
+      return e.response?.data['message'].toString();
+    }
+    return null;
+  }
+
+  // profile Data & update Image
+  File? imageFile;
+
+  ProfileData? profileData;
 
   Future<ProfileData?> getProfileData() async {
     try {
@@ -217,6 +242,9 @@ class AppProvider extends ChangeNotifier {
 
   }
 
+
+  //Order & Complaint
+  List<ComplaintReplay> complaintReplay = [];
   Future<String?> postComplaint(String title, String subject) async {
     try {
       await DioClient.dioClient.postComplaint(title, subject);
@@ -235,6 +263,25 @@ class AppProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+  Future<ComplaintReplay?> getComplaintReplay() async {
+    try {
+      complaintReplay = await DioClient.dioClient.getComplaintReplay();
+
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+  List<OrderReplay> orderReplay = [];
   Future<String?> postOrder(String title, String subject) async {
     try {
       await DioClient.dioClient.postOrder(title, subject);
@@ -253,8 +300,28 @@ class AppProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+  Future<OrderReplay?> getOrderReplay() async {
+    try {
+      orderReplay = await DioClient.dioClient.getOrderReplay();
 
 
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+
+
+
+// Postponement
   final TextEditingController reasonController = TextEditingController();
   final TextEditingController detailsController = TextEditingController();
   Future<String?> postUserPostponement(int id,String reason, String details) async {
@@ -277,43 +344,7 @@ class AppProvider extends ChangeNotifier {
   }
 
 
-  Future<String?> resetPasswordAuthorize(
-      String oldPass, String pass, String conPass) async {
-    try {
-      ResponsMassageCode? success = await DioClient.dioClient
-          .resetPasswordAuthorize(oldPass, pass, conPass);
-
-      if (success!.message != null) {
-        notifyListeners();
-        return 'true';
-      }
-    } on DioError catch (e) {
-      notifyListeners();
-      print(e.toString());
-      return e.response?.data['message'].toString();
-    }
-    return null;
-  }
-
-  List<ComplaintReplay> complaintReplay = [];
-
-  Future<ComplaintReplay?> getComplaintReplay() async {
-    try {
-      complaintReplay = await DioClient.dioClient.getComplaintReplay();
-
-
-    } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
-    }
-    notifyListeners();
-  }
+  //Notification
   List<NotificationModel> notificationModel = [];
   Future<ComplaintReplay?> getUserNotification() async {
     try {
@@ -333,31 +364,58 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<OrderReplay> orderReplay = [];
-  Future<OrderReplay?> getOrderReplay() async {
-    try {
-      orderReplay = await DioClient.dioClient.getOrderReplay();
 
-
-    } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
-    }
-    notifyListeners();
-  }
+  //classTime
 
   List<ClassTime> classTime = [];
   Future<ClassTime?> getClassTime() async {
     try {
       classTime = await DioClient.dioClient.getLecture();
 
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+  // offers
 
+
+
+  List<OffersModel> listOffer = [];
+
+  Future<String?> getOffers() async {
+    try {
+      listOffer = await DioClient.dioClient.getOffer();
+      print(listOffer.length);
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+    if (listOffer.isEmpty) {
+      return "No offers found";
+    }
+
+    return null;
+  }
+
+  sendOfferId(int Id) async {
+    try {
+      return await DioClient.dioClient.sendOfferId(Id);
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -371,6 +429,7 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+// is Active
   Future<bool?> getIsActive() async {
     try {
     bool? isActive=  await DioClient.dioClient.getIsActive();
@@ -391,64 +450,59 @@ class AppProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-  bool firstTime=true;
-  changeFirstTime(bool value){
-    firstTime=value;
-    notifyListeners();
-  }
+
 
   logOut() {
 
     getIt<SharedPreferenceHelper>().setIsLogin(isLogint: false);
+    getIt<SharedPreferenceHelper>().setRememberMe(rememberMe: false);
+
     getIt<SharedPreferenceHelper>().setUserToken(userToken: '');
     clearAllData();
   }
-
-  clearAllData(){
-
-    getIt<AuthProvider>().listTime=[];
-
-
-    getIt<AuthProvider>().coachFromId = []; // نشطة
-    getIt<AuthProvider>().offerSub = []; //مغلقة
-    getIt<AuthProvider>().offerSelected = []; //مسودة
-    getIt<AuthProvider>().diseases = [];
+  clearAllData() {
+    //Auth Provider
+    getIt<AuthProvider>().categoryMain = []; //mainCategory
+    getIt<AuthProvider>().categorySub = []; //subCategory
+    getIt<AuthProvider>().subCatId = []; //subCat Id List
+    getIt<AuthProvider>().coachFromId = []; //sub Category for Coach
+    getIt<AuthProvider>().listTime = []; //List Time
+    getIt<AuthProvider>().timeListMain = []; //List Time
+    getIt<AuthProvider>().timeListMap = {}; //List Time
+    getIt<AuthProvider>().maptimeListString = {}; //List Time
+    getIt<AuthProvider>().timeListString = []; //List Time
     getIt<AuthProvider>().timeId = [];
-    getIt<AuthProvider>().timeListString=[];
-    getIt<AuthProvider>().timeListMain=[];
-    getIt<AuthProvider>().categorySubforcat=[];
-    getIt<AuthProvider>().subCatId=[];
-    getIt<AuthProvider>().categorySub=[];
-    getIt<AuthProvider>().categoryMain=[];
+    getIt<AuthProvider>().classId = [];
+    getIt<AuthProvider>().diseases = [];
+    getIt<AuthProvider>().diseasesId = [];
+    getIt<AuthProvider>().diseasesId = [];
+    getIt<AuthProvider>().offerSelected = [];
+    getIt<AuthProvider>().listPackages = [];
 
-    getIt<AppProvider>().complaintReplay=[];
+    //AppProvider
     getIt<AppProvider>().orderReplay = [];
+    getIt<AppProvider>().complaintReplay = [];
+    getIt<AppProvider>().notificationModel = [];
     getIt<AppProvider>().classTime = [];
 
 
 
-  }
-
-  getAllData(){
-    getIt<AuthProvider>().listTime;
 
 
-    getIt<AuthProvider>().coachFromId; // نشطة
-    getIt<AuthProvider>().offerSub; //مغلقة
-    getIt<AuthProvider>().offerSelected; //مسودة
-    getIt<AuthProvider>().diseases;
-    getIt<AuthProvider>().timeId;
-    getIt<AuthProvider>().timeListString;
-    getIt<AuthProvider>().timeListMain;
-    getIt<AuthProvider>().categorySubforcat;
-    getIt<AuthProvider>().subCatId;
-    getIt<AuthProvider>().categorySub;
-    getIt<AuthProvider>().categoryMain;
-
-    getIt<AppProvider>().complaintReplay;
-    getIt<AppProvider>().orderReplay ;
-    getIt<AppProvider>().classTime ;
 
   }
 
+
+
+  void dispose() {
+    oldPass.dispose();
+    newPass.dispose();
+    confPass.dispose();
+    reasonController.dispose();
+    detailsController.dispose();
+    // TODO: implement dispose
+
+
+    super.dispose();
+  }
 }
