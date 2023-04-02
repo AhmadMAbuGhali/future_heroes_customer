@@ -10,6 +10,7 @@ import 'package:future_heroes_customer/models/class_time_model.dart';
 import 'package:future_heroes_customer/models/complaint_replay.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/login_model.dart';
+import 'package:future_heroes_customer/models/notification_model.dart';
 import 'package:future_heroes_customer/models/order_replay.dart';
 import 'package:future_heroes_customer/models/profile_data.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
@@ -72,13 +73,21 @@ class DioClient {
     return registerUser;
   }
 
-  Future<void> updateImage(File image) async{
-    FormData formData = FormData.fromMap({
-      "ImageFile":
-      await MultipartFile.fromFile(image.path, filename: image.path),
-    });
-    Response response = await dio!.put(ApiConstant.updateImageProfile, data: formData);
-  }
+  Future<File?> updateImage(File image) async{
+    try{
+      FormData formData = FormData.fromMap({
+        "ImageFile":
+        await MultipartFile.fromFile(image.path, filename: image.path),
+      });
+      await dio!.put(ApiConstant.updateImageProfile, data: formData,options: Options(
+        headers: {"Accept-Language": shaedpref.getString("curruntLang"),'Authorization':
+        'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'},
+      ));
+
+    }catch(e){
+      print(e.toString());
+    }
+      }
 
   // term
   Future<TermsAndConditionsModel> termsAndConditions() async {
@@ -336,6 +345,24 @@ class DioClient {
     print('listcat.length');
     print(orderReplay.length);
     return orderReplay;
+  }
+  Future<List<NotificationModel>> getUserNotification() async {
+    Response response = await dio!.get(
+      ApiConstant.userNotification,
+      options: Options(
+        headers: {
+          "Accept-Language": shaedpref.getString("curruntLang"),
+          'Authorization':
+              'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+        },
+      ),
+    );
+    List<NotificationModel>  notificationModel= [];
+    notificationModel =
+        (response.data as List).map((e) => NotificationModel.fromJson(e)).toList();
+    print('listcat.length');
+    print(notificationModel.length);
+    return notificationModel;
   }
 
   Future<bool?> getIsActive() async {

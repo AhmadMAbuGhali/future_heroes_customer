@@ -3,22 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/styles_manager.dart';
+import '../../services/app_provider.dart';
 
-class NotificationPage extends StatefulWidget {
+class NotificationPage extends StatelessWidget {
   const NotificationPage({Key? key}) : super(key: key);
 
   @override
-  State<NotificationPage> createState() => _NotificationPageState();
-}
-
-class _NotificationPageState extends State<NotificationPage> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -32,27 +30,28 @@ class _NotificationPageState extends State<NotificationPage> {
                   "notification".tr,
                   style: getBoldStyle(color: ColorManager.black),
                 ),
+                SizedBox(width: 10.w,),
                 CircleAvatar(
                   backgroundColor: ColorManager.primary,
                   radius: 17,
                   child: Text(
-                    "4",
+                    "${provider.notificationModel.length}",
                     style: getRegularStyle(color: ColorManager.white),
                   ),
                 ),
-                Spacer(),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "markAsRead".tr,
-                      style: getBoldStyle(
-                          color: ColorManager.primary, fontSize: 12),
-                    ))
+                // Spacer(),
+                // TextButton(
+                //     onPressed: () {},
+                //     child: Text(
+                //       "markAsRead".tr,
+                //       style: getBoldStyle(
+                //           color: ColorManager.primary, fontSize: 12),
+                //     ))
               ],
             ),
             Expanded(
                 child: ListView.builder(
-                    itemCount: 7,
+                    itemCount: provider.notificationModel.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -90,7 +89,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                       width: 15.w,
                                     ),
                                     Text(
-                                      "notificationTitle".tr,
+                                      provider.notificationModel[index].message!,
                                       style: getBoldStyle(
                                           color: ColorManager.black,
                                           fontSize: 14),
@@ -98,27 +97,15 @@ class _NotificationPageState extends State<NotificationPage> {
                                   ],
                                 ),
                                 collapsed: Text(
-                                  "notificationBody".tr,
+                                  provider.notificationModel[index].respone??"",
                                   softWrap: true,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 expanded: Column(
                                   children: [
-                                    Text("notificationBody".tr),
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          IconAssets.time,
-                                          color: ColorManager.primary,
-                                        ),
-                                        Text(
-                                          "02 ساعات".tr,
-                                          style: getRegularStyle(
-                                              color: ColorManager.primary),
-                                        ),
-                                      ],
-                                    ),
+                                    Text(provider.notificationModel[index].respone??""),
+
                                   ],
                                 )),
                             Divider(
@@ -133,6 +120,6 @@ class _NotificationPageState extends State<NotificationPage> {
           ],
         ),
       ),
-    );
+    );});
   }
 }

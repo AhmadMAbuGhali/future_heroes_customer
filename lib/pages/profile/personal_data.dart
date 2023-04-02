@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:future_heroes_customer/widgets/custom_text_feild.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/api/apiconst.dart';
 import '../../main.dart';
+import '../../resources/assets_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../../routes/route_helper.dart';
 import '../../services/app_provider.dart';
@@ -48,6 +53,7 @@ class _PersonalDataState extends State<PersonalData> {
                           IconButton(
                               onPressed: () {
                                 Get.back();
+                                provider.getProfileData();
                               },
                               icon: Icon(
                                 Icons.arrow_back,
@@ -71,6 +77,79 @@ class _PersonalDataState extends State<PersonalData> {
                 )),
                 SizedBox(
                   height: 10.h,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 80.h,
+                      width: 80.w,
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        fit: StackFit.expand,
+                        children: [
+                          CircleAvatar(
+                            foregroundImage:
+                                provider.profileData!.imageString == null
+                                    ? Image.asset(
+                                        ImageAssets.avatar,
+                                      ).image
+                                    : provider.imageFile == null
+                                        ? Image.network(
+                                            ApiConstant.imageURL +
+                                                provider
+                                                    .profileData!.imageString!,
+                                            fit: BoxFit.cover,
+                                          ).image
+                                        : Image.file(
+                                            provider.imageFile!,
+                                            fit: BoxFit.cover,
+                                          ).image,
+                            backgroundImage:
+                                provider.profileData!.imageString == null
+                                    ? Image.asset(
+                                        ImageAssets.avatar,
+                                      ).image
+                                    : provider.imageFile == null
+                                        ? Image.network(
+                                            ApiConstant.imageURL +
+                                                provider
+                                                    .profileData!.imageString!,
+                                            fit: BoxFit.cover,
+                                          ).image
+                                        : Image.file(
+                                            provider.imageFile!,
+                                            fit: BoxFit.cover,
+                                          ).image,
+                          ),
+                          Positioned(
+                              bottom: -10.h,
+                              right: -35.w,
+                              child: RawMaterialButton(
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: (builder) => bottomSheet(),
+                                  );
+                                },
+                                elevation: 2.0,
+                                fillColor: Color(0xFFF5F6F9),
+                                child: Icon(
+                                  Icons.camera_alt_outlined,
+                                  color: Colors.blue,
+                                ),
+                                padding: EdgeInsets.all(5.0),
+                                shape: CircleBorder(),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(
+                  height: 15.h,
                 ),
                 Text(
                   'email'.tr,
@@ -214,9 +293,7 @@ class _PersonalDataState extends State<PersonalData> {
                 SizedBox(
                   height: 20.h,
                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
+
                 CustomButtonPrimary(
                   text: "changePassword".tr,
                   onpressed: () {
@@ -224,9 +301,61 @@ class _PersonalDataState extends State<PersonalData> {
                     Get.toNamed(RouteHelper.changePassword);
                   },
                 ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                CustomButtonPrimary(
+                  text: "save".tr,
+                  onpressed: () async {
+                    try{
+                     await provider.updateImage(provider.imageFile!);
+                      print("Joe");
+                      print(provider.imageFile!.path);
+                    }catch(e){
+                      print(e.toString());
+                    }
+
+                  },
+                ),
               ],
             ),
           ),
+        ),
+      );
+    });
+  }
+
+  Widget bottomSheet() {
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return Container(
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+        height: 200.h,
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Text(
+              'changePhoto'.tr,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CustomButtonPrimary(
+                text: "openCamera".tr,
+                onpressed: () {
+                  provider.openCamera(context);
+                }),
+            SizedBox(
+              height: 10.h,
+            ),
+            Text("or".tr),
+            CustomButtonPrimary(
+                text: "openGallery".tr,
+                onpressed: () {
+                  provider.openGallery(context);
+                }),
+          ],
         ),
       );
     });

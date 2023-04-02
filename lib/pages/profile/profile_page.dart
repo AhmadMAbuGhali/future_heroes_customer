@@ -25,7 +25,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  File? imageFile;
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,25 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             : NetworkImage(ApiConstant.imageURL+provider.profileData!.imageString!),
 
                       ),
-                      Positioned(
-                          bottom: -10.h,
-                          right: -35.w,
-                          child: RawMaterialButton(
-                            onPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (builder) => provider.bottomSheet(context),
-                              );
-                            },
-                            elevation: 2.0,
-                            fillColor: Color(0xFFF5F6F9),
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.blue,
-                            ),
-                            padding: EdgeInsets.all(5.0),
-                            shape: CircleBorder(),
-                          )),
+
                     ],
                   ),
                 ),
@@ -295,20 +277,6 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );});
-  }
-
-  Future _getFromGallery() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      setState(() => this.imageFile = imageTemp);
-    }
   }
 
 

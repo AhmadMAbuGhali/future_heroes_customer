@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/models/class_time_model.dart';
 import 'package:future_heroes_customer/models/complaint_replay.dart';
+import 'package:future_heroes_customer/models/notification_model.dart';
 import 'package:future_heroes_customer/models/order_replay.dart';
 import 'package:future_heroes_customer/models/profile_data.dart';
 import 'package:future_heroes_customer/services/shared_preference_helper.dart';
@@ -24,6 +25,7 @@ class AppProvider extends ChangeNotifier {
     getOrderReplay();
     getClassTime();
     getProfileData();
+    getUserNotification();
   }
 
 
@@ -99,6 +101,9 @@ class AppProvider extends ChangeNotifier {
     try {
       await DioClient.dioClient
           .updateImage(image);
+      print("Done");
+      notifyListeners();
+
 
     } on DioError catch (e) {
 
@@ -291,9 +296,28 @@ class AppProvider extends ChangeNotifier {
   }
 
   List<ComplaintReplay> complaintReplay = [];
+
   Future<ComplaintReplay?> getComplaintReplay() async {
     try {
       complaintReplay = await DioClient.dioClient.getComplaintReplay();
+
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+  List<NotificationModel> notificationModel = [];
+  Future<ComplaintReplay?> getUserNotification() async {
+    try {
+      notificationModel = await DioClient.dioClient.getUserNotification();
 
 
     } on DioError catch (e) {

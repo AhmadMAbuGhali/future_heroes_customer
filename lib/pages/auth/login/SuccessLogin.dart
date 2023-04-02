@@ -46,7 +46,8 @@ class SuccessLogin extends StatelessWidget {
                 text: 'goToHome'.tr,
                 onpressed: ()  async{
                  await provider.getProfileData();
-               await   Get.offNamed(RouteHelper.initial);
+                 await provider.getUserNotification();
+               await  Get.offNamed(RouteHelper.initial);
                 },
               )
             ],

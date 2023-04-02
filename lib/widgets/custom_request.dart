@@ -16,7 +16,7 @@ class CustomRequest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
-      return ListView.builder(
+      return provider.orderReplay.length==0 ?Center(child: Container(child: Text("ليس لديك اي رد على طلباتك",style: getBoldStyle(color: ColorManager.primary,fontSize: 20),),)) :ListView.builder(
         itemCount: provider.orderReplay.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
