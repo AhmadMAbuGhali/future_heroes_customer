@@ -54,6 +54,9 @@ class _PersonalDataState extends State<PersonalData> {
                               onPressed: () {
                                 Get.back();
                                 provider.getProfileData();
+                                provider.getClassTime();
+                                print(getIt<SharedPreferenceHelper>().getActiveStat());
+
                               },
                               icon: Icon(
                                 Icons.arrow_back,
@@ -339,7 +342,7 @@ class _PersonalDataState extends State<PersonalData> {
               'changePhoto'.tr,
             ),
             SizedBox(
-              height: 20,
+              height: 20.h,
             ),
             CustomButtonPrimary(
                 text: "openCamera".tr,

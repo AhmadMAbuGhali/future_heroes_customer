@@ -53,6 +53,9 @@ class ChangePassword extends StatelessWidget {
                   'lastPassword'.tr,
                   style: TextStyle(fontSize: 12.sp),
                 ),
+                SizedBox(
+                  height: 10.h,
+                ),
                 CustomTextFormAuth(
                   textInputType: TextInputType.visiblePassword,
                   hidepassword: provider.showOldPasswordAuth,
@@ -73,6 +76,9 @@ class ChangePassword extends StatelessWidget {
                   'typeNewPassword'.tr,
                   style: TextStyle(fontSize: 12.sp),
                 ),
+                SizedBox(
+                  height: 10.h,
+                ),
                 CustomTextFormAuth(
                   textInputType: TextInputType.visiblePassword,
                   hidepassword: provider.showNewPasswordAuth,
@@ -92,6 +98,9 @@ class ChangePassword extends StatelessWidget {
                 Text(
                   'retypePassword'.tr,
                   style: TextStyle(fontSize: 12.sp),
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 CustomTextFormAuth(
                   textInputType: TextInputType.visiblePassword,

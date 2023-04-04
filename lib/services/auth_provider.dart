@@ -251,6 +251,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   Future<dynamic> getSubCategory() async {
     try {
       categorySub = await DioClient.dioClient.getSubCategory();

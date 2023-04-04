@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyLocalController controller = Get.put(MyLocalController());
-    shaedpref.setString("curruntLang", "ar");
     return ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,

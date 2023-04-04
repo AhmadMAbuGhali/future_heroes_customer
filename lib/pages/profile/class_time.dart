@@ -63,7 +63,7 @@ class _ClassTimeState extends State<ClassTime> {
               ),
             ),
             SizedBox(
-              height: 40.h,
+              height: 10.h,
             ),
             CustomTextTitle(text: "classTime".tr),
             SizedBox(

@@ -66,6 +66,9 @@ class SignUpScreenPart2 extends StatelessWidget {
                   style: TextStyle(color: ColorManager.gray),
                 ),
                 SizedBox(
+                  height: 15.h,
+                ),
+                SizedBox(
                   height: 170.h,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -157,6 +160,7 @@ class SignUpScreenPart2 extends StatelessWidget {
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
+                    provider.classId=[];
                     provider.getChoesenCoach(provider.subCatId);
 
                     snakbarWidget(context,

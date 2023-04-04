@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_customer/services/auth_provider.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -76,6 +77,16 @@ class PostponeAnAppointment extends StatelessWidget {
                 hidepassword: false,
                 textInputType: TextInputType.text,
                 myController: provider.reasonController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'emailEmpty'.tr;
+                  } else if (value.isValidName() == false) {
+                    return 'invalidEmail'.tr;
+                  } else if (value.isValidName() == true) {
+                    return null;
+                  }
+                  return null;
+                },
                 hintText: 'postponementReasonAddress'.tr),
 
 

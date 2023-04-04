@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_customer/services/auth_provider.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:get/get.dart';
@@ -16,8 +17,7 @@ import '../../widgets/CustomButtonPrimary.dart';
 
 class SendComplaints extends StatelessWidget {
   SendComplaints({Key? key}) : super(key: key);
-  TextEditingController titleController = TextEditingController();
-  TextEditingController subjectController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,17 @@ class SendComplaints extends StatelessWidget {
                   CustomTextFormAuth(
                       hidepassword: false,
                       textInputType: TextInputType.text,
-                      myController: titleController,
+                      myController: provider.titleController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'emailEmpty'.tr;
+                        } else if (value.isValidName() == false) {
+                          return 'invalidEmail'.tr;
+                        } else if (value.isValidName() == true) {
+                          return null;
+                        }
+                        return null;
+                      },
                       hintText: 'AddressHint'.tr),
                   SizedBox(
                     height: 10.h,
@@ -85,7 +95,7 @@ class SendComplaints extends StatelessWidget {
                   TextField(
                     keyboardType: TextInputType.multiline,
                     maxLines: 8,
-                    controller: subjectController,
+                    controller: provider.subjectController,
                     decoration: InputDecoration(
                       fillColor: ColorManager.white,
                       filled: true,
@@ -124,11 +134,10 @@ class SendComplaints extends StatelessWidget {
                   CustomButtonPrimary(
                       text: "sendComplaint".tr,
                       onpressed: () {
-                        print(titleController.text.trim());
-                        print(subjectController.text.trim());
+
                         print({getIt<SharedPreferenceHelper>().getUserToken()});
-                        provider.postComplaint(titleController.text.trim(),
-                            subjectController.text.trim());
+                        provider.postComplaint(provider.titleController.text.trim(),
+                            provider.subjectController.text.trim());
                         Get.toNamed(RouteHelper.requestsAndComplaints);
                       }),
                 ],

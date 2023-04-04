@@ -386,7 +386,8 @@ class AppProvider extends ChangeNotifier {
   }
   // offers
 
-
+  TextEditingController titleController = TextEditingController();
+  TextEditingController subjectController = TextEditingController();
 
   List<OffersModel> listOffer = [];
 

@@ -144,16 +144,24 @@ class _QRCodeState extends State<QRCode> {
            Get.offNamed(RouteHelper.initial);
           snakbarWidget(context,
               Titel:
-              'takeOfferSnackBar'.tr,
+              'qrSuccsesDoneTitle'.tr,
               Description:
-              'snakbarOffers'.tr)
+              'qrSuccsesDoneBody'.tr)
               .Success();
 
           print(scanData.toString());
         } catch (e) {
+
           print('Error making HTTP request: $e');
         }
 
+      }else{
+        snakbarWidget(context,
+            Titel:
+            'qrFailTitle'.tr,
+            Description:
+            'qrFailBody'.tr)
+            .error();
       }
 
       setState(() {

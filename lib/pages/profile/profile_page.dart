@@ -25,12 +25,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
-
       Future<void> _logoutDialog() async {
         return showDialog<void>(
           context: context,
@@ -86,9 +83,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             border: Border.all(color: Colors.red)),
                         child: Center(
                             child: Text(
-                              'yes'.tr,
-                              style: getBoldStyle(color: Colors.white),
-                            )),
+                          'yes'.tr,
+                          style: getBoldStyle(color: Colors.white),
+                        )),
                       ),
                     ),
                     GestureDetector(
@@ -104,12 +101,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             border: Border.all(color: Colors.red)),
                         child: Center(
                             child: Text(
-                              'cancel'.tr,
-                              textAlign: TextAlign.center,
-                              style: getBoldStyle(
-                                color: Colors.red,
-                              ),
-                            )),
+                          'cancel'.tr,
+                          textAlign: TextAlign.center,
+                          style: getBoldStyle(
+                            color: Colors.red,
+                          ),
+                        )),
                       ),
                     ),
                   ],
@@ -122,8 +119,8 @@ class _ProfilePageState extends State<ProfilePage> {
           },
         );
       }
-      return SafeArea(
-      child: Scaffold(
+
+      return Scaffold(
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -131,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 30.h,
+                  height: 60.h,
                 ),
                 SizedBox(
                   height: 80.h,
@@ -141,19 +138,21 @@ class _ProfilePageState extends State<ProfilePage> {
                     fit: StackFit.expand,
                     children: [
                       CircleAvatar(
-                        foregroundImage: provider.profileData!.imageString == null
-                            ? Image.asset(
-                                ImageAssets.avatar,
-                              ).image
-                            : NetworkImage(ApiConstant.imageURL+provider.profileData!.imageString!),
-                        backgroundImage: provider.profileData!.imageString == null
-                            ? Image.asset(
-                                ImageAssets.avatar,
-                              ).image
-                            : NetworkImage(ApiConstant.imageURL+provider.profileData!.imageString!),
-
+                        foregroundImage:
+                            provider.profileData!.imageString == null
+                                ? Image.asset(
+                                    ImageAssets.avatar,
+                                  ).image
+                                : NetworkImage(ApiConstant.imageURL +
+                                    provider.profileData!.imageString!),
+                        backgroundImage:
+                            provider.profileData!.imageString == null
+                                ? Image.asset(
+                                    ImageAssets.avatar,
+                                  ).image
+                                : NetworkImage(ApiConstant.imageURL +
+                                    provider.profileData!.imageString!),
                       ),
-
                     ],
                   ),
                 ),
@@ -169,7 +168,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 5.h,
                 ),
                 Text(
-                  "membershipNumber".tr+"${provider.profileData!.membershipNo??0}",
+                  "membershipNumber".tr +
+                      "${provider.profileData!.membershipNo ?? 0}",
                   style: getRegularStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -197,12 +197,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     haveArrow: true,
                     icon: IconAssets.user,
                     onTap: () {
-                      print(ApiConstant.imageURL+provider.profileData!.imageString!);
+                      print(ApiConstant.imageURL +
+                          provider.profileData!.imageString!);
                       provider.getProfileData();
 
                       Get.toNamed(RouteHelper.personalData);
                     }),
-
+                SizedBox(
+                  height: 10.h,
+                ),
                 //الطلبات والشكاوي
                 ProfileSection(
                     label: "requestsAndComplaints".tr,
@@ -215,7 +218,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     }),
 
                 //مواعيد التدريب
-
+                SizedBox(
+                  height: 10.h,
+                ),
                 ProfileSection(
                     label: "classTime".tr,
                     haveArrow: true,
@@ -223,7 +228,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () {
                       Get.toNamed(RouteHelper.classTime);
                     }),
-
+                SizedBox(
+                  height: 10.h,
+                ),
                 //ترقية الاشتراك
                 ProfileSection(
                     label: "subscriptionUpgrade".tr,
@@ -232,7 +239,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () {
                       Get.toNamed(RouteHelper.subscriptionUpgrade);
                     }),
-
+                SizedBox(
+                  height: 10.h,
+                ),
                 //التقيمات
 
                 ProfileSection(
@@ -242,7 +251,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () {
                       Get.toNamed(RouteHelper.ratings);
                     }),
-
+                SizedBox(
+                  height: 10.h,
+                ),
                 //اللغة
                 ProfileSection(
                     label: "language".tr,
@@ -251,7 +262,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () {
                       Get.toNamed(RouteHelper.language);
                     }),
-
+                SizedBox(
+                  height: 10.h,
+                ),
                 //تسجيل الخروج
                 ProfileSection(
                     label: "logout".tr,
@@ -261,7 +274,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () {
                       _logoutDialog();
                     }),
-
+                SizedBox(
+                  height: 10.h,
+                ),
                 //حذف الحساب
                 ProfileSection(
                     label: "deleteAccount".tr,
@@ -275,15 +290,9 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
-      ),
-    );});
+      );
+    });
   }
-
-
-
-
-
-
 
   Future<void> _deleteAccountDialog() async {
     return showDialog<void>(
@@ -327,7 +336,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-
                         Navigator.of(context).pop();
                       },
                       child: Container(

@@ -17,7 +17,16 @@ class CustomComplaints extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
-      return ListView.builder(
+      return provider.complaintReplay.isEmpty
+          ? Center(
+          child: Container(
+            child: Text(
+              "noComplaintsReplay".tr,
+              textAlign: TextAlign.center,
+              style: getBoldStyle(color: ColorManager.primary, fontSize: 20),
+            ),
+          ))
+          : ListView.builder(
         itemCount: provider.complaintReplay.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
@@ -27,8 +36,8 @@ class CustomComplaints extends StatelessWidget {
                 header: Row(
                   children: [
 
-                    const CircleAvatar(
-                      radius: 3,
+                     CircleAvatar(
+                      radius: 3.r,
                       backgroundColor: ColorManager.primary,
                     ),
                     SizedBox(width: 5.w,),

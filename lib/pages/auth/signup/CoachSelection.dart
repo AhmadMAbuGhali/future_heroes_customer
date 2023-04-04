@@ -63,7 +63,7 @@ class CoachSelection extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "الحصة : " + provider.categorySub[index].name!,
+                                "lecture".tr  + provider.coachFromId[index].subCategoryName!,
                                 style:
                                     getBoldStyle(color: ColorManager.primary),
                               ),

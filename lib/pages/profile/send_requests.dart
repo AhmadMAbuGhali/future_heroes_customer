@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_customer/services/auth_provider.dart';
 import 'package:future_heroes_customer/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:get/get.dart';
@@ -71,6 +72,16 @@ class SendRequests extends StatelessWidget {
                       hidepassword: false,
                       textInputType: TextInputType.text,
                       myController: titleController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'emailEmpty'.tr;
+                        } else if (value.isValidName() == false) {
+                          return 'invalidEmail'.tr;
+                        } else if (value.isValidName() == true) {
+                          return null;
+                        }
+                        return null;
+                      },
                       hintText: 'AddressHint'.tr),
                   SizedBox(
                     height: 10.h,

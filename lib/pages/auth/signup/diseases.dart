@@ -135,36 +135,43 @@ class Diseases extends StatelessWidget {
                   child: Column(
                       children: List.generate(
                           provider.diseases.length,
-                              (index) => Container(
+                              (index) => Column(
+                                children: [
+                                  Container(
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 2,
-                                  color: ColorManager.primary,
-                                ),
-                                borderRadius: BorderRadius.circular(15.r)),
+                                    border: Border.all(
+                                      width: 2,
+                                      color: ColorManager.primary,
+                                    ),
+                                    borderRadius: BorderRadius.circular(15.r)),
                             child: CheckboxListTile(
-                              checkColor: ColorManager.primary,
-                              value: provider.diseasesId.contains(
-                                  provider.diseases[index].id),
-                              onChanged: (selected) {
-                                if (provider.diseases.contains(provider
-                                    .diseases[index].id) ==
-                                    true) {
-                                  provider.removediseasesId(index);
-                                } else {
-                                  provider.adddiseasesId(index);
-                                }
-                                // provider.onUserSelect(selected??false, index);
-                              },
-                              selected: true,
-                              title: Text(
-                                provider.diseases[index].name ??
-                                    '',
-                                style: getRegularStyle(
-                                    color: ColorManager.primary),
-                              ),
+                                  checkColor: ColorManager.primary,
+                                  value: provider.diseasesId.contains(
+                                      provider.diseases[index].id),
+                                  onChanged: (selected) {
+                                    if (provider.diseases.contains(provider
+                                        .diseases[index].id) ==
+                                        true) {
+                                      provider.removediseasesId(index);
+                                    } else {
+                                      provider.adddiseasesId(index);
+                                    }
+                                    // provider.onUserSelect(selected??false, index);
+                                  },
+                                  selected: true,
+                                  title: Text(
+                                    provider.diseases[index].name ??
+                                        '',
+                                    style: getRegularStyle(
+                                        color: ColorManager.primary),
+                                  ),
                             ),
-                          ))),
+
+                          ),
+                                  SizedBox(height: 10.h,),
+
+                                ],
+                              ))),
                 )
                     :  Column(children: [],),
                 CustomButtonPrimary(

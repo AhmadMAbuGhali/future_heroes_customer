@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                       left: 0,
                       right: 0,
                       child: Container(
-                        height: 280,
+                        height: 270.h,
                         width: double.infinity,
                         decoration: new BoxDecoration(
                           image: new DecorationImage(
@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                               height: 60.h,
                             ),
                             CircleAvatar(
-                              radius: 50,
+                              radius: 50.r,
                               foregroundImage: provider.profileData!.imageString == null
                                   ? Image.asset(
                                 ImageAssets.avatar,
@@ -116,13 +116,13 @@ class HomeScreen extends StatelessWidget {
                     //   child: ClassTimeWidget(),
                     // ),
                     Positioned(
-                        top: 250.h,
-                        left: 20,
-                        right: 20,
+                        top: 240.h,
+                        left: 20.w,
+                        right: 20.w,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding:  EdgeInsets.symmetric(horizontal: 8.w,vertical: 8.h),
                           child: Container(
-                            height: 479.h,
+                            height: 490.h,
                             child: ListView.builder(
                                 itemCount: provider.classTime.length,
                                 itemBuilder: (context, index) {
@@ -157,7 +157,7 @@ class HomeScreen extends StatelessWidget {
                           left: 0,
                           right: 0,
                           child: Container(
-                            height: 300,
+                            height: 270.h,
                             width: double.infinity,
                             decoration: new BoxDecoration(
                               image: new DecorationImage(
@@ -211,7 +211,7 @@ class HomeScreen extends StatelessWidget {
                                         Text("homeTopText3".tr,
                                             style: getRegularStyle(
                                                 color: ColorManager.white,
-                                                fontSize: 11)),
+                                                fontSize: 11.sp)),
                                       ],
                                     ),
                                   ],
@@ -324,16 +324,16 @@ class HomeScreen extends StatelessWidget {
                         //   child: ClassTimeWidget(),
                         // ),
                         Positioned(
-                            top: 300.h,
-                            left: 20,
-                            right: 20,
+                            top: 260.h,
+                            left: 20.w,
+                            right: 20.w,
                             child: Center(
                               child: Column(
                                 children: [
                                   Image.asset(
                                     ImageAssets.mustReg,
-                                    width: 300,
-                                    height: 300,
+                                    width: 300.w,
+                                    height: 300.h,
                                   ),
                                   Text(
                                     "عليك اكمال عملية التسجيل  لتتمكن من عرض الصفحة الحالية",
