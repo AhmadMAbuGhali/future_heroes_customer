@@ -1,9 +1,4 @@
-import 'dart:ui';
 
-import 'package:future_heroes_customer/resources/strings_manager.dart';
-import 'package:get/get.dart';
-
-import '../main.dart';
 
 class DiseaseModel {
   String? name;
@@ -24,7 +19,7 @@ class DiseaseModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
+    data['name'] = name;
     data["id"]= id;
 
     return data;

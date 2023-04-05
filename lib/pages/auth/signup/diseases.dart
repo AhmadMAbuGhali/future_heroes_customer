@@ -1,19 +1,18 @@
+// ignore_for_file: iterable_contains_unrelated_type
+
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
-import 'package:future_heroes_customer/widgets/CardCheckBoxWidget.dart';
-import 'package:future_heroes_customer/widgets/snakbar.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
 import '../../../resources/styles_manager.dart';
 import '../../../routes/route_helper.dart';
 import '../../../services/auth_provider.dart';
+import '../../home/NoConnection.dart';
 
 class Diseases extends StatelessWidget {
   Diseases({super.key});
@@ -33,12 +32,14 @@ class Diseases extends StatelessWidget {
     }
 
     return Consumer<AuthProvider>(builder: (context, provider, x) {
-      return SafeArea(
-        child: Scaffold(
-          backgroundColor: ColorManager.backGround,
-          body: Container(
-              padding: EdgeInsets.all(16),
-              child: ListView(children: [
+      return Scaffold(
+        backgroundColor: ColorManager.backGround,
+        body: OfflineBuilder(
+          child: Container(
+              padding: const EdgeInsets.all(16),
+              child: SingleChildScrollView(
+                  child: Column(
+                  children: [
                 SizedBox(
                   height: 16.h,
                 ),
@@ -116,7 +117,7 @@ class Diseases extends StatelessWidget {
                             provider.makeIsDiseasesFalse();
                           },
                           child: Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Text(
                               'iHaveDiseases'.tr,
                               textAlign: TextAlign.center,
@@ -173,7 +174,7 @@ class Diseases extends StatelessWidget {
                                 ],
                               ))),
                 )
-                    :  Column(children: [],),
+                    :  const Column(children: [],),
                 CustomButtonPrimary(
                   text: 'continue'.tr,
                   onpressed: () {
@@ -181,8 +182,17 @@ class Diseases extends StatelessWidget {
                     Get.offNamed(RouteHelper.subscriptionType);
                   },
                 )
-              ])),
+              ])),),
+          connectivityBuilder:
+              (BuildContext context, ConnectivityResult connectivity, Widget child) {
+
+            final bool connected = connectivity != ConnectivityResult.none;
+            return connected?child:NoConnectionScreen();
+
+
+          },
         ),
+
       );
     });
   }

@@ -1,13 +1,12 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:future_heroes_customer/widgets/guestWidget.dart';
 import 'package:get/get.dart';
 
-import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/styles_manager.dart';
+import '../home/NoConnection.dart';
 
 class NotificationPageGuest extends StatefulWidget {
   const NotificationPageGuest({Key? key}) : super(key: key);
@@ -19,42 +18,53 @@ class NotificationPageGuest extends StatefulWidget {
 class _NotificationPageGuestState extends State<NotificationPageGuest> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "notification".tr,
-                    style: getBoldStyle(color: ColorManager.black),
-                  ),
-                  Spacer(),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "markAsRead".tr,
-                        style: getBoldStyle(
-                            color: ColorManager.primary, fontSize: 12),
-                      ))
-                ],
-              ),
-              SizedBox(
-                height: 100.h,
-              ),
-              Column(
-                children: [
-                  GuestWidget(),
-                ],
-              ),
-            ],
+    return Scaffold(
+      body: OfflineBuilder(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Padding(
+            padding:  EdgeInsets.only(top: 40.h),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "notification".tr,
+                      style: getBoldStyle(color: ColorManager.black),
+                    ),
+                    const Spacer(),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "markAsRead".tr,
+                          style: getBoldStyle(
+                              color: ColorManager.primary, fontSize: 12),
+                        ))
+                  ],
+                ),
+                SizedBox(
+                  height: 100.h,
+                ),
+                const Column(
+                  children: [
+                    GuestWidget(),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
+        connectivityBuilder:
+            (BuildContext context, ConnectivityResult connectivity, Widget child) {
+
+          final bool connected = connectivity != ConnectivityResult.none;
+          return connected?child:NoConnectionScreen();
+
+
+        },
       ),
     );
   }

@@ -31,7 +31,7 @@ class ApiConstant {
   static const String getUserOrders = 'UserOrder/GetUserOrders';
   static const String userDiseases = 'UserDiseases';
   static const String userPostponement = 'UserPostponement';
-  static const String isActiveStatus = 'Authentication/IsActiveStatus';
+  static const String isActiveStatus = '/Authentication/IsActiveStatus';
   static const String confirmCode = 'Authentication/ConfirmCode';
   static const String resetPassword = 'Authentication/ResetPassword';
   static const String resetPasswordAuthorize = 'Authentication/ResetPasswordAuthorize';

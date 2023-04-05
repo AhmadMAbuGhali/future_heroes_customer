@@ -1,4 +1,5 @@
-import 'dart:ffi';
+// ignore_for_file: empty_catches
+
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -9,6 +10,7 @@ import 'package:future_heroes_customer/models/choess_coach_model.dart';
 import 'package:future_heroes_customer/models/class_time_model.dart';
 import 'package:future_heroes_customer/models/complaint_replay.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
+import 'package:future_heroes_customer/models/is_active.dart';
 import 'package:future_heroes_customer/models/login_model.dart';
 import 'package:future_heroes_customer/models/notification_model.dart';
 import 'package:future_heroes_customer/models/order_replay.dart';
@@ -38,20 +40,18 @@ class DioClient {
 
 // Login
   Future<LoginModel?> login(String email, String password) async {
-
-    try{
-      Response response = await dio!
-          .post(ApiConstant.login, data: {"email": email, "password": password});
+    try {
+      Response response = await dio!.post(ApiConstant.login,
+          data: {"email": email, "password": password});
       LoginModel user = LoginModel.fromJson(response.data);
       if (user.role == "User") {
         return user;
       } else {
         return null;
       }
-    }catch(error){
+    } catch (error) {
       rethrow;
     }
-
   }
 
 // register
@@ -67,28 +67,30 @@ class DioClient {
       "Email": email,
     });
     Response response = await dio!.post(ApiConstant.register, data: formData);
-    print('response.statusCode');
-    print(response.data.toString());
     RegisterModel registerUser = RegisterModel.fromJson(response.data);
 
     return registerUser;
   }
 
-  Future<File?> updateImage(File image) async{
-    try{
+  Future<File?> updateImage(File image) async {
+    try {
       FormData formData = FormData.fromMap({
         "ImageFile":
-        await MultipartFile.fromFile(image.path, filename: image.path),
+            await MultipartFile.fromFile(image.path, filename: image.path),
       });
-      await dio!.put(ApiConstant.updateImageProfile, data: formData,options: Options(
-        headers: {"Accept-Language": shaedpref.getString("curruntLang"),'Authorization':
-        'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'},
-      ));
-
-    }catch(e){
-      print(e.toString());
+      await dio!.put(ApiConstant.updateImageProfile,
+          data: formData,
+          options: Options(
+            headers: {
+              "Accept-Language": shaedpref.getString("curruntLang"),
+              'Authorization':
+                  'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+            },
+          ));
+    } catch (e) {
     }
-      }
+    return null;
+  }
 
   // term
   Future<TermsAndConditionsModel> termsAndConditions() async {
@@ -152,7 +154,6 @@ class DioClient {
     listChoessCoach = (response.data as List)
         .map((e) => ChoessCoachModel.fromJson(e))
         .toList();
-    print(response.data.toString());
 
     return listChoessCoach;
   }
@@ -165,8 +166,7 @@ class DioClient {
         queryParameters: {"userEmail": emailUser});
     List<TimeList> listcat = [];
     listcat = (response.data as List).map((e) => TimeList.fromJson(e)).toList();
-    print('listcat.length');
-    print(listcat.length);
+
     return listcat;
   }
 
@@ -191,7 +191,6 @@ class DioClient {
     List<DiseaseModel> listDisease = [];
     listDisease =
         (response.data as List).map((e) => DiseaseModel.fromJson(e)).toList();
-    print(listDisease.length);
 
     return listDisease;
   }
@@ -207,6 +206,7 @@ class DioClient {
           },
         ));
   }
+
   Future<void> presenceRegistration() async {
     await dio!.put(ApiConstant.presenceRegistration,
         options: Options(
@@ -225,12 +225,12 @@ class DioClient {
           headers: {"Accept-Language": shaedpref.getString("curruntLang")},
         ));
     List<OffersModel> listOffer = [];
-    listOffer = (response.data as List)
-        .map((e) => OffersModel.fromJson(e))
-        .toList();
+    listOffer =
+        (response.data as List).map((e) => OffersModel.fromJson(e)).toList();
 
     return listOffer;
   }
+
   Future<List<SubscriptionModel>> getPackages() async {
     Response response = await dio!.get(ApiConstant.getPakages,
         options: Options(
@@ -285,13 +285,11 @@ class DioClient {
             'Authorization':
                 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           }));
-      print("Post complaint success");
     } on DioError catch (e) {
       if (e.response?.statusCode == 500) {
-        print("Server error occurred: ${e.message}");
       }
-      print(e.toString());
     }
+    return null;
   }
 
   Future<ResponsMassageCode?> postOrder(String title, String subject) async {
@@ -303,13 +301,11 @@ class DioClient {
             'Authorization':
                 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           }));
-      print("Post Order success");
     } on DioError catch (e) {
       if (e.response?.statusCode == 500) {
-        print("Server error occurred: ${e.message}");
       }
-      print(e.toString());
     }
+    return null;
   }
 
   Future<ResponsMassageCode?> postUserPostponement(
@@ -322,13 +318,11 @@ class DioClient {
             'Authorization':
                 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           }));
-      print("Post Order success");
     } on DioError catch (e) {
       if (e.response?.statusCode == 500) {
-        print("Server error occurred: ${e.message}");
       }
-      print(e.toString());
     }
+    return null;
   }
 
   Future<List<ComplaintReplay>> getComplaintReplay() async {
@@ -346,8 +340,6 @@ class DioClient {
     complaintReplay = (response.data as List)
         .map((e) => ComplaintReplay.fromJson(e))
         .toList();
-    print('listcat.length');
-    print(complaintReplay.length);
     return complaintReplay;
   }
 
@@ -365,10 +357,9 @@ class DioClient {
     List<OrderReplay> orderReplay = [];
     orderReplay =
         (response.data as List).map((e) => OrderReplay.fromJson(e)).toList();
-    print('listcat.length');
-    print(orderReplay.length);
     return orderReplay;
   }
+
   Future<List<NotificationModel>> getUserNotification() async {
     Response response = await dio!.get(
       ApiConstant.userNotification,
@@ -380,26 +371,33 @@ class DioClient {
         },
       ),
     );
-    List<NotificationModel>  notificationModel= [];
-    notificationModel =
-        (response.data as List).map((e) => NotificationModel.fromJson(e)).toList();
-    print('listcat.length');
-    print(notificationModel.length);
+    List<NotificationModel> notificationModel = [];
+    notificationModel = (response.data as List)
+        .map((e) => NotificationModel.fromJson(e))
+        .toList();
     return notificationModel;
   }
 
-  Future<bool?> getIsActive() async {
-    await dio!.get(
-      ApiConstant.isActiveStatus,
-      options: Options(
-        headers: {
-          "Accept-Language": shaedpref.getString("curruntLang"),
-          'Authorization':
-              'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
-        },
-      ),
-    );
+  Future<IsACtive?> getIsActive() async {
+    if (dio == null) {
+      throw Exception("Dio instance is null");
+    }
+    try {
+      Response response = await dio!.get(
+        ApiConstant.isActiveStatus,
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization': 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+        ),
+      );
+      return IsACtive.fromJson(response.data);
+    } catch (e) {
+      throw Exception("Error getting isActive status: $e");
+    }
   }
+
 
   Future<List<ClassTime>> getLecture() async {
     Response response = await dio!.get(
@@ -415,8 +413,6 @@ class DioClient {
     List<ClassTime> classTime = [];
     classTime =
         (response.data as List).map((e) => ClassTime.fromJson(e)).toList();
-    print('listcat.length');
-    print(classTime.length);
     return classTime;
   }
 
@@ -462,7 +458,6 @@ class DioClient {
   Future<ResponsMassageCode?> resetPasswordAuthorize(
       String oldPass, String password, String confirmPassword) async {
     try {
-      print("1");
       Response response = await dio!.put(
         ApiConstant.resetPasswordAuthorize,
         data: {
@@ -476,12 +471,11 @@ class DioClient {
         }),
       );
 
-      print("2");
       ResponsMassageCode responseMassage =
           ResponsMassageCode.fromJson(response.data);
       return responseMassage;
     } catch (e) {
-      print("3");
     }
+    return null;
   }
 }

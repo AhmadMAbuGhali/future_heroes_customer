@@ -23,21 +23,11 @@ class _MainNavBarState extends State<MainNavBar> {
   late PersistentTabController _controller;
 
   List pages = [
-    Container(
-      child: Center(child: Text('NextPage 1')),
-    ),
-    Container(
-      child: Center(child: Text('NextPage 2 ')),
-    ),
-    Container(
-      child: Center(child: Text('NextPage 3')),
-    ),
-    Container(
-      child: Center(child: Text('NextPage 4')),
-    ),
-    Container(
-      child: Center(child: Text('NextPage 5')),
-    ),
+    const Center(child: Text('NextPage 1')),
+    const Center(child: Text('NextPage 2 ')),
+    const Center(child: Text('NextPage 3')),
+    const Center(child: Text('NextPage 4')),
+    const Center(child: Text('NextPage 5')),
   ];
 
   void onTapNav(int index) {
@@ -55,10 +45,10 @@ class _MainNavBarState extends State<MainNavBar> {
 
   List<Widget> _buildScreens() {
     return [
-      ProfilePage(),
-      NotificationPage(),
-      QRCode(),
-      OfferPage(),
+      const ProfilePage(),
+      const NotificationPage(),
+      const QRCode(),
+      const OfferPage(),
       HomeScreen()
     ];
   }
@@ -120,12 +110,12 @@ class _MainNavBarState extends State<MainNavBar> {
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties(
+      itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
         curve: Curves.ease,
       ),
-      screenTransitionAnimation: ScreenTransitionAnimation(
+      screenTransitionAnimation: const ScreenTransitionAnimation(
         // Screen transition animation on change of selected tab.
         animateTabTransition: true,
         curve: Curves.ease,

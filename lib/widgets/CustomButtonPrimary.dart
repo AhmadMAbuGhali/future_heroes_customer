@@ -18,15 +18,16 @@ class CustomButtonPrimary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
+      height: 44.h,
       // margin:  EdgeInsets.only(top: 10.h),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
           foregroundColor: ColorManager.white,
-          side: BorderSide(color: ColorManager.primary),
+          side: const BorderSide(color: ColorManager.primary),
           padding: EdgeInsets.symmetric(vertical: 10.h),
           primary: buttonColor,
           textStyle: TextStyle(
@@ -43,7 +44,7 @@ class CustomButtonPrimary extends StatelessWidget {
                       text,
                       style: getRegularStyle(color: textColor!),
                     ),
-                    CircularProgressIndicator()
+                    const CircularProgressIndicator()
                   ],
                 ),
               )

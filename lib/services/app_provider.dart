@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/models/class_time_model.dart';
 import 'package:future_heroes_customer/models/complaint_replay.dart';
+import 'package:future_heroes_customer/models/is_active.dart';
 import 'package:future_heroes_customer/models/notification_model.dart';
 import 'package:future_heroes_customer/models/offer_model.dart';
 import 'package:future_heroes_customer/models/order_replay.dart';
@@ -48,6 +49,27 @@ class AppProvider extends ChangeNotifier {
   }
 
 
+  Map<int,String> daysAr= {
+
+    0:"الأحد",
+    1:"الاثنين",
+    2:"الثلاثاء",
+    3:"الأربعاء",
+    4:"الخميس",
+    5:"الجمعة",
+    6:"السبت",
+  };
+  Map<int,String> daysEn= {
+
+    0:"Sunday",
+    1:"Monday",
+    2:"Tuesday",
+    3:"Wednesday",
+    4:"Thursday",
+    5:"Friday",
+    6:"Saturday",
+  };
+
 
 
   //reset Password from Personal Page
@@ -87,7 +109,6 @@ class AppProvider extends ChangeNotifier {
       }
     } on DioError catch (e) {
       notifyListeners();
-      print(e.toString());
       return e.response?.data['message'].toString();
     }
     return null;
@@ -107,7 +128,6 @@ class AppProvider extends ChangeNotifier {
           .setPhone(phone: profileData!.phoneNumber.toString());
       getIt<SharedPreferenceHelper>()
           .setDOB(dob: profileData!.dateOfBirth.toString());
-      print(profileData!.email.toString());
       notifyListeners();
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
@@ -120,28 +140,22 @@ class AppProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
 
   Future<String?> updateImage(File image) async{
     try {
       await DioClient.dioClient
           .updateImage(image);
-      print("Done");
       notifyListeners();
 
 
     } on DioError catch (e) {
 
       String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
     }
     notifyListeners();
+    return null;
 
   }
 
@@ -155,7 +169,7 @@ class AppProvider extends ChangeNotifier {
     if (pickedFile != null) {
       // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
-      this.imageFile = imageTemp;
+      imageFile = imageTemp;
       updateImage(imageTemp);
       notifyListeners();
     }
@@ -181,7 +195,7 @@ class AppProvider extends ChangeNotifier {
     if (pickedFile != null) {
       // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
-      this.imageFile = imageTemp;
+      imageFile = imageTemp;
       updateImage(imageTemp);
 
       notifyListeners();
@@ -191,16 +205,16 @@ class AppProvider extends ChangeNotifier {
   Widget bottomSheet(BuildContext context) {
     return Container(
       decoration:
-      BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+      const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
       height: 200.h,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       child: Column(
         children: [
           Text(
             'changePhoto'.tr,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton(
@@ -210,11 +224,11 @@ class AppProvider extends ChangeNotifier {
                 Navigator.pop(context);
            notifyListeners();
             },
-            child: Text('openCamera'.tr),
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 5),
             ),
+            child: Text('openCamera'.tr),
           ),
           SizedBox(
             height: 7.h,
@@ -230,11 +244,11 @@ class AppProvider extends ChangeNotifier {
                 Navigator.pop(context);
                 notifyListeners();
             },
-            child: Text('openGallery'.tr),
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 95, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 95, vertical: 5),
             ),
+            child: Text('openGallery'.tr),
           ),
         ],
       ),
@@ -248,10 +262,8 @@ class AppProvider extends ChangeNotifier {
   Future<String?> postComplaint(String title, String subject) async {
     try {
       await DioClient.dioClient.postComplaint(title, subject);
-      print("Done");
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -262,6 +274,7 @@ class AppProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
   Future<ComplaintReplay?> getComplaintReplay() async {
     try {
@@ -270,25 +283,17 @@ class AppProvider extends ChangeNotifier {
 
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
     }
     notifyListeners();
+    return null;
   }
 
   List<OrderReplay> orderReplay = [];
   Future<String?> postOrder(String title, String subject) async {
     try {
       await DioClient.dioClient.postOrder(title, subject);
-      print("Done");
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -299,6 +304,7 @@ class AppProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
   Future<OrderReplay?> getOrderReplay() async {
     try {
@@ -316,6 +322,7 @@ class AppProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
 
 
@@ -327,10 +334,8 @@ class AppProvider extends ChangeNotifier {
   Future<String?> postUserPostponement(int id,String reason, String details) async {
     try {
       await DioClient.dioClient.postUserPostponement(id,reason, details);
-      print("Done");
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -341,6 +346,7 @@ class AppProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
 
 
@@ -362,6 +368,7 @@ class AppProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
 
 
@@ -383,6 +390,7 @@ class AppProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
   // offers
 
@@ -394,7 +402,6 @@ class AppProvider extends ChangeNotifier {
   Future<String?> getOffers() async {
     try {
       listOffer = await DioClient.dioClient.getOffer();
-      print(listOffer.length);
 
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
@@ -431,23 +438,15 @@ class AppProvider extends ChangeNotifier {
   }
 
 // is Active
-  Future<bool?> getIsActive() async {
+  Future<void> checkIsActive() async {
     try {
-    bool? isActive=  await DioClient.dioClient.getIsActive();
-    print("is Active");
-    print(isActive.toString());
-      getIt<SharedPreferenceHelper>().setActiveStat(activeStat:isActive! ) ;
-
-
-    } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
+      IsACtive? isActive = await DioClient.dioClient.getIsActive();
+      if (isActive != null && isActive.isActive != null) {
+        getIt<SharedPreferenceHelper>().setActiveStat(activeStat: isActive.isActive!);
+      } else {
+      }
+    } catch (e) {
+      String message = e.toString();
     }
     notifyListeners();
   }

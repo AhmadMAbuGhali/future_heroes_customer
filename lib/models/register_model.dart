@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_null_aware_operators
+
 import 'dart:io';
 
 class RegisterModel {
@@ -29,13 +31,13 @@ class RegisterModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ImageFile'] = this.imageFile;
-    data['FullName'] = this.fullName;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['ImageFile'] = imageFile;
+    data['FullName'] = fullName;
     data['DateOfBirth'] = dateOfBirth == null ? null : dateOfBirth?.toIso8601String();
-    data['PhoneNumber'] = this.phoneNumber;
-    data['Email'] = this.email;
-    data['Password'] = this.password;
+    data['PhoneNumber'] = phoneNumber;
+    data['Email'] = email;
+    data['Password'] = password;
 
     return data;
   }

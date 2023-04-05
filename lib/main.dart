@@ -16,8 +16,8 @@ late SharedPreferences shaedpref;
 GetIt getIt = GetIt.instance;
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
+  // _connectivity = Connectivity();
   shaedpref = await SharedPreferences.getInstance();
   final prefs = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferenceHelper>(
@@ -29,6 +29,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => AppProvider()),
         ChangeNotifierProvider(create: (_) => APIProvider()),
@@ -40,7 +41,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     MyLocalController controller = Get.put(MyLocalController());
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
                 primaryColor: const Color(0xFF8A57DC),
                 checkboxTheme: CheckboxThemeData(
                   checkColor:
-                      MaterialStateProperty.all<Color>(Color(0xFF8A57DC)),
+                  MaterialStateProperty.all<Color>(const Color(0xFF8A57DC)),
                 )),
             initialRoute: RouteHelper.getSplashScreen(),
             getPages: RouteHelper.routes,

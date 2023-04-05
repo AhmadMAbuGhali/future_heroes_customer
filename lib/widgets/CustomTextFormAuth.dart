@@ -44,7 +44,7 @@ class CustomTextFormAuth extends StatelessWidget {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: ColorManager.primary),
+                    borderSide: const BorderSide(color: ColorManager.primary),
                     borderRadius: BorderRadius.circular(10.r)),
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 contentPadding:

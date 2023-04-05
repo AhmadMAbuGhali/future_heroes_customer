@@ -1,4 +1,6 @@
 
+// ignore_for_file: constant_identifier_names
+
 class AppConstants {
   static const int splashDelay = 2;
 

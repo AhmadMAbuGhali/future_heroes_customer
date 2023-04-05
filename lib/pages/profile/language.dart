@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/locale/locale_controller.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../resources/styles_manager.dart';
 import '../../widgets/CustomTextTitle.dart';
+import '../home/NoConnection.dart';
 
 class Language extends StatelessWidget {
   const Language({Key? key}) : super(key: key);
@@ -15,22 +17,18 @@ class Language extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyLocalController controllerLang = Get.find();
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: ColorManager.backGround,
-        body: Padding(
+    return Scaffold(
+      backgroundColor: ColorManager.backGround,
+      body: OfflineBuilder(
+        child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                    //  top: 45.h,
-                    // left: 20.w,
-                    // right: 20.w,
-                    ),
-                child: Row(
+          child: Padding(
+            padding:  EdgeInsets.only(top: 40.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Row(
@@ -39,7 +37,7 @@ class Language extends StatelessWidget {
                             onPressed: () {
                               Get.back();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back,
                               color: ColorManager.primary,
                             )),
@@ -51,37 +49,45 @@ class Language extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 40.h,
-              ),
-              Center(
-                  child: CustomTextTitle(
-                text: "changeDisplayLang".tr,
-              )),
-              SizedBox(
-                height: 100.h,
-              ),
-              SizedBox(
-                  height: 50.h,
-                  child: CustomButtonPrimary(
-                      text: "اللغة العربية",
-                      onpressed: () {
-                        controllerLang.changLocal(AppStrings.ar);
-                      })),
-              SizedBox(
-                height: 40.h,
-              ),
-              SizedBox(
-                  height: 50.h,
-                  child: CustomButtonPrimary(
-                      text: "English",
-                      onpressed: () {
-                        controllerLang.changLocal(AppStrings.en);
-                      })),
-            ],
+                SizedBox(
+                  height: 40.h,
+                ),
+                Center(
+                    child: CustomTextTitle(
+                  text: "changeDisplayLang".tr,
+                )),
+                SizedBox(
+                  height: 100.h,
+                ),
+                SizedBox(
+                    height: 50.h,
+                    child: CustomButtonPrimary(
+                        text: "اللغة العربية",
+                        onpressed: () {
+                          controllerLang.changLocal(AppStrings.ar);
+                        })),
+                SizedBox(
+                  height: 40.h,
+                ),
+                SizedBox(
+                    height: 50.h,
+                    child: CustomButtonPrimary(
+                        text: "English",
+                        onpressed: () {
+                          controllerLang.changLocal(AppStrings.en);
+                        })),
+              ],
+            ),
           ),
         ),
+        connectivityBuilder:
+            (BuildContext context, ConnectivityResult connectivity, Widget child) {
+
+          final bool connected = connectivity != ConnectivityResult.none;
+          return connected?child:NoConnectionScreen();
+
+
+        },
       ),
     );
   }

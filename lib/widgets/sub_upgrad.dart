@@ -23,17 +23,7 @@ class _SubUpgradeState extends State<SubUpgrade> {
   var price3 = 249.99;
   @override
   Widget build(BuildContext context) {
-    Color getColor(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return ColorManager.primary;
-      }
-      return ColorManager.primary;
-    }
+
 
     return Column(
       children: [
@@ -57,7 +47,7 @@ class _SubUpgradeState extends State<SubUpgrade> {
             isSelecte: isSelecteOne,
             title: 'month'.tr,
             description: 'packageDetails'.tr,
-            price: '${price1} ' + 'RS'.tr,
+            price: '$price1  ${'RS'.tr}',
           ),
         ),
         InkWell(
@@ -72,7 +62,7 @@ class _SubUpgradeState extends State<SubUpgrade> {
             isSelecte: isSelectetwo,
             title: 'month2'.tr,
             description: 'packageDetails'.tr,
-            price: '${price2} ' + 'RS'.tr,
+            price: '$price2  ${'RS'.tr}',
           ),
         ),
         InkWell(
@@ -87,7 +77,7 @@ class _SubUpgradeState extends State<SubUpgrade> {
             isSelecte: isSelecteThree,
             title: 'month3'.tr,
             description: 'packageDetails'.tr,
-            price: '${price3}  ' + 'RS'.tr,
+            price: '$price3  ${'RS'.tr}',
           ),
         ),
       ],

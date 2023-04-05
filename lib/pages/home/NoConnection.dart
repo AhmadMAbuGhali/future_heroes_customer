@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
-import 'package:future_heroes_customer/routes/route_helper.dart';
-import 'package:future_heroes_customer/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_customer/widgets/CustomTextTitle.dart';
 import 'package:get/get.dart';
 
 class NoConnectionScreen extends StatelessWidget {
-  const NoConnectionScreen({super.key});
+
+   NoConnectionScreen({super.key,});
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +40,7 @@ class NoConnectionScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(color: ColorManager.gray),
             ),
-            CustomButtonPrimary(
-              text: 'tryAgain'.tr,
-              onpressed: () {
-                Get.offNamed(RouteHelper.initial);
-              },
-            )
+
           ],
         ),
       ),

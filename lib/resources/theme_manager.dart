@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'color_manager.dart';
 import 'font_manager.dart';
 import 'styles_manager.dart';
-import 'values_manager.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(

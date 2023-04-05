@@ -5,16 +5,10 @@ import 'package:future_heroes_customer/pages/Guest/Guest_Offers.dart';
 import 'package:future_heroes_customer/pages/Guest/Guest_profile_page.dart';
 import 'package:future_heroes_customer/pages/Guest/Guest_qr_code.dart';
 import 'package:future_heroes_customer/pages/Guest/NotificationPageGuest.dart';
-import 'package:future_heroes_customer/pages/home/home_screen.dart';
-import 'package:future_heroes_customer/pages/offer/offer_page.dart';
-import 'package:future_heroes_customer/pages/profile/profile_page.dart';
-import 'package:future_heroes_customer/pages/qr_code/qr_code.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-
-import '../notification/notification.dart';
 
 class GuestNavBar extends StatefulWidget {
   const GuestNavBar({Key? key}) : super(key: key);
@@ -43,10 +37,10 @@ class _GuestNavBarState extends State<GuestNavBar> {
   List<Widget> _buildScreens() {
     return [
       GuestProfilePage(),
-      NotificationPageGuest(),
-      GuestQRCode(),
-      GuestOffers(),
-      GuestHome()
+      const NotificationPageGuest(),
+      const GuestQRCode(),
+      const GuestOffers(),
+      const GuestHome()
     ];
   }
 
@@ -107,12 +101,12 @@ class _GuestNavBarState extends State<GuestNavBar> {
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties(
+      itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
         curve: Curves.ease,
       ),
-      screenTransitionAnimation: ScreenTransitionAnimation(
+      screenTransitionAnimation: const ScreenTransitionAnimation(
         // Screen transition animation on change of selected tab.
         animateTabTransition: true,
         curve: Curves.ease,

@@ -1,6 +1,7 @@
-import 'dart:io';
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_customer/data/api/apiconst.dart';
@@ -9,13 +10,13 @@ import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/services/app_provider.dart';
 import 'package:future_heroes_customer/widgets/profile_section.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../resources/assets_manager.dart';
 import '../../resources/styles_manager.dart';
-import '../../services/shared_preference_helper.dart';
+import '../auth/login/login.dart';
+import '../home/NoConnection.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -34,6 +35,8 @@ class _ProfilePageState extends State<ProfilePage> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
               title: Column(
                 children: [
                   SizedBox(
@@ -72,7 +75,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         final prefs = await SharedPreferences.getInstance();
                         await prefs.clear();
                         await provider.logOut();
-                        Get.toNamed(RouteHelper.login);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => Login()),
+                            (Route<dynamic> route) => false);
                       },
                       child: Container(
                         width: 100.w,
@@ -121,174 +128,198 @@ class _ProfilePageState extends State<ProfilePage> {
       }
 
       return Scaffold(
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 60.h,
-                ),
-                SizedBox(
-                  height: 80.h,
-                  width: 80.w,
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    fit: StackFit.expand,
-                    children: [
-                      CircleAvatar(
-                        foregroundImage:
-                            provider.profileData!.imageString == null
-                                ? Image.asset(
-                                    ImageAssets.avatar,
-                                  ).image
-                                : NetworkImage(ApiConstant.imageURL +
-                                    provider.profileData!.imageString!),
-                        backgroundImage:
-                            provider.profileData!.imageString == null
-                                ? Image.asset(
-                                    ImageAssets.avatar,
-                                  ).image
-                                : NetworkImage(ApiConstant.imageURL +
-                                    provider.profileData!.imageString!),
-                      ),
-                    ],
+        body: OfflineBuilder(
+          child: provider.profileData == null
+              ? Center(
+                  child: Text(
+                  "No Data",
+                  style: getRegularStyle(
+                      color: ColorManager.primary, fontSize: 14.sp),
+                ))
+              : Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 60.h,
+                        ),
+                        SizedBox(
+                          height: 80.h,
+                          width: 80.w,
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            fit: StackFit.expand,
+                            children: [
+                              CircleAvatar(
+                                foregroundImage:
+                                    provider.profileData!.imageString == null
+                                        ? Image.asset(
+                                            ImageAssets.avatar,
+                                          ).image
+                                        : NetworkImage(ApiConstant.imageURL +
+                                            provider.profileData!.imageString!),
+                                backgroundImage:
+                                    provider.profileData!.imageString == null
+                                        ? Image.asset(
+                                            ImageAssets.avatar,
+                                          ).image
+                                        : NetworkImage(ApiConstant.imageURL +
+                                            provider.profileData!.imageString!),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text(
+                          provider.profileData!.fullName!,
+                          style: getBoldStyle(color: Colors.black),
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "membershipNumber".tr,
+                              style: getRegularStyle(color: Colors.black),
+                            ),
+                            SizedBox(
+                              width: 3.w,
+                            ),
+                            Text(
+                              "${provider.profileData!.membershipNo ?? 0}",
+                              style: getBoldStyle(color: ColorManager.primary),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "playerLevel".tr,
+                              style: getRegularStyle(color: ColorManager.black),
+                            ),
+                            Text(
+                              "Beginner".tr,
+                              style: getBoldStyle(
+                                  color: ColorManager.primary, fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 40.h,
+                        ),
+                        //معلومات الشخصية
+                        ProfileSection(
+                            label: "personalDetails".tr,
+                            haveArrow: true,
+                            icon: IconAssets.user,
+                            onTap: () {
+                              provider.getProfileData();
+
+                              Get.toNamed(RouteHelper.personalData);
+                            }),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        //الطلبات والشكاوي
+                        ProfileSection(
+                            label: "requestsAndComplaints".tr,
+                            haveArrow: true,
+                            icon: IconAssets.paper,
+                            onTap: () {
+                              provider.getComplaintReplay();
+                              provider.getOrderReplay();
+                              Get.toNamed(RouteHelper.requestsAndComplaints);
+                            }),
+
+                        //مواعيد التدريب
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        ProfileSection(
+                            label: "classTime".tr,
+                            haveArrow: true,
+                            icon: IconAssets.calendar,
+                            onTap: () {
+                              Get.toNamed(RouteHelper.classTime);
+                            }),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        //ترقية الاشتراك
+                        ProfileSection(
+                            label: "subscriptionUpgrade".tr,
+                            haveArrow: true,
+                            icon: IconAssets.jewelry,
+                            onTap: () {
+                              Get.toNamed(RouteHelper.subscriptionUpgrade);
+                            }),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        //التقيمات
+
+                        ProfileSection(
+                            label: "rating".tr,
+                            haveArrow: true,
+                            icon: IconAssets.stars,
+                            onTap: () {
+                              Get.toNamed(RouteHelper.ratings);
+                            }),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        //اللغة
+                        ProfileSection(
+                            label: "language".tr,
+                            haveArrow: true,
+                            icon: IconAssets.language,
+                            onTap: () {
+                              Get.toNamed(RouteHelper.language);
+                            }),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        //تسجيل الخروج
+                        ProfileSection(
+                            label: "logout".tr,
+                            haveArrow: false,
+                            icon: IconAssets.user,
+                            myColor: Colors.red,
+                            onTap: () {
+                              _logoutDialog();
+                            }),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        //حذف الحساب
+                        ProfileSection(
+                            label: "deleteAccount".tr,
+                            haveArrow: false,
+                            icon: IconAssets.delete,
+                            myColor: Colors.red,
+                            onTap: () {
+                              _deleteAccountDialog();
+                            }),
+                      ],
+                    ),
                   ),
                 ),
-
-                SizedBox(
-                  height: 8.h,
-                ),
-                Text(
-                  provider.profileData!.fullName!,
-                  style: getBoldStyle(color: Colors.black),
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                Text(
-                  "membershipNumber".tr +
-                      "${provider.profileData!.membershipNo ?? 0}",
-                  style: getRegularStyle(color: Colors.black),
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "playerLevel".tr,
-                      style: getBoldStyle(color: Colors.black, fontSize: 12),
-                    ),
-                    Text(
-                      "Beginner".tr,
-                      style: getRegularStyle(color: ColorManager.primary),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 40.h,
-                ),
-                //معلومات الشخصية
-                ProfileSection(
-                    label: "personalDetails".tr,
-                    haveArrow: true,
-                    icon: IconAssets.user,
-                    onTap: () {
-                      print(ApiConstant.imageURL +
-                          provider.profileData!.imageString!);
-                      provider.getProfileData();
-
-                      Get.toNamed(RouteHelper.personalData);
-                    }),
-                SizedBox(
-                  height: 10.h,
-                ),
-                //الطلبات والشكاوي
-                ProfileSection(
-                    label: "requestsAndComplaints".tr,
-                    haveArrow: true,
-                    icon: IconAssets.paper,
-                    onTap: () {
-                      provider.getComplaintReplay();
-                      provider.getOrderReplay();
-                      Get.toNamed(RouteHelper.requestsAndComplaints);
-                    }),
-
-                //مواعيد التدريب
-                SizedBox(
-                  height: 10.h,
-                ),
-                ProfileSection(
-                    label: "classTime".tr,
-                    haveArrow: true,
-                    icon: IconAssets.calendar,
-                    onTap: () {
-                      Get.toNamed(RouteHelper.classTime);
-                    }),
-                SizedBox(
-                  height: 10.h,
-                ),
-                //ترقية الاشتراك
-                ProfileSection(
-                    label: "subscriptionUpgrade".tr,
-                    haveArrow: true,
-                    icon: IconAssets.jewelry,
-                    onTap: () {
-                      Get.toNamed(RouteHelper.subscriptionUpgrade);
-                    }),
-                SizedBox(
-                  height: 10.h,
-                ),
-                //التقيمات
-
-                ProfileSection(
-                    label: "rating".tr,
-                    haveArrow: true,
-                    icon: IconAssets.stars,
-                    onTap: () {
-                      Get.toNamed(RouteHelper.ratings);
-                    }),
-                SizedBox(
-                  height: 10.h,
-                ),
-                //اللغة
-                ProfileSection(
-                    label: "language".tr,
-                    haveArrow: true,
-                    icon: IconAssets.language,
-                    onTap: () {
-                      Get.toNamed(RouteHelper.language);
-                    }),
-                SizedBox(
-                  height: 10.h,
-                ),
-                //تسجيل الخروج
-                ProfileSection(
-                    label: "logout".tr,
-                    haveArrow: false,
-                    icon: IconAssets.user,
-                    myColor: Colors.red,
-                    onTap: () {
-                      _logoutDialog();
-                    }),
-                SizedBox(
-                  height: 10.h,
-                ),
-                //حذف الحساب
-                ProfileSection(
-                    label: "deleteAccount".tr,
-                    haveArrow: false,
-                    icon: IconAssets.delete,
-                    myColor: Colors.red,
-                    onTap: () {
-                      _deleteAccountDialog();
-                    }),
-              ],
-            ),
-          ),
+          connectivityBuilder: (BuildContext context,
+              ConnectivityResult connectivity, Widget child) {
+            final bool connected = connectivity != ConnectivityResult.none;
+            return connected ? child : NoConnectionScreen();
+          },
         ),
       );
     });
@@ -300,6 +331,8 @@ class _ProfilePageState extends State<ProfilePage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32.0))),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -320,7 +353,7 @@ class _ProfilePageState extends State<ProfilePage> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('deleteAccountTextTitle'.tr),
+                Center(child: Text('deleteAccountTextTitle'.tr)),
               ],
             ),
           ),

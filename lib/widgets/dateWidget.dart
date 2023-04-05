@@ -46,10 +46,10 @@ class _DateWidgetState extends State<DateWidget> {
                       border: Border.all(color: ColorManager.primary),
                       borderRadius: BorderRadius.circular(10.0)),
                   child: Container(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.date_range,
                           color: ColorManager.primary,
                         ),
@@ -63,7 +63,7 @@ class _DateWidgetState extends State<DateWidget> {
                             Text(
                               widget.date.toString(),
                               textAlign: TextAlign.start,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -76,7 +76,7 @@ class _DateWidgetState extends State<DateWidget> {
                                       color: ColorManager.gray,
                                       fontWeight: FontWeight.normal),
                                 ),
-                                Text(" --> "),
+                                const Text(" --> "),
                                 Text(
                                   widget.timeEnd.toString(),
                                   style: TextStyle(
@@ -87,8 +87,8 @@ class _DateWidgetState extends State<DateWidget> {
                             ),
                           ],
                         ),
-                        Spacer(),
-                        Icon(
+                        const Spacer(),
+                        const Icon(
                           Icons.keyboard_arrow_down,
                           color: ColorManager.primary,
                         ),
@@ -96,7 +96,7 @@ class _DateWidgetState extends State<DateWidget> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
               ],
@@ -116,11 +116,11 @@ class _DateWidgetState extends State<DateWidget> {
                       border: Border.all(color: ColorManager.primary),
                       borderRadius: BorderRadius.circular(10.0)),
                   child: Container(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.date_range,
                           color: ColorManager.primary,
                         ),
@@ -133,7 +133,7 @@ class _DateWidgetState extends State<DateWidget> {
                           children: [
                             Text(
                               widget.date.toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -146,7 +146,7 @@ class _DateWidgetState extends State<DateWidget> {
                                       color: ColorManager.gray,
                                       fontWeight: FontWeight.normal),
                                 ),
-                                Text(" --> "),
+                                const Text(" --> "),
                                 Text(
                                   widget.timeEnd.toString(),
                                   style: TextStyle(
@@ -160,7 +160,7 @@ class _DateWidgetState extends State<DateWidget> {
                               children: [
                                 Text(
                                   'nameCoach'.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: ColorManager.primary,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -177,7 +177,7 @@ class _DateWidgetState extends State<DateWidget> {
                               children: [
                                 Text(
                                   'class'.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: ColorManager.primary,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -194,7 +194,7 @@ class _DateWidgetState extends State<DateWidget> {
                               children: [
                                 Text(
                                   'classtime'.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: ColorManager.primary,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -207,37 +207,32 @@ class _DateWidgetState extends State<DateWidget> {
                               ],
                             ),
                             SizedBox(height:7.h ,),
-                            Container(
-                              //   padding: EdgeInsets.all(8),
-                              // width: 100,
-                              //   margin: EdgeInsets.all(10),
-                              child: ElevatedButton(
-                                onPressed: widget.onTap,
-
-                                child: Container(
-                                  width: 100.w,
-                                  height: 30.h,
-                                  padding: EdgeInsets.all(6),
-                                  child: Center(
-                                    child: Text(
-                                      'requestPostponement'.tr,
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          color: ColorManager.primary),
-                                    ),
-                                  ),
+                            ElevatedButton(
+                              onPressed: widget.onTap,
+                              style: ElevatedButton.styleFrom(
+                                // shape: RoundedRectangleBorder(
+                                //     borderRadius:
+                                //         BorderRadius.circular(10.r)),
+                                foregroundColor: ColorManager.white,
+                                side: const BorderSide(color: ColorManager.primary),
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
+                                primary: ColorManager.white,
+                                textStyle: TextStyle(
+                                  fontFamily: 'DroidKufi',
+                                  fontSize: 16.sp,
                                 ),
-                                style: ElevatedButton.styleFrom(
-                                  // shape: RoundedRectangleBorder(
-                                  //     borderRadius:
-                                  //         BorderRadius.circular(10.r)),
-                                  foregroundColor: ColorManager.white,
-                                  side: BorderSide(color: ColorManager.primary),
-                                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                                  primary: ColorManager.white,
-                                  textStyle: TextStyle(
-                                    fontFamily: 'DroidKufi',
-                                    fontSize: 16.sp,
+                              ),
+
+                              child: Container(
+                                width: 140.w,
+                                height: 30.h,
+                                padding: const EdgeInsets.all(6),
+                                child: Center(
+                                  child: Text(
+                                    'requestPostponement'.tr,
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        color: ColorManager.primary),
                                   ),
                                 ),
                               ),
@@ -251,8 +246,8 @@ class _DateWidgetState extends State<DateWidget> {
                             // )
                           ],
                         ),
-                        Spacer(),
-                        Icon(
+                        const Spacer(),
+                        const Icon(
                           Icons.keyboard_arrow_up,
                           color: ColorManager.primary,
                         ),

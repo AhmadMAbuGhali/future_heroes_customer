@@ -119,12 +119,12 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                 width: 80.w,
                 child: ElevatedButton(
                   onPressed: details.onStepContinue,
+                  style:
+                      ElevatedButton.styleFrom(primary: ColorManager.primary),
                   child: Text(
                     "next".tr,
                     style: getRegularStyle(color: ColorManager.white),
                   ),
-                  style:
-                      ElevatedButton.styleFrom(primary: ColorManager.primary),
                 ),
               ),
               const SizedBox(
@@ -135,15 +135,16 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                 width: 160.w,
                 child: TextButton(
                   onPressed: () {
+
                     Get.toNamed(RouteHelper.postponeAnAppointment);
                   },
+                  style: ElevatedButton.styleFrom(
+                      primary: ColorManager.white,
+                      side: const BorderSide(width: 1, color: ColorManager.primary)),
                   child: Text(
                     "requestPostponement".tr,
                     style: getRegularStyle(color: ColorManager.primary),
                   ),
-                  style: ElevatedButton.styleFrom(
-                      primary: ColorManager.white,
-                      side: const BorderSide(width: 1, color: ColorManager.primary)),
                 ),
               ),
             ],

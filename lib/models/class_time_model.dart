@@ -38,7 +38,7 @@ class ClassTime {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (classLecture != null) {
       data['classLecture'] = classLecture!.toJson();
     }

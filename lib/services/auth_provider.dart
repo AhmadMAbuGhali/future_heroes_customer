@@ -1,9 +1,8 @@
 import 'dart:io';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:future_heroes_customer/services/shared_preference_helper.dart';
-import 'package:path_provider/path_provider.dart';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/data/api/dio_client.dart';
 import 'package:future_heroes_customer/data/api/exception_handling.dart';
@@ -14,18 +13,17 @@ import 'package:future_heroes_customer/models/sub_category.dart';
 import 'package:future_heroes_customer/models/subscribtion_model.dart';
 import 'package:future_heroes_customer/models/time_list.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
+import 'package:future_heroes_customer/services/shared_preference_helper.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../main.dart';
 import '../models/choess_coach_model.dart';
-import '../models/class_time_model.dart';
 import '../models/login_model.dart';
 import '../models/respons_massage_code.dart';
 import '../models/terms_and_conditions_model.dart';
 import '../widgets/snakbar.dart';
-import 'app_provider.dart';
 
 class AuthProvider extends ChangeNotifier {
   AuthProvider() {
@@ -39,7 +37,6 @@ class AuthProvider extends ChangeNotifier {
 
   bool get isAuthenticated => _isAuthenticated;
 
-  @override
   // general
   bool _loading = false;
   bool isLoading = false;
@@ -111,6 +108,8 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
 
+
+
   changeShowPasswordSignUP() {
     showPasswordSignUp = !showPasswordSignUp;
     notifyListeners();
@@ -146,7 +145,7 @@ class AuthProvider extends ChangeNotifier {
     if (pickedFile != null) {
       // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
-      this.imageFile = imageTemp;
+      imageFile = imageTemp;
       notifyListeners();
     }
   }
@@ -176,7 +175,7 @@ class AuthProvider extends ChangeNotifier {
     if (pickedFile != null) {
       // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
-      this.imageFile = imageTemp;
+      imageFile = imageTemp;
       notifyListeners();
     }
   }
@@ -194,7 +193,6 @@ class AuthProvider extends ChangeNotifier {
     try {
       TermsAndConditionsModel termsAndConditionsModel =
           await DioClient.dioClient.termsAndConditions();
-      print(termsAndConditionsModel.toJson().toString());
       return termsAndConditionsModel.description;
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
@@ -207,6 +205,7 @@ class AuthProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
 
   //
@@ -230,6 +229,7 @@ class AuthProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
 
 // subcategory
@@ -277,7 +277,6 @@ class AuthProvider extends ChangeNotifier {
           await DioClient.dioClient.getSubCategorysForCategor(id);
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -335,10 +334,7 @@ class AuthProvider extends ChangeNotifier {
       timeListMap[subCatId] = listTime;
       timeListMain.add(listTime);
 
-      print("timeListMain");
-      print(timeListMain.toString());
       timeListString = [];
-      print(listTime.length);
       for (TimeList value in listTime) {
         String days = '';
         for (ClassDateTimes listvalue in value.classDateTimes ?? []) {
@@ -350,11 +346,8 @@ class AuthProvider extends ChangeNotifier {
         maptimeListString[value.id ?? 0] = days;
         timeListString.add(days);
       }
-      print(timeListString.toString());
       notifyListeners();
     } on DioError catch (e) {
-      print('e.toString()');
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -369,21 +362,12 @@ class AuthProvider extends ChangeNotifier {
 
   Future<dynamic> getChoesenCoach(List<int> id) async {
     try {
-      print(id);
       coachFromId = [];
       coachFromId = await DioClient.dioClient.getSendSubId(id);
       await getTimeList(coachFromId.first.coaches!.first.email ?? '', id.first);
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
-      final snackBar = SnackBar(
-        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
-        backgroundColor: ColorManager.red,
-        behavior: SnackBarBehavior.floating,
-        width: 300.w,
-        duration: const Duration(seconds: 1),
-      );
     }
     notifyListeners();
   }
@@ -392,11 +376,9 @@ class AuthProvider extends ChangeNotifier {
 
   sendClassTime(List<int> id) async {
     try {
-      print(id);
       await DioClient.dioClient.sendClassId(id);
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -426,11 +408,9 @@ class AuthProvider extends ChangeNotifier {
 
   sendDiseasesId(List<int> id) async {
     try {
-      print(id);
       await DioClient.dioClient.sendDiseases(id);
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -446,7 +426,6 @@ class AuthProvider extends ChangeNotifier {
   Future<String?> getDisease() async {
     try {
       diseases = await DioClient.dioClient.getDisease();
-      print(diseases.length);
       notifyListeners();
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
@@ -459,6 +438,7 @@ class AuthProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
 
   bool isDiseases = true;
@@ -488,7 +468,6 @@ class AuthProvider extends ChangeNotifier {
   Future<String?> getPackages() async {
     try {
       listPackages = await DioClient.dioClient.getPackages();
-      print(listPackages.length);
       offerSelected = List.filled(listPackages.length, false);
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
@@ -501,6 +480,7 @@ class AuthProvider extends ChangeNotifier {
       );
     }
     notifyListeners();
+    return null;
   }
 
   sendOfferId(int Id) async {
@@ -549,7 +529,6 @@ class AuthProvider extends ChangeNotifier {
       }
     } on DioError catch (e) {
       notifyListeners();
-      print(e.response?.data['message'].toString());
       return e.response?.data['message'].toString();
     }
   }
@@ -572,7 +551,6 @@ class AuthProvider extends ChangeNotifier {
 
   Future<String?> resetPassword(String pass, String conPass) async {
     try {
-      print(emailSendCodeController.text.trim());
       ResponsMassageCode? success = await DioClient.dioClient
           .resetPassword(emailSendCodeController.text.trim(), pass, conPass);
 
@@ -582,7 +560,6 @@ class AuthProvider extends ChangeNotifier {
       }
     } on DioError catch (e) {
       notifyListeners();
-      print(e.toString());
       return e.response?.data['message'].toString();
     }
     return null;

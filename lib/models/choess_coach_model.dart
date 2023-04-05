@@ -18,10 +18,10 @@ class ChoessCoachModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['subCategoryName'] = this.subCategoryName;
-    data['subCategoryId'] = this.subCategoryId;
-    if (this.coaches != null) {
-      data['coaches'] = this.coaches!.map((v) => v.toJson()).toList();
+    data['subCategoryName'] = subCategoryName;
+    data['subCategoryId'] = subCategoryId;
+    if (coaches != null) {
+      data['coaches'] = coaches!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -44,10 +44,10 @@ class Coaches {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['email'] = this.email;
-    data['imageString'] = this.imageString;
-    data['fullName'] = this.fullName;
-    data['subCategoryId'] = this.subCategoryId;
+    data['email'] = email;
+    data['imageString'] = imageString;
+    data['fullName'] = fullName;
+    data['subCategoryId'] = subCategoryId;
     return data;
   }
 }

@@ -20,11 +20,11 @@ class ComplaintReplay {
     respone = json['respone'];
     id = json['id'];
     createdAt = json['createdAt'];
-    ;
+
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['title'] = title;
     data['subject'] = subject;
     data['respone'] = respone;

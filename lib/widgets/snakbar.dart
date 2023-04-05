@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
@@ -16,7 +14,6 @@ class snakbarWidget {
     MotionToast(
       icon: Icons.error,
       primaryColor: ColorManager.red,
-      // secondaryColor: ColorManager.black,
       backgroundType: BackgroundType.lighter,
       title: Text(
         Titel,
@@ -39,11 +36,11 @@ class snakbarWidget {
     ).show(context);
   }
 
+  // ignore: non_constant_identifier_names
   void Success() {
     MotionToast(
       icon: Icons.done,
       primaryColor: ColorManager.green,
-      //secondaryColor: ColorManager.green,
       backgroundType: BackgroundType.transparent,
       title: Text(
         Titel,

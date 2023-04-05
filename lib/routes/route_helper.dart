@@ -3,20 +3,19 @@ import 'package:future_heroes_customer/pages/Guest/Guest_profile_page.dart';
 import 'package:future_heroes_customer/pages/Guest/Guest_qr_code.dart';
 import 'package:future_heroes_customer/pages/Guest/Navbar_Guest.dart';
 import 'package:future_heroes_customer/pages/Guest/NotificationPageGuest.dart';
-import 'package:future_heroes_customer/pages/auth/signup/CoachSelection.dart';
-import 'package:future_heroes_customer/pages/auth/signup/EndSignUp.dart';
-import 'package:future_heroes_customer/pages/auth/signup/confirm_code.dart';
-import 'package:future_heroes_customer/pages/home/NoConnection.dart';
-import 'package:future_heroes_customer/pages/auth/signup/SignUpPersonalData.dart';
-import 'package:future_heroes_customer/pages/auth/signup/SignUppart2.dart';
-import 'package:future_heroes_customer/pages/auth/signup/SubscriptionType.dart';
 import 'package:future_heroes_customer/pages/auth/login/SuccessLogin.dart';
-import 'package:future_heroes_customer/pages/auth/signup/TermsAndConditions.dart';
 import 'package:future_heroes_customer/pages/auth/login/codeVerification.dart';
-import 'package:future_heroes_customer/pages/auth/signup/diseases.dart';
 import 'package:future_heroes_customer/pages/auth/login/forgetPassword.dart';
 import 'package:future_heroes_customer/pages/auth/login/login.dart';
 import 'package:future_heroes_customer/pages/auth/login/setPassword.dart';
+import 'package:future_heroes_customer/pages/auth/signup/CoachSelection.dart';
+import 'package:future_heroes_customer/pages/auth/signup/EndSignUp.dart';
+import 'package:future_heroes_customer/pages/auth/signup/SignUpPersonalData.dart';
+import 'package:future_heroes_customer/pages/auth/signup/SignUppart2.dart';
+import 'package:future_heroes_customer/pages/auth/signup/SubscriptionType.dart';
+import 'package:future_heroes_customer/pages/auth/signup/TermsAndConditions.dart';
+import 'package:future_heroes_customer/pages/auth/signup/confirm_code.dart';
+import 'package:future_heroes_customer/pages/auth/signup/diseases.dart';
 import 'package:future_heroes_customer/pages/home/home_screen.dart';
 import 'package:future_heroes_customer/pages/navbar/main_navbar.dart';
 import 'package:future_heroes_customer/pages/onBoarding/onBoarding.dart';
@@ -77,65 +76,65 @@ class RouteHelper {
   static const String guestQRCode = "/GuestQRCode";
   static const String guestProfilePage = "/GuestProfilePage";
 
-  static String getSplashScreen() => '$splashScreen';
-  static String getInitial() => '$initial';
-  static String getProfile() => '$profile';
-  static String getPersonalData() => '$personalData';
-  static String getRequestsAndComplaints() => '$requestsAndComplaints';
-  static String getLogin() => '$login';
-  static String getNoConnection() => '$noConnection';
-  static String getPostponeAnAppointment() => '$postponeAnAppointment';
-  static String getSendComplaints() => '$sendComplaints';
-  static String getSendRequests() => '$sendRequests';
+  static String getSplashScreen() => splashScreen;
+  static String getInitial() => initial;
+  static String getProfile() => profile;
+  static String getPersonalData() => personalData;
+  static String getRequestsAndComplaints() => requestsAndComplaints;
+  static String getLogin() => login;
+  static String getNoConnection() => noConnection;
+  static String getPostponeAnAppointment() => postponeAnAppointment;
+  static String getSendComplaints() => sendComplaints;
+  static String getSendRequests() => sendRequests;
   static String getSubscriptionUpgradeSuccessfully() =>
-      '$subscriptionUpgradeSuccessfully';
-  static String getSignUpPart2() => '$signUpPart2';
-  static String getSignUp() => '$signUp';
-  static String getSignupPersonalData() => '$signupPersonalData';
-  static String getTermsAndConditions() => '$termsAndConditions';
-  static String getChangePassword() => '$changePassword';
-  static String getClassTime() => '$classTime';
-  static String getConfirmCode() => '$confirmCode';
-  static String getDiseases() => '$diseases';
-  static String getCoachSelection() => '$coachSelection';
-  static String getSubscriptionType() => '$subscriptionType';
-  static String getEndSignUp() => '$endSignUp';
-  static String getForgetPassword() => '$forgetPassword';
-  static String getSubscriptionUpgrade() => '$subscriptionUpgrade';
-  static String getRatings() => '$ratings';
-  static String getSetPassword() => '$setPassword';
-  static String getCodeVerification() => '$codeVerification';
-  static String getOnBoarding() => '$onBoarding';
-  static String getSuccessLogin() => '$successLogin';
-  static String getHomeScreen() => '$homeScreen';
-  static String getLanguage() => '$language';
-  static String getGuestHome() => '$guestHome';
-  static String getGuestNavBar() => '$guestInitial';
-  static String getNotificationPageGuest() => '$notificationPageGuest';
-  static String getGuestOffers() => '$guestOffers';
-  static String getGuestQRCode() => '$guestQRCode';
-  static String getGuestProfilePage() => '$guestProfilePage';
+      subscriptionUpgradeSuccessfully;
+  static String getSignUpPart2() => signUpPart2;
+  static String getSignUp() => signUp;
+  static String getSignupPersonalData() => signupPersonalData;
+  static String getTermsAndConditions() => termsAndConditions;
+  static String getChangePassword() => changePassword;
+  static String getClassTime() => classTime;
+  static String getConfirmCode() => confirmCode;
+  static String getDiseases() => diseases;
+  static String getCoachSelection() => coachSelection;
+  static String getSubscriptionType() => subscriptionType;
+  static String getEndSignUp() => endSignUp;
+  static String getForgetPassword() => forgetPassword;
+  static String getSubscriptionUpgrade() => subscriptionUpgrade;
+  static String getRatings() => ratings;
+  static String getSetPassword() => setPassword;
+  static String getCodeVerification() => codeVerification;
+  static String getOnBoarding() => onBoarding;
+  static String getSuccessLogin() => successLogin;
+  static String getHomeScreen() => homeScreen;
+  static String getLanguage() => language;
+  static String getGuestHome() => guestHome;
+  static String getGuestNavBar() => guestInitial;
+  static String getNotificationPageGuest() => notificationPageGuest;
+  static String getGuestOffers() => guestOffers;
+  static String getGuestQRCode() => guestQRCode;
+  static String getGuestProfilePage() => guestProfilePage;
 
   static List<GetPage> routes = [
     GetPage(
         name: splashScreen,
         page: () {
-          return SplashScreen();
+          return const SplashScreen();
         }),
     GetPage(
         name: initial,
         page: () {
-          return MainNavBar();
+          return const MainNavBar();
         }),
     GetPage(
         name: notificationPageGuest,
         page: () {
-          return NotificationPageGuest();
+          return const NotificationPageGuest();
         }),
     GetPage(
         name: guestInitial,
         page: () {
-          return GuestNavBar();
+          return const GuestNavBar();
         }),
     GetPage(
         name: guestProfilePage,
@@ -145,17 +144,17 @@ class RouteHelper {
     GetPage(
         name: guestQRCode,
         page: () {
-          return GuestQRCode();
+          return const GuestQRCode();
         }),
     GetPage(
         name: guestOffers,
         page: () {
-          return GuestOffers();
+          return const GuestOffers();
         }),
     GetPage(
         name: guestHome,
         page: () {
-          return GuestHome();
+          return const GuestHome();
         }),
     GetPage(
         name: homeScreen,
@@ -165,7 +164,7 @@ class RouteHelper {
     GetPage(
       name: profile,
       page: () {
-        return ProfilePage();
+        return const ProfilePage();
       },
     ),
     GetPage(
@@ -177,7 +176,7 @@ class RouteHelper {
     GetPage(
       name: requestsAndComplaints,
       page: () {
-        return RequestsAndComplaints();
+        return const RequestsAndComplaints();
       },
     ),
     GetPage(
@@ -189,15 +188,10 @@ class RouteHelper {
     GetPage(
       name: confirmCode,
       page: () {
-        return ConfirmCode();
+        return const ConfirmCode();
       },
     ),
-    GetPage(
-      name: noConnection,
-      page: () {
-        return NoConnectionScreen();
-      },
-    ),
+
     GetPage(
       name: postponeAnAppointment,
       page: () {
@@ -219,7 +213,7 @@ class RouteHelper {
     GetPage(
       name: subscriptionUpgradeSuccessfully,
       page: () {
-        return SubscriptionUpgradeSuccessfully();
+        return const SubscriptionUpgradeSuccessfully();
       },
     ),
     GetPage(
@@ -249,7 +243,7 @@ class RouteHelper {
     GetPage(
       name: classTime,
       page: () {
-        return ClassTime();
+        return const ClassTime();
       },
     ),
     GetPage(
@@ -273,7 +267,7 @@ class RouteHelper {
     GetPage(
       name: endSignUp,
       page: () {
-        return EndSignUp();
+        return const EndSignUp();
       },
     ),
     GetPage(
@@ -291,7 +285,7 @@ class RouteHelper {
     GetPage(
       name: ratings,
       page: () {
-        return Ratings();
+        return const Ratings();
       },
     ),
     GetPage(
@@ -303,25 +297,25 @@ class RouteHelper {
     GetPage(
       name: codeVerification,
       page: () {
-        return CodeVerification();
+        return const CodeVerification();
       },
     ),
     GetPage(
       name: onBoarding,
       page: () {
-        return OnBoarding();
+        return const OnBoarding();
       },
     ),
     GetPage(
       name: successLogin,
       page: () {
-        return SuccessLogin();
+        return const SuccessLogin();
       },
     ),
     GetPage(
       name: language,
       page: () {
-        return Language();
+        return const Language();
       },
     ),
   ];

@@ -1,16 +1,19 @@
+// ignore_for_file: empty_catches
+
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'dart:developer';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 
 import '../../data/api/dio_client.dart';
 import '../../widgets/snakbar.dart';
+import '../home/NoConnection.dart';
 
 class QRCode extends StatefulWidget {
   const QRCode({Key? key}) : super(key: key);
@@ -37,76 +40,92 @@ class _QRCodeState extends State<QRCode> {
 
   @override
   Widget build(BuildContext context) {
-
     controller?.resumeCamera();
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 9, child: _buildQrView(context)),
-          Expanded(
-
-            child: FittedBox(
-              fit: BoxFit.cover,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    height: 25.h,
-                    margin: const EdgeInsets.all(8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          style:ElevatedButton.styleFrom(
-                            backgroundColor: ColorManager.primary
-                          ),
-                            onPressed: () async {
-                              await controller?.toggleFlash();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getFlashStatus(),
-                              builder: (context, snapshot) {
-                                return Icon(Icons.flash_on,size: 20,);
+      body: OfflineBuilder(
+        child: Column(
+          children: <Widget>[
+            Expanded(flex: 9, child: _buildQrView(context)),
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      height: 25.h,
+                      margin: const EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: ColorManager.primary),
+                              onPressed: () async {
+                                await controller?.toggleFlash();
+                                setState(() {});
                               },
-                            )),
-                      ],
+                              child: FutureBuilder(
+                                future: controller?.getFlashStatus(),
+                                builder: (context, snapshot) {
+                                  return const Icon(
+                                    Icons.flash_on,
+                                    size: 20,
+                                  );
+                                },
+                              )),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: 25.h,
-
-                    margin: const EdgeInsets.all(8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                            style:ElevatedButton.styleFrom(
-                                backgroundColor: ColorManager.primary
-                            ),
-                            onPressed: () async {
-                              await controller?.flipCamera();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getCameraInfo(),
-                              builder: (context, snapshot) {
-                                if (snapshot.data != null) {
-                                  return Center(child: Icon(Icons.flip_camera_ios,size: 20,));
-                                } else {
-                                  return Center(child: const Icon(Icons.flip_camera_ios,size: 20,));
-                                }
+                    Container(
+                      height: 25.h,
+                      margin: const EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: ColorManager.primary),
+                              onPressed: () async {
+                                await controller?.flipCamera();
+                                setState(() {});
                               },
-                            )),
-                      ],
-                    ),
-                  )
-                ],
+                              child: FutureBuilder(
+                                future: controller?.getCameraInfo(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.data != null) {
+                                    return const Center(
+                                        child: Icon(
+                                      Icons.flip_camera_ios,
+                                      size: 20,
+                                    ));
+                                  } else {
+                                    return const Center(
+                                        child: Icon(
+                                      Icons.flip_camera_ios,
+                                      size: 20,
+                                    ));
+                                  }
+                                },
+                              )),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
+        connectivityBuilder:
+            (BuildContext context, ConnectivityResult connectivity, Widget child) {
+
+          final bool connected = connectivity != ConnectivityResult.none;
+          return connected?child:NoConnectionScreen();
+
+
+        },
       ),
     );
   }
@@ -114,7 +133,7 @@ class _QRCodeState extends State<QRCode> {
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
-        MediaQuery.of(context).size.height < 400)
+            MediaQuery.of(context).size.height < 400)
         ? 150.0
         : 300.0;
     // To ensure the Scanner view is properly sizes after rotation
@@ -135,32 +154,18 @@ class _QRCodeState extends State<QRCode> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) async {
-      if(result!= null && result!.code=="FutureHeroes")
-      {
-
+      if (result != null && result!.code == "FutureHeroes") {
         try {
-          print(result!.code);
-           DioClient.dioClient.presenceRegistration();
-           Get.offNamed(RouteHelper.initial);
+          DioClient.dioClient.presenceRegistration();
+          Get.offNamed(RouteHelper.initial);
           snakbarWidget(context,
-              Titel:
-              'qrSuccsesDoneTitle'.tr,
-              Description:
-              'qrSuccsesDoneBody'.tr)
+                  Titel: 'qrSuccsesDoneTitle'.tr,
+                  Description: 'qrSuccsesDoneBody'.tr)
               .Success();
-
-          print(scanData.toString());
-        } catch (e) {
-
-          print('Error making HTTP request: $e');
-        }
-
-      }else{
+        } catch (e) {}
+      } else {
         snakbarWidget(context,
-            Titel:
-            'qrFailTitle'.tr,
-            Description:
-            'qrFailBody'.tr)
+                Titel: 'qrFailTitle'.tr, Description: 'qrFailBody'.tr)
             .error();
       }
 
@@ -169,7 +174,6 @@ class _QRCodeState extends State<QRCode> {
       });
     });
   }
-
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
@@ -185,7 +189,4 @@ class _QRCodeState extends State<QRCode> {
     controller?.dispose();
     super.dispose();
   }
-
-
-
 }

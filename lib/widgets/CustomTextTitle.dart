@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/resources/font_manager.dart';
 import 'package:future_heroes_customer/resources/styles_manager.dart';
 

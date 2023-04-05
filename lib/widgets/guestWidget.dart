@@ -20,7 +20,7 @@ class GuestWidget extends StatelessWidget {
         ),
         Text(
           'ourhonorableguest'.tr,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: 10.h,

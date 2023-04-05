@@ -33,7 +33,7 @@ class CardSubscriptionType extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomTextTitle(text: title),
-              Text(price, style: TextStyle(color: ColorManager.primary, fontWeight: FontWeight.bold))
+              Text(price, style: const TextStyle(color: ColorManager.primary, fontWeight: FontWeight.bold))
             ],
           ),
           Text(description, textAlign: TextAlign.left, style: getRegularStyle(color: ColorManager.gray))

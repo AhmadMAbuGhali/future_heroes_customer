@@ -16,8 +16,11 @@ class MyLocale extends Translations {
 
           "noOrderReplay": "ليس لديك اي رد على طلباتك",
           "noComplaintsReplay": "ليس لديك اي رد على شكاويك",
-
+          "replayOnReq": "الرد على طلب",
           "skip": "تخطي",
+          "SentSuccesfully": "تم الارسال بنجاح",
+          "TheReqSent": "تم ارسال الطلب بنجاح",
+          "TheComplSent": "تم ارساال الشكوى بنجاح",
           "replayOnComp": "الرد على شكوى ",
           "onBoardingText1": "تفوق طفلك مسؤوليتنا",
           "onBoardingBody1":
@@ -103,6 +106,11 @@ class MyLocale extends Translations {
           "DOBEmpty": "تاريخ الميلاد مطلوب",
           "mobileNumberEmpty": "رقم الهاتف مطلوب",
           "or": "أو",
+          "DataError": "خطأ في البيانات",
+          "EnterAllData": "يرجى ادخال جميع البيانات ",
+          "Standard": "المعيار ",
+          "YourRating": "تقييمك",
+          "HighestScore": "اعلى درجة",
           "weAreClose": "لقد شارفنا على الانتهاء",
           "tellUsDiseases": "اذا كنت تعاني من بعض الامراض اخبرنا بذلك",
           "iHaveDiseases": "اعاني من بعض الامراض",
@@ -112,7 +120,6 @@ class MyLocale extends Translations {
           "pressure": "الضغط",
           "anemia": "فقر الدم",
           "muscleTear": "تمزق عضلي",
-          "noNotification": "ليس هناك اشعارات حالياً",
           "heartDisease": "أمراض القلب",
           "other": "أخرى",
           "choseCoach": "اختيار المدرب",
@@ -198,6 +205,9 @@ class MyLocale extends Translations {
           "ratingTitle": "التقييم الخاص بشهر يناير",
           "ratingBodyCosplay": "انقر لاظهار البيانات",
           "ratingAttendeesTitle": "الحضور : ",
+          "PassNotSame": "كلمة المرور غير متشابهة",
+          "EnterMatchingPassword": " يرجى ادخال كلمة مرور متطابقة",
+          "Punctuality": "الالتزام بالمواعيد ",
           "ratingAttendeesBody": "تقييمك في الحضور هو 3  من  5",
           "ratingObligationDressTitle": "الالتزام بالزي",
           "ratingObligationDressBody": "تقييمك في : الالتزام بالزي هو 3  من  5",
@@ -208,7 +218,12 @@ class MyLocale extends Translations {
           "ratingLiteratureAndEthicsTitle": "الادب والأخلاق :",
           "ratingLiteratureAndEthicsBody":
               "تقييمك في  الادب والأخلاق هو 3  من  5",
-          "coachNoteTitle": ": ملاحظات أخرى من المدرب",
+          "coachNoteTitle": "ملاحظات أخرى من المدرب :",
+          "CodeWrong": "الرمز خاطئ",
+          "VerifyCode": "تأكد من الرمز المرسل الى البريد",
+          "CompleteReg": "اكمال التسجيل",
+          "WaitingApproval": "عليك انتظار الموافقة على طلب انضمامك",
+
           "coachNoteBody":
               "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
           "logoutPopUpText": "هل انت متأكد من تسجيل الخروج",
@@ -249,7 +264,10 @@ class MyLocale extends Translations {
           "login": "Login",
           "changeDisplayLang": "Change Display Language",
           "next": "Next",
+          "CompleteRegistration": "You must complete the registration to be able to view the current page",
+          "CompleteReg": "Complete the registration",
           "skip": "skip",
+          "replayOnReq": "Reply to Request of",
           "replayOnComp": "Reply to Complaint",
           "onBoardingText1": "Your Child's Excellence is Our Responsibility",
           "onBoardingBody1":
@@ -273,8 +291,7 @@ class MyLocale extends Translations {
           "YouMustlogin":
               "You must be logged in to be able to register for the courses",
           "YouMustlogin2": "You must be logged in to view the current page",
-          "CompleteRegistration":
-              "You must complete the registration process to be able to view the current page.",
+
           "password": "password",
           "rememberMe": "remember me",
           "forgotPassword": "Forgot your password?",
@@ -285,6 +302,19 @@ class MyLocale extends Translations {
           "helloAgain": "Welcome back",
           "areYouReady": "Are you ready to start",
           "goToHome": "go to home",
+          "SentSuccesfully": "Sent Succesfully",
+          "TheReqSent": "The request has been sent successfully",
+          "TheComplSent": "The complaint has been sent successfully",
+
+          "EnterMatchingPassword": "Please enter a matching password",
+          "WaitingApproval": "You must wait for your application to be approved",
+
+
+          "DataError": "Data error",
+          "EnterAllData": "Please enter all data ",
+          "Standard": "Standard",
+          "YourRating": "Your Rating",
+          "HighestScore": "Highest Score",
           "noOrderReplay": "You have no response to your orders",
           "noComplaintsReplay": "You have no response to your complaint",
           "lecture": "Lecture : ",
@@ -299,7 +329,6 @@ class MyLocale extends Translations {
           "cultural": "cultural",
           "continue": "Continue",
           "Karate": "Karate",
-          "noNotification": "There are currently no notifications",
           "Gymnastics": "Gymnastics",
           "taekwondo": "taekwondo",
           "drawing": "drawing",
@@ -387,6 +416,7 @@ class MyLocale extends Translations {
           "passwordReset": "Password Reset",
           "passwordResetSuccessfully": "Password set successfully",
           "problem": "there is a problem",
+          "Punctuality": "Punctuality ",
           "noInternet":
               "Unfortunately, it is not possible to connect to the Internet. Please check.",
           "tryAgain": "try again",
@@ -396,6 +426,7 @@ class MyLocale extends Translations {
           "language": "language",
           "rating": "ratings",
           "logout": "logout",
+          "PassNotSame": "The password is not the same",
           "allOk": "Operation completed successfully",
           "deleteAccount": "Delete my account",
           "save": "save",
@@ -449,7 +480,7 @@ class MyLocale extends Translations {
           "ratingObligationTrainingBody": "Your rating is 3 out of 5",
           "ratingLiteratureAndEthicsTitle": "Literature and Ethics:",
           "ratingLiteratureAndEthicsBody": "Your rating is 3 out of 5",
-          "coachNoteTitle": ": Other notes from the trainer",
+          "coachNoteTitle": " Other notes from the trainer :",
           "coachNoteBody":
               "There is a proven fact from a long time ago that the readable content of a page will not distract the reader from focusing on the external appearance.. There is a proven fact from a long time ago, which is that the readable content of a page will not distract the reader from focusing on the external appearance.. There is a proven fact a long time ago and it is that the",
           "logoutPopUpText": "Are you sure you are logged out",
@@ -465,6 +496,8 @@ class MyLocale extends Translations {
           "qrCode": "QR Code",
           "offer": "Offers",
           "home": "home",
+          "CodeWrong": "The code is wrong",
+          "VerifyCode": "Verify the code sent to the mail",
           "markAsRead": "Mark all as read",
           "noNotification": "There are currently no notifications",
           "notificationTitle": "Your subscription is coming to an end",
