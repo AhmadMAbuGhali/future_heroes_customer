@@ -23,10 +23,6 @@ class PersonalData extends StatefulWidget {
 }
 
 class _PersonalDataState extends State<PersonalData> {
-  TextEditingController? name = TextEditingController();
-  bool hidePass = true;
-  TextEditingController dateInput = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
@@ -55,7 +51,6 @@ class _PersonalDataState extends State<PersonalData> {
                                 await provider.getClassTime();
                                 await provider.getOrderReplay();
                                 await provider.getOffers();
-
                               },
                               icon: const Icon(
                                 Icons.arrow_back,
@@ -105,8 +100,8 @@ class _PersonalDataState extends State<PersonalData> {
                                       : provider.imageFile == null
                                           ? Image.network(
                                               ApiConstant.imageURL +
-                                                  provider
-                                                      .profileData!.imageString!,
+                                                  provider.profileData!
+                                                      .imageString!,
                                               fit: BoxFit.cover,
                                             ).image
                                           : Image.file(
@@ -121,8 +116,8 @@ class _PersonalDataState extends State<PersonalData> {
                                       : provider.imageFile == null
                                           ? Image.network(
                                               ApiConstant.imageURL +
-                                                  provider
-                                                      .profileData!.imageString!,
+                                                  provider.profileData!
+                                                      .imageString!,
                                               fit: BoxFit.cover,
                                             ).image
                                           : Image.file(
@@ -252,8 +247,8 @@ class _PersonalDataState extends State<PersonalData> {
                           children: [
                             Text(
                               provider.profileData!.dateOfBirth!
-                                      .split("T")
-                                      .first,
+                                  .split("T")
+                                  .first,
                               style: getRegularStyle(color: ColorManager.gray),
                             ),
                           ],
@@ -305,9 +300,7 @@ class _PersonalDataState extends State<PersonalData> {
                     onpressed: () async {
                       try {
                         await provider.updateImage(provider.imageFile!);
-
-                      } catch (e) {
-                      }
+                      } catch (e) {}
                     },
                   ),
 
@@ -316,20 +309,20 @@ class _PersonalDataState extends State<PersonalData> {
                   ),
                   SizedBox(
                     width: double.infinity,
-
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorManager.white,
-                        side: const BorderSide(color: ColorManager.primary,width: 1),
-                        shape:
-                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-                        padding: EdgeInsets.symmetric(vertical: 10.h),
-                        textStyle: TextStyle(
-                          fontFamily: 'DroidKufi',
-                          fontSize: 16.sp,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorManager.white,
+                          side: const BorderSide(
+                              color: ColorManager.primary, width: 1),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.r)),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          textStyle: TextStyle(
+                            fontFamily: 'DroidKufi',
+                            fontSize: 16.sp,
+                          ),
                         ),
-                      ),
-                        onPressed: () async{
+                        onPressed: () async {
                           await provider.getComplaintReplay();
                           await provider.getProfileData();
                           await provider.getUserNotification();
@@ -338,20 +331,19 @@ class _PersonalDataState extends State<PersonalData> {
                           await provider.getOffers();
                           Get.toNamed(RouteHelper.changePassword);
                         },
-                        child: Text("changePassword".tr,style: getRegularStyle(color: ColorManager.primary),)),
+                        child: Text(
+                          "changePassword".tr,
+                          style: getRegularStyle(color: ColorManager.primary),
+                        )),
                   ),
-
                 ],
               ),
             ),
           ),
-          connectivityBuilder:
-              (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
+          connectivityBuilder: (BuildContext context,
+              ConnectivityResult connectivity, Widget child) {
             final bool connected = connectivity != ConnectivityResult.none;
-            return connected?child:NoConnectionScreen();
-
-
+            return connected ? child : NoConnectionScreen();
           },
         ),
       );
@@ -361,8 +353,8 @@ class _PersonalDataState extends State<PersonalData> {
   Widget bottomSheet() {
     return Consumer<AppProvider>(builder: (context, provider, x) {
       return Container(
-        decoration:
-            const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(30))),
         height: 200.h,
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.all(20),

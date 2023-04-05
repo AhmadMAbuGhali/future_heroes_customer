@@ -25,13 +25,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Consumer<AppProvider>(builder: (context, provider, x) {
       return Scaffold(
         backgroundColor: ColorManager.backGround,
         body: getIt<SharedPreferenceHelper>().getActiveStat() == true
             ? OfflineBuilder(
-              child: Stack(
+                child: Stack(
                   children: [
                     Positioned(
                       top: 0,
@@ -73,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Text(
                               "homeTopText1".tr +
-                                      provider.profileData!.fullName!,
+                                  provider.profileData!.fullName!,
                               style: getRegularStyle(color: ColorManager.white),
                             ),
                             SizedBox(
@@ -125,8 +124,8 @@ class HomeScreen extends StatelessWidget {
                               horizontal: 8.w, vertical: 8.h),
                           child: RefreshIndicator(
                             onRefresh: () async {
-                              await    provider.getProfileData();
-                              await  provider.getClassTime();
+                              await provider.getProfileData();
+                              await provider.getClassTime();
                             },
                             child: SizedBox(
                               height: 490.h,
@@ -136,20 +135,17 @@ class HomeScreen extends StatelessWidget {
                                     return DateWidget(
                                       timeStart:
                                           provider.classTime[index].startTime,
-                                      timeEnd: provider.classTime[index].endTime,
-                                      date: shaedpref.getString("curruntLang") ==
+                                      timeEnd:
+                                          provider.classTime[index].endTime,
+                                      date: shaedpref
+                                                  .getString("curruntLang") ==
                                               "ar"
-                                          ? "${provider
-                                              .daysAr[provider.classTime[index].day]!}  : ${provider.classTime[index].classEnd!
-                                              .split("T")
-                                              .first}"
-                                          : "${provider.daysEn[
-                                                  provider.classTime[index].day]!}  : ${provider.classTime[index].classEnd!
-                                                  .split("T")
-                                                  .first}",
-                                      name: provider.classTime[index].classLecture!
-                                          .coachName,
-                                      duration: provider.classTime[index].duration,
+                                          ? "${provider.daysAr[provider.classTime[index].day]!}  : ${provider.classTime[index].classEnd!.split("T").first}"
+                                          : "${provider.daysEn[provider.classTime[index].day]!}  : ${provider.classTime[index].classEnd!.split("T").first}",
+                                      name: provider.classTime[index]
+                                          .classLecture!.coachName,
+                                      duration:
+                                          provider.classTime[index].duration,
                                       type: provider
                                           .classTime[index].classLecture!.name,
                                       onTap: () {
@@ -165,18 +161,16 @@ class HomeScreen extends StatelessWidget {
                         )),
                   ],
                 ),
-          connectivityBuilder:
-              (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
-            final bool connected = connectivity != ConnectivityResult.none;
-            return connected?child:NoConnectionScreen();
-
-
-          },
-            )
+                connectivityBuilder: (BuildContext context,
+                    ConnectivityResult connectivity, Widget child) {
+                  final bool connected =
+                      connectivity != ConnectivityResult.none;
+                  return connected ? child : NoConnectionScreen();
+                },
+              )
             : getIt<SharedPreferenceHelper>().getWaitingStat() == true
                 ? OfflineBuilder(
-                  child: Stack(
+                    child: Stack(
                       children: [
                         Positioned(
                           top: 0,
@@ -205,13 +199,12 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   "homeTopText1".tr,
-                                  style:
-                                      getRegularStyle(color: ColorManager.white),
+                                  style: getRegularStyle(
+                                      color: ColorManager.white),
                                 ),
                                 SizedBox(
                                   height: 5.h,
                                 ),
-
                               ],
                             ),
                           ),
@@ -219,8 +212,8 @@ class HomeScreen extends StatelessWidget {
                         RefreshIndicator(
                           onRefresh: () async {
                             await provider.checkIsActive();
-                            await    provider.getProfileData();
-                            await  provider.getClassTime();
+                            await provider.getProfileData();
+                            await provider.getClassTime();
                           },
                           child: Stack(
                             children: [
@@ -229,7 +222,8 @@ class HomeScreen extends StatelessWidget {
                                   left: 20,
                                   right: 20,
                                   child: SingleChildScrollView(
-                                    physics: const AlwaysScrollableScrollPhysics(),
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(),
                                     child: Center(
                                       child: Column(
                                         children: [
@@ -251,17 +245,15 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-          connectivityBuilder:
-              (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
-            final bool connected = connectivity != ConnectivityResult.none;
-            return connected?child:NoConnectionScreen();
-
-
-          },
-                )
+                    connectivityBuilder: (BuildContext context,
+                        ConnectivityResult connectivity, Widget child) {
+                      final bool connected =
+                          connectivity != ConnectivityResult.none;
+                      return connected ? child : NoConnectionScreen();
+                    },
+                  )
                 : OfflineBuilder(
-                  child: Stack(
+                    child: Stack(
                       children: [
                         Positioned(
                           top: 0,
@@ -290,13 +282,12 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   "homeTopText1".tr,
-                                  style:
-                                      getRegularStyle(color: ColorManager.white),
+                                  style: getRegularStyle(
+                                      color: ColorManager.white),
                                 ),
                                 SizedBox(
                                   height: 5.h,
                                 ),
-
                               ],
                             ),
                           ),
@@ -334,15 +325,13 @@ class HomeScreen extends StatelessWidget {
                             )),
                       ],
                     ),
-          connectivityBuilder:
-              (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
-            final bool connected = connectivity != ConnectivityResult.none;
-            return connected?child:NoConnectionScreen();
-
-
-          },
-                ),
+                    connectivityBuilder: (BuildContext context,
+                        ConnectivityResult connectivity, Widget child) {
+                      final bool connected =
+                          connectivity != ConnectivityResult.none;
+                      return connected ? child : NoConnectionScreen();
+                    },
+                  ),
       );
     });
   }

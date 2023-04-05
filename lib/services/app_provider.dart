@@ -22,7 +22,7 @@ import '../resources/color_manager.dart';
 import 'auth_provider.dart';
 
 class AppProvider extends ChangeNotifier {
-  AppProvider(){
+  AppProvider() {
     getComplaintReplay();
     getOrderReplay();
     getClassTime();
@@ -30,7 +30,6 @@ class AppProvider extends ChangeNotifier {
     getUserNotification();
     getOffers();
   }
-
 
   int? _idPostpone;
 
@@ -48,35 +47,35 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  nullValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Required field";
+    }
+  }
 
-  Map<int,String> daysAr= {
-
-    0:"الأحد",
-    1:"الاثنين",
-    2:"الثلاثاء",
-    3:"الأربعاء",
-    4:"الخميس",
-    5:"الجمعة",
-    6:"السبت",
+  Map<int, String> daysAr = {
+    0: "الأحد",
+    1: "الاثنين",
+    2: "الثلاثاء",
+    3: "الأربعاء",
+    4: "الخميس",
+    5: "الجمعة",
+    6: "السبت",
   };
-  Map<int,String> daysEn= {
-
-    0:"Sunday",
-    1:"Monday",
-    2:"Tuesday",
-    3:"Wednesday",
-    4:"Thursday",
-    5:"Friday",
-    6:"Saturday",
+  Map<int, String> daysEn = {
+    0: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
   };
-
-
 
   //reset Password from Personal Page
   TextEditingController oldPass = TextEditingController();
   TextEditingController newPass = TextEditingController();
   TextEditingController confPass = TextEditingController();
-
 
   bool showOldPasswordAuth = true;
   bool showNewPasswordAuth = true;
@@ -143,20 +142,15 @@ class AppProvider extends ChangeNotifier {
     return null;
   }
 
-  Future<String?> updateImage(File image) async{
+  Future<String?> updateImage(File image) async {
     try {
-      await DioClient.dioClient
-          .updateImage(image);
+      await DioClient.dioClient.updateImage(image);
       notifyListeners();
-
-
     } on DioError catch (e) {
-
       String massage = DioException.fromDioError(e).toString();
     }
     notifyListeners();
     return null;
-
   }
 
   Future _getFromCamera() async {
@@ -204,8 +198,8 @@ class AppProvider extends ChangeNotifier {
 
   Widget bottomSheet(BuildContext context) {
     return Container(
-      decoration:
-      const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
       height: 200.h,
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.all(20),
@@ -219,10 +213,9 @@ class AppProvider extends ChangeNotifier {
           ),
           ElevatedButton(
             onPressed: () {
-
-                _getFromCamera();
-                Navigator.pop(context);
-           notifyListeners();
+              _getFromCamera();
+              Navigator.pop(context);
+              notifyListeners();
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManager.primary,
@@ -239,10 +232,9 @@ class AppProvider extends ChangeNotifier {
           ),
           ElevatedButton(
             onPressed: () {
-
-                _getFromGallery();
-                Navigator.pop(context);
-                notifyListeners();
+              _getFromGallery();
+              Navigator.pop(context);
+              notifyListeners();
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManager.primary,
@@ -253,9 +245,7 @@ class AppProvider extends ChangeNotifier {
         ],
       ),
     );
-
   }
-
 
   //Order & Complaint
   List<ComplaintReplay> complaintReplay = [];
@@ -276,11 +266,10 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
     return null;
   }
+
   Future<ComplaintReplay?> getComplaintReplay() async {
     try {
       complaintReplay = await DioClient.dioClient.getComplaintReplay();
-
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
     }
@@ -306,11 +295,10 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
     return null;
   }
+
   Future<OrderReplay?> getOrderReplay() async {
     try {
       orderReplay = await DioClient.dioClient.getOrderReplay();
-
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -325,15 +313,13 @@ class AppProvider extends ChangeNotifier {
     return null;
   }
 
-
-
-
 // Postponement
   final TextEditingController reasonController = TextEditingController();
   final TextEditingController detailsController = TextEditingController();
-  Future<String?> postUserPostponement(int id,String reason, String details) async {
+  Future<String?> postUserPostponement(
+      int id, String reason, String details) async {
     try {
-      await DioClient.dioClient.postUserPostponement(id,reason, details);
+      await DioClient.dioClient.postUserPostponement(id, reason, details);
       notifyListeners();
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
@@ -349,14 +335,11 @@ class AppProvider extends ChangeNotifier {
     return null;
   }
 
-
   //Notification
   List<NotificationModel> notificationModel = [];
   Future<ComplaintReplay?> getUserNotification() async {
     try {
       notificationModel = await DioClient.dioClient.getUserNotification();
-
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -371,14 +354,12 @@ class AppProvider extends ChangeNotifier {
     return null;
   }
 
-
   //classTime
 
   List<ClassTime> classTime = [];
   Future<ClassTime?> getClassTime() async {
     try {
       classTime = await DioClient.dioClient.getLecture();
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -396,13 +377,14 @@ class AppProvider extends ChangeNotifier {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
+  TextEditingController ReqtitleController = TextEditingController();
+  TextEditingController ReqsubjectController = TextEditingController();
 
   List<OffersModel> listOffer = [];
 
   Future<String?> getOffers() async {
     try {
       listOffer = await DioClient.dioClient.getOffer();
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -442,24 +424,23 @@ class AppProvider extends ChangeNotifier {
     try {
       IsACtive? isActive = await DioClient.dioClient.getIsActive();
       if (isActive != null && isActive.isActive != null) {
-        getIt<SharedPreferenceHelper>().setActiveStat(activeStat: isActive.isActive!);
-      } else {
-      }
+        getIt<SharedPreferenceHelper>()
+            .setActiveStat(activeStat: isActive.isActive!);
+      } else {}
     } catch (e) {
       String message = e.toString();
     }
     notifyListeners();
   }
 
-
   logOut() {
-
     getIt<SharedPreferenceHelper>().setIsLogin(isLogint: false);
     getIt<SharedPreferenceHelper>().setRememberMe(rememberMe: false);
 
     getIt<SharedPreferenceHelper>().setUserToken(userToken: '');
     clearAllData();
   }
+
   clearAllData() {
     //Auth Provider
     getIt<AuthProvider>().categoryMain = []; //mainCategory
@@ -484,15 +465,7 @@ class AppProvider extends ChangeNotifier {
     getIt<AppProvider>().complaintReplay = [];
     getIt<AppProvider>().notificationModel = [];
     getIt<AppProvider>().classTime = [];
-
-
-
-
-
-
   }
-
-
 
   void dispose() {
     oldPass.dispose();
@@ -501,7 +474,6 @@ class AppProvider extends ChangeNotifier {
     reasonController.dispose();
     detailsController.dispose();
     // TODO: implement dispose
-
 
     super.dispose();
   }

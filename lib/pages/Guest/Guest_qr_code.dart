@@ -9,22 +9,19 @@ class GuestQRCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: OfflineBuilder(
-        child: const Padding(
+        child: Padding(
           padding: EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [GuestWidget()],
           ),
         ),
-        connectivityBuilder:
-            (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
+        connectivityBuilder: (BuildContext context,
+            ConnectivityResult connectivity, Widget child) {
           final bool connected = connectivity != ConnectivityResult.none;
-          return connected?child:NoConnectionScreen();
-
-
+          return connected ? child : NoConnectionScreen();
         },
       ),
     );

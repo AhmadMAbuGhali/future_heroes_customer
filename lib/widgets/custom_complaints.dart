@@ -19,93 +19,93 @@ class CustomComplaints extends StatelessWidget {
       return provider.complaintReplay.isEmpty
           ? Center(
               child: Text(
-                "noComplaintsReplay".tr,
-                textAlign: TextAlign.center,
-                style: getBoldStyle(color: ColorManager.primary, fontSize: 16),
-              ))
+              "noComplaintsReplay".tr,
+              textAlign: TextAlign.center,
+              style: getBoldStyle(color: ColorManager.primary, fontSize: 14),
+            ))
           : RefreshIndicator(
-            onRefresh: ()async {
-              await provider.getComplaintReplay();
-              await provider.getProfileData();
-              await provider.getUserNotification();
-              await provider.getClassTime();
-              await provider.getOrderReplay();
-              await provider.getOffers();
-            },
-            child: ListView.builder(
-                itemCount: provider.complaintReplay.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      ExpandablePanel(
-                        header: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 3.r,
-                              backgroundColor: ColorManager.primary,
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Container(
-                              width: 25.w,
-                              height: 25.h,
-                              decoration: BoxDecoration(
-                                color: ColorManager.jewelryBG,
-                                shape: BoxShape.circle,
+              onRefresh: () async {
+                await provider.getComplaintReplay();
+                await provider.getProfileData();
+                await provider.getUserNotification();
+                await provider.getClassTime();
+                await provider.getOrderReplay();
+                await provider.getOffers();
+              },
+              child: ListView.builder(
+                  itemCount: provider.complaintReplay.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        ExpandablePanel(
+                          header: Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 3.r,
+                                backgroundColor: ColorManager.primary,
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: SvgPicture.asset(
-                                  IconAssets.report,
-                                  width: 10.w,
-                                  height: 10.h,
-                                  // color: ColorManager.white,
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Container(
+                                width: 25.w,
+                                height: 25.h,
+                                decoration: BoxDecoration(
+                                  color: ColorManager.jewelryBG,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: SvgPicture.asset(
+                                    IconAssets.report,
+                                    width: 10.w,
+                                    height: 10.h,
+                                    // color: ColorManager.white,
+                                  ),
                                 ),
                               ),
+                              SizedBox(
+                                width: 15.w,
+                              ),
+                              Expanded(
+                                  child: Text(
+                                "${"replayOnComp".tr} ${provider.complaintReplay[index].title!}",
+                                style: getBoldStyle(
+                                    color: ColorManager.black, fontSize: 12),
+                              )),
+                            ],
+                          ),
+                          collapsed: Container(
+                            margin: const EdgeInsets.only(right: 55),
+                            child: Text(
+                              provider.complaintReplay[index].respone!,
+                              softWrap: true,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: getRegularStyle(color: ColorManager.gray),
                             ),
-                            SizedBox(
-                              width: 15.w,
+                          ),
+                          expanded: Container(
+                            margin: const EdgeInsets.only(right: 55),
+                            child: Text(
+                              provider.complaintReplay[index].respone!,
+                              softWrap: true,
                             ),
-                            Expanded(
-                                child: Text(
-                              "${"replayOnComp".tr} ${provider.complaintReplay[index].title!}",
-                              style: getBoldStyle(
-                                  color: ColorManager.black, fontSize: 12),
-                            )),
-                          ],
-                        ),
-                        collapsed: Container(
-                          margin: const EdgeInsets.only(right: 55),
-                          child: Text(
-                            provider.complaintReplay[index].respone!,
-                            softWrap: true,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: getRegularStyle(color: ColorManager.gray),
                           ),
                         ),
-                        expanded: Container(
-                          margin: const EdgeInsets.only(right: 55),
-                          child: Text(
-                            provider.complaintReplay[index].respone!,
-                            softWrap: true,
-                          ),
+                        SizedBox(
+                          height: 5.h,
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Divider(
-                        thickness: 2,
-                        endIndent: 3,
-                        height: 2.h,
-                      )
-                    ],
-                  );
-                }),
-          );
+                        Divider(
+                          thickness: 2,
+                          endIndent: 3,
+                          height: 2.h,
+                        )
+                      ],
+                    );
+                  }),
+            );
     });
   }
 }

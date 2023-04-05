@@ -71,8 +71,8 @@ dependencies:
 
 
 flutter_icons:
-  image_path_android: "assets/images/logo.png"
-  image_path_ios: "assets/images/logo.png"
+  image_path_android: "assets/images/logoicon.png"
+  image_path_ios: "assets/images/logoicon.png"
   android: true
   ios: true
   remove_alpha_ios: true

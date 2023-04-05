@@ -40,7 +40,7 @@ class _DateWidgetState extends State<DateWidget> {
             child: Column(
               children: [
                 Container(
-                  height: 80.h,
+                  height: 88.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: ColorManager.primary),
@@ -67,7 +67,9 @@ class _DateWidgetState extends State<DateWidget> {
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(height: 5.h,),
+                            SizedBox(
+                              height: 5.h,
+                            ),
                             Row(
                               children: [
                                 Text(
@@ -137,7 +139,9 @@ class _DateWidgetState extends State<DateWidget> {
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(height:7.h ,),
+                            SizedBox(
+                              height: 7.h,
+                            ),
                             Row(
                               children: [
                                 Text(
@@ -155,7 +159,9 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
-                            SizedBox(height:7.h ,),
+                            SizedBox(
+                              height: 7.h,
+                            ),
                             Row(
                               children: [
                                 Text(
@@ -172,7 +178,9 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
-                            SizedBox(height:7.h ,),
+                            SizedBox(
+                              height: 7.h,
+                            ),
                             Row(
                               children: [
                                 Text(
@@ -189,7 +197,9 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
-                            SizedBox(height:7.h ,),
+                            SizedBox(
+                              height: 7.h,
+                            ),
                             Row(
                               children: [
                                 Text(
@@ -206,7 +216,9 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
-                            SizedBox(height:7.h ,),
+                            SizedBox(
+                              height: 7.h,
+                            ),
                             ElevatedButton(
                               onPressed: widget.onTap,
                               style: ElevatedButton.styleFrom(
@@ -214,7 +226,8 @@ class _DateWidgetState extends State<DateWidget> {
                                 //     borderRadius:
                                 //         BorderRadius.circular(10.r)),
                                 foregroundColor: ColorManager.white,
-                                side: const BorderSide(color: ColorManager.primary),
+                                side: const BorderSide(
+                                    color: ColorManager.primary),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
                                 primary: ColorManager.white,
                                 textStyle: TextStyle(
@@ -222,7 +235,6 @@ class _DateWidgetState extends State<DateWidget> {
                                   fontSize: 16.sp,
                                 ),
                               ),
-
                               child: Container(
                                 width: 140.w,
                                 height: 30.h,
@@ -237,7 +249,9 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 5.h,)
+                            SizedBox(
+                              height: 5.h,
+                            )
                             //    CustomButtonPrimary(
                             //   onpressed: () {},
                             //   text: 'طلب تأجيل',

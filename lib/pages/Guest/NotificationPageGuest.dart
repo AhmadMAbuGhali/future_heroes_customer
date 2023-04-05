@@ -23,7 +23,7 @@ class _NotificationPageGuestState extends State<NotificationPageGuest> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Padding(
-            padding:  EdgeInsets.only(top: 40.h),
+            padding: EdgeInsets.only(top: 40.h),
             child: Column(
               children: [
                 SizedBox(
@@ -48,7 +48,7 @@ class _NotificationPageGuestState extends State<NotificationPageGuest> {
                 SizedBox(
                   height: 100.h,
                 ),
-                const Column(
+                Column(
                   children: [
                     GuestWidget(),
                   ],
@@ -57,13 +57,10 @@ class _NotificationPageGuestState extends State<NotificationPageGuest> {
             ),
           ),
         ),
-        connectivityBuilder:
-            (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
+        connectivityBuilder: (BuildContext context,
+            ConnectivityResult connectivity, Widget child) {
           final bool connected = connectivity != ConnectivityResult.none;
-          return connected?child:NoConnectionScreen();
-
-
+          return connected ? child : NoConnectionScreen();
         },
       ),
     );

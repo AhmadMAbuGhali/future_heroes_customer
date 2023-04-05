@@ -14,7 +14,7 @@ class CustomTextFormAuth extends StatelessWidget {
   final bool? hidepassword;
   Function()? pressSuffixIcon;
   TextInputType? textInputType;
-  final  Function(String?)? validator;
+  final Function(String?)? validator;
 
   CustomTextFormAuth(
       {super.key,
@@ -40,7 +40,7 @@ class CustomTextFormAuth extends StatelessWidget {
               obscureText: hidepassword ?? false,
               controller: myController,
               focusNode: FocusNode(),
-              validator:(value)=> validator!(value),
+              validator: (value) => validator!(value),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
@@ -57,8 +57,7 @@ class CustomTextFormAuth extends StatelessWidget {
                   onPressed: pressSuffixIcon,
                 ),
                 hintText: hintText,
-
-                hintStyle: TextStyle(color: ColorManager.gray, fontSize: 13.sp),
+                hintStyle: TextStyle(color: ColorManager.gray, fontSize: 12.sp),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.r)),
                 enabledBorder: OutlineInputBorder(
