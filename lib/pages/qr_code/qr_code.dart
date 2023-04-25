@@ -167,6 +167,8 @@ class _QRCodeState extends State<QRCode> {
         snakbarWidget(context,
                 Titel: 'qrFailTitle'.tr, Description: 'qrFailBody'.tr)
             .error();
+        Get.offNamed(RouteHelper.initial);
+
       }
 
       setState(() {

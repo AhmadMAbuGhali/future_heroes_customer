@@ -14,11 +14,11 @@ class ProfileSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: onTap,
-          child: Row(
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -38,19 +38,19 @@ class ProfileSection extends StatelessWidget {
 
             ],
           ),
-        ),
-        SizedBox(
-          height: 7.h,
-        ),
-        const Divider(
-          height: 1,
-          thickness: 1,
-          endIndent: 2,
-        ),
-        SizedBox(
-          height: 7.h,
-        ),
-      ],
+          SizedBox(
+            height: 7.h,
+          ),
+          const Divider(
+            height: 1,
+            thickness: 1,
+            endIndent: 2,
+          ),
+          SizedBox(
+            height: 7.h,
+          ),
+        ],
+      ),
     );
   }
 }

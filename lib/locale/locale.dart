@@ -12,7 +12,7 @@ class MyLocale extends Translations {
           "qrSuccsesDoneTitle": "تسجيل الحضور ",
           "qrSuccsesDoneBody": "تم تسجيل الحضور بنجاج ",
           "qrFailTitle": "تسجيل الحضور ",
-          "qrFailBody": "تم تسجيل الحضور بنجاج ",
+          "qrFailBody": "فشل تسجيل الحضور  ",
 
           "noOrderReplay": "ليس لديك اي رد على طلباتك",
           "noComplaintsReplay": "ليس لديك اي رد على شكاويك",

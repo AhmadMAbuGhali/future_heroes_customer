@@ -147,6 +147,7 @@ class OfferPage extends StatelessWidget {
                                                       provider
                                                           .listOffer[index].description!,
                                                       textAlign: TextAlign.start,
+
                                                     ),
                                                   ),
                                                 ],
