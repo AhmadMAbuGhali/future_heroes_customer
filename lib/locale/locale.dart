@@ -13,7 +13,7 @@ class MyLocale extends Translations {
           "qrSuccsesDoneBody": "تم تسجيل الحضور بنجاج ",
           "qrFailTitle": "تسجيل الحضور ",
           "qrFailBody": "فشل تسجيل الحضور  ",
-
+          "Recordattendance": "تسجيل الحضور ",
           "noOrderReplay": "ليس لديك اي رد على طلباتك",
           "noComplaintsReplay": "ليس لديك اي رد على شكاويك",
           "replayOnReq": "الرد على طلب",
@@ -223,7 +223,6 @@ class MyLocale extends Translations {
           "VerifyCode": "تأكد من الرمز المرسل الى البريد",
           "CompleteReg": "اكمال التسجيل",
           "WaitingApproval": "عليك انتظار الموافقة على طلب انضمامك",
-
           "coachNoteBody":
               "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
           "logoutPopUpText": "هل انت متأكد من تسجيل الخروج",
@@ -259,12 +258,16 @@ class MyLocale extends Translations {
           "middle": "متوسط",
           "expert": "خبير",
           "snakbarOffers": "يمكنك التوجه للنادي لتأكيد  الطلب",
+          "ScanQR": "قم بمسح رمز QR",
         },
         "en": {
+          "Recordattendance": "Record attendance",
+          "ScanQR": "Scan the QR code",
           "login": "Login",
           "changeDisplayLang": "Change Display Language",
           "next": "Next",
-          "CompleteRegistration": "You must complete the registration to be able to view the current page",
+          "CompleteRegistration":
+              "You must complete the registration to be able to view the current page",
           "CompleteReg": "Complete the registration",
           "skip": "skip",
           "replayOnReq": "Reply to Request of",
@@ -291,7 +294,6 @@ class MyLocale extends Translations {
           "YouMustlogin":
               "You must be logged in to be able to register for the courses",
           "YouMustlogin2": "You must be logged in to view the current page",
-
           "password": "password",
           "rememberMe": "remember me",
           "forgotPassword": "Forgot your password?",
@@ -305,11 +307,9 @@ class MyLocale extends Translations {
           "SentSuccesfully": "Sent Succesfully",
           "TheReqSent": "The request has been sent successfully",
           "TheComplSent": "The complaint has been sent successfully",
-
           "EnterMatchingPassword": "Please enter a matching password",
-          "WaitingApproval": "You must wait for your application to be approved",
-
-
+          "WaitingApproval":
+              "You must wait for your application to be approved",
           "DataError": "Data error",
           "EnterAllData": "Please enter all data ",
           "Standard": "Standard",

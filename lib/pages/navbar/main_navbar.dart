@@ -47,7 +47,7 @@ class _MainNavBarState extends State<MainNavBar> {
     return [
       const ProfilePage(),
       const NotificationPage(),
-      const QRCode(),
+      QRCode(),
       const OfferPage(),
       HomeScreen()
     ];

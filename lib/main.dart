@@ -21,7 +21,7 @@ void main() async {
   shaedpref = await SharedPreferences.getInstance();
   final prefs = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferenceHelper>(
-          () => SharedPreferenceHelper(prefs: prefs));
+      () => SharedPreferenceHelper(prefs: prefs));
   getIt.registerLazySingleton<SharedPreferences>(() => prefs);
   getIt.registerLazySingleton<AuthProvider>(() => AuthProvider());
   getIt.registerLazySingleton<AppProvider>(() => AppProvider());
@@ -29,7 +29,6 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => AppProvider()),
         ChangeNotifierProvider(create: (_) => APIProvider()),
@@ -60,7 +59,7 @@ class MyApp extends StatelessWidget {
                 primaryColor: const Color(0xFF8A57DC),
                 checkboxTheme: CheckboxThemeData(
                   checkColor:
-                  MaterialStateProperty.all<Color>(const Color(0xFF8A57DC)),
+                      MaterialStateProperty.all<Color>(const Color(0xFF8A57DC)),
                 )),
             initialRoute: RouteHelper.getSplashScreen(),
             getPages: RouteHelper.routes,

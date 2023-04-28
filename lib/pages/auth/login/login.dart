@@ -1,4 +1,3 @@
-
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ import 'package:future_heroes_customer/widgets/LogoAuth.dart';
 import 'package:future_heroes_customer/widgets/textSignUp.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
 
 import '../../../main.dart';
 import '../../../services/shared_preference_helper.dart';
@@ -44,7 +42,6 @@ class Login extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(top: 40.h),
                     child: Column(
-
                       children: [
                         const LogoAuth(),
                         SizedBox(
@@ -158,7 +155,7 @@ class Login extends StatelessWidget {
                                   provider.passwordLoginPage.text, context);
                               if (loginFormKey.currentState!.validate()) {
                                 String? statusString =
-                                getIt<SharedPreferenceHelper>().getStatus();
+                                    getIt<SharedPreferenceHelper>().getStatus();
                                 if (statusString == 'success') {
                                   await Get.offNamed(RouteHelper.successLogin);
                                 } else {
@@ -166,7 +163,7 @@ class Login extends StatelessWidget {
                                     context,
                                     Titel: 'dataErorr'.tr,
                                     Description:
-                                    'Make sure that Data is Good'.tr,
+                                        'Make sure that Data is Good'.tr,
                                   ).error();
                                 }
                               } else {
@@ -174,7 +171,7 @@ class Login extends StatelessWidget {
                                   context,
                                   Titel: 'dataErorr'.tr,
                                   Description:
-                                  'Make sure asdas that Data is Good'.tr,
+                                      'Make sure asdas that Data is Good'.tr,
                                 ).error();
                               }
                             } else {
@@ -188,7 +185,8 @@ class Login extends StatelessWidget {
                             },
                             child: Text(
                               'Loginasaguest'.tr,
-                              style: const TextStyle(color: ColorManager.primary),
+                              style:
+                                  const TextStyle(color: ColorManager.primary),
                             )),
                         const SizedBox(
                           height: 50,
@@ -205,15 +203,11 @@ class Login extends StatelessWidget {
                   ),
                 )),
           ),
-          connectivityBuilder:
-              (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
-                final bool connected = connectivity != ConnectivityResult.none;
-                return connected?child:NoConnectionScreen();
-
-
-              },
-
+          connectivityBuilder: (BuildContext context,
+              ConnectivityResult connectivity, Widget child) {
+            final bool connected = connectivity != ConnectivityResult.none;
+            return connected ? child : NoConnectionScreen();
+          },
         ),
       );
     });

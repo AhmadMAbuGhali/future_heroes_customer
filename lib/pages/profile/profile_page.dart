@@ -5,6 +5,7 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_customer/data/api/apiconst.dart';
+import 'package:future_heroes_customer/pages/qr_code/qr_code.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:future_heroes_customer/routes/route_helper.dart';
 import 'package:future_heroes_customer/services/app_provider.dart';
@@ -20,7 +21,6 @@ import '../home/NoConnection.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
-
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }

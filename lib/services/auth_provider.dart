@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -76,8 +77,7 @@ class AuthProvider extends ChangeNotifier {
             .setStatus(statusString: response.status!);
         getIt<SharedPreferenceHelper>()
             .setActiveStat(activeStat: response.isActive!);
-        getIt<SharedPreferenceHelper>()
-            .setRememberMe(rememberMe: rememberMe);
+        getIt<SharedPreferenceHelper>().setRememberMe(rememberMe: rememberMe);
 
         _loading = false;
         notifyListeners();
@@ -96,7 +96,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
   // SignUp Page
   bool showPasswordSignUp = true;
   File? imageFile;
@@ -107,8 +106,6 @@ class AuthProvider extends ChangeNotifier {
   TextEditingController nameSignUpPage = TextEditingController();
   TextEditingController dateTextInputSignUPPage = TextEditingController();
   TextEditingController phoneSignUpPage = TextEditingController();
-
-
 
   changeShowPasswordSignUP() {
     showPasswordSignUp = !showPasswordSignUp;
@@ -250,7 +247,6 @@ class AuthProvider extends ChangeNotifier {
     subCatId.toSet().toList();
     notifyListeners();
   }
-
 
   Future<dynamic> getSubCategory() async {
     try {
