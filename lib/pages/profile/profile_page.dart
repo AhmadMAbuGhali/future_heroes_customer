@@ -73,9 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        String email = provider.profileData!.email!;
 
-                        await DioClient.dioClient.deleteAccount(email);
                         final prefs = await SharedPreferences.getInstance();
                         await prefs.clear();
                         await provider.logOut();
@@ -125,6 +123,110 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(
                   height: 20.h,
                 ),
+              ],
+            );
+          },
+        );
+      }
+      Future<void> _deleteAccountDialog() async {
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    IconAssets.alert,
+                    color: Colors.red,
+                  ),
+                  // GestureDetector(
+                  //     onTap: () {
+                  //       Navigator.of(context).pop();
+                  //     },
+                  //     child: Icon(
+                  //       Icons.cancel,
+                  //       color: Colors.red,
+                  //     ))
+                ],
+              ),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Center(child: Text('deleteAccountTextTitle'.tr)),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                Column(
+                  children: [
+                    Text('deleteAccountTextBody'.tr),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        GestureDetector(
+                          onTap: () async{
+                            String email = provider.profileData!.email!;
+
+                            await DioClient.dioClient.deleteAccount(email);
+                            final prefs = await SharedPreferences.getInstance();
+                            await prefs.clear();
+                            await provider.logOut();
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) => Login()),
+                                    (Route<dynamic> route) => false);
+
+                          },
+                          child: Container(
+                            width: 100.w,
+                            height: 30.h,
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.red)),
+                            child: Center(
+                                child: Text(
+                                  'yes'.tr,
+                                  style: getBoldStyle(color: Colors.white),
+                                )),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Container(
+                            width: 100.w,
+                            height: 30.h,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.red)),
+                            child: Center(
+                                child: Text(
+                                  'cancel'.tr,
+                                  textAlign: TextAlign.center,
+                                  style: getBoldStyle(
+                                    color: Colors.red,
+                                  ),
+                                )),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                  ],
+                )
               ],
             );
           },
@@ -329,97 +431,4 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  Future<void> _deleteAccountDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(32.0))),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                IconAssets.alert,
-                color: Colors.red,
-              ),
-              // GestureDetector(
-              //     onTap: () {
-              //       Navigator.of(context).pop();
-              //     },
-              //     child: Icon(
-              //       Icons.cancel,
-              //       color: Colors.red,
-              //     ))
-            ],
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Center(child: Text('deleteAccountTextTitle'.tr)),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            Column(
-              children: [
-                Text('deleteAccountTextBody'.tr),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        width: 100.w,
-                        height: 30.h,
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.red)),
-                        child: Center(
-                            child: Text(
-                          'yes'.tr,
-                          style: getBoldStyle(color: Colors.white),
-                        )),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        width: 100.w,
-                        height: 30.h,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.red)),
-                        child: Center(
-                            child: Text(
-                          'cancel'.tr,
-                          textAlign: TextAlign.center,
-                          style: getBoldStyle(
-                            color: Colors.red,
-                          ),
-                        )),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-              ],
-            )
-          ],
-        );
-      },
-    );
-  }
 }
