@@ -1,9 +1,10 @@
 
 class ApiConstant {
-  static const  String baseUrl ='https://yousef.azurewebsites.net/api/' ;
+  static const  String baseUrl ='http://futureheroes-001-site1.gtempurl.com/api/' ;
   static const String login = 'Authentication/login';
   static const String register = 'Authentication/register';
   static const String completeProfile = 'Authentication/CompleteProfile';
+  static const String deleteAccount = 'Authentication/DeleteAccount';
   static const String createCoach = 'Authentication/CreateCoach';
   static const String getAllCoaches = 'Authentication/GetAllCoaches';
   static const String createRespationUser = 'Authentication/CreateRespationUser';

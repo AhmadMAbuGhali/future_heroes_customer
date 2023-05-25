@@ -217,6 +217,19 @@ class DioClient {
           },
         ));
   }
+  Future<void> deleteAccount(String email) async {
+    await dio!.delete(ApiConstant.deleteAccount,
+        data: {
+      "email":email
+        },
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+        ));
+  }
 
 //Subscription
   Future<List<OffersModel>> getOffer() async {

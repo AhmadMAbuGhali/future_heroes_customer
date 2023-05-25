@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/api/dio_client.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../auth/login/login.dart';
@@ -72,6 +73,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     GestureDetector(
                       onTap: () async {
+                        String email = provider.profileData!.email!;
+
+                        await DioClient.dioClient.deleteAccount(email);
                         final prefs = await SharedPreferences.getInstance();
                         await prefs.clear();
                         await provider.logOut();
