@@ -229,9 +229,22 @@ class MyLocale extends Translations {
           "yes": "نعم",
           "cancel": "الغاء الأمر",
           "deleteAccountTextTitle": "هل انت متأكد من حذف الحساب",
-          "deleteAccountTextBody":
-              "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
-          "deleteAccountCheckBox": "نعم متأكد من رغبتي بحذف الحساب",
+          "deleteAccountTextBody":  '''
+تحذير: قبل حذف حسابك، يرجى مراعاة الملاحظات التالية:
+
+1. فقدان البيانات: بمجرد حذف حسابك، سيتم إزالة جميع البيانات المرتبطة به بشكل دائم. لا يمكن استرداد أو استعادة هذه البيانات بعد الحذف، وسيتعذر علينا تقديم أي نسخة احتياطية لها. يُرجى التأكد من أخذ نسخ احتياطية من أي معلومات هامة قبل المتابعة.
+
+2. إلغاء الوصول: بعد حذف حسابك، لن تتمكن من الوصول إلى خدماتنا بنفس بيانات تسجيل الدخول الحالية. لذا، يُرجى التأكد من تسجيل الخروج من جميع الأجهزة وحذف أي معلومات تسجيل الدخول المحفوظة.
+
+3. عدم القدرة على التراجع: يجب أن تدرك أنه بمجرد حذف حسابك، لن يكون بإمكانك استعادته أو استرداد أي بيانات تابعة له. يُرجى التأكد من قرارك جيدًا قبل المتابعة.
+
+إذا كنت متأكدًا من رغبتك الكاملة في حذف حسابك وفقًا للشروط والقواعد الخاصة بنا، يُرجى المتابعة باتخاذ الإجراءات اللازمة. وإلا، يمكنك إلغاء العملية والاستمرار في استخدام خدماتنا.
+
+نحن نقدر استخدامك لتطبيقنا ونأمل أن تكون قد حصلت على تجربة إيجابية. إذا كان لديك أي أسئلة أو استفسارات، يُرجى الاتصال بفريق الدعم لدينا.
+
+شكرًا لك،
+فريق Future Heroes ''' ,
+            "deleteAccountCheckBox": "نعم متأكد من رغبتي بحذف الحساب",
           "confirm": "تأكيد",
           "user": "المستخدم",
           "notification": "الاشعارات",
@@ -487,8 +500,20 @@ class MyLocale extends Translations {
           "yes": "yes",
           "cancel": "Cancel",
           "deleteAccountTextTitle": "Are you sure to delete the account",
-          "deleteAccountTextBody":
-              "There is a long-established fact that the readable content of a page will not distract the reader from focusing on the external appearance.. There is a long-established fact that the readable content of a page will not distract the reader from focusing on the external appearance.. There is a proven fact a long time ago and it is that the",
+          "deleteAccountTextBody": '''Warning: Before deleting your account, please consider the following notes:
+
+Data Loss: Once you delete your account, all associated data will be permanently removed. It will not be possible to recover or retrieve this data after deletion, and we cannot provide any backups of it. Please make sure to take backups of any important information before proceeding.
+
+Access Revocation: After deleting your account, you will no longer be able to access our services with the current login credentials. Please ensure that you log out from all devices and delete any saved login information.
+
+Irreversible Action: You should be aware that once you delete your account, you will not be able to restore it or retrieve any related data. Please carefully consider your decision before proceeding.
+
+If you are absolutely certain about your desire to delete your account in accordance with our terms and policies, please proceed with the necessary steps. Otherwise, you can cancel the operation and continue using our services.
+
+We appreciate your usage of our application and hope you have had a positive experience. If you have any questions or concerns, please contact our support team.
+
+Thank you,
+Future Heroes Team'''  ,
           "deleteAccountCheckBox": "Yes, I'm sure I want to delete the account",
           "confirm": "confirm",
           "user": "user",
