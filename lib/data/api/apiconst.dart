@@ -37,7 +37,7 @@ class ApiConstant {
   static const String resetPassword = 'Authentication/ResetPassword';
   static const String resetPasswordAuthorize = 'Authentication/ResetPasswordAuthorize';
   static const String getProfileData = '/Authentication/UserProfileGetAsync';
-  static const String imageURL = 'https://yousef.azurewebsites.net/images/';
+  static const String imageURL = 'http://futureheroes-001-site1.gtempurl.com/images/';
 
 
 }

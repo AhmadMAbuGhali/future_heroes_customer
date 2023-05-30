@@ -167,14 +167,7 @@ class SignUpPersonalData extends StatelessWidget {
                             hidepassword: false,
                             textInputType: TextInputType.text,
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'userNameEmpty'.tr;
-                              } else if (value.isValidName() == false) {
-                                return 'invalidName'.tr;
-                              } else if (value.isValidName() == true) {
-                                return null;
-                              }
-                              return null;
+                              provider.nullValidation(value);
                             },
                             hintText: 'userName'.tr,
                             myController: provider.nameSignUpPage,
@@ -240,8 +233,10 @@ class SignUpPersonalData extends StatelessWidget {
                             onpressed: provider.isLoading == true
                                 ? null
                                 : () {
+                              print("start");
                                     provider.changeIsLoding(true);
                                     if (signUpFormKey.currentState!.validate()&&provider.imageFile!=null) {
+                                      print("start cond");
                                       provider.register(
                                           provider.imageFile!,
                                           provider.nameSignUpPage.text,
@@ -249,8 +244,16 @@ class SignUpPersonalData extends StatelessWidget {
                                           provider.phoneSignUpPage.text,
                                           provider.emailSignUpPage.text,
                                           provider.passwordSignUpPage.text);
+                                      print(provider.imageFile!);
+                                      print(provider.nameSignUpPage.text);
+                                      print(provider.pickedDate ?? DateTime.now());
+                                      print(provider.phoneSignUpPage.text);
+                                      print(provider.emailSignUpPage.text);
+                                      print(provider.passwordSignUpPage.text);
+
                                       Get.toNamed(RouteHelper.termsAndConditions);
                                     } else {
+                                      print("start else");
                                       provider.changeIsLoding(false);
                                       snakbarWidget(context,
                                           Titel:

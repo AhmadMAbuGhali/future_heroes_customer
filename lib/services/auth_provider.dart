@@ -42,6 +42,11 @@ class AuthProvider extends ChangeNotifier {
   bool _loading = false;
   bool isLoading = false;
 
+  nullValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Required field";
+    }
+  }
   bool get loading => _loading;
 
   changeIsLoding(bool value) {
@@ -115,10 +120,13 @@ class AuthProvider extends ChangeNotifier {
   register(File image, String fullName, DateTime dob, String phoneNumber,
       String email, String password) async {
     try {
+      print("start try");
       RegisterModel? responseRegister = await DioClient.dioClient
           .register(image, fullName, dob, phoneNumber, email, password);
       changeIsLoding(false);
     } on DioError catch (e) {
+      print("start error");
+      print(e);
       changeIsLoding(true);
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(

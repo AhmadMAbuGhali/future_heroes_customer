@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -96,8 +97,7 @@ class _ConfirmCodeState extends State<ConfirmCode> {
                                 style: ElevatedButton.styleFrom(
                                   primary: ColorManager.primary, // Background color
                                 ),
-                                onPressed: provider.isLoading
-                                    ? null
+                                onPressed: provider.isLoading? null
                                     : () async {
                                   if (provider.sendCodeConfController.text
                                       .trim()

@@ -33,6 +33,7 @@ class DioClient {
   static final DioClient dioClient = DioClient._();
   Dio? dio;
 
+
   initDio() {
     dio = Dio();
     dio?.options.baseUrl = ApiConstant.baseUrl;
@@ -217,11 +218,8 @@ class DioClient {
           },
         ));
   }
-  Future<void> deleteAccount(String email) async {
+  Future<void> deleteAccount() async {
     await dio!.delete(ApiConstant.deleteAccount,
-        data: {
-      "email":email
-        },
         options: Options(
           headers: {
             "Accept-Language": shaedpref.getString("curruntLang"),
@@ -449,10 +447,13 @@ class DioClient {
 
   Future<ResponsMassageCode?> sendEmailConfirmation(
       String email, String code) async {
+    print("1");
     Response response = await dio!.put(ApiConstant.sendEmailConfirmation,
         data: {"email": email, "code": code});
+    print("2");
     ResponsMassageCode responseMassage =
         ResponsMassageCode.fromJson(response.data);
+    print("3");
     return responseMassage;
   }
 
