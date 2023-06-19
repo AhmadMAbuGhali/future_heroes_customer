@@ -54,7 +54,7 @@ class _DateWidgetState extends State<DateWidget> {
                           color: ColorManager.primary,
                         ),
                         SizedBox(
-                          width: 10.w,
+                          width: 9.w,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -68,7 +68,7 @@ class _DateWidgetState extends State<DateWidget> {
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
-                              height: 5.h,
+                              height: 4.h,
                             ),
                             Row(
                               children: [
@@ -237,7 +237,7 @@ class _DateWidgetState extends State<DateWidget> {
                               ),
                               child: Container(
                                 width: 140.w,
-                                height: 30.h,
+                                height: 40.h,
                                 padding: const EdgeInsets.all(6),
                                 child: Center(
                                   child: Text(
