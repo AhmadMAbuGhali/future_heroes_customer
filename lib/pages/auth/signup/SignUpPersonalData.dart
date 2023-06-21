@@ -181,12 +181,7 @@ class SignUpPersonalData extends StatelessWidget {
                           ),
                           CustomTextFormAuth(
                             myController: provider.dateTextInputSignUPPage,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'DOBEmpty'.tr;
-                              }
-                              return null;
-                            },
+
                             pressSuffixIcon: () async {
                               provider.pickedDate = await showDatePicker(
                                   context: context,
@@ -215,16 +210,7 @@ class SignUpPersonalData extends StatelessWidget {
                             textInputType: const TextInputType.numberWithOptions(
                                 signed: true, decimal: true),
                             iconData: Icons.phone,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'mobileNumberEmpty'.tr;
-                              } else if (value.isValidPhone() == false) {
-                                return 'invalidPhone'.tr;
-                              } else if (value.isValidPhone() == true) {
-                                return null;
-                              }
-                              return null;
-                            },
+
                             myController: provider.phoneSignUpPage,
                             hintText: 'mobileNumber'.tr,
                           ),
@@ -241,15 +227,10 @@ class SignUpPersonalData extends StatelessWidget {
                                           provider.imageFile!,
                                           provider.nameSignUpPage.text,
                                           provider.pickedDate ?? DateTime.now(),
-                                          provider.phoneSignUpPage.text,
+                                          provider.phoneSignUpPage.text??"",
                                           provider.emailSignUpPage.text,
                                           provider.passwordSignUpPage.text);
-                                      print(provider.imageFile!);
-                                      print(provider.nameSignUpPage.text);
-                                      print(provider.pickedDate ?? DateTime.now());
-                                      print(provider.phoneSignUpPage.text);
-                                      print(provider.emailSignUpPage.text);
-                                      print(provider.passwordSignUpPage.text);
+
 
                                       Get.toNamed(RouteHelper.termsAndConditions);
                                     } else {

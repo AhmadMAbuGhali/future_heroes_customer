@@ -7,9 +7,9 @@
 	<key>io.flutter.embedded_views_preview</key>
     <true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>To chose a picture from the gallery</string>
+    <string>Grant access to your photos for a personalized user profile. We will only use selected photos as profile pictures.</string>
     <key>NSCameraUsageDescription</key>
-    <string>To chose a picture from the Camera</string>
+    <string>Grant access to your photos for a personalized user profile. We will only use selected photos as profile pictures.</string>
      <key>NSMicrophoneUsageDescription</key>
     <string>To get voice from camera</string>
 	<key>CFBundleDisplayName</key>
