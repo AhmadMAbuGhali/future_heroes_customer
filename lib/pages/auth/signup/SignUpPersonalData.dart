@@ -227,7 +227,7 @@ class SignUpPersonalData extends StatelessWidget {
                                           provider.imageFile!,
                                           provider.nameSignUpPage.text,
                                           provider.pickedDate ?? DateTime.now(),
-                                          provider.phoneSignUpPage.text??"",
+                                          provider.phoneSignUpPage.text??"0000000000",
                                           provider.emailSignUpPage.text,
                                           provider.passwordSignUpPage.text);
 

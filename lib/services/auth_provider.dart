@@ -117,12 +117,12 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  register(File image, String fullName, DateTime dob, String phoneNumber,
+  register(File image, String fullName, DateTime? dob, String? phoneNumber,
       String email, String password) async {
     try {
       print("start try");
       RegisterModel? responseRegister = await DioClient.dioClient
-          .register(image, fullName, dob, phoneNumber, email, password);
+          .register(image, fullName, dob!, phoneNumber!, email, password);
       changeIsLoding(false);
     } on DioError catch (e) {
       print("start error");

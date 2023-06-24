@@ -40,7 +40,8 @@ class CustomTextFormAuth extends StatelessWidget {
               obscureText: hidepassword ?? false,
               controller: myController,
               focusNode: FocusNode(),
-              validator: (value) => validator!(value),
+              validator: (value) => validator != null ? validator!(value) : null,
+
               autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
