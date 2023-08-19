@@ -27,10 +27,10 @@ class MyLocale extends Translations {
               "الاستمرار بالتمرين يصنع منك شخص من حديد يتمتع بكامل النشاط والحيوية .. ويساعد ذهنك على التركيز على جميع نواحي حياتك اليومية",
           "onBoardingText2": "صناعة ابطال المستقبل",
           "onBoardingBody2":
-              "الكثير من الأنشطة منها خدمة كرة السلة والقدم ، التايكواندو، التيكوﻧﺟﺗﺳو، البوﻛﺳﯾﻧﺞ، الجمباز",
+              "الكثير من الأنشطة منها التايكواندو، التيكوﻧﺟﺗﺳو، البوﻛﺳﯾﻧﺞ، الجمباز",
           "onBoardingText3": "نساعدك لتحقيق الهدف",
           "onBoardingBody3":
-              "ليست مجرد لكمات وركلات🥋 نحن نصنع أفضل نسخة من طفلك💪 ابطال2021 على مستوى المملكة",
+              "ليست مجرد لكمات وركلات🥋 نحن نصنع أفضل نسخة من طفلك💪 ابطال  2020 2021 2022  على مستوى المملكة",
           "email": "البريد الالكتروني",
           "password": "كلمة المرور",
           "rememberMe": "تذكرني",
@@ -290,10 +290,10 @@ class MyLocale extends Translations {
               "Continuing to exercise makes you a person of iron with full activity and vitality..and helps your mind focus on all aspects of your daily life.",
           "onBoardingText2": "Creating Future Champions",
           "onBoardingBody2":
-              "A lot of activities, including basketball, football, taekwondo, taekwondo, boxing, gymnastics",
+              "A lot of activities, including  taekwondo, taekwondo, boxing, gymnastics",
           "onBoardingText3": "We help you achieve your goal",
           "onBoardingBody3":
-              "It's not just punches and kicks🥋 We create the best version of your child💪 2021 champions across the Kingdom.",
+              "It's not just punches and kicks🥋 We create the best version of your child💪 2020 2021 2022 champions across the Kingdom.",
           "email": "Email",
           "nameCoach": "Coach Name : ",
           "class": "Class :",
