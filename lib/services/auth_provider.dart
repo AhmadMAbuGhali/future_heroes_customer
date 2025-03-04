@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio/src/dio_exception.dart' as dio_exception; // Specific import for DioException
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_customer/data/api/dio_client.dart';
-import 'package:future_heroes_customer/data/api/exception_handling.dart';
 import 'package:future_heroes_customer/models/category.dart';
 import 'package:future_heroes_customer/models/disease_model.dart';
 import 'package:future_heroes_customer/models/register_model.dart';
@@ -54,7 +54,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-// login page
+  // login page
   bool rememberMe = false;
   bool showPasswordLogin = true;
   TextEditingController emailLoginPage = TextEditingController();
@@ -89,10 +89,9 @@ class AuthProvider extends ChangeNotifier {
       }
     } catch (e) {
       _loading = false;
-
       snakbarWidget(context,
-              Titel: 'Network Error'.tr,
-              Description: 'Make sure that Network is Good'.tr)
+          Titel: 'Network Error'.tr,
+          Description: 'Make sure that Network is Good'.tr)
           .error();
       notifyListeners();
     } finally {
@@ -128,7 +127,7 @@ class AuthProvider extends ChangeNotifier {
       print("start error");
       print(e);
       changeIsLoding(true);
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -141,14 +140,13 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future _getFromCamera() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
+    XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
       maxWidth: 1800,
       maxHeight: 1800,
     );
 
     if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
       imageFile = imageTemp;
       notifyListeners();
@@ -171,14 +169,14 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future _getFromGallery() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
+    final ImagePicker picker = ImagePicker();
+    XFile? pickedFile = await picker.pickImage(  // Added await
       source: ImageSource.gallery,
       maxWidth: 1800,
       maxHeight: 1800,
     );
 
     if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
       imageFile = imageTemp;
       notifyListeners();
@@ -186,7 +184,6 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // term
-
   bool isCheckedTerm = false;
 
   changeIsCheckedTerm(bool? value) {
@@ -197,10 +194,10 @@ class AuthProvider extends ChangeNotifier {
   Future<String?> getTerm() async {
     try {
       TermsAndConditionsModel termsAndConditionsModel =
-          await DioClient.dioClient.termsAndConditions();
+      await DioClient.dioClient.termsAndConditions();
       return termsAndConditionsModel.description;
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -213,9 +210,7 @@ class AuthProvider extends ChangeNotifier {
     return null;
   }
 
-  //
-
-  //Main category
+  // Main category
   List<Category1> categoryMain = [];
 
   Future<String?> getCategory() async {
@@ -224,7 +219,7 @@ class AuthProvider extends ChangeNotifier {
       idSelectedCategory = categoryMain.first.id ?? 0;
       getSubCategorysForCategor(categoryMain.first.id ?? 0);
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -237,8 +232,7 @@ class AuthProvider extends ChangeNotifier {
     return null;
   }
 
-// subcategory
-
+  // subcategory
   int idSelectedCategory = 0;
   List<int> subCatId = [];
   List<ChoessCoachModel> coachFromId = [];
@@ -260,7 +254,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       categorySub = await DioClient.dioClient.getSubCategory();
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -278,10 +272,10 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       categorySubforcat = [];
       categorySubforcat =
-          await DioClient.dioClient.getSubCategorysForCategor(id);
+      await DioClient.dioClient.getSubCategorysForCategor(id);
       notifyListeners();
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -293,10 +287,8 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  //Coach Selection
-
+  // Coach Selection
   List<TimeList> listTime = [];
-
   Map<int, List<TimeList>> timeListMap = {};
   List<List<TimeList>> timeListMain = [];
   List<String> timeListString = [];
@@ -327,7 +319,7 @@ class AuthProvider extends ChangeNotifier {
       days += '/';
     }
     days +=
-        '${timeOb.classDateTimes!.first.startClass}->${timeOb.classDateTimes!.first.endClass}';
+    '${timeOb.classDateTimes!.first.startClass}->${timeOb.classDateTimes!.first.endClass}';
 
     timeString = days;
   }
@@ -346,13 +338,13 @@ class AuthProvider extends ChangeNotifier {
           days += '/';
         }
         days +=
-            '\n${int.parse(value.classDateTimes!.first.startClass!.split(":").first)} ---> ${int.parse(value.classDateTimes!.first.endClass!.split(":").first)}';
+        '\n${int.parse(value.classDateTimes!.first.startClass!.split(":").first)} ---> ${int.parse(value.classDateTimes!.first.endClass!.split(":").first)}';
         maptimeListString[value.id ?? 0] = days;
         timeListString.add(days);
       }
       notifyListeners();
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -371,7 +363,7 @@ class AuthProvider extends ChangeNotifier {
       await getTimeList(coachFromId.first.coaches!.first.email ?? '', id.first);
       notifyListeners();
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
     }
     notifyListeners();
   }
@@ -383,7 +375,7 @@ class AuthProvider extends ChangeNotifier {
       await DioClient.dioClient.sendClassId(id);
       notifyListeners();
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -395,7 +387,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  //Disease
+  // Disease
   List<DiseaseModel> diseases = [];
   List<int> diseasesId = [];
 
@@ -415,7 +407,7 @@ class AuthProvider extends ChangeNotifier {
       await DioClient.dioClient.sendDiseases(id);
       notifyListeners();
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -432,7 +424,7 @@ class AuthProvider extends ChangeNotifier {
       diseases = await DioClient.dioClient.getDisease();
       notifyListeners();
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -458,7 +450,6 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // offer
-
   List<bool> offerSelected = [];
 
   isSelectedChange(int select) {
@@ -474,7 +465,7 @@ class AuthProvider extends ChangeNotifier {
       listPackages = await DioClient.dioClient.getPackages();
       offerSelected = List.filled(listPackages.length, false);
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -491,7 +482,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       return await DioClient.dioClient.sendOfferId(Id);
     } on DioError catch (e) {
-      String massage = DioException.fromDioError(e).toString();
+      String massage = dio_exception.DioException.connectionTimeout.toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
         backgroundColor: ColorManager.red,
@@ -503,8 +494,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  //ForgetPassword
-
+  // ForgetPassword
   TextEditingController emailSendCodeController = TextEditingController();
   TextEditingController sendCodeController = TextEditingController();
   TextEditingController sendCodeConfController = TextEditingController();
@@ -541,7 +531,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       ResponsMassageCode? success = await DioClient.dioClient
           .verifyResetSendCode(
-              emailSendCodeController.text.trim(), sendCodeController.text);
+          emailSendCodeController.text.trim(), sendCodeController.text);
       if (success!.message != null) {
         notifyListeners();
         return 'true';
@@ -569,11 +559,11 @@ class AuthProvider extends ChangeNotifier {
     return null;
   }
 
-  //send Email Confirmation
+  // send Email Confirmation
   Future<String?> sendEmailConfirmation(String email, String code) async {
     try {
       ResponsMassageCode? success =
-          await DioClient.dioClient.sendEmailConfirmation(email, code);
+      await DioClient.dioClient.sendEmailConfirmation(email, code);
       if (success!.message != null) {
         notifyListeners();
         return 'true';
@@ -585,8 +575,8 @@ class AuthProvider extends ChangeNotifier {
     return null;
   }
 
+  @override
   void dispose() {
-    // TODO: implement dispose
     emailLoginPage.dispose();
     passwordLoginPage.dispose();
     emailSendCodeController.dispose();
@@ -597,7 +587,6 @@ class AuthProvider extends ChangeNotifier {
     nameSignUpPage.dispose();
     phoneSignUpPage.dispose();
     dateTextInputSignUPPage.dispose();
-
     super.dispose();
   }
 }
@@ -606,13 +595,13 @@ class AuthProvider extends ChangeNotifier {
 extension EmailValidator on String {
   bool isValidEmail() {
     return RegExp(
-            r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)')
+        r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)([@])([a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3}$)')
         .hasMatch(this);
   }
 
   bool isValidPassword() {
     return RegExp(
-            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
         .hasMatch(this);
   }
 

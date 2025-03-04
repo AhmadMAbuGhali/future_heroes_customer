@@ -5,23 +5,23 @@ class DioException implements Exception {
 
   DioException.fromDioError(DioError dioError) {
     switch (dioError.type){
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         errorMessage = 'Request to the server was cancelled.';
         break;
-      case DioErrorType.connectTimeout:
+      case DioExceptionType.connectionTimeout:
         errorMessage = 'Connection timed out.';
         break;
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         errorMessage = 'Receiving timeout occurred.';
         break;
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         errorMessage = 'Request send timeout.';
         break;
-      case DioErrorType.response:
+      case DioExceptionType.badCertificate:
         errorMessage = _handleStatusCode(dioError.response);
         break;
-      case DioErrorType.other:
-        if (dioError.message.contains('SocketException')) {
+      case DioExceptionType.unknown:
+        if (dioError.message!.contains('SocketException')) {
           errorMessage = 'تحقق من اتصال الإنترنت';
           break;
         }

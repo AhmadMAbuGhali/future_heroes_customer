@@ -225,11 +225,10 @@ class _DateWidgetState extends State<DateWidget> {
                                 // shape: RoundedRectangleBorder(
                                 //     borderRadius:
                                 //         BorderRadius.circular(10.r)),
-                                foregroundColor: ColorManager.white,
+                                foregroundColor: ColorManager.white, backgroundColor: ColorManager.white,
                                 side: const BorderSide(
                                     color: ColorManager.primary),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
-                                primary: ColorManager.white,
                                 textStyle: TextStyle(
                                   fontFamily: 'DroidKufi',
                                   fontSize: 16.sp,

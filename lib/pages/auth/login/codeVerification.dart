@@ -115,7 +115,7 @@ class _CodeVerificationState extends State<CodeVerification> {
                       height: 44.h,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: ColorManager.primary, // Background color
+                            backgroundColor: ColorManager.primary, // Background color
                           ),
                           onPressed: provider.isLoading
                               ? null
@@ -171,12 +171,10 @@ class _CodeVerificationState extends State<CodeVerification> {
               ),
             ),
             connectivityBuilder:
-                (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
-              final bool connected = connectivity != ConnectivityResult.none;
-              return connected?child:NoConnectionScreen();
-
-
+                (BuildContext context, List<ConnectivityResult> connectivity, Widget child) {
+              final bool connected = connectivity.contains(ConnectivityResult.mobile) ||
+                  connectivity.contains(ConnectivityResult.wifi);
+              return connected ? child : NoConnectionScreen();
             },
           ));
     });

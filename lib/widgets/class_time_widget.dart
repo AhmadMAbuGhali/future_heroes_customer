@@ -120,7 +120,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                 child: ElevatedButton(
                   onPressed: details.onStepContinue,
                   style:
-                      ElevatedButton.styleFrom(primary: ColorManager.primary),
+                      ElevatedButton.styleFrom(backgroundColor: ColorManager.primary),
                   child: Text(
                     "next".tr,
                     style: getRegularStyle(color: ColorManager.white),
@@ -139,7 +139,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                     Get.toNamed(RouteHelper.postponeAnAppointment);
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: ColorManager.white,
+                      backgroundColor: ColorManager.white,
                       side: const BorderSide(width: 1, color: ColorManager.primary)),
                   child: Text(
                     "requestPostponement".tr,

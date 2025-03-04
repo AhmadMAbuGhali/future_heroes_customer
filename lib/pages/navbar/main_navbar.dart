@@ -7,7 +7,6 @@ import 'package:future_heroes_customer/pages/qr_code/qr_code.dart';
 import 'package:future_heroes_customer/resources/assets_manager.dart';
 import 'package:future_heroes_customer/resources/color_manager.dart';
 import 'package:get/get.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../notification/notification.dart';
 
@@ -19,110 +18,70 @@ class MainNavBar extends StatefulWidget {
 }
 
 class _MainNavBarState extends State<MainNavBar> {
-  int _selectedIndex = 0;
-  late PersistentTabController _controller;
+  int _selectedIndex = 4;
 
-  List pages = [
-    const Center(child: Text('NextPage 1')),
-    const Center(child: Text('NextPage 2 ')),
-    const Center(child: Text('NextPage 3')),
-    const Center(child: Text('NextPage 4')),
-    const Center(child: Text('NextPage 5')),
+  final List<Widget> _screens = [
+    const ProfilePage(),
+    const NotificationPage(),
+    QRCode(),
+    const OfferPage(),
+    HomeScreen(),
   ];
 
-  void onTapNav(int index) {
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _controller = PersistentTabController(initialIndex: 4);
-  }
-
-  List<Widget> _buildScreens() {
+  List<BottomNavigationBarItem> _navBarsItems() {
     return [
-      const ProfilePage(),
-      const NotificationPage(),
-      QRCode(),
-      const OfferPage(),
-      HomeScreen()
+      _buildNavItem(IconAssets.user, "user".tr),
+      _buildNavItem(IconAssets.notifications, "notification".tr),
+      _buildNavItem(IconAssets.qr_code, "qrCode".tr),
+      _buildNavItem(IconAssets.localoffer, "offer".tr),
+      _buildNavItem(IconAssets.home, "home".tr),
     ];
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(IconAssets.user),
-        title: ("user".tr),
-        iconSize: 70,
-        activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(IconAssets.notifications),
-        title: ("notification".tr),
-        activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(IconAssets.qr_code),
-        title: ("qrCode".tr),
-        activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(IconAssets.localoffer),
-        title: ("offer".tr),
-        activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(IconAssets.home),
-        title: ("home".tr),
-        activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.grey,
-      ),
-    ];
+  BottomNavigationBarItem _buildNavItem(String assetPath, String label) {
+    return BottomNavigationBarItem(
+      icon: SvgPicture.asset(assetPath, height: 24, width: 24, color: Colors.grey),
+      activeIcon: SvgPicture.asset(assetPath, height: 24, width: 24, color: ColorManager.primary),
+      label: label,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      confineInSafeArea: true,
-      backgroundColor: Colors.white, // Default is Colors.white.
-      handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true, // Default is true.
-      hideNavigationBarWhenKeyboardShows:
-          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
+    return Scaffold(
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _screens,
       ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+          boxShadow: [
+            BoxShadow(color: Colors.black12, blurRadius: 8, spreadRadius: 1),
+          ],
+        ),
+        child: BottomNavigationBar(
+          items: _navBarsItems(),
+          currentIndex: _selectedIndex,
+          selectedItemColor: ColorManager.primary,
+          unselectedItemColor: Colors.grey,
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          elevation: 0, // تقليل الظل لمطابقة `style3`
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
-      ),
-      navBarStyle:
-          NavBarStyle.style3, // Choose the nav bar style with this property.
     );
   }
 }

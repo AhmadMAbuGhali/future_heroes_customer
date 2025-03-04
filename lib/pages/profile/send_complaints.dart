@@ -154,9 +154,10 @@ class SendComplaints extends StatelessWidget {
               ),
             ),
           ),
-          connectivityBuilder: (BuildContext context,
-              ConnectivityResult connectivity, Widget child) {
-            final bool connected = connectivity != ConnectivityResult.none;
+          connectivityBuilder:
+              (BuildContext context, List<ConnectivityResult> connectivity, Widget child) {
+            final bool connected = connectivity.contains(ConnectivityResult.mobile) ||
+                connectivity.contains(ConnectivityResult.wifi);
             return connected ? child : NoConnectionScreen();
           },
         ),

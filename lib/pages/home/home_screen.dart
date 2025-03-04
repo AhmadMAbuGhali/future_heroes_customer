@@ -163,12 +163,12 @@ class HomeScreen extends StatelessWidget {
                         )),
                   ],
                 ),
-                connectivityBuilder: (BuildContext context,
-                    ConnectivityResult connectivity, Widget child) {
-                  final bool connected =
-                      connectivity != ConnectivityResult.none;
-                  return connected ? child : NoConnectionScreen();
-                },
+          connectivityBuilder:
+              (BuildContext context, List<ConnectivityResult> connectivity, Widget child) {
+            final bool connected = connectivity.contains(ConnectivityResult.mobile) ||
+                connectivity.contains(ConnectivityResult.wifi);
+            return connected ? child : NoConnectionScreen();
+          },
               )
             : getIt<SharedPreferenceHelper>().getWaitingStat() == true
                 ? OfflineBuilder(
@@ -247,12 +247,12 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    connectivityBuilder: (BuildContext context,
-                        ConnectivityResult connectivity, Widget child) {
-                      final bool connected =
-                          connectivity != ConnectivityResult.none;
-                      return connected ? child : NoConnectionScreen();
-                    },
+          connectivityBuilder:
+              (BuildContext context, List<ConnectivityResult> connectivity, Widget child) {
+            final bool connected = connectivity.contains(ConnectivityResult.mobile) ||
+                connectivity.contains(ConnectivityResult.wifi);
+            return connected ? child : NoConnectionScreen();
+          },
                   )
                 : OfflineBuilder(
                     child: Stack(
@@ -327,12 +327,12 @@ class HomeScreen extends StatelessWidget {
                             )),
                       ],
                     ),
-                    connectivityBuilder: (BuildContext context,
-                        ConnectivityResult connectivity, Widget child) {
-                      final bool connected =
-                          connectivity != ConnectivityResult.none;
-                      return connected ? child : NoConnectionScreen();
-                    },
+          connectivityBuilder:
+              (BuildContext context, List<ConnectivityResult> connectivity, Widget child) {
+            final bool connected = connectivity.contains(ConnectivityResult.mobile) ||
+                connectivity.contains(ConnectivityResult.wifi);
+            return connected ? child : NoConnectionScreen();
+          },
                   ),
       );
     });

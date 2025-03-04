@@ -14,7 +14,7 @@ class snakbarWidget {
     MotionToast(
       icon: Icons.error,
       primaryColor: ColorManager.red,
-      backgroundType: BackgroundType.lighter,
+     // backgroundType: BackgroundType.lighter,
       title: Text(
         Titel,
         style: TextStyle(
@@ -32,7 +32,7 @@ class snakbarWidget {
       width: 350.w,
       height: 80.h,
       animationDuration: const Duration(milliseconds: 1000),
-      layoutOrientation: ToastOrientation.ltr,
+     // layoutOrientation: ToastOrientation.ltr,
     ).show(context);
   }
 
@@ -41,7 +41,7 @@ class snakbarWidget {
     MotionToast(
       icon: Icons.done,
       primaryColor: ColorManager.green,
-      backgroundType: BackgroundType.transparent,
+      //backgroundType: BackgroundType.transparent,
       title: Text(
         Titel,
         style: TextStyle(
@@ -59,7 +59,7 @@ class snakbarWidget {
       animationType: AnimationType.fromTop,
       width: 350.w,
       height: 70.h,
-      layoutOrientation: ToastOrientation.ltr,
+      //layoutOrientation: ToastOrientation.ltr,
       animationDuration: const Duration(milliseconds: 1000),
     ).show(context);
   }

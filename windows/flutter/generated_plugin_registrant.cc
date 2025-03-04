@@ -6,12 +6,12 @@
 
 #include "generated_plugin_registrant.h"
 
-#include <connectivity_plus_windows/connectivity_plus_windows_plugin.h>
-#include <network_info_plus_windows/network_info_plus_windows_plugin.h>
+#include <connectivity_plus/connectivity_plus_windows_plugin.h>
+#include <file_selector_windows/file_selector_windows.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   ConnectivityPlusWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("ConnectivityPlusWindowsPlugin"));
-  NetworkInfoPlusWindowsPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("NetworkInfoPlusWindowsPlugin"));
+  FileSelectorWindowsRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FileSelectorWindows"));
 }

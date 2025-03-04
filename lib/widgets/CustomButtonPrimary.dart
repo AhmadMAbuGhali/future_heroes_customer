@@ -25,11 +25,10 @@ class CustomButtonPrimary extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)), backgroundColor: buttonColor,
           foregroundColor: ColorManager.white,
           side: const BorderSide(color: ColorManager.primary),
           padding: EdgeInsets.symmetric(vertical: 10.h),
-          primary: buttonColor,
           textStyle: TextStyle(
             fontFamily: 'DroidKufi',
             fontSize: 16.sp,

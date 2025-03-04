@@ -148,49 +148,37 @@ class CoachSelection extends StatelessWidget {
                                   ),
                                   isExpanded: true,
                                   key: Key('$index'),
-                                  itemHeight: 60,
-                                  icon: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: ColorManager.primary,
+                                  dropdownStyleData: DropdownStyleData(
+                                    maxHeight: 200.h,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                    ),
                                   ),
-                                  iconSize: 30.sp,
-                                  buttonHeight: 60.h,
-                                  buttonPadding:
-                                      const EdgeInsets.only(left: 12, right: 12),
-                                  dropdownDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
+                                  buttonStyleData: ButtonStyleData(
+                                    height: 60.h,
+                                    padding: EdgeInsets.symmetric(horizontal: 12),
                                   ),
-                                  items: provider.timeListMap[provider.categorySub[index].id]?.where((element) =>
-                                  element.subCategoryId ==
-                                      provider
-                                          .coachFromId[index].subCategoryId)
+                                  menuItemStyleData: MenuItemStyleData(
+                                    height: 50.h,
+                                  ),
+                                  items: provider.timeListMap[provider.categorySub[index].id]
+                                      ?.where((element) => element.subCategoryId == provider.coachFromId[index].subCategoryId)
                                       .map((item) => DropdownMenuItem<String>(
-                                    value: provider.maptimeListString[item.id!] ?? "احتر الحصة",
+                                    value: provider.maptimeListString[item.id!] ?? "اختر الحصة",
                                     child: Text(
                                       provider.maptimeListString[item.id!]!,
                                       style: const TextStyle(fontSize: 14),
                                     ),
-                                  )).toList() ?? [],
-
-                                  // validator: (value) {
-                                  //   if (value == null) {
-                                  //     return 'يجب تحديد تصنيف المهمة';
-                                  //   }
-                                  //   return null;
-                                  // },
+                                  ))
+                                      .toList() ??
+                                      [],
                                   onChanged: (value) {
-                                    var key = provider.maptimeListString.keys
-                                        .firstWhere(
-                                            (k) =>
-                                                provider.maptimeListString[k] ==
-                                                value,
-                                            orElse: () => 0);
+                                    var key = provider.maptimeListString.keys.firstWhere(
+                                            (k) => provider.maptimeListString[k] == value,
+                                        orElse: () => 0);
 
                                     provider.classId.remove(key);
                                     provider.classId.add(key);
-
-                                    // TaskCategoryItem? h2 = value as TaskCategoryItem?;
-                                    // provider.selectedCategoryId = h2!.id!;
                                   },
                                 ),
                               ],
@@ -211,12 +199,10 @@ class CoachSelection extends StatelessWidget {
             ),
           ),
           connectivityBuilder:
-              (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
-            final bool connected = connectivity != ConnectivityResult.none;
-            return connected?child:NoConnectionScreen();
-
-
+              (BuildContext context, List<ConnectivityResult> connectivity, Widget child) {
+            final bool connected = connectivity.contains(ConnectivityResult.mobile) ||
+                connectivity.contains(ConnectivityResult.wifi);
+            return connected ? child : NoConnectionScreen();
           },
         ),
       );
